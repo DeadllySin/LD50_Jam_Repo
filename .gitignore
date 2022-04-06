@@ -73,32 +73,23 @@ crashlytics-build.properties
 *.log
 
 # FMOD
-/Assets/FMODStudioCache.asset
-/Assets/FMODStudioCache.asset.meta
+
+!LD50/[Aa]ssets/Plugins/FMOD/**/*.dll
+
+!LD50/[Aa}ssets/Gizmos/FMOD/*
+!LD50/[Aa}ssets/Editor Default Resources/FMOD/*
+
+LD50/[Aa]ssets/**/FMODStudioCache.asset
+LD50/[Aa]ssets/**/FMODStudioCache.asset.meta
+LD50/[Aa]ssets/Plugins/FMOD/Cache.meta
+LD50/[Aa]ssets/Plugins/FMOD/Cache/Editor.meta
+
 fmod.log
 fmod_editor.log
 
-# FMOD studio (In folder FMOD)
-/FMOD/**.user
-/FMOD/**.unsaved
-/FMOD/**.cache
-/FMOD/**.restore
+# LD50/Assets/Plugins/FMOD/
 
-# FMOD
-Assets/FMODStudioCache.asset
-Assets/FMODStudioCache.asset.meta
-Assets/Plugins/FMOD/Resources/FMODStudioCache.asset
-Assets/StreamingAssets/*.bank
-Assets/StreamingAssets/Master Bank\.bank
-Assets/StreamingAssets/Master Bank\.bank\.meta
-Assets/StreamingAssets/Master Bank\.strings\.bank
-Assets/StreamingAssets/Master Bank\.strings\.bank\.meta
-LD50/Assets/Plugins/FMOD/
-LD50/Assets/StreamingAssets/
-fmod.log
-fmod_editor.log
-/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset
-Assets/FMODStudioCache.asset
+LD50/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset
 
 # Builds
 *.apk
