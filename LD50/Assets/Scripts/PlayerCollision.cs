@@ -15,27 +15,9 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision hit)
-    {
-        if (hit.gameObject.tag == "Respawn")
-        {
-            Debug.Log(hit.gameObject.name);
-            ceiling c = hit.gameObject.GetComponent<ceiling>();
-            c.speed = 0;
-            Debug.Log("You Are DEAD");
-        }
-    }
-
     private void OnTriggerEnter(Collider hit)
     {
-        if (hit.gameObject.tag == "Respawn")
-        {
-            Debug.Log(hit.gameObject.name);
-            ceiling c = hit.gameObject.GetComponent<ceiling>();
-            c.speed = 0;
-            Debug.Log("You Are DEAD");
-        }
-        if (hit.gameObject.tag == "Finish")
+        if (hit.gameObject.tag == "Trigger1")
         {
             Debug.Log(hit.gameObject.name);
             GameManager gm = FindObjectOfType<GameManager>();
