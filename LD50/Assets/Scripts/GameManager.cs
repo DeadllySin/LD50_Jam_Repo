@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (roof.transform.position.y <= 2) Debug.Log("You Are Dead");
+        if (roof.transform.position.y <= 2)
+        {
+            Debug.Log("You Are Dead");
+            roof.GetComponent<MovingCeiling>().speed = 0;
+        }
     }
 }
