@@ -98,4 +98,7 @@ LD50/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset
 *.unitypackage
 *.db
 
+# Materials Folder
+LD50/Assets/Materials/
+
 
