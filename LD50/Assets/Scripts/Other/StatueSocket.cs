@@ -3,13 +3,13 @@ using UnityEngine;
 public class StatueSocket : MonoBehaviour
 {
     PlayerHand ph;
-    RoomManager room;
+    StatueRoomManager room;
     public int correctStatue;
     public GameObject assinedStatue;
 
     private void Start()
     {
-        room = GetComponentInParent<RoomManager>();
+        room = GetComponentInParent<StatueRoomManager>();
         ph =FindObjectOfType<PlayerHand>(); 
     }
 
