@@ -5,13 +5,13 @@ public class PlayerHand : MonoBehaviour
     public GameObject hand;
     public GameObject handTarget;
     public GameObject handStatueTarget;
-    private Room room;
+    private RoomManager room;
     [HideInInspector] public StatuePiece sp;
     [HideInInspector] public StatueSocket ss;
 
     private void Start()
     {
-        room = FindObjectOfType<Room>();
+        room = FindObjectOfType<RoomManager>();
     }
 
     private void Update()
