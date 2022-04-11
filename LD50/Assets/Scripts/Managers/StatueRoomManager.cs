@@ -13,6 +13,7 @@ public class StatueRoomManager : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject trigger1;
     [SerializeField] private GameObject trigger2;
+    [SerializeField] private Animator doorAnim;
 
     private void Awake()
     {
@@ -40,7 +41,7 @@ public class StatueRoomManager : MonoBehaviour
     {
         if (correctPieces == 2)
         {
-            door.gameObject.SetActive(false);
+            doorAnim.SetTrigger("isOpen");
             trigger1.SetActive(true);
         }
         if (correctPieces == 3)

@@ -10,11 +10,9 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider hit)
     {
-        if (hit.gameObject.tag == "Trigger1")
+        if (hit.gameObject.tag == "Transition")
         {
             Debug.Log(hit.gameObject.name);
-            GameManager gm = FindObjectOfType<GameManager>();
-            gm.SpawnRoom(hit.gameObject);
         }
     }
 }
