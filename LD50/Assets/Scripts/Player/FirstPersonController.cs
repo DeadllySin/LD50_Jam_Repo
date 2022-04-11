@@ -73,6 +73,12 @@ namespace StarterAssets
 		
 		private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
 
+		// FMOD footsteps replace movement variables if already present with other name:
+
+		public float MinFootstepSpeed = 2f;
+		public float FootstepsFrequencyFactor;
+		private float _timeBeforeNextStep = 0f;
+
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -98,6 +104,28 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			FMODSteps();
+
+		}
+
+        void FMODSteps() //first step time sounds off from the following steps
+        {
+			var speed = _controller.velocity.magnitude;
+			if (speed < MinFootstepSpeed)
+			{
+				_timeBeforeNextStep = 0.1F / (MinFootstepSpeed * FootstepsFrequencyFactor);
+			}
+			else
+			{
+				if (_timeBeforeNextStep <= 0f)
+				{
+                    // Comment this out if you get tired of kick drums xD
+					FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.testSound);
+
+					_timeBeforeNextStep = 1 / (speed * FootstepsFrequencyFactor);
+				}
+				_timeBeforeNextStep -= Time.deltaTime;
+			}
 		}
 
 		private void LateUpdate()
