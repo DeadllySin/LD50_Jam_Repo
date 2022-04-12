@@ -67,7 +67,6 @@ public class PlayerHand : MonoBehaviour
             hand.GetComponent<StatuePiece>().ss.OnAssienedStatue();
             hand.transform.position = handStatueTarget.transform.position;
             hand = null;
-            if(room.correctPieces >= 2)room.GetComponent<StatueRoomManager>().SpawnRoom();
         }
     }
 }
