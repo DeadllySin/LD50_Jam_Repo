@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,17 +9,11 @@ public class StatueRoomManager : MonoBehaviour
     [SerializeField] private GameObject statuePieces;
     [SerializeField] private GameObject statuePiece2;
     [SerializeField] private GameObject statuePiece3;
-    [SerializeField] private GameObject door;
-    [SerializeField] private GameObject trigger1;
-    [SerializeField] private GameObject trigger2;
     [SerializeField] private Animator doorAnim;
 
     private void Awake()
     {
-        for (int i = 0; i < spawner.Length; i++)
-        {
-            spawners.Add(spawner[i]);
-        } 
+        for (int i = 0; i < spawner.Length; i++) spawners.Add(spawner[i]);
     }
 
     private void Start()
@@ -37,17 +30,8 @@ public class StatueRoomManager : MonoBehaviour
         spawners.Remove(spawners[temp3]);
     }
 
-    private void FixedUpdate()
+    public void SpawnRoom()
     {
-        if (correctPieces == 2)
-        {
-            doorAnim.SetTrigger("isOpen");
-            trigger1.SetActive(true);
-        }
-        if (correctPieces == 3)
-        {
-            trigger1.gameObject.SetActive(false);
-            trigger2.SetActive(true);
-        }
+        GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isOpen");
     }
 }

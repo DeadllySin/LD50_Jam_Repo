@@ -2,18 +2,12 @@ using UnityEngine;
 
 public class PlayerHand : MonoBehaviour
 {
-    [HideInInspector]public StatueRoomManager room;
     [SerializeField] private Transform gDrop;
     [HideInInspector]public GameObject hand;
     [HideInInspector] public GameObject handTarget;
     [HideInInspector] public GameObject handStatueTarget;
     [HideInInspector] public StatuePiece sp;
     [HideInInspector] public StatueSocket ss;
-
-    private void Start()
-    {
-        room = FindObjectOfType<StatueRoomManager>();
-    }
 
     private void Update()
     {
@@ -51,7 +45,7 @@ public class PlayerHand : MonoBehaviour
         hand.transform.localPosition = new Vector3(1, 1.2f, 2f);
         if (setASNull)
         {
-            if (sp.ss.assinedStatue.GetComponent<StatuePiece>().statueNumber == sp.ss.correctStatue) room.correctPieces--;
+            if (sp.ss.assinedStatue.GetComponent<StatuePiece>().statueNumber == sp.ss.correctStatue) GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces--;
             sp.ss.assinedStatue = null;
         }
     }
@@ -67,6 +61,7 @@ public class PlayerHand : MonoBehaviour
             hand.GetComponent<StatuePiece>().ss.OnAssienedStatue();
             hand.transform.position = handStatueTarget.transform.position;
             hand = null;
+            if(GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces >= 2) GameManager.gm.currRoom.GetComponent<StatueRoomManager>().GetComponent<StatueRoomManager>().SpawnRoom();
         }
     }
 }

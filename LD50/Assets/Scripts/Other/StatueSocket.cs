@@ -3,19 +3,17 @@ using UnityEngine;
 public class StatueSocket : MonoBehaviour
 {
     PlayerHand ph;
-    StatueRoomManager room;
     public int correctStatue;
     public GameObject assinedStatue;
 
     private void Start()
     {
-        room = GetComponentInParent<StatueRoomManager>();
         ph =FindObjectOfType<PlayerHand>(); 
     }
 
     public void OnAssienedStatue()
     {
-        if (assinedStatue != null) if (assinedStatue.GetComponent<StatuePiece>().statueNumber == correctStatue) room.correctPieces++;
+        if (assinedStatue != null) if (assinedStatue.GetComponent<StatuePiece>().statueNumber == correctStatue) GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces++;
     }
 
     private void OnMouseEnter()
