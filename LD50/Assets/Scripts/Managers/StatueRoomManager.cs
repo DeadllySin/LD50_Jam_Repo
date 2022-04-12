@@ -39,19 +39,6 @@ public class StatueRoomManager : MonoBehaviour
 
     public void SpawnRoom()
     {
-<<<<<<< HEAD
         doorAnim.SetTrigger("isOpen");
-=======
-        if (correctPieces == 2) // || Input.GetKeyDown("g"))
-        {
-            doorAnim.SetTrigger("isOpen");
-            trigger1.SetActive(true);
-        }
-        if (correctPieces == 3)
-        {
-            trigger1.gameObject.SetActive(false);
-            trigger2.SetActive(true);
-        }
->>>>>>> d25a01d84d862b3f659022416f7c181cfc0282e1
     }
 }
