@@ -39,7 +39,7 @@ public class StatueRoomManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (correctPieces == 2)
+        if (correctPieces == 2) // || Input.GetKeyDown("g"))
         {
             doorAnim.SetTrigger("isOpen");
             trigger1.SetActive(true);
