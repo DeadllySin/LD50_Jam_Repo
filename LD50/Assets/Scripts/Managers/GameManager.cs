@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
     public GameObject currRoom;
     public static GameManager gm;
     public GameObject ceiling;
+    public GameObject[] roomList;
+    public int lastRoom = 0;
 
     private void Awake()
     {

@@ -3974,6 +3974,10 @@ MonoBehaviour:
   currDoor: {fileID: 1699062667}
   currRoom: {fileID: 934610722}
   ceiling: {fileID: 1845200605}
+  roomList:
+  - {fileID: 1739284135203955518, guid: ee7f19a8e8da3384eb3536e37e07e20a, type: 3}
+  - {fileID: 1739284135203955518, guid: ee7f19a8e8da3384eb3536e37e07e20a, type: 3}
+  lastRoom: 0
   speed: 0.05
 --- !u!43 &1967634544
 Mesh:
