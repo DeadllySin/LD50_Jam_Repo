@@ -37,8 +37,8 @@ public class Transition : MonoBehaviour
             {
                 nextRoomIndex = Random.Range(0, GameManager.gm.roomList.Length);
             }
-            GameManager.gm.currRoom = Instantiate(nextRoom, new Vector3(0, 0, room.gameObject.transform.position.z + 22), Quaternion.identity);
-            GameManager.gm.currDoor = Instantiate(GameManager.gm.roomList[nextRoomIndex], new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>().doorIn;
+            GameManager.gm.currRoom = Instantiate(GameManager.gm.roomList[nextRoomIndex], new Vector3(0, 0, room.gameObject.transform.position.z + 22), Quaternion.identity);
+            GameManager.gm.currDoor = Instantiate(nextTunnel, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>().doorIn;
             yield return new WaitForSeconds(1);
             Destroy(room.gameObject);
             door2.SetTrigger("isOpen");
