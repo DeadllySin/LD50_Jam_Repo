@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class StatuePiece : MonoBehaviour
 {
-    public string state = "ground";
     private PlayerHand ph;
+    public string state = "ground";
     public int statueNumber;
     [HideInInspector] public StatueSocket ss;
 

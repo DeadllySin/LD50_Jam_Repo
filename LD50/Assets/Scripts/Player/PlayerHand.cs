@@ -54,14 +54,14 @@ public class PlayerHand : MonoBehaviour
     {
         if (handStatueTarget != null && hand.GetComponent<StatuePiece>().state == "inHand" && handStatueTarget.GetComponent<StatueSocket>().assinedStatue == null)
         {
-            hand.transform.parent = null;
+            hand.transform.parent = handStatueTarget.transform;
             hand.GetComponent<StatuePiece>().state = "Ass";
             hand.GetComponent<StatuePiece>().ss = ss;
             hand.GetComponent<StatuePiece>().ss.assinedStatue = hand;
             hand.GetComponent<StatuePiece>().ss.OnAssienedStatue();
             hand.transform.position = handStatueTarget.transform.position;
             hand = null;
-            if(GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces >= 2) GameManager.gm.currRoom.GetComponent<StatueRoomManager>().GetComponent<StatueRoomManager>().SpawnRoom();
+            if(GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces >= 2) GameManager.gm.OpenNextDoor();
         }
     }
 }

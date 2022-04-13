@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    [SerializeField] private GameObject nextRoom;
-
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if(hit.gameObject.tag == "Respawn") Debug.Log(hit.gameObject.name);
@@ -12,11 +10,11 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider hit)
     {
-        if (hit.gameObject.tag == "Transition")
+        if (hit.CompareTag("Transition"))
         {
-            StartCoroutine(hit.GetComponent<Transition>().newRoom());
+            hit.GetComponent<Transition>().doNewRoom();
         }
-        if (hit.gameObject.tag == "Transition2")
+        if (hit.CompareTag("Transition2"))
         {
             hit.GetComponent<Transition2>().CloseDoor();
         }
