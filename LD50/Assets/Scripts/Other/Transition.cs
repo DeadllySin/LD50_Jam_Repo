@@ -33,10 +33,7 @@ public class Transition : MonoBehaviour
                     break;
             }
             int nextRoomIndex = Random.Range(0,GameManager.gm.roomList.Length);
-            while(nextRoomIndex == GameManager.gm.lastRoom)
-            {
-                nextRoomIndex = Random.Range(0, GameManager.gm.roomList.Length);
-            }
+            while(nextRoomIndex == GameManager.gm.lastRoom) nextRoomIndex = Random.Range(0, GameManager.gm.roomList.Length);
             GameManager.gm.lastRoom = nextRoomIndex;
             GameManager.gm.currRoom = Instantiate(GameManager.gm.roomList[nextRoomIndex], new Vector3(0, 0, room.gameObject.transform.position.z + 22), Quaternion.identity);
             GameManager.gm.currDoor = Instantiate(nextTunnel, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>().doorIn;

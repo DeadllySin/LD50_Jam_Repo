@@ -10,13 +10,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider hit)
     {
-        if (hit.CompareTag("Transition"))
-        {
-            hit.GetComponent<Transition>().doNewRoom();
-        }
-        if (hit.CompareTag("Transition2"))
-        {
-            hit.GetComponent<Transition2>().CloseDoor();
-        }
+        if (hit.CompareTag("Transition")) hit.GetComponent<Transition>().doNewRoom();
+        if (hit.CompareTag("Transition2")) hit.GetComponent<Transition2>().CloseDoor();
     }
 }

@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager gm;
     public GameObject ceiling;
     public GameObject[] roomList;
-    public int lastRoom = 0;
+    [HideInInspector]public int lastRoom = 0;
+    public float ceilingSpeed;
 
     private void Awake()
     {
@@ -18,15 +19,15 @@ public class GameManager : MonoBehaviour
     {
         GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isOpen");
     }
-    public float speed;
-    private void Update() { ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), speed * Time.deltaTime); }
+
+    private void Update() { ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime); }
 
     private void FixedUpdate()
     {
         if (ceiling.transform.position.y <= 2)
         {
             Debug.Log("You Are Dead");
-            speed = 0;
+            ceilingSpeed = 0;
         }
     }
 }

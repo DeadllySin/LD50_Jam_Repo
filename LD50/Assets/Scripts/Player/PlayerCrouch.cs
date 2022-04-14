@@ -6,7 +6,7 @@ public class PlayerCrouch : MonoBehaviour
     private StarterAssets.FirstPersonController fps;
     [SerializeField] private float hight;
 
-    private void Start()
+    private void Awake()
     {
         cc = GetComponent<CharacterController>();
         fps = GetComponent<StarterAssets.FirstPersonController>();
