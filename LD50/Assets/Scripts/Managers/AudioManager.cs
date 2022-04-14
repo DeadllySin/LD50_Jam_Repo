@@ -7,8 +7,35 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager am;
 
-    [Header("Player Movement")]
-    public FMODUnity.EventReference testSound;
+    [Header("Player")]
+    public FMODUnity.EventReference testSound; //movement
+    public FMODUnity.EventReference deathSFX;
+    public FMODUnity.EventReference pDrop;
+    public FMODUnity.EventReference pPickUp;
+
+    [Header("Environment")]
+    public FMODUnity.EventReference ceilingLoop;
+    public FMODUnity.EventReference ceilingDebris;
+    public FMODUnity.EventReference doorOpen;
+    public FMODUnity.EventReference doorClose;
+
+    [Header("Music")]
+    public FMODUnity.EventReference mainMusic;
+
+    [Header("Puzzle Combine")]
+    public FMODUnity.EventReference pInsertPiece;
+
+    [Header("Puzzle Math")]
+    public FMODUnity.EventReference pSlideUp;
+    public FMODUnity.EventReference pSlideDown;
+
+    [Header("UI")]
+    public FMODUnity.EventReference puzzleCorrect;
+    public FMODUnity.EventReference puzzleWrong;
+    public FMODUnity.EventReference uiClick;
+
+
+
 
     public void Awake()
     {
