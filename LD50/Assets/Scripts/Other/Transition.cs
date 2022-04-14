@@ -9,12 +9,12 @@ public class Transition : MonoBehaviour
     [SerializeField] private GameObject nextTunnel;
     bool alreadyColl;
 
-    public void doNewRoom()
+    public void CallNewRoom()
     {
-        StartCoroutine(newRoom());
+        StartCoroutine(NewRoom());
     }
 
-    IEnumerator newRoom()
+    IEnumerator NewRoom()
     {
         if (!alreadyColl)
         {

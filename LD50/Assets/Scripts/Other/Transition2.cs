@@ -7,10 +7,10 @@ public class Transition2 : MonoBehaviour
     [SerializeField] private GameObject fakeDoor;
     public void CloseDoor()
     {
-        StartCoroutine(deleteLastTunnel());
+        StartCoroutine(DeleteLastTunnel());
     }
     
-    IEnumerator deleteLastTunnel()
+    IEnumerator DeleteLastTunnel()
     {
         doorAnim.SetTrigger("isClosed");
         GameObject tunnelParent = GetComponentInParent<Transform>().GetComponentInParent<Tunnel>().gameObject;

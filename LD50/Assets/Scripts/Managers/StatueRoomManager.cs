@@ -4,7 +4,7 @@ using UnityEngine;
 public class StatueRoomManager : MonoBehaviour
 {
     public int correctPieces;
-    List <GameObject> spawners = new List<GameObject>();
+    readonly List <GameObject> spawners = new List<GameObject>();
     [SerializeField] private GameObject[] spawner;
     [SerializeField] private GameObject statuePieces;
     [SerializeField] private GameObject statuePiece2;
@@ -13,7 +13,6 @@ public class StatueRoomManager : MonoBehaviour
 
     private void Awake()
     {
-
         for (int i = 0; i < spawner.Length; i++) spawners.Add(spawner[i]);
     }
 
