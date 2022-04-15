@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager gm;
+    bool dieOnlyOnce;
     public GameObject currDoor;
     public GameObject currRoom;
-    public static GameManager gm;
     public GameObject player;
     public GameObject ceiling;
     public GameObject[] roomList;
-    [HideInInspector]public int lastRoom = 0;
-    public float ceilingSpeed;
-    bool dieOnlyOnce;
+    [HideInInspector] public int lastRoom = 0;
+    [SerializeField] private float ceilingSpeed;
     [SerializeField] private GameObject blackScreen;
+    [SerializeField] private float deathHeight;
+    [SerializeField] private float fastHeight;
 
     private void Awake()
     {
@@ -26,12 +28,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (ceiling.transform.position.y <= 4 && !dieOnlyOnce)
+        if (ceiling.transform.position.y <= fastHeight && !dieOnlyOnce)
         {
             Debug.Log("You Are Dead");
             player.SetActive(false);
-            ceilingSpeed = ceilingSpeed * 2;
-            if (ceiling.transform.position.y < 2)
+            ceilingSpeed *= 2;
+            if (ceiling.transform.position.y < deathHeight)
             {
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.deathSFX);
                 blackScreen.SetActive(true); 
@@ -39,12 +41,12 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        if (Input.GetKeyDown("t"))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isOpen");
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen, currDoor.transform.position);
         }
-        if (Input.GetKeyDown("y"))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isClosed");
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose, currDoor.transform.position);

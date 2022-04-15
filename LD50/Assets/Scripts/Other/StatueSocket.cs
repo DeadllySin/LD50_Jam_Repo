@@ -13,7 +13,13 @@ public class StatueSocket : MonoBehaviour
 
     public void OnAssienedStatue()
     {
-        if (assinedStatue != null) if (assinedStatue.GetComponent<StatuePiece>().statueNumber == correctStatue) GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces++;
+        if (assinedStatue != null)
+        {
+            if (assinedStatue.GetComponent<StatuePiece>().statueNumber == correctStatue)
+            {
+                GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces++;
+            }
+        }
     }
 
     private void OnMouseEnter()

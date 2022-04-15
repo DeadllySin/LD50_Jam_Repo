@@ -4,7 +4,7 @@ public class PlayerCrouch : MonoBehaviour
 {
     private CharacterController cc;
     private StarterAssets.FirstPersonController fps;
-    [SerializeField] private float hight;
+    [SerializeField] private float ceilingCrouchHeight;
 
     private void Awake()
     {
@@ -14,15 +14,14 @@ public class PlayerCrouch : MonoBehaviour
 
     void Update()
     {
-        //Makes the player crouch when pressing crouch key or the ceiling is to low
-        if (Input.GetKeyDown(KeyCode.LeftControl) || GameManager.gm.ceiling.transform.position.y < hight)
+        if (Input.GetKeyDown(KeyCode.LeftControl) || GameManager.gm.ceiling.transform.position.y < ceilingCrouchHeight)
         {
             cc.height = 1;
             fps.MoveSpeed = 2;
             fps.SprintSpeed = 2;
             fps.JumpHeight = .7f;
-        }// Uncrouches the player when the crouch key is released
-        if (Input.GetKeyUp(KeyCode.LeftControl) && GameManager.gm.ceiling.transform.position.y > hight)
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl) && GameManager.gm.ceiling.transform.position.y > ceilingCrouchHeight)
         {
             fps.JumpHeight = 1.2f;
             cc.height = 2;
