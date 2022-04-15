@@ -12,7 +12,7 @@ public class Tunnel : MonoBehaviour
 
     private void Awake()
     {
-        CloseDoor(doorIn);
+        IdleDoor(doorIn);
     }
 
     private void Update()
@@ -81,4 +81,8 @@ public class Tunnel : MonoBehaviour
     {
         door.GetComponent<Animator>().SetTrigger("isClosed");
     }
+    public void IdleDoor(GameObject door)
+    {
+        door.GetComponent<Animator>().SetTrigger("isIdle");
+    } 
 }
