@@ -119,8 +119,7 @@ namespace StarterAssets
 			{
 				if (_timeBeforeNextStep <= 0f)
 				{
-                    // Comment this out if you get tired of kick drums xD
-					FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.testSound);
+					FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.footsteps);
 
 					_timeBeforeNextStep = 1 / (speed * FootstepsFrequencyFactor);
 				}

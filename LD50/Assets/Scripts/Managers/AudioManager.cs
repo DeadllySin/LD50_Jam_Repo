@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager am;
 
     [Header("Player")]
-    public FMODUnity.EventReference testSound; //movement
+    public FMODUnity.EventReference footsteps; //movement
     public FMODUnity.EventReference deathSFX;
     public FMODUnity.EventReference pDrop;
     public FMODUnity.EventReference pPickUp;
@@ -58,7 +58,7 @@ public class AudioManager : MonoBehaviour
     {
         if (Input.GetKeyDown("t"))
         {
-            FMODUnity.RuntimeManager.PlayOneShot(testSound);
+            //FMODUnity.RuntimeManager.PlayOneShot(testSound);
         }
     }
 }
