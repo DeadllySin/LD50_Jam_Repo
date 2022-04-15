@@ -18783,13 +18783,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03531af918adc0b48a22c304cdf18bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testSound:
+  footsteps:
     Guid:
-      Data1: 640211788
-      Data2: 1328733148
-      Data3: 549199511
-      Data4: 1953815127
-    Path: event:/Test_Event_Timeline
+      Data1: 1880838797
+      Data2: 1078668871
+      Data3: -624420718
+      Data4: 797676473
+    Path: event:/Player/Movement
   deathSFX:
     Guid:
       Data1: 2064272696
