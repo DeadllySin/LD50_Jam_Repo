@@ -31,13 +31,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("You Are Dead");
             player.SetActive(false);
             ceilingSpeed = ceilingSpeed * 2;
-
-
-
-            // fmod stop music instance or change paramter to menu/death screen
-            // stop all instances except menu/death screen
-            // reset parameters?
-
             if (ceiling.transform.position.y < 2)
             {
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.deathSFX);
@@ -45,7 +38,6 @@ public class GameManager : MonoBehaviour
                 dieOnlyOnce = true;
             }
         }
-
         
         if (Input.GetKeyDown("t"))
         {
