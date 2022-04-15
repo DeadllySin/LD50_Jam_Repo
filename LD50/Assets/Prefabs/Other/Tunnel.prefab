@@ -105,7 +105,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8147287963644728522}
   - component: {fileID: 8147287963644728523}
-  - component: {fileID: 8147287963644728524}
   m_Layer: 0
   m_Name: Transition
   m_TagString: Transition
@@ -140,22 +139,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 3.1649675, z: 1}
   m_Center: {x: 0, y: 1.0824838, z: 0}
---- !u!114 &8147287963644728524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8147287963644728521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcec94929ab71574f8083de330f8a1d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  door1: {fileID: 8147287963732536476}
-  door2: {fileID: 8147287964059894044}
-  nextRoom: {fileID: 1739284135203955518, guid: ee7f19a8e8da3384eb3536e37e07e20a, type: 3}
-  nextTunnel: {fileID: 8147287964468909956}
 --- !u!1 &8147287963716455534
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,7 +795,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8147287963761286537}
   - component: {fileID: 8147287963761286538}
-  - component: {fileID: 8147287963761286539}
   m_Layer: 0
   m_Name: Transition
   m_TagString: Transition2
@@ -847,20 +829,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 3.1639323, z: 1}
   m_Center: {x: 0, y: 1.0819662, z: 0}
---- !u!114 &8147287963761286539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8147287963761286536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c86811b525ce3949b0e2b4fd84ff095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorAnim: {fileID: 8147287964059894044}
-  fakeDoor: {fileID: 3219292511492543933, guid: 243eed46cd913e64f9f3fe1b6f2a6a6d, type: 3}
 --- !u!1 &8147287964059894042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1241,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorIn: {fileID: 8147287963732536475}
   doorOut: {fileID: 8147287964059894042}
+  fakeDoor: {fileID: 3219292511492543933, guid: 243eed46cd913e64f9f3fe1b6f2a6a6d, type: 3}
+  tunnelPrefab: {fileID: 8147287964468909956}
 --- !u!1 &8147287964485439494
 GameObject:
   m_ObjectHideFlags: 0

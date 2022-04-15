@@ -10,7 +10,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider hit)
     {
-        if (hit.CompareTag("Transition")) hit.GetComponent<Transition>().CallNewRoom();
-        if (hit.CompareTag("Transition2")) hit.GetComponent<Transition2>().CloseDoor();
+        if (hit.CompareTag("Transition")) hit.GetComponent<Transform>().GetComponentInParent<Tunnel>().NewRoom();
+        if (hit.CompareTag("Transition2")) hit.GetComponent<Transform>().GetComponentInParent<Tunnel>().RemoveTunnel();
     }
 }
