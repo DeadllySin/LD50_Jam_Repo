@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     public GameObject currDoor;
     public GameObject currRoom;
     public static GameManager gm;
+    public GameObject player;
     public GameObject ceiling;
     public GameObject[] roomList;
     [HideInInspector]public int lastRoom = 0;
