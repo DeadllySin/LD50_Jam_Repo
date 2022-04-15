@@ -36,14 +36,15 @@ public class GameManager : MonoBehaviour
             // reset parameters?
         }
         
-        /*if (Input.GetKeyDown("t") && GameManager.gm.currDoor.GetComponent<Animator>()GetTrigger;
+        if (Input.GetKeyDown("t"))
         {
-            OpenNextDoor();
-        }
-        {
-            Debug.Log("INPUT");
             GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isOpen");
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen, currDoor.transform.position);
-        }*/
+        }
+        if (Input.GetKeyDown("y"))
+        {
+            GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isClosed");
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose, currDoor.transform.position);
+        }
     }
 }
