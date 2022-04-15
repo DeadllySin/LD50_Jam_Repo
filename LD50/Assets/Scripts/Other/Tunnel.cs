@@ -39,10 +39,12 @@ public class Tunnel : MonoBehaviour
             switch (room.correctPieces)
             {
                 case 2:
-                    Debug.Log("2 Pieces correct. Put the code for the sound and ceiling here");
+                    FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
+                    Debug.Log("Wrong Puzzle");
                     break;
                 case 3:
-                    Debug.Log("3 Pieces correct. Put the code for the sound and ceiling here");
+                    FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
+                    Debug.Log("Correct Puzzle");
                     break;
                 default:
                     break;
