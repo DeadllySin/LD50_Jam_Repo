@@ -11001,9 +11001,7 @@ MonoBehaviour:
   statuePieces: {fileID: 8372689591941707010, guid: 995ee43cbc6db5040b688f93593fc74a, type: 3}
   statuePiece2: {fileID: 9154388833964036966, guid: 1f5d3bf0e553f1148a6ec1e223e03c20, type: 3}
   statuePiece3: {fileID: 9154388833964036966, guid: d71c16b6365477c4e8adb23c3e9a3afe, type: 3}
-  door: {fileID: 814665885}
-  trigger1: {fileID: 1603165145}
-  trigger2: {fileID: 1721553560}
+  ceiling: {fileID: 0}
 --- !u!1 &1007990790
 GameObject:
   m_ObjectHideFlags: 0
@@ -13974,6 +13972,104 @@ MonoBehaviour:
       Data3: 549199511
       Data4: 1953815127
     Path: event:/Test_Event_Timeline
+  deathSFX:
+    Guid:
+      Data1: 2064272696
+      Data2: 1129834078
+      Data3: 2031722919
+      Data4: 109258761
+    Path: event:/Player/Death
+  pDrop:
+    Guid:
+      Data1: 1878582543
+      Data2: 1234976852
+      Data3: 1959968421
+      Data4: -1680627223
+    Path: event:/Player/Drop
+  pPickUp:
+    Guid:
+      Data1: -1072476986
+      Data2: 1142427847
+      Data3: -345773675
+      Data4: 1577822887
+    Path: event:/Player/Pick_Up
+  ceilingLoop:
+    Guid:
+      Data1: 1734490846
+      Data2: 1252568122
+      Data3: -1496786253
+      Data4: 856932879
+    Path: event:/Environment/Ceiling/Ceiling_Loop
+  ceilingDebris:
+    Guid:
+      Data1: -399963291
+      Data2: 1092534417
+      Data3: 731208867
+      Data4: 815161791
+    Path: event:/Environment/Ceiling/Generic_Debris
+  doorOpen:
+    Guid:
+      Data1: -1683764075
+      Data2: 1104930205
+      Data3: 2078332304
+      Data4: 1696368375
+    Path: event:/Environment/Door/Door_Open
+  doorClose:
+    Guid:
+      Data1: -1377422271
+      Data2: 1321077590
+      Data3: 1344055980
+      Data4: 1259722169
+    Path: event:/Environment/Door/Door_Close
+  mainMusic:
+    Guid:
+      Data1: 1129507240
+      Data2: 1260476724
+      Data3: 1320635057
+      Data4: 645242537
+    Path: event:/Music/Main_Music
+  pInsertPiece:
+    Guid:
+      Data1: 3815429
+      Data2: 1314688873
+      Data3: -1742353507
+      Data4: -872551543
+    Path: event:/Puzzles/Combine Pieces/Insert
+  pSlideUp:
+    Guid:
+      Data1: -313341191
+      Data2: 1219265372
+      Data3: 959580801
+      Data4: 1723810247
+    Path: event:/Puzzles/Math/Press_Up
+  pSlideDown:
+    Guid:
+      Data1: -588044523
+      Data2: 1324404253
+      Data3: 2089462662
+      Data4: 1358427229
+    Path: event:/Puzzles/Math/Press_Down
+  puzzleCorrect:
+    Guid:
+      Data1: 620300921
+      Data2: 1293802599
+      Data3: 237939387
+      Data4: 739517141
+    Path: event:/UI/Puzzle_Right
+  puzzleWrong:
+    Guid:
+      Data1: 555603755
+      Data2: 1201641156
+      Data3: -406815824
+      Data4: 1806189794
+    Path: event:/UI/Puzzle_Wrong
+  uiClick:
+    Guid:
+      Data1: -60722240
+      Data2: 1187753440
+      Data3: 758568595
+      Data4: 2088136972
+    Path: event:/UI/UI_Click
 --- !u!4 &1370114460
 Transform:
   m_ObjectHideFlags: 0
@@ -19792,8 +19888,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 509dc6c99d2578a4e9b39c6f3752ad1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 4414007795817898995, guid: 5723c50750087834da0f6875d7ae01a7, type: 3}
-  roof: {fileID: 214032213}
+  currDoor: {fileID: 0}
+  currRoom: {fileID: 0}
+  player: {fileID: 0}
+  ceiling: {fileID: 0}
+  roomList: []
+  lastRoom: 0
+  ceilingSpeed: 0
 --- !u!1 &1953334688
 GameObject:
   m_ObjectHideFlags: 0
@@ -22608,7 +22709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e669f4ad66034e43840ccfc6474c294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 0}
   gDrop: {fileID: 1878280567}
   hand: {fileID: 0}
   handTarget: {fileID: 0}
