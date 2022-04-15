@@ -22,9 +22,7 @@ public class GameManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen, currDoor.transform.position);
     }
 
-    private void Update() { ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime); }
-
-    private void FixedUpdate()
+    private void Update()
     {
         if (ceiling.transform.position.y <= 2)
         {
@@ -46,5 +44,7 @@ public class GameManager : MonoBehaviour
             GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isClosed");
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose, currDoor.transform.position);
         }
+
+       ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
     }
 }
