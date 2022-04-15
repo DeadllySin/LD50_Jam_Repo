@@ -13674,6 +13674,7 @@ MonoBehaviour:
   - {fileID: 1739284135861986967}
   - {fileID: 1739284135711792130}
   - {fileID: 1739284135535918067}
+  - {fileID: 1392885056408560962}
   statuePieces: {fileID: 8372689591941707010, guid: 995ee43cbc6db5040b688f93593fc74a, type: 3}
   statuePiece2: {fileID: 9154388833964036966, guid: 1f5d3bf0e553f1148a6ec1e223e03c20, type: 3}
   statuePiece3: {fileID: 9154388833964036966, guid: d71c16b6365477c4e8adb23c3e9a3afe, type: 3}
