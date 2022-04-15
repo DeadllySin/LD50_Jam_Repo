@@ -6,12 +6,21 @@ public class Tunnel : MonoBehaviour
     bool alreadyColl;
     public GameObject doorIn;
     public GameObject doorOut;
+    [SerializeField] private GameObject ceil;
     [SerializeField] private GameObject fakeDoor;
     [SerializeField] private GameObject tunnelPrefab;
 
     private void Awake()
     {
         CloseDoor(doorIn);
+    }
+
+    private void Update()
+    {
+        if(GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y)
+        {
+            ceil.transform.parent = GameManager.gm.ceiling.transform;
+        }
     }
 
     public void NewRoom()

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] roomList;
     [HideInInspector]public int lastRoom = 0;
     public float ceilingSpeed;
+    bool dieOnlyOnce;
+    [SerializeField] private GameObject blackScreen;
 
     private void Awake()
     {
@@ -24,15 +26,26 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (ceiling.transform.position.y <= 2)
+        if (ceiling.transform.position.y <= 4 && !dieOnlyOnce)
         {
             Debug.Log("You Are Dead");
-            ceilingSpeed = 0;
-            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.deathSFX);
+            player.SetActive(false);
+            ceilingSpeed = ceilingSpeed * 2;
+
+
+
             // fmod stop music instance or change paramter to menu/death screen
             // stop all instances except menu/death screen
             // reset parameters?
+
+            if (ceiling.transform.position.y < 2)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.deathSFX);
+                blackScreen.SetActive(true); 
+                dieOnlyOnce = true;
+            }
         }
+
         
         if (Input.GetKeyDown("t"))
         {
