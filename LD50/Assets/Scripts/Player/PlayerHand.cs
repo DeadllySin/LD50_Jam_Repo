@@ -8,13 +8,40 @@ public class PlayerHand : MonoBehaviour
     [HideInInspector] public GameObject handStatueTarget;
     [HideInInspector] public StatuePiece sp;
     [HideInInspector] public StatueSocket ss;
+    [SerializeField] private float distance;
+    private RingManager ringman;
+
+    private void Awake()
+    {
+        ringman = FindObjectOfType<RingManager>();
+    }
 
     private void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (hand == null) PickUpFrom();
-            else if(hand != null) Place();
+            /*
+            if(handTarget?.GetComponent<Ring>())
+            {
+                ringman.MoveDown(handTarget);
+            }*/
+
+            if (hand == null)
+            {
+                if (Vector3.Distance(handTarget.transform.position, transform.position) < distance)
+                {
+                    PickUpFrom();
+                }
+            }
+            else if (hand != null)
+            {
+                if (Vector3.Distance(handStatueTarget.transform.position, transform.position) < distance)
+                {
+                    Place();
+                }
+            }
+
         }
         if (Input.GetKeyDown(KeyCode.G)) Drop();
     }
@@ -62,6 +89,7 @@ public class PlayerHand : MonoBehaviour
             hand.transform.position = handStatueTarget.transform.position;
             hand = null;
             if(GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces >= 2) GameManager.gm.OpenNextDoor();
+            if (GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces < 2) GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isClosed");
         }
     }
 }
