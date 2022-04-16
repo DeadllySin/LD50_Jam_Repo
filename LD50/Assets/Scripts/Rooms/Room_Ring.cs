@@ -15,16 +15,6 @@ public class Room_Ring : MonoBehaviour
         GameManager.gm.whatRoom = "ring";
     }
 
-    private void OnMouseEnter()
-    {
-        ph.handTarget = this.gameObject;
-    }
-
-    private void OnMouseExit()
-    {
-        ph.handTarget = null;
-    }
-
     public void MoveDown()
     {
         int ringMovedIndex = 0;
