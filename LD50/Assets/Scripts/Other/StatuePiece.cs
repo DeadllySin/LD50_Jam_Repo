@@ -14,6 +14,7 @@ public class StatuePiece : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        ph.lookingAt = "staue";
         ph.handTarget = gameObject;
         ph.sp = this.gameObject.GetComponent<StatuePiece>();
     }
@@ -22,6 +23,7 @@ public class StatuePiece : MonoBehaviour
     {
         if(ph.handTarget == this.gameObject)
         {
+            ph.lookingAt = "none";
             ph.sp = null;
             ph.handTarget = null;
         }

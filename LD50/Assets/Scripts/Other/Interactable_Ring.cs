@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ring : MonoBehaviour
+public class Interactable_Ring : MonoBehaviour
 {
     private PlayerHand ph;
 
-    private void Awake()
+    private void Start()
     {
         ph = FindObjectOfType<PlayerHand>();
     }
 
     private void OnMouseEnter()
     {
-        ph.handTarget = this.gameObject;
+        ph.lookingAt = "ring";
+    }
+
+    private void OnMouseExit()
+    {
+        ph.lookingAt = "none";
     }
 }

@@ -2,67 +2,76 @@ using UnityEngine;
 
 public class RingManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] rings;
+    public Slot[] s;
 
-    public void MoveDown(GameObject i)
+    private PlayerHand ph;
+
+    private void Awake()
     {
-        for (int j = 0; j < rings.Length; j++)
+        ph = FindObjectOfType<PlayerHand>();
+    }
+
+    private void OnMouseEnter()
+    {
+        ph.handTarget = this.gameObject;
+    }
+
+    private void OnMouseExit()
+    {
+        ph.handTarget = null;
+    }
+
+    public void MoveDown()
+    {
+        int ringMovedIndex = 0;
+        for (int j = s.Length - 1; j > 0; j--)
         {
-            if (rings[j].gameObject == i)
+            if (s[j].ring == null)
             {
-                if(j != rings.Length - 1)
-                {
-                    if (rings[j + 1] == null)
-                    {
-                        for (int k = j + 1; k < rings.Length; k++)
-                        {
-                            if (rings[k].gameObject != null)
-                            {
-                                rings[k - 1] = rings[j];
-                                rings[j] = null;
-                                return;
-                            }
-                            if(k == rings.Length - 1 && rings[k] == null)
-                            {
-                                rings[k] = rings[j];
-                                rings[j] = null;
-                                return;
-                            }
-                        }
-                    }
-                }
+                ringMovedIndex = j + 1;
+                break;
+            }
+        }
+
+        for (int j = 0; j < s.Length; j++)
+        {
+            if (s[j].ring == null)
+            {
+                s[j].ring = s[ringMovedIndex].ring;
+                s[j].ring.transform.position = s[j].pos;
+                s[ringMovedIndex].ring = null;
+                return;
             }
         }
     }
 
-    public void MoveUp(GameObject i)
+    public void MoveUp()
     {
-        for (int j = 0; j < rings.Length; j++)
+        int ringMovedIndex = 0;
+        for (int j = 0; j < s.Length; j++)
         {
-            if (rings[j].gameObject == i)
+            if (s[j].ring == null)
             {
-                if (j != 0)
-                {
-                    if (rings[j - 1] == null)
-                    {
-                        for (int k = j - 1; k < rings.Length; k--)
-                        {
-                            if (rings[k].gameObject != null)
-                            {
-                                rings[k + 1] = rings[j];
-                                rings[j] = null;
-                                return;
-                            }
-                            if (k == 0 && rings[k] == null)
-                            {
-                                rings[0] = rings[j];
-                                rings[j] = null;
-                                return;
-                            }
-                        }
-                    }
-                }
+                ringMovedIndex = j - 1;
+                break;
+            }
+        }
+        for (int j = s.Length - 1; j > -1; j--)
+        {
+            if (s[j].ring == null)
+            {
+                s[j].ring = s[ringMovedIndex].ring;
+                s[j].ring.transform.position = s[j].pos;
+                s[ringMovedIndex].ring = null;
+                return;
             }
         }
     }
 }
+
+[System.Serializable]
+public struct Slot
+{
+    public GameObject ring;
+    public Vector3 pos;
+} 

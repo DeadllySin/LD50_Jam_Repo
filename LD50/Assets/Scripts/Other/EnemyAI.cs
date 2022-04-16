@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    float distance;
+    [SerializeField] private NavMeshAgent agent;
+
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position,GameManager.gm.player.transform.position, 1 * Time.deltaTime);
+        agent.SetDestination(GameManager.gm.player.transform.position);
     }
 }

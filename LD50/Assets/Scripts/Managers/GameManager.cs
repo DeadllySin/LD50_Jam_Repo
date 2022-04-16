@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         ceilingDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceiling));
         
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceiling.transform.position.y);
-        Debug.Log("Height: " + ceiling.transform.position.y);
+        //Debug.Log("Height: " + ceiling.transform.position.y);
         
         ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
     }

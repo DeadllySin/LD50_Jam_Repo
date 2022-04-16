@@ -9,6 +9,7 @@ public class PlayerHand : MonoBehaviour
     [HideInInspector] public StatuePiece sp;
     [HideInInspector] public StatueSocket ss;
     [SerializeField] private float distance;
+    public string lookingAt = "none";
     private RingManager ringman;
 
     private void Awake()
@@ -18,31 +19,35 @@ public class PlayerHand : MonoBehaviour
 
     private void Update()
     {
-
+        Debug.Log(lookingAt);
         if (Input.GetKeyDown(KeyCode.E))
         {
-            /*
-            if(handTarget?.GetComponent<Ring>())
+            if (lookingAt == "ring")
             {
-                ringman.MoveDown(handTarget);
-            }*/
+                ringman.MoveUp();
+            }
+            else
+            {
+                if (hand == null)
+                {
+                    if (Vector3.Distance(handTarget.transform.position, transform.position) < distance)
+                    {
+                        PickUpFrom();
+                    }
+                }
+                else if (hand != null)
+                {
+                    if (Vector3.Distance(handStatueTarget.transform.position, transform.position) < distance)
+                    {
+                        Place();
+                    }
+                }
+            }
 
-            if (hand == null)
-            {
-                if (Vector3.Distance(handTarget.transform.position, transform.position) < distance)
-                {
-                    PickUpFrom();
-                }
-            }
-            else if (hand != null)
-            {
-                if (Vector3.Distance(handStatueTarget.transform.position, transform.position) < distance)
-                {
-                    Place();
-                }
-            }
+
 
         }
+        if(Input.GetKeyDown(KeyCode.R)) ringman.MoveDown();
         if (Input.GetKeyDown(KeyCode.G)) Drop();
     }
 
