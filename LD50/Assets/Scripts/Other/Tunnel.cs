@@ -15,13 +15,7 @@ public class Tunnel : MonoBehaviour
         IdleDoor(doorIn);
     }
 
-    private void Update()
-    {
-        if(GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y)
-        {
-            ceil.transform.parent = GameManager.gm.ceiling.transform;
-        }
-    }
+    private void Update() { if (GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.parent = GameManager.gm.ceiling.transform; }
 
     public void NewRoom()
     {

@@ -4,7 +4,7 @@ public class Interactable_Socket : MonoBehaviour
 {
     PlayerHand ph;
     Room_Statue rs;
-    public int correctStatue;
+    [SerializeField] private int correctStatue;
     [HideInInspector] public GameObject assinedStatue;
 
     private void Start()
@@ -15,13 +15,12 @@ public class Interactable_Socket : MonoBehaviour
 
     public void OnAssienedStatue()
     {
-        if (assinedStatue != null)
-        {
-            if (assinedStatue.GetComponent<Interactable_Statue>().statueNumber == correctStatue)
-            {
-                GameManager.gm.currRoom.GetComponent<Room_Statue>().correctPieces++;
-            }
-        }
+        if (assinedStatue.GetComponent<Interactable_Statue>().statueNumber == correctStatue) rs.correctPieces++;
+    }
+
+    public void OnRemovedStatue()
+    {
+        if(assinedStatue.GetComponent<Interactable_Statue>().statueNumber == correctStatue) rs.correctPieces--;
     }
 
     private void OnMouseEnter()

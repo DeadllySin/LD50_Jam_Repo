@@ -39,8 +39,8 @@ public class Room_Statue : MonoBehaviour
     {
         if (phand.handTarget != null && phand.hand == null)
         {
-            if (sp.state == "ground") PickUp(sp, false);
-            if (sp.state == "Ass") PickUp(sp, true);
+            if (sp.state == "ground") PickUp(false);
+            if (sp.state == "Ass") PickUp(true);
         }
     }
 
@@ -53,7 +53,7 @@ public class Room_Statue : MonoBehaviour
         phand.hand = null;
     }
 
-    public void PickUp(Interactable_Statue sp, bool setASNull = false)
+    public void PickUp(bool setASNull = false)
     {
         sp.state = "inHand";
         phand.hand = sp.gameObject;
@@ -61,8 +61,8 @@ public class Room_Statue : MonoBehaviour
         phand.hand.transform.localPosition = new Vector3(1, 1.2f, 2f);
         if (setASNull)
         {
+            ss.OnRemovedStatue();
             if (GameManager.gm.currRoom.GetComponent<Room_Statue>().correctPieces == 2) GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isClosed");
-            if (sp.ss.assinedStatue.GetComponent<Interactable_Statue>().statueNumber == sp.ss.correctStatue) correctPieces--;
             sp.ss.assinedStatue = null;
         }
     }

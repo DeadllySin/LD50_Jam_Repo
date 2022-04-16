@@ -24921,6 +24921,7 @@ MonoBehaviour:
   roomList:
   - {fileID: 1739284135203955518, guid: ee7f19a8e8da3384eb3536e37e07e20a, type: 3}
   - {fileID: 1739284135203955518, guid: ee7f19a8e8da3384eb3536e37e07e20a, type: 3}
+  whatRoom: 
   lastRoom: 0
   ceilingSpeed: 0.2
   blackScreen: {fileID: 236524569}
