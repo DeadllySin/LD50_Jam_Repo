@@ -79,7 +79,9 @@ public class PlayerHand : MonoBehaviour
         {
             if (sp.ss.assinedStatue.GetComponent<StatuePiece>().statueNumber == sp.ss.correctStatue) GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces--;
             sp.ss.assinedStatue = null;
+            if (GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces < 2) GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isClosed");
         }
+
     }
 
     void Place()
@@ -94,7 +96,7 @@ public class PlayerHand : MonoBehaviour
             hand.transform.position = handStatueTarget.transform.position;
             hand = null;
             if(GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces >= 2) GameManager.gm.OpenNextDoor();
-            if (GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces < 2) GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isClosed");
+
         }
     }
 }

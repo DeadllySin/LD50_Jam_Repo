@@ -109,5 +109,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: ground
-  statueNumber: 2
+  statueNumber: 1
   ss: {fileID: 0}
