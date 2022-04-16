@@ -1,23 +1,25 @@
 using UnityEngine;
 
-public class StatueSocket : MonoBehaviour
+public class Interactable_Socket : MonoBehaviour
 {
     PlayerHand ph;
+    Room_Statue rs;
     public int correctStatue;
-    public GameObject assinedStatue;
+    [HideInInspector] public GameObject assinedStatue;
 
     private void Start()
     {
-        ph =FindObjectOfType<PlayerHand>(); 
+        ph =FindObjectOfType<PlayerHand>();
+        rs = FindObjectOfType<Room_Statue>();
     }
 
     public void OnAssienedStatue()
     {
         if (assinedStatue != null)
         {
-            if (assinedStatue.GetComponent<StatuePiece>().statueNumber == correctStatue)
+            if (assinedStatue.GetComponent<Interactable_Statue>().statueNumber == correctStatue)
             {
-                GameManager.gm.currRoom.GetComponent<StatueRoomManager>().correctPieces++;
+                GameManager.gm.currRoom.GetComponent<Room_Statue>().correctPieces++;
             }
         }
     }
@@ -25,13 +27,13 @@ public class StatueSocket : MonoBehaviour
     private void OnMouseEnter()
     {
         ph.handStatueTarget = gameObject;
-        ph.ss = this.gameObject.GetComponent<StatueSocket>();
+        rs.ss = this.gameObject.GetComponent<Interactable_Socket>();
     }
 
     private void OnMouseOver()
     {
         ph.handStatueTarget = gameObject;
-        ph.ss = this.gameObject.GetComponent<StatueSocket>();
+        rs.ss = this.gameObject.GetComponent<Interactable_Socket>();
     }
 
     private void OnMouseExit()
@@ -39,7 +41,7 @@ public class StatueSocket : MonoBehaviour
         if(ph.handStatueTarget == this.gameObject)
         {
             ph.handStatueTarget = null;
-            ph.ss = null;
+            rs.ss = null;
         }
     }
 }

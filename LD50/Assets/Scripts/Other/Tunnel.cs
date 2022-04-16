@@ -34,7 +34,7 @@ public class Tunnel : MonoBehaviour
         {
             alreadyColl = true;
             CloseDoor(doorIn);
-            StatueRoomManager room = FindObjectOfType<StatueRoomManager>();
+            Room_Statue room = FindObjectOfType<Room_Statue>();
             Tunnel tunnel = GetComponentInParent<Transform>().GetComponentInParent<Tunnel>();
             switch (room.correctPieces)
             {

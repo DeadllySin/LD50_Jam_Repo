@@ -154,7 +154,6 @@ GameObject:
   - component: {fileID: 3653882480043813501}
   - component: {fileID: 3653882480043813502}
   - component: {fileID: 3653882480043813503}
-  - component: {fileID: 6797442124862390408}
   - component: {fileID: 1016527007193642500}
   - component: {fileID: 3653882480043813492}
   - component: {fileID: 3653882480043813490}
@@ -200,6 +199,8 @@ MonoBehaviour:
   handStatueTarget: {fileID: 0}
   sp: {fileID: 0}
   ss: {fileID: 0}
+  distance: 4
+  lookingAt: none
 --- !u!114 &3653882480043813501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,23 +257,6 @@ MonoBehaviour:
   BottomClamp: -89
   MinFootstepSpeed: 2
   FootstepsFrequencyFactor: 0.75
---- !u!114 &6797442124862390408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3653882480043813496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 909d917d73a63f940ac158d02e936645, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pushLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  canPush: 0
-  strength: 1.1
 --- !u!114 &1016527007193642500
 MonoBehaviour:
   m_ObjectHideFlags: 0

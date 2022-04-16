@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject ceiling;
     public GameObject[] roomList;
+    public string whatRoom;
     [HideInInspector] public int lastRoom = 0;
     [SerializeField] private float ceilingSpeed;
     [SerializeField] private GameObject blackScreen;

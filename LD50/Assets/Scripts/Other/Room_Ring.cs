@@ -1,14 +1,18 @@
 using UnityEngine;
 
-public class RingManager : MonoBehaviour
+public class Room_Ring : MonoBehaviour
 {
     public Slot[] s;
-
     private PlayerHand ph;
 
     private void Awake()
     {
         ph = FindObjectOfType<PlayerHand>();
+    }
+
+    private void Start()
+    {
+        GameManager.gm.whatRoom = "ring";
     }
 
     private void OnMouseEnter()
@@ -32,7 +36,6 @@ public class RingManager : MonoBehaviour
                 break;
             }
         }
-
         for (int j = 0; j < s.Length; j++)
         {
             if (s[j].ring == null)
