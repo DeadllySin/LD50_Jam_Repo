@@ -47,7 +47,8 @@ public class Tunnel : MonoBehaviour
             while (nextRoomIndex == GameManager.gm.lastRoom) nextRoomIndex = Random.Range(0, GameManager.gm.roomList.Length);
             GameManager.gm.lastRoom = nextRoomIndex;
             GameManager.gm.currRoom = Instantiate(GameManager.gm.roomList[nextRoomIndex], new Vector3(0, 0, room.gameObject.transform.position.z + 22), Quaternion.identity);
-            GameManager.gm.currDoor = Instantiate(tunnelPrefab, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>().doorIn;
+            GameManager.gm.currTunnel = Instantiate(tunnelPrefab, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>();
+            GameManager.gm.currDoor = GameManager.gm.currTunnel.doorIn;
             yield return new WaitForSeconds(2);
             Destroy(room.gameObject);
             OpenDoor(doorOut);

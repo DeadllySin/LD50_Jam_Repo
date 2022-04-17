@@ -3,6 +3,7 @@ using UnityEngine;
 public class Interactable_Ring : MonoBehaviour
 {
     private PlayerHand ph;
+    [SerializeField] private string whichWay;
 
     private void Start()
     {
@@ -11,7 +12,8 @@ public class Interactable_Ring : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        ph.lookingAt = "ring";
+        if(whichWay == "down")ph.lookingAt = "ring_down";
+        if(whichWay == "up")ph.lookingAt = "ring_up";
     }
 
     private void OnMouseExit()

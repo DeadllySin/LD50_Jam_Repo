@@ -14,17 +14,20 @@ public class PlayerHand : MonoBehaviour
         ringman = FindObjectOfType<Room_Ring>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Debug.Log(lookingAt);
+    }
+
+    private void Update()
+    {
         if(GameManager.gm.whatRoom == "ring")
         {
-            if(lookingAt == "ring")
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                if (Input.GetKeyDown(KeyCode.E)) ringman.MoveUp();
-                if (Input.GetKeyDown(KeyCode.R)) ringman.MoveDown();
+                if (lookingAt == "ring_up") ringman.MoveUp();
+                else if (lookingAt == "ring_down") ringman.MoveDown();
             }
-
         }
         if(GameManager.gm.whatRoom == "statue")
         {

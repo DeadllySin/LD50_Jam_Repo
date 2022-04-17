@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     bool dieOnlyOnce;
     public GameObject currDoor;
     public GameObject currRoom;
+    public Tunnel currTunnel;
     public GameObject player;
     public GameObject ceiling;
     public GameObject[] roomList;

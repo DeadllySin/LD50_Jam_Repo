@@ -3,11 +3,15 @@ using UnityEngine;
 public class Room_Ring : MonoBehaviour
 {
     public Slot[] s;
-    private PlayerHand ph;
+    public Questions[] Questions;
+    private int ringsOnSide =0;
+    private int randomQuestion;
+    Room_Ring_Main main;
 
     private void Awake()
     {
-        ph = FindObjectOfType<PlayerHand>();
+        main = GetComponentInParent<Transform>().GetComponentInParent<Room_Ring_Main>();
+        randomQuestion = Random.Range(0, Questions.Length);
     }
 
     private void Start()
@@ -33,6 +37,16 @@ public class Room_Ring : MonoBehaviour
                 s[j].ring = s[ringMovedIndex].ring;
                 s[j].ring.transform.position = s[j].pos;
                 s[ringMovedIndex].ring = null;
+                if (Questions[randomQuestion].answer == ringsOnSide)
+                {
+                    if(main.correctSolutions == 2)
+                    {
+                        GameManager.gm.currTunnel.doorIn.GetComponent<Animator>().SetTrigger("isClosed");
+                    }
+                    main.correctSolutions--;
+
+                }
+                ringsOnSide--;
                 return;
             }
         }
@@ -56,6 +70,15 @@ public class Room_Ring : MonoBehaviour
                 s[j].ring = s[ringMovedIndex].ring;
                 s[j].ring.transform.position = s[j].pos;
                 s[ringMovedIndex].ring = null;
+                ringsOnSide++;
+                if(Questions[randomQuestion].answer == ringsOnSide)
+                {
+                    if(main.correctSolutions == 1)
+                    {
+                        GameManager.gm.currTunnel.doorIn.GetComponent<Animator>().SetTrigger("isOpen");
+                    }
+                    main.correctSolutions++;
+                }
                 return;
             }
         }
@@ -67,4 +90,11 @@ public struct Slot
 {
     public GameObject ring;
     public Vector3 pos;
-} 
+}
+
+[System.Serializable]
+public struct Questions
+{
+    public string question;
+    public int answer;
+}
