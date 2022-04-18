@@ -15319,6 +15319,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1261429799 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4072753133933914794, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
+  m_PrefabInstance: {fileID: 4072753134887407245}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1287562030
 Mesh:
   m_ObjectHideFlags: 0
@@ -21425,14 +21430,15 @@ MonoBehaviour:
   blackScreen: {fileID: 236524569}
   player: {fileID: 1150986498881406268}
   ceiling: {fileID: 1845200605}
-  room: {fileID: 0}
-  ceilingSpeed: 0.2
+  room: {fileID: 1261429799}
+  ceilingSpeed: 0.1
   deathHeight: 2
-  fastHeight: 4
+  thresholdToSlower: 6
   currRoom: {fileID: 934610722}
   currRoomType: 
   currTunnel: {fileID: 1194714409}
   lastRoom: 0
+  slowThresholdSpeed: 0.05
   ceilingSourceChild: {fileID: 0}
 --- !u!54 &1940723136
 Rigidbody:
@@ -24928,6 +24934,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 827341073}
+    - target: {fileID: 4072753135064943023, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4072753135365922961, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -25472,6 +25482,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 307494392}
+    - target: {fileID: 8997924380713898881, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9011510175812796734, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
       propertyPath: m_Mesh
       value: 
