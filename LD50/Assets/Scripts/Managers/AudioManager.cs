@@ -20,7 +20,9 @@ public class AudioManager : MonoBehaviour
     public FMODUnity.EventReference doorClose;
 
     [Header("Music")]
-    public FMODUnity.EventReference mainMusic;
+    public FMODUnity.EventReference inGameMusic;
+    public FMODUnity.EventReference mainMenuMusic;
+    public FMODUnity.EventReference deadMusic;
 
     [Header("Puzzle Combine")]
     public FMODUnity.EventReference pInsertPiece;
@@ -34,7 +36,7 @@ public class AudioManager : MonoBehaviour
     public FMODUnity.EventReference puzzleWrong;
     public FMODUnity.EventReference uiClick;
 
-
+    //bool isPlaying(FMOD.Studio.EventInstance.GameManager.gm.
 
 
     public void Awake()

@@ -19,8 +19,9 @@ public class GameManager : MonoBehaviour
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     FMOD.Studio.EventInstance ceilingDebrisInstance;
-    FMOD.Studio.EventInstance mainMusicInstance;
-        
+    FMOD.Studio.EventInstance mainMenuMusicInstance;
+    FMOD.Studio.EventInstance inGameMusicInstance;
+
     private void Awake()
     {
         gm = this;
@@ -32,8 +33,10 @@ public class GameManager : MonoBehaviour
         ceilingLoopInstance.start();
         ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingDebris);
         ceilingDebrisInstance.start();
-        //mainMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMusic);
-        //mainMusicInstance.start(); ---- Depends on the main menu
+        //mainMenuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMenuMusic);
+        //mainMenuMusicInstance.start(); ---- Depends on the main menu
+        //inGameMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.inGameMusic);
+        //inGameMusicInstance.start(); ---- Depends on the main menu
     }
     public void OpenNextDoor()
     {
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
             ceilingSpeed *= 2;
             if (ceiling.transform.position.y < deathHeight)
             {
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.deathSFX);
                 ceilingLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 ceilingLoopInstance.release();
