@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
 {
 
     public static AudioManager am;
+    GameManager gm;
 
     [Header("Player")]
     public FMODUnity.EventReference footsteps; //movement
@@ -36,7 +37,12 @@ public class AudioManager : MonoBehaviour
     public FMODUnity.EventReference puzzleWrong;
     public FMODUnity.EventReference uiClick;
 
-    //bool isPlaying(FMOD.Studio.EventInstance.GameManager.gm.
+    /*bool isPlaying(FMOD.Studio.EventInstance inGameMusicInstance)
+    {
+        FMOD.Studio.PLAYBACK_STATE state;
+        inGameMusicInstance.getPlaybackState(out state);
+        return state != FMOD.Studio.PLAYBACK_STATE.STOPPED;
+    }*/
 
 
     public void Awake()
