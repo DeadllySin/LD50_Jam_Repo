@@ -16,7 +16,7 @@ public class Room_Ring : MonoBehaviour
 
     private void Start()
     {
-        GameManager.gm.whatRoom = "ring";
+        GameManager.gm.currRoomType = "ring";
     }
 
     public void MoveDown()

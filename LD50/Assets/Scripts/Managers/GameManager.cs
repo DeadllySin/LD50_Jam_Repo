@@ -4,17 +4,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gm;
     bool dieOnlyOnce;
-    public GameObject currRoom;
-    public Tunnel currTunnel;
+    [SerializeField] private GameObject blackScreen;
     public GameObject player;
     public GameObject ceiling;
-    public GameObject[] roomList;
-    public string whatRoom;
-    [HideInInspector] public int lastRoom = 0;
+    public GameObject room;
     [SerializeField] private float ceilingSpeed;
-    [SerializeField] private GameObject blackScreen;
     [SerializeField] private float deathHeight;
     [SerializeField] private float fastHeight;
+    [HideInInspector] public GameObject currRoom;
+    [HideInInspector] public string currRoomType;
+    [HideInInspector] public Tunnel currTunnel;
+    [HideInInspector] public int lastRoom = 0;
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     FMOD.Studio.EventInstance ceilingDebrisInstance;
@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gm = this;
+        currRoom = FindObjectOfType<Main_Room>().gameObject;
+        currTunnel = FindObjectOfType<Tunnel>();
     }
 
     private void Start()
@@ -42,7 +44,6 @@ public class GameManager : MonoBehaviour
     {
         if (ceiling.transform.position.y <= fastHeight && !dieOnlyOnce)
         {
-            Debug.Log("You Are Dead");
             player.SetActive(false);
             ceilingSpeed *= 2;
             if (ceiling.transform.position.y < deathHeight)
@@ -53,18 +54,13 @@ public class GameManager : MonoBehaviour
                 ceilingLoopInstance.release();
                 ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 ceilingDebrisInstance.release();
-
                 blackScreen.SetActive(true); 
                 dieOnlyOnce = true;
             }
         }
-
         ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceiling));
         ceilingDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceiling));
-        
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceiling.transform.position.y);
-        //Debug.Log("Height: " + ceiling.transform.position.y);
-        
         ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
     }
 }

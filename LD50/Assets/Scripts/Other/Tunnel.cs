@@ -39,10 +39,7 @@ public class Tunnel : MonoBehaviour
                     break;
             }
             Destroy(room.gameObject);
-            int nextRoomIndex = Random.Range(0, GameManager.gm.roomList.Length - 1);
-            while (nextRoomIndex == GameManager.gm.lastRoom) nextRoomIndex = Random.Range(0, GameManager.gm.roomList.Length);
-            GameManager.gm.lastRoom = nextRoomIndex;
-            GameManager.gm.currRoom = Instantiate(GameManager.gm.roomList[nextRoomIndex], new Vector3(0, 0, room.gameObject.transform.position.z + 22), Quaternion.identity);
+            GameManager.gm.currRoom = Instantiate(GameManager.gm.room, new Vector3(0, 0, room.gameObject.transform.position.z + 22), Quaternion.identity);
             GameManager.gm.currTunnel = Instantiate(tunnelPrefab, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>();
             yield return new WaitForSeconds(2);
             OpenDoor(doorOut);

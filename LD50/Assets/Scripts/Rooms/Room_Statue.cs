@@ -22,7 +22,7 @@ public class Room_Statue : MonoBehaviour
 
     private void Start()
     {
-        GameManager.gm.whatRoom = "statue";
+        GameManager.gm.currRoomType = "statue";
         ceiling.transform.parent = GameManager.gm.ceiling.transform;
         ceiling.transform.localPosition = new Vector3(0, 0, transform.position.z);
         while (pieces.Count > 0)
@@ -62,7 +62,7 @@ public class Room_Statue : MonoBehaviour
         if (setASNull)
         {
             sp.ss.OnRemovedStatue();
-            if (GameManager.gm.currRoom.GetComponent<Room_Statue>().correctPieces == 2) GameManager.gm.currTunnel.CloseDoor(GameManager.gm.currTunnel.doorIn);
+            if (GameManager.gm.currRoom.GetComponentInChildren<Room_Statue>().correctPieces == 2) GameManager.gm.currTunnel.CloseDoor(GameManager.gm.currTunnel.doorIn);
             sp.ss.assinedStatue = null;
         }
     }

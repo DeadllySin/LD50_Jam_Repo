@@ -21,7 +21,7 @@ public class PlayerHand : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.gm.whatRoom == "ring")
+        if(GameManager.gm.currRoomType == "ring")
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -29,7 +29,7 @@ public class PlayerHand : MonoBehaviour
                 else if (lookingAt == "ring_down") ringman.MoveDown();
             }
         }
-        if(GameManager.gm.whatRoom == "statue")
+        if(GameManager.gm.currRoomType == "statue")
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
