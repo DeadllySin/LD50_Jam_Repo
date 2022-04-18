@@ -26389,6 +26389,7 @@ MonoBehaviour:
     room: {fileID: 4072753135064943023}
   - whichRoom: ring
     room: {fileID: 8997924380713898881}
+  ceiling: {fileID: 4072753134941983192}
 --- !u!1 &4072753133975211954
 GameObject:
   m_ObjectHideFlags: 0
@@ -30628,7 +30629,6 @@ MonoBehaviour:
   - {fileID: 9154388833964036966, guid: 1f5d3bf0e553f1148a6ec1e223e03c20, type: 3}
   - {fileID: 9154388833964036966, guid: d71c16b6365477c4e8adb23c3e9a3afe, type: 3}
   spawnerParent: {fileID: 4072753135178296744}
-  ceiling: {fileID: 4072753134941983192}
   sp: {fileID: 0}
   ss: {fileID: 0}
 --- !u!1 &4072753135079050373

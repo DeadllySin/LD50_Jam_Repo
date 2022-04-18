@@ -8,7 +8,6 @@ public class Room_Statue : MonoBehaviour
     readonly List <GameObject> spawners = new List<GameObject>();
     readonly List<GameObject> pieces = new List<GameObject>();
     [SerializeField] private GameObject spawnerParent;
-    [SerializeField] private GameObject ceiling;
     [HideInInspector] public Interactable_Statue sp;
     [HideInInspector] public Interactable_Socket ss;
     private PlayerHand phand;
@@ -22,9 +21,6 @@ public class Room_Statue : MonoBehaviour
 
     private void Start()
     {
-        GameManager.gm.currRoomType = "statue";
-        ceiling.transform.parent = GameManager.gm.ceiling.transform;
-        ceiling.transform.localPosition = new Vector3(0, 0, transform.position.z);
         while (pieces.Count > 0)
         {
             int temp = Random.Range(0,spawners.Count - 1);

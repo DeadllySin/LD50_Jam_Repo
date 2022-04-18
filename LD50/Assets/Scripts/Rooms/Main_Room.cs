@@ -3,10 +3,13 @@ using UnityEngine;
 public class Main_Room : MonoBehaviour
 {
     public Rooms[] rooms;
+    [SerializeField] private GameObject ceiling;
 
     private void Start()
     {
-        for(int i = 0; i < rooms.Length; i++)
+        ceiling.transform.parent = GameManager.gm.ceiling.transform;
+        ceiling.transform.localPosition = new Vector3(0, 0, transform.position.z);
+        for (int i = 0; i < rooms.Length; i++)
         {
             rooms[i].room.SetActive(false);
         }

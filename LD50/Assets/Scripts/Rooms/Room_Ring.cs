@@ -10,13 +10,8 @@ public class Room_Ring : MonoBehaviour
 
     private void Awake()
     {
-        main = GetComponentInParent<Transform>().GetComponentInParent<Room_Ring_Main>();
+        main = GetComponentInParent<Room_Ring_Main>();
         randomQuestion = Random.Range(0, Questions.Length);
-    }
-
-    private void Start()
-    {
-        GameManager.gm.currRoomType = "ring";
     }
 
     public void MoveDown()
