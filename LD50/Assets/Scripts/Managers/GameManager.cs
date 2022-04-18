@@ -4,7 +4,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gm;
     bool dieOnlyOnce;
-    public GameObject currDoor;
     public GameObject currRoom;
     public Tunnel currTunnel;
     public GameObject player;
@@ -38,11 +37,6 @@ public class GameManager : MonoBehaviour
         //inGameMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.inGameMusic);
         //inGameMusicInstance.start(); ---- Depends on the main menu
     }
-    public void OpenNextDoor()
-    {
-        GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isOpen");
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen, currDoor.transform.position);
-    }
 
     private void Update()
     {
@@ -63,17 +57,6 @@ public class GameManager : MonoBehaviour
                 blackScreen.SetActive(true); 
                 dieOnlyOnce = true;
             }
-        }
-        
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isOpen");
-            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen, currDoor.transform.position);
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isClosed");
-            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose, currDoor.transform.position);
         }
 
         ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceiling));

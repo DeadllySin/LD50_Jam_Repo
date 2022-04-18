@@ -61,8 +61,8 @@ public class Room_Statue : MonoBehaviour
         phand.hand.transform.localPosition = new Vector3(1, 1.2f, 2f);
         if (setASNull)
         {
-            ss.OnRemovedStatue();
-            if (GameManager.gm.currRoom.GetComponent<Room_Statue>().correctPieces == 2) GameManager.gm.currDoor.GetComponent<Animator>().SetTrigger("isClosed");
+            sp.ss.OnRemovedStatue();
+            if (GameManager.gm.currRoom.GetComponent<Room_Statue>().correctPieces == 2) GameManager.gm.currTunnel.CloseDoor(GameManager.gm.currTunnel.doorIn);
             sp.ss.assinedStatue = null;
         }
     }
@@ -79,7 +79,7 @@ public class Room_Statue : MonoBehaviour
             phand.hand.GetComponent<Interactable_Statue>().ss.OnAssienedStatue();
             phand.hand.transform.position = phand.handStatueTarget.transform.position;
             phand.hand = null;
-            if(correctPiecesOld != 2) if (correctPieces >= 2) GameManager.gm.OpenNextDoor();
+            if(correctPiecesOld != 2) if (correctPieces >= 2) GameManager.gm.currTunnel.OpenDoor(GameManager.gm.currTunnel.doorIn);
         }
     }
 }
