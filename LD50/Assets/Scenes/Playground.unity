@@ -19625,13 +19625,27 @@ MonoBehaviour:
       Data3: 1344055980
       Data4: 1259722169
     Path: event:/Environment/Door/Door_Close
-  mainMusic:
+  inGameMusic:
     Guid:
       Data1: 1129507240
       Data2: 1260476724
       Data3: 1320635057
       Data4: 645242537
     Path: event:/Music/Main_Music
+  mainMenuMusic:
+    Guid:
+      Data1: 1009332111
+      Data2: 1155464542
+      Data3: -1067238465
+      Data4: -742220504
+    Path: event:/Music/Main_Menu
+  deadMusic:
+    Guid:
+      Data1: 661350751
+      Data2: 1186088538
+      Data3: -2022477386
+      Data4: 1110063518
+    Path: event:/Music/Dead_Music
   pInsertPiece:
     Guid:
       Data1: 3815429
