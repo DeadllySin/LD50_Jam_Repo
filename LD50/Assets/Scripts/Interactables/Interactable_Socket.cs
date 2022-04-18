@@ -29,11 +29,12 @@ public class Interactable_Socket : MonoBehaviour
         rs.ss = this.gameObject.GetComponent<Interactable_Socket>();
     }
 
+    /*
     private void OnMouseOver()
     {
         ph.handStatueTarget = gameObject;
         rs.ss = this.gameObject.GetComponent<Interactable_Socket>();
-    }
+    }*/
 
     private void OnMouseExit()
     {

@@ -4,5 +4,5 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
-    void Update() { agent.SetDestination(GameManager.gm.player.transform.position); }
+    void FixedUpdate() { agent.SetDestination(GameManager.gm.player.transform.position); }
 }
