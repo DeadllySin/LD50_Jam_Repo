@@ -10,11 +10,12 @@ public class GameManager : MonoBehaviour
     public GameObject room;
     [SerializeField] private float ceilingSpeed;
     [SerializeField] private float deathHeight;
-    [SerializeField] private float fastHeight;
+    [SerializeField] private float thresholdToSlower;
     [HideInInspector] public GameObject currRoom;
     [HideInInspector] public string currRoomType;
     [HideInInspector] public Tunnel currTunnel;
     [HideInInspector] public int lastRoom = 0;
+    [SerializeField] float slowThresholdSpeed = 1.5f;
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     FMOD.Studio.EventInstance ceilingDebrisInstance;
@@ -52,10 +53,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (ceiling.transform.position.y <= fastHeight && !dieOnlyOnce)
+        if (ceiling.transform.position.y <= thresholdToSlower && !dieOnlyOnce)
         {
             player.SetActive(false);
-            ceilingSpeed *= 2;
+            ceilingSpeed = slowThresholdSpeed;
             if (ceiling.transform.position.y < deathHeight)
             {
                 FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
