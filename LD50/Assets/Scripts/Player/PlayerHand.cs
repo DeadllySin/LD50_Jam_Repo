@@ -7,12 +7,6 @@ public class PlayerHand : MonoBehaviour
     [HideInInspector] public GameObject handStatueTarget;
     [SerializeField] private float distance;
     public string lookingAt = "none";
-    private Room_Ring ringman;
-
-    private void Awake()
-    {
-        ringman = FindObjectOfType<Room_Ring>();
-    }
 
     private void FixedUpdate()
     {
@@ -25,8 +19,9 @@ public class PlayerHand : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (lookingAt == "ring_up") ringman.MoveUp();
-                else if (lookingAt == "ring_down") ringman.MoveDown();
+                Debug.Log(lookingAt);
+                if (lookingAt == "ring_up") handTarget.GetComponent<Interactable_Ring>().rr.MoveUp();
+                else if (lookingAt == "ring_down") handTarget.GetComponent<Interactable_Ring>().rr.MoveDown();
             }
         }
         if(GameManager.gm.currRoomType == "statue")

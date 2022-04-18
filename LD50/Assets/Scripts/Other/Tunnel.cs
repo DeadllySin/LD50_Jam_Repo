@@ -21,17 +21,19 @@ public class Tunnel : MonoBehaviour
     {
         if (!alreadyColl)
         {
+
             alreadyColl = true;
             CloseDoor(doorIn);
-            Room_Statue room = FindObjectOfType<Room_Statue>();
-            Tunnel tunnel = GetComponentInParent<Transform>().GetComponentInParent<Tunnel>();
-            switch (room.correctPieces)
+            Main_Room room = GameManager.gm.currRoom.GetComponent<Main_Room>();
+            Tunnel tunnel = GameManager.gm.currTunnel.GetComponent<Tunnel>();
+            yield return new WaitForSeconds(1);
+            switch (room.winState)
             {
-                case 2:
+                case "normal":
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
                     Debug.Log("Wrong Puzzle");
                     break;
-                case 3:
+                case "good":
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
                     Debug.Log("Correct Puzzle");
                     break;
@@ -39,9 +41,10 @@ public class Tunnel : MonoBehaviour
                     break;
             }
             Destroy(room.gameObject);
+            GameManager.gm.ceiling.transform.position = new Vector3(GameManager.gm.ceiling.transform.position.x, GameManager.gm.ceiling.transform.position.y, GameManager.gm.ceiling.transform.position.z + 22);
             GameManager.gm.currRoom = Instantiate(GameManager.gm.room, new Vector3(0, 0, room.gameObject.transform.position.z + 22), Quaternion.identity);
             GameManager.gm.currTunnel = Instantiate(tunnelPrefab, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>();
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
             OpenDoor(doorOut);
             IdleDoor(GameManager.gm.currTunnel.doorIn);
         }

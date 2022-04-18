@@ -11,9 +11,11 @@ public class Room_Statue : MonoBehaviour
     [HideInInspector] public Interactable_Statue sp;
     [HideInInspector] public Interactable_Socket ss;
     private PlayerHand phand;
+    private Main_Room room;
 
     private void Awake()
     {
+        room = GetComponentInParent<Main_Room>();
         for (int i = 0; i < piecess.Length; i++) pieces.Add(piecess[i]);
         phand = FindObjectOfType<PlayerHand>();
         foreach (Transform child in spawnerParent.transform) spawners.Add(child.gameObject);
@@ -76,6 +78,14 @@ public class Room_Statue : MonoBehaviour
             phand.hand.transform.position = phand.handStatueTarget.transform.position;
             phand.hand = null;
             if(correctPiecesOld != 2) if (correctPieces >= 2) GameManager.gm.currTunnel.OpenDoor(GameManager.gm.currTunnel.doorIn);
+            if (correctPieces == 2)
+            {
+                room.winState = "normal";
+            }
+            else if (correctPieces == 3)
+            {
+                room.winState = "good";
+            }
         }
     }
 }

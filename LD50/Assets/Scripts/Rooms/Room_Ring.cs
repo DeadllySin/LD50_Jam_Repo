@@ -7,9 +7,11 @@ public class Room_Ring : MonoBehaviour
     private int ringsOnSide =0;
     private int randomQuestion;
     Room_Ring_Main main;
+    Main_Room room;
 
-    private void Awake()
+    private void Start()
     {
+        room = GetComponentInParent<Room_Ring_Main>().GetComponentInParent<Main_Room>();
         main = GetComponentInParent<Room_Ring_Main>();
         randomQuestion = Random.Range(0, Questions.Length);
     }
@@ -21,6 +23,7 @@ public class Room_Ring : MonoBehaviour
         {
             if (s[j].ring == null)
             {
+                if (j == s.Length - 1) return;
                 ringMovedIndex = j + 1;
                 break;
             }
@@ -40,6 +43,19 @@ public class Room_Ring : MonoBehaviour
                     }
                     main.correctSolutions--;
 
+                    if (main.correctSolutions < 2)
+                    {
+                        room.winState = "bad";
+                    }
+                    else if (main.correctSolutions == 2)
+                    {
+                        room.winState = "normal";
+                    }
+                    else if (main.correctSolutions == 3)
+                    {
+                        room.winState = "good";
+                    }
+
                 }
                 ringsOnSide--;
                 return;
@@ -54,6 +70,7 @@ public class Room_Ring : MonoBehaviour
         {
             if (s[j].ring == null)
             {
+                if (j == 0) return;
                 ringMovedIndex = j - 1;
                 break;
             }
@@ -71,6 +88,13 @@ public class Room_Ring : MonoBehaviour
                     if(main.correctSolutions == 1)
                     {
                         GameManager.gm.currTunnel.doorIn.GetComponent<Animator>().SetTrigger("isOpen");
+                    }
+                    if(main.correctSolutions == 2)
+                    {
+                        room.winState = "normal";
+                    }else if(main.correctSolutions == 3)
+                    {
+                        room.winState = "good";
                     }
                     main.correctSolutions++;
                 }
