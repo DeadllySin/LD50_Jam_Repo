@@ -38659,6 +38659,26 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &949456295 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8954046614125482787, guid: b1da252acba09e343b0614a36e6f53f7, type: 3}
+  m_PrefabInstance: {fileID: 1150986498881406267}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &949456296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949456295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c317ba09103a354797dbe91d95e17f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSeeingCeiling: 0
+  rayDistance: 15
+  EyesTest: {fileID: 2067324099}
 --- !u!1 &956740415
 GameObject:
   m_ObjectHideFlags: 0
@@ -81341,7 +81361,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2067324099}
-  - component: {fileID: 2067324100}
   m_Layer: 0
   m_Name: EyesTest
   m_TagString: Untagged
@@ -81363,22 +81382,6 @@ Transform:
   m_Father: {fileID: 8944336656349189700}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2067324100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2067324098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c317ba09103a354797dbe91d95e17f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSeeingCeiling: 0
-  rayDistance: 20
-  fov: 360
-  EyesTest: {fileID: 2067324099}
 --- !u!1 &2070417200
 GameObject:
   m_ObjectHideFlags: 0
@@ -84736,7 +84739,6 @@ GameObject:
   - component: {fileID: 9078993846310988380}
   - component: {fileID: 295598564057613203}
   - component: {fileID: 8944336656349189698}
-  - component: {fileID: 8944336656349189701}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -84816,22 +84818,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8944336656349189701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8944336656349189697}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c317ba09103a354797dbe91d95e17f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSeeingCeiling: 0
-  rayDistance: 20
-  fov: 45
-  EyesTest: {fileID: 2067324099}
 --- !u!114 &9078993846310988380
 MonoBehaviour:
   m_ObjectHideFlags: 0
