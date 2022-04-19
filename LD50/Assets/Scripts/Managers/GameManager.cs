@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
     {
         if (ceiling.transform.position.y <= thresholdToSlower && !dieOnlyOnce)
         {
-            player.SetActive(false);
             ceilingSpeed = slowThresholdSpeed;
             if (ceiling.transform.position.y < deathHeight)
             {
@@ -67,9 +66,10 @@ public class GameManager : MonoBehaviour
                 ceilingDebrisInstance.release();
                 blackScreen.SetActive(true); 
                 dieOnlyOnce = true;
+                player.SetActive(false);
 
                 // find a way to release in game music instance after death screen and restart 
-                
+
                 /*if (isMusicPlaying(inGameMusicInstance))
                 {
                     inGameMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);

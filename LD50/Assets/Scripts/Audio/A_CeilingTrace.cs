@@ -7,42 +7,43 @@ public class A_CeilingTrace : MonoBehaviour
 
     [SerializeField] bool isSeeingCeiling;
     [SerializeField] float rayDistance = 20f;
-    [SerializeField] float fov = 90f;
     [SerializeField] Transform EyesTest;
-    //public GameObject ceiling;
+    bool isLookingAtCeiling;
 
+    FMOD.Studio.EventInstance ceilingSSInstance;
+    
     private void Start()
     {
+        isLookingAtCeiling = false;
 
+        ceilingSSInstance = FMODUnity.RuntimeManager.CreateInstance("snapshot:/LookingAtCeiling");
     }
 
     private void Update()
     {
 
-        //Debug.DrawRay(transform.position, transform.forward * rayDistance, isSeeingCeiling ? Color.green : Color.red, 2.0f);
+        //Debug.DrawRay(EyesTest.transform.position, transform.forward * rayDistance, isSeeingCeiling ? Color.green : Color.red, 2.0f);
         
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, rayDistance))
+        if (Physics.Raycast(EyesTest.transform.position, transform.forward, out hit, rayDistance))
         {
-            if (hit.collider.gameObject.tag == "Ceiling")
+            if (hit.collider.gameObject.tag == "Ceiling" && isLookingAtCeiling == false && GameManager.gm.ceiling.transform.position.y > 8f)
             {
+                isLookingAtCeiling = true;
+                ceilingSSInstance.start();
+                
                 //Debug.Log("true");
-
             }
-            //Debug.Log(hit.collider.name);
-            
-        }
-        
-        isSeeingCeiling = A_Trace_Utils.CanYouSeeThis(transform, GameManager.gm.ceiling.transform, null, fov, rayDistance);
-        //isSeeingCeiling = A_Trace_Utils.CanYouSeeThis(EyesTest, ceiling.transform, null, fov, rayDistance);
-        if (isSeeingCeiling) // && GameManager.gm.transform.position.y > 7f)
-        {
-            //Debug.Log("I can YES see the ceiling");
-        }
-        else
-        {
-            //Debug.Log("I can NOT see the ceiling");
+            else if (hit.collider.gameObject.tag != "Ceiling" && isLookingAtCeiling == true)
+            {
+                isLookingAtCeiling = false;
+                ceilingSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
+                //Debug.Log("false");
+            }
+
+            //Debug.Log(GameManager.gm.ceiling.transform.position.y);
+            //Debug.Log(hit.collider.name); 
         }
     }
-
 }
