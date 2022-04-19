@@ -7,11 +7,10 @@ public class Room_Ring : MonoBehaviour
     private int ringsOnSide =0;
     private int randomQuestion;
     Room_Ring_Main main;
-    Main_Room room;
+    [SerializeField] private int which;
 
     private void Start()
     {
-        room = GetComponentInParent<Room_Ring_Main>().GetComponentInParent<Main_Room>();
         main = GetComponentInParent<Room_Ring_Main>();
         randomQuestion = Random.Range(0, Questions.Length);
     }
@@ -33,31 +32,19 @@ public class Room_Ring : MonoBehaviour
             if (s[j].ring == null)
             {
                 s[j].ring = s[ringMovedIndex].ring;
-                s[j].ring.transform.position = s[j].pos;
+                s[j].ring.transform.localPosition = s[j].pos;
                 s[ringMovedIndex].ring = null;
+                ringsOnSide--;
                 if (Questions[randomQuestion].answer == ringsOnSide)
                 {
-                    if(main.correctSolutions == 2)
-                    {
-                        GameManager.gm.currTunnel.doorIn.GetComponent<Animator>().SetTrigger("isClosed");
-                    }
-                    main.correctSolutions--;
-
-                    if (main.correctSolutions < 2)
-                    {
-                        room.winState = "bad";
-                    }
-                    else if (main.correctSolutions == 2)
-                    {
-                        room.winState = "normal";
-                    }
-                    else if (main.correctSolutions == 3)
-                    {
-                        room.winState = "good";
-                    }
-
+                    main.solutionCorrect[which] = true;
                 }
-                ringsOnSide--;
+                else
+                {
+                    main.solutionCorrect[which] = false;
+                }
+                main.OnChanged();
+
                 return;
             }
         }
@@ -80,24 +67,18 @@ public class Room_Ring : MonoBehaviour
             if (s[j].ring == null)
             {
                 s[j].ring = s[ringMovedIndex].ring;
-                s[j].ring.transform.position = s[j].pos;
+                s[j].ring.transform.localPosition = s[j].pos;
                 s[ringMovedIndex].ring = null;
                 ringsOnSide++;
-                if(Questions[randomQuestion].answer == ringsOnSide)
+                if (Questions[randomQuestion].answer == ringsOnSide)
                 {
-                    if(main.correctSolutions == 1)
-                    {
-                        GameManager.gm.currTunnel.doorIn.GetComponent<Animator>().SetTrigger("isOpen");
-                    }
-                    if(main.correctSolutions == 2)
-                    {
-                        room.winState = "normal";
-                    }else if(main.correctSolutions == 3)
-                    {
-                        room.winState = "good";
-                    }
-                    main.correctSolutions++;
+                    main.solutionCorrect[which] = true;
                 }
+                else
+                {
+                    main.solutionCorrect[which] = false;
+                }
+                main.OnChanged();
                 return;
             }
         }
