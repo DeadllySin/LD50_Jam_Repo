@@ -83905,10 +83905,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 931326032}
-    - target: {fileID: 4072753133710468860, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4072753133933914789, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -84001,10 +83997,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1578683925}
-    - target: {fileID: 4072753134523463165, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 4072753134523463167, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -84085,10 +84077,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2119594118}
-    - target: {fileID: 8997924380713898881, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f1d4fcbe581a6b41ba7c6d564b87ca9, type: 3}
 --- !u!1001 &8147287964323565328
