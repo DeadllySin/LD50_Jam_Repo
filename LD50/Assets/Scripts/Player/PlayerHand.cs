@@ -10,7 +10,7 @@ public class PlayerHand : MonoBehaviour
 
     private void FixedUpdate()
     {
-       Debug.Log(lookingAt);
+       //Debug.Log(lookingAt);
     }
 
     private void Update()

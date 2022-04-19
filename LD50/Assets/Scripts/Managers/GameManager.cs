@@ -85,6 +85,6 @@ public class GameManager : MonoBehaviour
         ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
         ceilingDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceilingSourceChild.transform.position.y);
-        Debug.Log("Height: " + ceilingSourceChild.transform.position.y);
+        //Debug.Log("Height: " + ceilingSourceChild.transform.position.y);
     }
 }
