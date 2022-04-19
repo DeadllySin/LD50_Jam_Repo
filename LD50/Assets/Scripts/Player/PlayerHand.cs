@@ -46,7 +46,7 @@ public class PlayerHand : MonoBehaviour
                         FindObjectOfType<Room_Statue>().PickUpFrom();
                     }
                 }
-                else if (hand != null)
+                else if (hand != null && handStatueTarget != null)
                 {
                     if (Vector3.Distance(handStatueTarget.transform.position, transform.position) < distance)
                     {
