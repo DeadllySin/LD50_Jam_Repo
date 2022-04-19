@@ -7412,7 +7412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8997924380713898880
 Transform:
   m_ObjectHideFlags: 0
@@ -7446,6 +7446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   solutionCorrect: 000000
+  agentSpeed: 1
 --- !u!1001 &561533333437276461
 PrefabInstance:
   m_ObjectHideFlags: 0
