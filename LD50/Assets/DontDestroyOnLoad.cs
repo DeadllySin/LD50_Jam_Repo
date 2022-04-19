@@ -10,6 +10,12 @@ public class DontDestroyOnLoad : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
+
+    }
+
+    private void Start()
+    {
         ddol = this;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
