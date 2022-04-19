@@ -4,6 +4,9 @@ using UnityEngine;
 
 class A_MusicCallBack : MonoBehaviour
 {
+    bool musicIntroTriggerOnce = true;
+    public bool musicIntroTrigger = false;
+
     class TimelineInfo
     {
         public int currentMusicBar = 0;
@@ -40,7 +43,11 @@ class A_MusicCallBack : MonoBehaviour
 
         musicInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
         musicInstance.start();
-    }
+
+        // control variables
+        musicIntroTriggerOnce = true;
+        musicIntroTrigger = false;
+}
 
     void OnDestroy()
     {
@@ -53,6 +60,21 @@ class A_MusicCallBack : MonoBehaviour
     void OnGUI()
     {
         GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
+    }
+
+    void Update()
+    {
+        if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == true)
+        {
+            musicIntroTriggerOnce = false;
+            musicIntroTrigger = true;
+            GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoops();
+            Debug.Log("yey");
+        }
+        else if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == false)
+        {
+            //Debug.Log("nay");
+        }
     }
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
