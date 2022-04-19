@@ -6,6 +6,7 @@ public class Tunnel : MonoBehaviour
     bool alreadyColl;
     public GameObject doorIn;
     public GameObject doorOut;
+    Interactable_Statue[] statue = new Interactable_Statue[3];
     [SerializeField] private GameObject ceil;
     [SerializeField] private GameObject fakeDoor;
     [SerializeField] private GameObject tunnelPrefab;
@@ -21,7 +22,14 @@ public class Tunnel : MonoBehaviour
     {
         if (!alreadyColl)
         {
+            for (int i = 0; i < 3; i++) statue = FindObjectsOfType<Interactable_Statue>();
+            yield return new WaitForSeconds(.1f);
 
+            for (int i = 0; i < statue.Length; i++)
+            {
+                Destroy(statue[i].gameObject);
+            }
+            yield return new WaitForSeconds(.1f);
             alreadyColl = true;
             CloseDoor(doorIn);
             Main_Room room = GameManager.gm.currRoom.GetComponent<Main_Room>();
