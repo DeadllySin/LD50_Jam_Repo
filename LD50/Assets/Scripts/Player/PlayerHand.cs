@@ -15,6 +15,16 @@ public class PlayerHand : MonoBehaviour
 
     private void Update()
     {
+        if(GameManager.gm.currRoomType == "color")
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if(lookingAt == "color")
+                {
+                    hand.GetComponent<Interactable_ColorButton>().rc.onPressed(hand.GetComponent<Interactable_ColorButton>().color);
+                }
+            }
+        }
         if(GameManager.gm.currRoomType == "ring")
         {
             if (Input.GetKeyDown(KeyCode.E))

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable_Color : MonoBehaviour
+public class Interactable_ColorOrder : MonoBehaviour
 {
     public string color;
 }
