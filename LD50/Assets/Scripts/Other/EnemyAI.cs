@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private NavMeshAgent agent;
-    void FixedUpdate() { agent.SetDestination(GameManager.gm.player.transform.position); }
+    public float speed;
+    public float defaultSpeed;
+    void FixedUpdate() { transform.position = Vector3.MoveTowards(transform.position, GameManager.gm.player.transform.position, speed * Time.deltaTime); }
 }

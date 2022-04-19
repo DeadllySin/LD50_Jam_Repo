@@ -6,14 +6,12 @@ public class Room_Ring_Main : MonoBehaviour
     public bool[] solutionCorrect = new bool[3];
     int correctSolutions;
     private Main_Room room;
-    private NavMeshAgent agent;
-    [SerializeField] private float agentSpeed;
+    EnemyAI ai;
 
     private void Start()
     {
+        ai = GetComponentInChildren<EnemyAI>();
         room = GetComponentInParent<Main_Room>();
-        agent = GetComponentInChildren<NavMeshAgent>();
-        agent.speed = agentSpeed;
     }
 
     public void OnChanged()
@@ -28,12 +26,12 @@ public class Room_Ring_Main : MonoBehaviour
         if(oldCorrectSol < 2 && correctSolutions > 1)
         {
             GameManager.gm.currTunnel.doorIn.GetComponent<Animator>().SetTrigger("isOpen");
-            agent.speed = 0;
+            ai.speed = 0;
         }
         else if(oldCorrectSol > 1 && correctSolutions < 2)
         {
             GameManager.gm.currTunnel.doorIn.GetComponent<Animator>().SetTrigger("isClosed");
-            agent.speed = agentSpeed;
+            ai.speed = ai.defaultSpeed;
         }
         if(correctSolutions == 2)
         {
