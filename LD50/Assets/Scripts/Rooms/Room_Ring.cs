@@ -43,8 +43,6 @@ public class Room_Ring : MonoBehaviour
                 {
                     main.solutionCorrect[which] = false;
                 }
-                main.OnChanged();
-
                 return;
             }
         }
@@ -78,7 +76,6 @@ public class Room_Ring : MonoBehaviour
                 {
                     main.solutionCorrect[which] = false;
                 }
-                main.OnChanged();
                 return;
             }
         }

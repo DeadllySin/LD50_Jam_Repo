@@ -32,6 +32,7 @@ public class PlayerHand : MonoBehaviour
                 Debug.Log(lookingAt);
                 if (lookingAt == "ring_up") handTarget.GetComponent<Interactable_Ring>().rr.MoveUp();
                 else if (lookingAt == "ring_down") handTarget.GetComponent<Interactable_Ring>().rr.MoveDown();
+                else if (lookingAt == "confirm") handTarget.GetComponent<Interactable_Ring>().rrm.OnChanged();
             }
         }
         if(GameManager.gm.currRoomType == "statue")
