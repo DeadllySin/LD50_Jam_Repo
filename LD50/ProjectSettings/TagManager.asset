@@ -7,6 +7,7 @@ TagManager:
   - CinemachineTarget
   - Transition
   - Transition2
+  - Ceiling
   layers:
   - Default
   - TransparentFX
