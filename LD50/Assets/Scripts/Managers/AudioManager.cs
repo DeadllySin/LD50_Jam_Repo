@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
     public FMODUnity.EventReference inGameMusic;
     public FMODUnity.EventReference mainMenuMusic;
     public FMODUnity.EventReference deadMusic;
+    public FMODUnity.EventReference introStinger;
 
     [Header("Puzzle Combine")]
     public FMODUnity.EventReference pInsertPiece;
