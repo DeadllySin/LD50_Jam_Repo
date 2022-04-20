@@ -373,11 +373,11 @@ MonoBehaviour:
   CollisionTag: Player
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1632045093
+      Data2: 1136423165
+      Data3: 1312284840
+      Data4: -744100944
+    Path: snapshot:/ReverbTunnel
   Event: 
   PlayEvent: 3
   StopEvent: 4
@@ -386,8 +386,8 @@ MonoBehaviour:
   Preload: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &1189097278019103961
 GameObject:
   m_ObjectHideFlags: 0
