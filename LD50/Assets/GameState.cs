@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DontDestroyOnLoad : MonoBehaviour
+public class GameState : MonoBehaviour
 {
-    public static DontDestroyOnLoad ddol;
+    public static GameState gs;
     public bool playTheCutsceneOnlyOnce;
+
+    public bool playIntroMusic = true;
 
     private void Awake()
     {
@@ -16,7 +18,7 @@ public class DontDestroyOnLoad : MonoBehaviour
 
     private void Start()
     {
-        ddol = this;
+        gs = this;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

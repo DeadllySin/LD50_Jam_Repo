@@ -64,16 +64,18 @@ class A_MusicCallBack : MonoBehaviour
 
     void Update()
     {
-        if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == true)
+        if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == true && GameState.gs.playIntroMusic == true)
         {
             musicIntroTriggerOnce = false;
             musicIntroTrigger = true;
+            GameState.gs.playIntroMusic = false;
             GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoops();
-            Debug.Log("yey");
+            //Debug.Log("Play Intro Music and Ceiling Loop after");
         }
-        else if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == false)
+        else if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == false && GameState.gs.playIntroMusic == false)
         {
-            //Debug.Log("nay");
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
+            //Debug.Log("Music Intro skipped and ceiling started"); NEED RESTART TO TEST
         }
     }
 

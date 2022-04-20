@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 1563662064}
   - component: {fileID: 1563662065}
   m_Layer: 0
-  m_Name: DDOL
+  m_Name: GameState_DDOL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,3 +167,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playTheCutsceneOnlyOnce: 0
+  playIntroMusic: 1

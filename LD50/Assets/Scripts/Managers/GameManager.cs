@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     FMOD.Studio.EventInstance ceilingLoopInstance;
     FMOD.Studio.EventInstance ceilingDebrisInstance;
     FMOD.Studio.EventInstance mainMenuMusicInstance;
-    FMOD.Studio.EventInstance inGameMusicInstance;
     public GameObject ceilingSourceChild;
 
     private void Awake()
@@ -44,8 +43,6 @@ public class GameManager : MonoBehaviour
 
         //mainMenuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMenuMusic);
         //mainMenuMusicInstance.start(); ---- Depends on the main menu
-        inGameMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.inGameMusic);
-        //inGameMusicInstance.start(); //---- Depends on the main menu
 
         ceilingSourceChild = player.transform.GetChild(3).gameObject;
     }
@@ -84,9 +81,15 @@ public class GameManager : MonoBehaviour
         if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true)
             
         {
+            //Debug.Log("ceilling moving in if");
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
         }
-       
+        else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && GameState.gs.playIntroMusic == false)
+        {
+            //Debug.Log("ceiling moving in else if"); TEST AFTER RESTART 
+            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y + 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
+        }
+
         //Fmod stuff
         ceilingSourceChild.transform.position = new Vector3(player.transform.position.x, ceiling.transform.position.y - 0.5f, player.transform.position.z);
         ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
