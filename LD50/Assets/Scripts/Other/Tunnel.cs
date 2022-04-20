@@ -4,8 +4,7 @@ using UnityEngine;
 public class Tunnel : MonoBehaviour
 {
     bool alreadyColl;
-    public GameObject doorIn;
-    public GameObject doorOut;
+    public Door[] door;
     Interactable_Statue[] statue = new Interactable_Statue[3];
     [SerializeField] private GameObject ceil;
     [SerializeField] private GameObject fakeDoor;
@@ -17,11 +16,11 @@ public class Tunnel : MonoBehaviour
 
         if (Input.GetKeyDown("h"))
         {
-            OpenDoor(doorIn);
+            OpenDoor(0);
         }
         if (Input.GetKeyDown("j"))
         {
-            CloseDoor(doorIn);
+            CloseDoor(0);
         }
 
     }
@@ -44,7 +43,7 @@ public class Tunnel : MonoBehaviour
             }
             yield return new WaitForSeconds(.1f);
             alreadyColl = true;
-            CloseDoor(doorIn);
+            CloseDoor(0);
             Main_Room room = GameManager.gm.currRoom.GetComponent<Main_Room>();
             Tunnel tunnel = GameManager.gm.currTunnel.GetComponent<Tunnel>();
             yield return new WaitForSeconds(1);
@@ -66,8 +65,8 @@ public class Tunnel : MonoBehaviour
             GameManager.gm.currRoom = Instantiate(GameManager.gm.room, new Vector3(0, 0, room.gameObject.transform.position.z + 22), Quaternion.identity);
             GameManager.gm.currTunnel = Instantiate(tunnelPrefab, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>();
             yield return new WaitForSeconds(1);
-            OpenDoor(doorOut);
-            IdleDoor(GameManager.gm.currTunnel.doorIn);
+            OpenDoor(1);
+            IdleDoor(0);
         }
     }
 
@@ -78,27 +77,39 @@ public class Tunnel : MonoBehaviour
 
     IEnumerator RemoveTunnelEnu()
     {
-        CloseDoor(doorOut);
+        CloseDoor(1);
         GameObject tunnelParent = GetComponentInParent<Transform>().GetComponentInParent<Tunnel>().gameObject;
         yield return new WaitForSeconds(.8f);
-        Vector3 fakeDoorPos = new Vector3(8.75f, 1, tunnelParent.GetComponent<Tunnel>().doorOut.transform.position.z);
+        Vector3 fakeDoorPos = new Vector3(8.75f, 1, tunnelParent.GetComponent<Tunnel>().door[1].door.gameObject.transform.position.z);
         GameObject fakeDoorTemp = Instantiate(fakeDoor, fakeDoorPos, Quaternion.Euler(new Vector3(0, 90, 0)));
         fakeDoorTemp.transform.parent = GameManager.gm.currRoom.transform;
         Destroy(tunnelParent);
     }
 
-    public void OpenDoor(GameObject door)
+    public void OpenDoor(int index)
     {
-        door.GetComponent<Animator>().SetTrigger("isOpen");
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen, door.transform.position);
+        if (door[index].isOpen) return;
+        door[index].door.SetTrigger("isOpen");
+        door[index].isOpen = true;
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen, door[index].door.transform.position);
     }
-    public void CloseDoor(GameObject door)
+    public void CloseDoor(int index)
     {
-        door.GetComponent<Animator>().SetTrigger("isClosed");
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose, door.transform.position);
+        if (!door[index].isOpen) return;
+        door[index].door.SetTrigger("isOpen");
+        door[index].isOpen = true;
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose, door[index].door.transform.position);
     }
-    public void IdleDoor(GameObject door)
+    public void IdleDoor(int index)
     {
-        door.GetComponent<Animator>().SetTrigger("isIdle");
+        door[index].door.SetTrigger("isOpen");
+        door[index].isOpen = true;
     }
+}
+
+[System.Serializable]
+public struct Door
+{
+    public Animator door;
+    public bool isOpen;
 }

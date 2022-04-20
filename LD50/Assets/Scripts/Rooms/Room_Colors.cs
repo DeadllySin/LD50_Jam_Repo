@@ -10,7 +10,7 @@ public class Room_Colors : MonoBehaviour
     private int pressedButtons;
     private bool[] correctPresses = new bool[5];
 
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < colorPrefab.Length; i++)
         {

@@ -60,7 +60,7 @@ public class Room_Statue : MonoBehaviour
         if (setASNull)
         {
             sp.ss.OnRemovedStatue();
-            if (GameManager.gm.currRoom.GetComponentInChildren<Room_Statue>().correctPieces == 2) GameManager.gm.currTunnel.CloseDoor(GameManager.gm.currTunnel.doorIn);
+            if (correctPieces < 2) GameManager.gm.currTunnel.CloseDoor(0);
             sp.ss.assinedStatue = null;
         }
     }
@@ -73,19 +73,12 @@ public class Room_Statue : MonoBehaviour
             phand.hand.GetComponent<Interactable_Statue>().state = "Ass";
             phand.hand.GetComponent<Interactable_Statue>().ss = ss;
             phand.hand.GetComponent<Interactable_Statue>().ss.assinedStatue = phand.hand;
-            int correctPiecesOld = correctPieces;
             phand.hand.GetComponent<Interactable_Statue>().ss.OnAssienedStatue();
             phand.hand.transform.position = phand.handStatueTarget.transform.position;
             phand.hand = null;
-            if (correctPiecesOld != 2) if (correctPieces >= 2) GameManager.gm.currTunnel.OpenDoor(GameManager.gm.currTunnel.doorIn);
-            if (correctPieces == 2)
-            {
-                room.winState = "normal";
-            }
-            else if (correctPieces == 3)
-            {
-                room.winState = "good";
-            }
+            if (correctPieces > 1) GameManager.gm.currTunnel.OpenDoor(0);
+            if (correctPieces == 2) room.winState = "normal";
+            else if (correctPieces == 3) room.winState = "good";
         }
     }
 }
