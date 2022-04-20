@@ -22,7 +22,7 @@ public class PlayerHand : MonoBehaviour
                 if(lookingAt == "color")
                 {
                     Interactable_ColorButton icb = hand.GetComponent<Interactable_ColorButton>();
-                    icb.rc.onPressed(icb.color);
+                    icb.OnPressed();
                 }
             }
         }
