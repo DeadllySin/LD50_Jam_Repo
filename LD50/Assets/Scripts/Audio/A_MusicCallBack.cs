@@ -59,7 +59,7 @@ class A_MusicCallBack : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
+        //GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
     }
 
     void Update()

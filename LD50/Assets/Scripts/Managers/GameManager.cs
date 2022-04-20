@@ -29,27 +29,16 @@ public class GameManager : MonoBehaviour
         currTunnel = FindObjectOfType<Tunnel>();
     }
 
-    /*bool isMusicPlaying(FMOD.Studio.EventInstance inGameMusicInstance)
-    {
-        FMOD.Studio.PLAYBACK_STATE state;
-        inGameMusicInstance.getPlaybackState(out state);
-        return state != FMOD.Studio.PLAYBACK_STATE.STOPPED;
-    }*/
     private void Start()
     {
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game"); //change to menu once we have 
         ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingDebris);
         ceilingDebrisInstance.start();
-
         //mainMenuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMenuMusic);
         //mainMenuMusicInstance.start(); ---- Depends on the main menu
 
         ceilingSourceChild = player.transform.GetChild(3).gameObject;
     }
-
-    //Result FMOD.Studio.EventInstance.getPlaybackState(out PLAYBACK_STATE state);
-
-
 
     private void Update()
     {
@@ -69,12 +58,6 @@ public class GameManager : MonoBehaviour
                 player.SetActive(false);
 
                 // find a way to release in game music instance after death screen and restart 
-
-                /*if (isMusicPlaying(inGameMusicInstance))
-                {
-                    inGameMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                    inGameMusicInstance.release();
-                }*/
             }
         }
         
