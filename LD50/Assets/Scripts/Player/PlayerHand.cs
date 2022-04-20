@@ -10,7 +10,7 @@ public class PlayerHand : MonoBehaviour
 
     private void FixedUpdate()
     {
-       //Debug.Log(lookingAt);
+       Debug.Log(lookingAt);
     }
 
     private void Update()
@@ -21,7 +21,8 @@ public class PlayerHand : MonoBehaviour
             {
                 if(lookingAt == "color")
                 {
-                    hand.GetComponent<Interactable_ColorButton>().rc.onPressed(hand.GetComponent<Interactable_ColorButton>().color);
+                    Interactable_ColorButton icb = hand.GetComponent<Interactable_ColorButton>();
+                    icb.rc.onPressed(icb.color);
                 }
             }
         }

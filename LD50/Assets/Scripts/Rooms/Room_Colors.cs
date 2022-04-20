@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Room_Colors : MonoBehaviour
 {
-    [SerializeField] private Vector3[] spawners;
+    [SerializeField] private Transform[] spawners;
     [SerializeField] private GameObject[] colorPrefab;
-    private List <string> colorOrder;
+    private List <string> colorOrder = new List<string>();
     private List<GameObject> colorList = new List<GameObject>();
     private int pressedButtons;
     private bool[] correctPresses = new bool[5];
@@ -23,7 +23,7 @@ public class Room_Colors : MonoBehaviour
         {
 
             int temp2 = Random.Range(0, colorList.Count - 1);
-            GameObject color = Instantiate(colorList[temp2], spawners[j], Quaternion.identity);
+            GameObject color = Instantiate(colorList[temp2], spawners[j].position, Quaternion.identity);
             colorOrder.Add(color.GetComponent<Interactable_ColorOrder>().color);
             colorList.RemoveAt(temp2);
             j++;

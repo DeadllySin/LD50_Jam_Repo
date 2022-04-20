@@ -21,4 +21,9 @@ public class GameState : MonoBehaviour
         gs = this;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    private void FixedUpdate()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 }
