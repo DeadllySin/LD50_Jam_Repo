@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class A_CeilingTrace : MonoBehaviour
@@ -11,7 +9,7 @@ public class A_CeilingTrace : MonoBehaviour
     bool isLookingAtCeiling;
 
     FMOD.Studio.EventInstance ceilingSSInstance;
-    
+
     private void Start()
     {
         isLookingAtCeiling = false;
@@ -23,7 +21,7 @@ public class A_CeilingTrace : MonoBehaviour
     {
 
         //Debug.DrawRay(EyesTest.transform.position, transform.forward * rayDistance, isSeeingCeiling ? Color.green : Color.red, 2.0f);
-        
+
         RaycastHit hit;
         if (Physics.Raycast(EyesTest.transform.position, transform.forward, out hit, rayDistance))
         {
@@ -31,7 +29,7 @@ public class A_CeilingTrace : MonoBehaviour
             {
                 isLookingAtCeiling = true;
                 ceilingSSInstance.start();
-                
+
                 //Debug.Log("true");
             }
             else if (hit.collider.gameObject.tag != "Ceiling" && isLookingAtCeiling == true)

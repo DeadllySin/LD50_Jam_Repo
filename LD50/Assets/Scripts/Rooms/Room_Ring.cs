@@ -1,15 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class Room_Ring : MonoBehaviour
 {
     public Slot[] s;
     public Questions[] Questions;
-    private int ringsOnSide =0;
+    private int ringsOnSide = 0;
     private int randomQuestion;
     Room_Ring_Main main;
     [SerializeField] private int which;
-    private List <char> quesCh = new List<char>();
+    private List<char> quesCh = new List<char>();
 
     private void Start()
     {
@@ -21,33 +20,33 @@ public class Room_Ring : MonoBehaviour
     void GenerateQuestion()
     {
         string ques = "";
-        int qzuesInt =0;
+        int qzuesInt = 0;
         ques = Random.Range(1, 5).ToString() + Random.Range(8, 9).ToString() + Random.Range(1, 5).ToString() + Random.Range(8, 9).ToString() + Random.Range(1, 5).ToString();
         for (int i = 0; i < ques.Length; i++)
         {
             quesCh.Add(ques[i]);
         }
         qzuesInt += int.Parse(quesCh[0].ToString());
-        if(quesCh[1] == 8)
+        if (quesCh[1] == 8)
         {
             qzuesInt += int.Parse(quesCh[2].ToString());
             if (quesCh[3] == 8)
             {
                 qzuesInt += int.Parse(quesCh[4].ToString());
             }
-            else
+            else if (quesCh[3] == 9)
             {
                 qzuesInt -= int.Parse(quesCh[4].ToString());
             }
         }
-        else
+        else if (quesCh[1] == 9)
         {
             qzuesInt -= int.Parse(quesCh[2].ToString());
             if (quesCh[3] == 8)
             {
                 qzuesInt += int.Parse(quesCh[4].ToString());
             }
-            else
+            else if (quesCh[3] == 9)
             {
                 qzuesInt -= int.Parse(quesCh[4].ToString());
             }
@@ -56,7 +55,7 @@ public class Room_Ring : MonoBehaviour
         for (int i = 0; i < ques.Length; i++)
         {
             if (ques[i] == '8') questionFinal += "+";
-            else if(ques[i] == '9') questionFinal += "-";
+            else if (ques[i] == '9') questionFinal += "-";
             else questionFinal += ques[i];
         }
 

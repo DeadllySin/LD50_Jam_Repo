@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -916,7 +914,7 @@ namespace FMODUnity
         }
 
         // The platforms which inherit their property values from this platform.
-        public List<string> ChildIdentifiers { get { return childIdentifiers; } } 
+        public List<string> ChildIdentifiers { get { return childIdentifiers; } }
 #endif
 
         // Checks whether this platform inherits from the given platform, so we can avoid creating

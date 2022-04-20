@@ -4,8 +4,8 @@ public class Interactable_ColorButton : MonoBehaviour
 {
     private PlayerHand ph;
     private bool isPressed;
+    [SerializeField] private string color;
     [HideInInspector] public Room_Colors rc;
-    public string color;
 
     private void Start()
     {

@@ -26,7 +26,7 @@ namespace FMODUnity
 
         public float GetValue(int index)
         {
-            switch(index)
+            switch (index)
             {
                 case 0:
                     return slot00;

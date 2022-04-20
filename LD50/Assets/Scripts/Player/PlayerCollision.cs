@@ -4,7 +4,7 @@ public class PlayerCollision : MonoBehaviour
 {
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.gameObject.CompareTag("Respawn")) Debug.Log(hit.gameObject.name);
+        if (hit.gameObject.CompareTag("Respawn")) Debug.Log(hit.gameObject.name);
         if (hit.gameObject.CompareTag("Finish")) Debug.Log(hit.gameObject.name);
     }
 

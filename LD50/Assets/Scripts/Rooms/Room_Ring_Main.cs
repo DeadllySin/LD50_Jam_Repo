@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Room_Ring_Main : MonoBehaviour
 {
@@ -18,22 +17,22 @@ public class Room_Ring_Main : MonoBehaviour
     {
         int oldCorrectSol = correctSolutions;
         correctSolutions = 3;
-        for(int i = 0; i < solutionCorrect.Length; i++)
+        for (int i = 0; i < solutionCorrect.Length; i++)
         {
-            if (solutionCorrect[i] == false) correctSolutions -= 1; 
+            if (solutionCorrect[i] == false) correctSolutions -= 1;
         }
 
-        if(oldCorrectSol < 2 && correctSolutions > 1)
+        if (oldCorrectSol < 2 && correctSolutions > 1)
         {
             GameManager.gm.currTunnel.doorIn.GetComponent<Animator>().SetTrigger("isOpen");
             ai.speed = 0;
         }
-        else if(oldCorrectSol > 1 && correctSolutions < 2)
+        else if (oldCorrectSol > 1 && correctSolutions < 2)
         {
             GameManager.gm.currTunnel.doorIn.GetComponent<Animator>().SetTrigger("isClosed");
             ai.speed = ai.defaultSpeed;
         }
-        if(correctSolutions == 2)
+        if (correctSolutions == 2)
         {
             room.winState = "normal";
         }

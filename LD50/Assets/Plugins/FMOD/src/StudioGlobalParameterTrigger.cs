@@ -1,10 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FMODUnity
 {
     [AddComponentMenu("FMOD Studio/FMOD Studio Global Parameter Trigger")]
-    public class StudioGlobalParameterTrigger: EventHandler
+    public class StudioGlobalParameterTrigger : EventHandler
     {
         [ParamRef]
         public string parameter;

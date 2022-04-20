@@ -53,16 +53,16 @@ public class GameManager : MonoBehaviour
                 ceilingLoopInstance.release();
                 ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 ceilingDebrisInstance.release();
-                blackScreen.SetActive(true); 
+                blackScreen.SetActive(true);
                 dieOnlyOnce = true;
                 player.SetActive(false);
 
                 // find a way to release in game music instance after death screen and restart 
             }
         }
-        
+
         if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true)
-            
+
         {
             //Debug.Log("ceilling moving in if");
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             //Debug.Log("ceiling moving in else if"); TEST AFTER RESTART 
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y + 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
         }
-        
+
         //Fmod stuff
         ceilingSourceChild.transform.position = new Vector3(player.transform.position.x, ceiling.transform.position.y - 0.5f, player.transform.position.z);
         ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));

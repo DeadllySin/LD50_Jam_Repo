@@ -22,7 +22,7 @@ public class Interactable_Statue : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if(ph.handTarget == this.gameObject)
+        if (ph.handTarget == this.gameObject)
         {
             rs.sp = null;
             ph.handTarget = null;

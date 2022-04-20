@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class A_Trace_Utils
-    
+
 {
     /// <summary>
     /// Função que serve para testar se um objeto "vê" o outro, ou seja se não há obstáculos entre dois objetos

@@ -5,7 +5,7 @@ public class Room_Statue : MonoBehaviour
 {
     public int correctPieces;
     [SerializeField] private GameObject[] piecess;
-    readonly List <GameObject> spawners = new List<GameObject>();
+    readonly List<GameObject> spawners = new List<GameObject>();
     readonly List<GameObject> pieces = new List<GameObject>();
     [SerializeField] private GameObject spawnerParent;
     [HideInInspector] public Interactable_Statue sp;
@@ -25,7 +25,7 @@ public class Room_Statue : MonoBehaviour
     {
         while (pieces.Count > 0)
         {
-            int temp = Random.Range(0,spawners.Count - 1);
+            int temp = Random.Range(0, spawners.Count - 1);
             int temp2 = Random.Range(0, pieces.Count - 1);
             Instantiate(pieces[temp2], spawners[temp].transform.position, Quaternion.identity);
             spawners.RemoveAt(temp);
@@ -77,7 +77,7 @@ public class Room_Statue : MonoBehaviour
             phand.hand.GetComponent<Interactable_Statue>().ss.OnAssienedStatue();
             phand.hand.transform.position = phand.handStatueTarget.transform.position;
             phand.hand = null;
-            if(correctPiecesOld != 2) if (correctPieces >= 2) GameManager.gm.currTunnel.OpenDoor(GameManager.gm.currTunnel.doorIn);
+            if (correctPiecesOld != 2) if (correctPieces >= 2) GameManager.gm.currTunnel.OpenDoor(GameManager.gm.currTunnel.doorIn);
             if (correctPieces == 2)
             {
                 room.winState = "normal";

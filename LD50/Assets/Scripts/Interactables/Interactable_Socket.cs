@@ -9,7 +9,7 @@ public class Interactable_Socket : MonoBehaviour
 
     private void Start()
     {
-        ph =FindObjectOfType<PlayerHand>();
+        ph = FindObjectOfType<PlayerHand>();
         rs = FindObjectOfType<Room_Statue>();
     }
 
@@ -20,7 +20,7 @@ public class Interactable_Socket : MonoBehaviour
 
     public void OnRemovedStatue()
     {
-        if(assinedStatue.GetComponent<Interactable_Statue>().statueNumber == correctStatue) rs.correctPieces--;
+        if (assinedStatue.GetComponent<Interactable_Statue>().statueNumber == correctStatue) rs.correctPieces--;
     }
 
     private void OnMouseEnter()
@@ -37,7 +37,7 @@ public class Interactable_Socket : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if(ph.handStatueTarget == this.gameObject)
+        if (ph.handStatueTarget == this.gameObject)
         {
             ph.handStatueTarget = null;
             rs.ss = null;

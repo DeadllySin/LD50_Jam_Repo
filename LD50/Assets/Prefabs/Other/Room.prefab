@@ -1464,8 +1464,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419259924255573521}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5, y: 1.75, z: -1.05}
-  m_LocalScale: {x: 0.099999994, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0.5, y: 1.75, z: -1.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1543841146}
   m_RootOrder: 0
@@ -2092,8 +2092,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2951378459538350211}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5, y: 1.75, z: -1.05}
-  m_LocalScale: {x: 0.099999994, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0.5, y: 1.75, z: -1.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 675997784}
   m_RootOrder: 0
@@ -2426,7 +2426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4354474185160728448
 Transform:
   m_ObjectHideFlags: 0
@@ -3174,7 +3174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4072753133710468863
 Transform:
   m_ObjectHideFlags: 0
@@ -8620,8 +8620,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4741656168833988191}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5, y: 1.75, z: -1.05}
-  m_LocalScale: {x: 0.099999994, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0.5, y: 1.75, z: -1.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 589311213}
   m_RootOrder: 0
@@ -8848,7 +8848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4415580599615512067
 Transform:
   m_ObjectHideFlags: 0
@@ -8889,7 +8889,6 @@ MonoBehaviour:
   colorPrefab:
   - {fileID: 8335385205413956127, guid: 306d88055d49f6140b46b4b0715d4e01, type: 3}
   - {fileID: 4741656169763650781, guid: 4a7508f4489f64d408f42d1391b617f3, type: 3}
-  - {fileID: 2663290959858290949, guid: cdd9d0dfa2634804db2c94a7f12d3477, type: 3}
   - {fileID: 6352795529804290986, guid: 7877cdbf3f8e0d444baba49a3a801577, type: 3}
   - {fileID: 3604325946400697789, guid: a7e2a4a81719d2544b84ecdc961b3359, type: 3}
 --- !u!1 &6733136873550676320

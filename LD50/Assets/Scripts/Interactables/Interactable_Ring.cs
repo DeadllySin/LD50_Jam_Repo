@@ -17,8 +17,8 @@ public class Interactable_Ring : MonoBehaviour
     private void OnMouseEnter()
     {
         ph.handTarget = this.gameObject;
-        if(whichWay == "down")ph.lookingAt = "ring_down";
-        if(whichWay == "up")ph.lookingAt = "ring_up";
+        if (whichWay == "down") ph.lookingAt = "ring_down";
+        if (whichWay == "up") ph.lookingAt = "ring_up";
         if (whichWay == "confirm") ph.lookingAt = "confirm";
     }
 

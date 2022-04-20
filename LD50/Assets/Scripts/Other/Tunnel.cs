@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class Tunnel : MonoBehaviour
 {
@@ -11,10 +11,10 @@ public class Tunnel : MonoBehaviour
     [SerializeField] private GameObject fakeDoor;
     [SerializeField] private GameObject tunnelPrefab;
 
-    private void Update() 
-    { 
+    private void Update()
+    {
         if (GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.parent = GameManager.gm.ceiling.transform;
-        
+
         if (Input.GetKeyDown("h"))
         {
             OpenDoor(doorIn);
@@ -100,5 +100,5 @@ public class Tunnel : MonoBehaviour
     public void IdleDoor(GameObject door)
     {
         door.GetComponent<Animator>().SetTrigger("isIdle");
-    } 
+    }
 }

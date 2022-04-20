@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace FMODUnity
 {
@@ -13,7 +13,7 @@ namespace FMODUnity
         public string CollisionTag;
         public bool PreloadSamples;
         private bool isQuitting;
-        
+
         void HandleGameEvent(LoaderGameEvent gameEvent)
         {
             if (LoadEvent == gameEvent)

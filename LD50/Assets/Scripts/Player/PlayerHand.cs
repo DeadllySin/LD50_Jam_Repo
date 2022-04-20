@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerHand : MonoBehaviour
 {
-    [HideInInspector]public GameObject hand;
+    [HideInInspector] public GameObject hand;
     [HideInInspector] public GameObject handTarget;
     [HideInInspector] public GameObject handStatueTarget;
     [SerializeField] private float distance;
@@ -10,23 +10,23 @@ public class PlayerHand : MonoBehaviour
 
     private void FixedUpdate()
     {
-       Debug.Log(lookingAt);
+        Debug.Log(lookingAt);
     }
 
     private void Update()
     {
-        if(GameManager.gm.currRoomType == "color")
+        if (GameManager.gm.currRoomType == "color")
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if(lookingAt == "color")
+                if (lookingAt == "color")
                 {
-                    Interactable_ColorButton icb = hand.GetComponent<Interactable_ColorButton>();
+                    Interactable_ColorButton icb = handTarget.GetComponent<Interactable_ColorButton>();
                     icb.OnPressed();
                 }
             }
         }
-        if(GameManager.gm.currRoomType == "ring")
+        if (GameManager.gm.currRoomType == "ring")
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -36,7 +36,7 @@ public class PlayerHand : MonoBehaviour
                 else if (lookingAt == "confirm") handTarget.GetComponent<Interactable_Ring>().rrm.OnChanged();
             }
         }
-        if(GameManager.gm.currRoomType == "statue")
+        if (GameManager.gm.currRoomType == "statue")
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
