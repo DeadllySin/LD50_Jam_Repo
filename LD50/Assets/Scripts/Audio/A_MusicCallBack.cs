@@ -71,6 +71,7 @@ class A_MusicCallBack : MonoBehaviour
             GameState.gs.playIntroMusic = false;
             GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoops();
             //Debug.Log("Play Intro Music and Ceiling Loop after");
+            
         }
         else if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == false && GameState.gs.playIntroMusic == false)
         {

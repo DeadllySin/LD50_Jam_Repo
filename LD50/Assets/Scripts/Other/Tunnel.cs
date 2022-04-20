@@ -11,7 +11,20 @@ public class Tunnel : MonoBehaviour
     [SerializeField] private GameObject fakeDoor;
     [SerializeField] private GameObject tunnelPrefab;
 
-    private void Update() { if (GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.parent = GameManager.gm.ceiling.transform; }
+    private void Update() 
+    { 
+        if (GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.parent = GameManager.gm.ceiling.transform;
+        
+        if (Input.GetKeyDown("h"))
+        {
+            OpenDoor(doorIn);
+        }
+        if (Input.GetKeyDown("j"))
+        {
+            CloseDoor(doorIn);
+        }
+
+    }
 
     public void NewRoom()
     {
@@ -77,10 +90,12 @@ public class Tunnel : MonoBehaviour
     public void OpenDoor(GameObject door)
     {
         door.GetComponent<Animator>().SetTrigger("isOpen");
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen, door.transform.position);
     }
     public void CloseDoor(GameObject door)
     {
         door.GetComponent<Animator>().SetTrigger("isClosed");
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose, door.transform.position);
     }
     public void IdleDoor(GameObject door)
     {

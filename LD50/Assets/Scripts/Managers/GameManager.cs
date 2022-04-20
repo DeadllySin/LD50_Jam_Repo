@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
         ceilingDebrisInstance.start();
         //mainMenuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMenuMusic);
         //mainMenuMusicInstance.start(); ---- Depends on the main menu
-
         ceilingSourceChild = player.transform.GetChild(3).gameObject;
     }
 
@@ -72,7 +71,7 @@ public class GameManager : MonoBehaviour
             //Debug.Log("ceiling moving in else if"); TEST AFTER RESTART 
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y + 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
         }
-
+        
         //Fmod stuff
         ceilingSourceChild.transform.position = new Vector3(player.transform.position.x, ceiling.transform.position.y - 0.5f, player.transform.position.z);
         ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
