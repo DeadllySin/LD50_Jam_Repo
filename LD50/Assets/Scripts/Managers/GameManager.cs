@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(currRoomType);
         if (ceiling.transform.position.y <= thresholdToSlower && !dieOnlyOnce)
         {
             ceilingSpeed = slowThresholdSpeed;

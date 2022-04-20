@@ -14,8 +14,9 @@ public class Interactable_ColorButton : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        Debug.Log("Mouse Entered");
         ph.lookingAt = "color";
-        ph.handTarget = gameObject;
+        ph.handTarget = this.gameObject;
     }
 
     private void OnMouseExit()
