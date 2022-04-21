@@ -4,7 +4,6 @@ using UnityEngine;
 public class Room_Ring : MonoBehaviour
 {
     public Slot[] s;
-    public Questions[] Questions;
     private int ringsOnSide = 0;
     private int randomQuestion;
     Room_Ring_Main main;
@@ -14,13 +13,13 @@ public class Room_Ring : MonoBehaviour
     private void Start()
     {
         main = GetComponentInParent<Room_Ring_Main>();
-        randomQuestion = Random.Range(0, Questions.Length);
+        randomQuestion = Random.Range(0, main.Questions.Length);
 
-        for(int i = 0; i < Questions[randomQuestion].question.Length; i++)
+        for(int i = 0; i < main.Questions[randomQuestion].question.Length; i++)
         {
             for(int j = 0; j < main.Symbols.Length; j++)
             {
-                if(main.Symbols[j].symbolName == Questions[randomQuestion].question[i])
+                if(main.Symbols[j].symbolName == main.Questions[randomQuestion].question[i])
                 {
                     Instantiate(main.Symbols[j].symbol, questionSpawners[i].position, Quaternion.identity);
                 }
@@ -48,7 +47,7 @@ public class Room_Ring : MonoBehaviour
                 s[j].ring.transform.localPosition = s[j].pos;
                 s[ringMovedIndex].ring = null;
                 ringsOnSide--;
-                if (Questions[randomQuestion].answer == ringsOnSide) main.solutionCorrect[which] = true;
+                if (main.Questions[randomQuestion].answer == ringsOnSide) main.solutionCorrect[which] = true;
                 else main.solutionCorrect[which] = false;
                 return;
             }
@@ -75,7 +74,7 @@ public class Room_Ring : MonoBehaviour
                 s[j].ring.transform.localPosition = s[j].pos;
                 s[ringMovedIndex].ring = null;
                 ringsOnSide++;
-                if (Questions[randomQuestion].answer == ringsOnSide) main.solutionCorrect[which] = true;
+                if (main.Questions[randomQuestion].answer == ringsOnSide) main.solutionCorrect[which] = true;
                 else main.solutionCorrect[which] = false;
                 return;
             }
@@ -90,11 +89,5 @@ public struct Slot
     public Vector3 pos;
 }
 
-[System.Serializable]
-public struct Questions
-{
-    public string question;
-    public int answer;
-}
 
 

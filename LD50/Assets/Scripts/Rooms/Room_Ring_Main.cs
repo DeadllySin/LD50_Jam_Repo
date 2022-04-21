@@ -6,6 +6,7 @@ public class Room_Ring_Main : MonoBehaviour
     int correctSolutions;
     private Main_Room room;
     EnemyAI ai;
+    public Questions[] Questions;
     public Symbols[] Symbols;
 
     private void Start()
@@ -51,4 +52,12 @@ public class Symbols
 {
     public GameObject symbol;
     public char symbolName;
+}
+
+
+[System.Serializable]
+public struct Questions
+{
+    public string question;
+    public int answer;
 }
