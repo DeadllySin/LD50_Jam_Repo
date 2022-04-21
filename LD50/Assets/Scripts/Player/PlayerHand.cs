@@ -33,8 +33,9 @@ public class PlayerHand : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if(distanceFu(handTarget) == 1)
+                if (distanceFu(handTarget) == 1)
                 {
+                    Debug.Log("ring1");
                     if (lookingAt == "ring_up") handTarget.GetComponent<Interactable_Ring>().rr.MoveUp();
                     else if (lookingAt == "ring_down") handTarget.GetComponent<Interactable_Ring>().rr.MoveDown();
                     else if (lookingAt == "confirm") handTarget.GetComponent<Interactable_Ring>().rrm.OnChanged();

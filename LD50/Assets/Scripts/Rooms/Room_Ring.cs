@@ -13,17 +13,20 @@ public class Room_Ring : MonoBehaviour
 
     private void Start()
     {
-        main = GetComponentInParent<Room_Ring_Main>();
+        main = GetComponentInParent<Transform>().GetComponentInParent<Room_Ring_Main>();
         randomQuestion = Random.Range(0, main.Questions.Count - 1);
         answer = main.Solutions[randomQuestion];
         question = main.Questions[randomQuestion];
+        int y = 0;
         for (int i = 0; i < question.Length; i++)
         {
             for (int j = 0; j < main.Symbols.Length; j++)
             {
                 if (main.Symbols[j].symbolName == question[i])
                 {
-                    Instantiate(main.Symbols[j].symbol, questionSpawners[i].position, Quaternion.identity);
+                    GameObject sym = Instantiate(main.Symbols[j].symbol, questionSpawners[y].position, Quaternion.identity);
+                    sym.transform.localScale = new Vector3(-1, 1, 1);
+                    y++;
                 }
             }
         }
@@ -31,6 +34,7 @@ public class Room_Ring : MonoBehaviour
 
     public void MoveDown()
     {
+        Debug.Log("ringdown");
         int ringMovedIndex = 0;
         for (int j = slot.Length - 1; j > 0; j--)
         {
@@ -58,6 +62,7 @@ public class Room_Ring : MonoBehaviour
 
     public void MoveUp()
     {
+        Debug.Log("ringup");
         int ringMovedIndex = 0;
         for (int j = 0; j < slot.Length; j++)
         {
@@ -68,6 +73,7 @@ public class Room_Ring : MonoBehaviour
                 break;
             }
         }
+        Debug.Log("ringup2");
         for (int j = slot.Length - 1; j > -1; j--)
         {
             if (slot[j].ring == null)
@@ -76,6 +82,7 @@ public class Room_Ring : MonoBehaviour
                 slot[j].ring.transform.localPosition = slot[j].pos;
                 slot[ringMovedIndex].ring = null;
                 ringsOnSide++;
+                Debug.Log("ringup3");
                 if (int.Parse(answer) == ringsOnSide) main.solutionCorrect[whichPole] = true;
                 else main.solutionCorrect[whichPole] = false;
                 return;
