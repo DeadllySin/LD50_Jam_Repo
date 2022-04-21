@@ -9,9 +9,11 @@ public class Room_Colors : MonoBehaviour
     private List<GameObject> colorList = new List<GameObject>();
     private int pressedButtons;
     private bool[] correctPresses = new bool[5];
+    private Room_Main rm;
 
     private void Awake()
     {
+        rm = GetComponentInParent<Room_Main>();
         for (int i = 0; i < colorPrefab.Length; i++) colorList.Add(colorPrefab[i]);
         int j = 0;
         while (colorList.Count > 0)
@@ -41,9 +43,16 @@ public class Room_Colors : MonoBehaviour
     {
         int correctPressesss = 0;
         for (int i = 0; i < correctPresses.Length; i++) if (correctPresses[i] == true) correctPressesss++;
-        if (correctPressesss == 3)
+        if (correctPressesss > 2)
         {
-            Debug.Log("test333");
+            GameManager.gm.currTunnel.OpenDoor(0);
+            if (correctPressesss == 3) rm.winState = "normal";
+            if (correctPressesss == 4) rm.winState = "good";
+        }
+        else if(correctPressesss < 3)
+        {
+            GameManager.gm.currTunnel.CloseDoor(0);
+            rm.winState = "bad";
         }
     }
 }
