@@ -30,6 +30,7 @@ public class Room_Ring : MonoBehaviour
                 }
             }
         }
+        Debug.Log(question + " " + answer);
     }
 
     public void MoveDown()
