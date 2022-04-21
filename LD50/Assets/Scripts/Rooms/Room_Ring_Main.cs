@@ -39,13 +39,13 @@ public class Room_Ring_Main : MonoBehaviour
         for (int i = 0; i < solutionCorrect.Length; i++) if (solutionCorrect[i] == false) correctSolutions -= 1;
         if (correctSolutions > 1)
         {
-            ai.speed = 0;
+            //ai.speed = 0;
             GameManager.gm.currTunnel.OpenDoor(0);
         }
         else if (correctSolutions < 2)
         {
             GameManager.gm.currTunnel.CloseDoor(0);
-            ai.speed = ai.defaultSpeed;
+            //ai.speed = ai.defaultSpeed;
         }
         if (correctSolutions == 2) room.winState = "normal";
         if (correctSolutions < 2) room.winState = "bad";

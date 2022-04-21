@@ -34,16 +34,16 @@ public class Room_Colors : MonoBehaviour
         if (color == colorOrder[pressedButtons]) correctPresses[pressedButtons] = true;
         else correctPresses[pressedButtons] = false;
         pressedButtons++;
+
+    }
+
+    public void OnConfirm()
+    {
         int correctPressesss = 0;
         for (int i = 0; i < correctPresses.Length; i++) if (correctPresses[i] == true) correctPressesss++;
         if (correctPressesss == 3)
         {
             Debug.Log("test333");
         }
-    }
-
-    public void OnConfirm()
-    {
-
     }
 }
