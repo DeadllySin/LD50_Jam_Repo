@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Room_Ring_Main : MonoBehaviour
@@ -6,8 +7,25 @@ public class Room_Ring_Main : MonoBehaviour
     int correctSolutions;
     private Main_Room room;
     EnemyAI ai;
-    public Questions[] Questions;
+    public List<string> Questions = new List<string>();
+    public List<string> Solutions = new List<string>();
     public Symbols[] Symbols;
+
+    private void Awake()
+    {
+        int counter = 0;
+        foreach (string line in System.IO.File.ReadLines("Assets/Resources/test.txt"))
+        {
+            string lineTemp = line;
+            string[] splites;
+            splites = lineTemp.Split('=');
+
+            Questions.Add(splites[0]);
+            Solutions.Add(splites[1]);
+            Debug.Log(line);
+            counter++;
+        }
+    }
 
     private void Start()
     {

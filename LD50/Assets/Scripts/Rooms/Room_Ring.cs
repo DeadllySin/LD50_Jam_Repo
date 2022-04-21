@@ -10,16 +10,17 @@ public class Room_Ring : MonoBehaviour
     [SerializeField] private Transform[] questionSpawners;
     [SerializeField] private int which;
 
+
     private void Start()
     {
         main = GetComponentInParent<Room_Ring_Main>();
-        randomQuestion = Random.Range(0, main.Questions.Length);
+        randomQuestion = Random.Range(0, main.Questions.Count - 1);
 
-        for(int i = 0; i < main.Questions[randomQuestion].question.Length; i++)
+        for(int i = 0; i < main.Questions[randomQuestion].Length; i++)
         {
             for(int j = 0; j < main.Symbols.Length; j++)
             {
-                if(main.Symbols[j].symbolName == main.Questions[randomQuestion].question[i])
+                if(main.Symbols[j].symbolName == main.Questions[randomQuestion][i])
                 {
                     Instantiate(main.Symbols[j].symbol, questionSpawners[i].position, Quaternion.identity);
                 }
@@ -47,7 +48,7 @@ public class Room_Ring : MonoBehaviour
                 s[j].ring.transform.localPosition = s[j].pos;
                 s[ringMovedIndex].ring = null;
                 ringsOnSide--;
-                if (main.Questions[randomQuestion].answer == ringsOnSide) main.solutionCorrect[which] = true;
+                if (int.Parse(main.Solutions[randomQuestion]) == ringsOnSide) main.solutionCorrect[which] = true;
                 else main.solutionCorrect[which] = false;
                 return;
             }
@@ -74,7 +75,7 @@ public class Room_Ring : MonoBehaviour
                 s[j].ring.transform.localPosition = s[j].pos;
                 s[ringMovedIndex].ring = null;
                 ringsOnSide++;
-                if (main.Questions[randomQuestion].answer == ringsOnSide) main.solutionCorrect[which] = true;
+                if (int.Parse(main.Solutions[randomQuestion]) == ringsOnSide) main.solutionCorrect[which] = true;
                 else main.solutionCorrect[which] = false;
                 return;
             }
