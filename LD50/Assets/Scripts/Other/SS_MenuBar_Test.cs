@@ -8,7 +8,7 @@ public class SS_MenuBar_Test : MonoBehaviour
     /// <summary>
     /// This adds an entry to the top main menu and a shortcut CTRL+ALT+S and stores files without transparency to Assets/{TimeStamp}.png
     /// </summary>
-    [MenuItem("My Stuff/CaptureEditorScreenshot %&S")]
+    [MenuItem("ScreenshotMenu/CaptureEditorScreenshot %&S")]
     private static void CaptureEditorScreenshot()
     {
         var path = Path.Combine(Application.dataPath, DateTime.Now.ToString("yyyy_MM_dd-hh_mm_ss") + ".png");
