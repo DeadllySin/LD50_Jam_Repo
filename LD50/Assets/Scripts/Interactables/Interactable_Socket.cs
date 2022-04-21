@@ -20,7 +20,10 @@ public class Interactable_Socket : MonoBehaviour
 
     public void OnRemovedStatue()
     {
-        if (assinedStatue.GetComponent<Interactable_Statue>().statueNumber == correctStatue) rs.correctPieces--;
+        if (assinedStatue.GetComponent<Interactable_Statue>().statueNumber == correctStatue)
+        {
+            rs.correctPieces--;
+        }
     }
 
     private void OnMouseEnter()

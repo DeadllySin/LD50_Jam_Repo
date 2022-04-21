@@ -26,10 +26,15 @@ public class AudioManager : MonoBehaviour
 
     [Header("Puzzle Combine")]
     public FMODUnity.EventReference pInsertPiece;
+    public FMODUnity.EventReference pRemovePiece;    
 
     [Header("Puzzle Math")]
     public FMODUnity.EventReference pSlideUp;
     public FMODUnity.EventReference pSlideDown;
+
+    [Header("Puzzle Color")]
+    public FMODUnity.EventReference pColorPress;
+    public FMODUnity.EventReference pColorTimer;
 
     [Header("UI")]
     public FMODUnity.EventReference puzzleCorrect;

@@ -46,17 +46,26 @@ public class PlayerHand : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (hand == null) FindObjectOfType<Room_Statue>().PickUpFrom();
+                if (hand == null)
+                {
+                    FindObjectOfType<Room_Statue>().PickUpFrom();
+                }
+
                 else if (hand != null && handStatueTarget != null)
                 {
                     if (distanceFu(handStatueTarget) == 1)
                     {
                         FindObjectOfType<Room_Statue>().Place();
-                        Debug.Log("place");
+                        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
+                        Debug.Log("insert and play sound");
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.G)) FindObjectOfType<Room_Statue>().Drop();
+            else if (Input.GetKeyDown(KeyCode.G))
+            {
+                FindObjectOfType<Room_Statue>().Drop();
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pDrop);
+            }
         }
     }
 

@@ -22,7 +22,7 @@ public class Room_Ring_Main : MonoBehaviour
 
             Questions.Add(splites[0]);
             Solutions.Add(splites[1]);
-            Debug.Log(line);
+            //Debug.Log(line);
             counter++;
         }
     }

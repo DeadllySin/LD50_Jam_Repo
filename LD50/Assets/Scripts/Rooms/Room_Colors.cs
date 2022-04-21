@@ -33,9 +33,18 @@ public class Room_Colors : MonoBehaviour
     public void onPressed(string color)
     {
         Debug.Log("color" + color + "presed");
-        if (color == colorOrder[pressedButtons]) correctPresses[pressedButtons] = true;
-        else correctPresses[pressedButtons] = false;
-        pressedButtons++;
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pColorPress);
+
+        if (color == colorOrder[pressedButtons])
+        {
+            correctPresses[pressedButtons] = true;
+        }
+
+        else
+        {
+            correctPresses[pressedButtons] = false;
+            pressedButtons++;
+        }
 
     }
 
@@ -43,6 +52,7 @@ public class Room_Colors : MonoBehaviour
     {
         int correctPressesss = 0;
         for (int i = 0; i < correctPresses.Length; i++) if (correctPresses[i] == true) correctPressesss++;
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Color_Progress", correctPressesss);
         if (correctPressesss > 2)
         {
             GameManager.gm.currTunnel.OpenDoor(0);

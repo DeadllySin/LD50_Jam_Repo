@@ -46,6 +46,7 @@ public class Room_Statue : MonoBehaviour
     public void Drop()
     {
         if (phand.hand == null) return;
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pDrop);
         phand.hand.GetComponent<Interactable_Statue>().state = "ground";
         phand.hand.transform.parent = null;
         phand.hand.transform.position = new Vector3(phand.transform.position.x, 1.5f, phand.transform.position.z);
@@ -59,8 +60,10 @@ public class Room_Statue : MonoBehaviour
         phand.hand.transform.parent = GameManager.gm.player.transform;
         phand.hand.transform.localPosition = new Vector3(1, 1.2f, 2f);
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pPickUp);
+        Debug.Log("Piece pick up sound");
         if (setASNull)
         {
+            Debug.Log("Set as null");
             sp.ss.OnRemovedStatue();
             if (correctPieces < 2) GameManager.gm.currTunnel.CloseDoor(0);
             sp.ss.assinedStatue = null;
