@@ -4,18 +4,19 @@ using UnityEngine;
 public class Room_Statue : MonoBehaviour
 {
     public int correctPieces;
-    [SerializeField] private GameObject[] piecess;
+    private PlayerHand phand;
+    private Room_Main room;
     readonly List<GameObject> spawners = new List<GameObject>();
     readonly List<GameObject> pieces = new List<GameObject>();
+    [SerializeField] private GameObject[] piecess;
     [SerializeField] private GameObject spawnerParent;
     [HideInInspector] public Interactable_Statue sp;
     [HideInInspector] public Interactable_Socket ss;
-    private PlayerHand phand;
-    private Main_Room room;
+
 
     private void Awake()
     {
-        room = GetComponentInParent<Main_Room>();
+        room = GetComponentInParent<Room_Main>();
         for (int i = 0; i < piecess.Length; i++) pieces.Add(piecess[i]);
         phand = FindObjectOfType<PlayerHand>();
         foreach (Transform child in spawnerParent.transform) spawners.Add(child.gameObject);
@@ -67,8 +68,10 @@ public class Room_Statue : MonoBehaviour
 
     public void Place()
     {
+        Debug.Log("place2");
         if (phand.handStatueTarget != null && phand.hand.GetComponent<Interactable_Statue>().state == "inHand" && phand.handStatueTarget.GetComponent<Interactable_Socket>().assinedStatue == null)
         {
+            Debug.Log("place3");
             phand.hand.transform.parent = phand.handStatueTarget.transform;
             phand.hand.GetComponent<Interactable_Statue>().state = "Ass";
             phand.hand.GetComponent<Interactable_Statue>().ss = ss;

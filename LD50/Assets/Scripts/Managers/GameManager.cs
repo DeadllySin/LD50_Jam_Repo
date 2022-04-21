@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gm = this;
-        currRoom = FindObjectOfType<Main_Room>().gameObject;
+        currRoom = FindObjectOfType<Room_Main>().gameObject;
         currTunnel = FindObjectOfType<Tunnel>();
     }
 

@@ -20,9 +20,12 @@ public class PlayerHand : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if (lookingAt == "color")
-                {
-                    Interactable_ColorButton icb = handTarget.GetComponent<Interactable_ColorButton>();
-                    icb.OnPressed();
+                {   
+                    if(distanceFu(handTarget) == 1)
+                    {
+                        Interactable_ColorButton icb = handTarget.GetComponent<Interactable_ColorButton>();
+                        icb.OnPressed();
+                    }
                 }
             }
         }
@@ -30,32 +33,41 @@ public class PlayerHand : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log(lookingAt);
-                if (lookingAt == "ring_up") handTarget.GetComponent<Interactable_Ring>().rr.MoveUp();
-                else if (lookingAt == "ring_down") handTarget.GetComponent<Interactable_Ring>().rr.MoveDown();
-                else if (lookingAt == "confirm") handTarget.GetComponent<Interactable_Ring>().rrm.OnChanged();
+                if(distanceFu(handTarget) == 1)
+                {
+                    if (lookingAt == "ring_up") handTarget.GetComponent<Interactable_Ring>().rr.MoveUp();
+                    else if (lookingAt == "ring_down") handTarget.GetComponent<Interactable_Ring>().rr.MoveDown();
+                    else if (lookingAt == "confirm") handTarget.GetComponent<Interactable_Ring>().rrm.OnChanged();
+                }
             }
         }
         if (GameManager.gm.currRoomType == "statue")
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (hand == null)
-                {
-                    if (Vector3.Distance(handTarget.transform.position, transform.position) < distance)
-                    {
-                        FindObjectOfType<Room_Statue>().PickUpFrom();
-                    }
-                }
+                if (hand == null) FindObjectOfType<Room_Statue>().PickUpFrom();
                 else if (hand != null && handStatueTarget != null)
                 {
-                    if (Vector3.Distance(handStatueTarget.transform.position, transform.position) < distance)
+                    if (distanceFu(handStatueTarget) == 1)
                     {
-                        FindObjectOfType<Room_Statue>().Place(); Debug.Log("test1");
+                        FindObjectOfType<Room_Statue>().Place();
+                        Debug.Log("place");
                     }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.G)) FindObjectOfType<Room_Statue>().Drop();
+        }
+    }
+
+    float distanceFu(GameObject target)
+    {
+        if (Vector3.Distance(target.transform.position, transform.position) < distance)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
         }
     }
 }

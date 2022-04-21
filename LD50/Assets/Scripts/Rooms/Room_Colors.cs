@@ -12,15 +12,10 @@ public class Room_Colors : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < colorPrefab.Length; i++)
-        {
-            colorList.Add(colorPrefab[i]);
-        }
-
+        for (int i = 0; i < colorPrefab.Length; i++) colorList.Add(colorPrefab[i]);
         int j = 0;
         while (colorList.Count > 0)
         {
-
             int temp2 = Random.Range(0, colorList.Count - 1);
             temp2 = Random.Range(0, colorList.Count - 1);
             temp2 = Random.Range(0, colorList.Count - 1);
@@ -36,24 +31,19 @@ public class Room_Colors : MonoBehaviour
     public void onPressed(string color)
     {
         Debug.Log("color" + color + "presed");
-        if (color == colorOrder[pressedButtons])
-        {
-            correctPresses[pressedButtons] = true;
-        }
-        else
-        {
-            correctPresses[pressedButtons] = false;
-        }
+        if (color == colorOrder[pressedButtons]) correctPresses[pressedButtons] = true;
+        else correctPresses[pressedButtons] = false;
         pressedButtons++;
         int correctPressesss = 0;
-        for (int i = 0; i < correctPresses.Length; i++)
-        {
-            if (correctPresses[i] == true) correctPressesss++;
-        }
+        for (int i = 0; i < correctPresses.Length; i++) if (correctPresses[i] == true) correctPressesss++;
         if (correctPressesss == 3)
         {
             Debug.Log("test333");
         }
     }
 
+    public void OnConfirm()
+    {
+
+    }
 }

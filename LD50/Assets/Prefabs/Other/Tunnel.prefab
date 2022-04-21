@@ -5096,8 +5096,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb9b8007b689a4b4d96665d840f96ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorIn: {fileID: 8147287963732536475}
-  doorOut: {fileID: 8147287964059894042}
+  door:
+  - door: {fileID: 8147287963732536476}
+    isOpen: 0
+  - door: {fileID: 8147287964059894044}
+    isOpen: 0
   ceil: {fileID: 8147287964666956684}
   fakeDoor: {fileID: 3219292511492543933, guid: 243eed46cd913e64f9f3fe1b6f2a6a6d, type: 3}
   tunnelPrefab: {fileID: 8147287964468909956}

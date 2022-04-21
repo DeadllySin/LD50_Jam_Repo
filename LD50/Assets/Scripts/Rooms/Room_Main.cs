@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Main_Room : MonoBehaviour
+public class Room_Main : MonoBehaviour
 {
     public Rooms[] rooms;
-    public string winState;
+    [HideInInspector] public string winState;
 
     private void Start()
     {

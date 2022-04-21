@@ -44,7 +44,7 @@ public class Tunnel : MonoBehaviour
             yield return new WaitForSeconds(.1f);
             alreadyColl = true;
             CloseDoor(0);
-            Main_Room room = GameManager.gm.currRoom.GetComponent<Main_Room>();
+            Room_Main room = GameManager.gm.currRoom.GetComponent<Room_Main>();
             Tunnel tunnel = GameManager.gm.currTunnel.GetComponent<Tunnel>();
             yield return new WaitForSeconds(1);
             switch (room.winState)
