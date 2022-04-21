@@ -58,6 +58,7 @@ public class Room_Statue : MonoBehaviour
         phand.hand = sp.gameObject;
         phand.hand.transform.parent = GameManager.gm.player.transform;
         phand.hand.transform.localPosition = new Vector3(1, 1.2f, 2f);
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pPickUp);
         if (setASNull)
         {
             sp.ss.OnRemovedStatue();
