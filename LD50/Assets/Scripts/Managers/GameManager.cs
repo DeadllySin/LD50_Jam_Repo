@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         gm = this;
         currRoom = FindObjectOfType<Room_Main>().gameObject;
         currTunnel = FindObjectOfType<Tunnel>();
+        ceilingSourceChild = player.transform.GetChild(3).gameObject;
     }
 
     private void Start()
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
         ceilingDebrisInstance.start();
         //mainMenuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMenuMusic);
         //mainMenuMusicInstance.start(); ---- Depends on the main menu
-        ceilingSourceChild = player.transform.GetChild(3).gameObject;
+
     }
 
     private void FixedUpdate()
