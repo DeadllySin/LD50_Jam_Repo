@@ -39,12 +39,12 @@ public class Room_Colors : MonoBehaviour
         {
             correctPresses[pressedButtons] = true;
         }
-
         else
         {
             correctPresses[pressedButtons] = false;
-            pressedButtons++;
+
         }
+        pressedButtons++;
 
     }
 
@@ -53,6 +53,7 @@ public class Room_Colors : MonoBehaviour
         int correctPressesss = 0;
         for (int i = 0; i < correctPresses.Length; i++) if (correctPresses[i] == true) correctPressesss++;
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Color_Progress", correctPressesss);
+        Debug.Log(correctPressesss + "CorrectPreesssssss");
         if (correctPressesss > 2)
         {
             GameManager.gm.currTunnel.OpenDoor(0);

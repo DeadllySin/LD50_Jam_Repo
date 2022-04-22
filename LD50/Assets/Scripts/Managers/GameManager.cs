@@ -7,14 +7,12 @@ public class GameManager : MonoBehaviour
     public static GameManager gm;
     private bool isDead;
     public GameObject player;
-    public GameObject ceiling;
+
     public GameObject room;
     [SerializeField] private Text scoreText;
     [SerializeField] float slowThresholdSpeed = 1.5f;
     [SerializeField] private GameObject blackScreen;
-    [SerializeField] private float ceilingSpeed;
-    [SerializeField] private float deathHeight;
-    [SerializeField] private float thresholdToSlower;
+
     [HideInInspector] public GameObject currRoom;
     [HideInInspector] public string currRoomType;
     [HideInInspector] public Tunnel currTunnel;
@@ -24,10 +22,18 @@ public class GameManager : MonoBehaviour
     FMOD.Studio.EventInstance ceilingLoopInstance;
     FMOD.Studio.EventInstance ceilingDebrisInstance;
     FMOD.Studio.EventInstance mainMenuMusicInstance;
+
+    [Header("Ceiling")]
     public GameObject ceilingSourceChild;
+    public GameObject ceiling;
+    [SerializeField] private float defaultSpeed;
+    [HideInInspector] public float ceilingSpeed;
+    [SerializeField] private float deathHeight;
+    [SerializeField] private float thresholdToSlower;
 
     private void Awake()
     {
+        ceilingSpeed = defaultSpeed;
         gm = this;
         currRoom = FindObjectOfType<Room_Main>().gameObject;
         currTunnel = FindObjectOfType<Tunnel>();
@@ -41,7 +47,6 @@ public class GameManager : MonoBehaviour
         ceilingDebrisInstance.start();
         //mainMenuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMenuMusic);
         //mainMenuMusicInstance.start(); ---- Depends on the main menu
-
     }
 
     private void FixedUpdate()

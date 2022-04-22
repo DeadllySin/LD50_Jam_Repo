@@ -27,6 +27,14 @@ public class PlayerHand : MonoBehaviour
                         icb.OnPressed();
                     }
                 }
+                if (lookingAt == "confirm")
+                {
+                    if (distanceFu(handTarget) == 1)
+                    {
+                        Interactable_ColorButton icb = handTarget.GetComponent<Interactable_ColorButton>();
+                        icb.rc.OnConfirm();
+                    }
+                }
             }
         }
         if (GameManager.gm.currRoomType == "ring")
