@@ -14,17 +14,22 @@ public class Room_PropPlacer : MonoBehaviour
         room = GetComponentInParent<Room_Main>();
         for (int i = 0; i < propMeshess.Length; i++) propMeshes.Add(propMeshess[i]);
         foreach (Transform child in spawnerParent.transform) spawners.Add(child.gameObject);
+
+        Debug.Log(spawners.Count);
     }
 
     private void Start()
     {
         while (propMeshes.Count > 0)
         {
-            int temp = Random.Range(0, spawners.Count - 1);
-            int temp2 = Random.Range(0, propMeshes.Count - 1);
-            Instantiate(propMeshes[temp2], spawners[temp].transform.position, Quaternion.identity);
-            spawners.RemoveAt(temp);
-            propMeshes.RemoveAt(temp2);
+            int spawnersIndex = Random.Range(0, spawners.Count);
+            int propIndex = Random.Range(0, propMeshes.Count);
+            Instantiate(propMeshes[propIndex], spawners[spawnersIndex].transform.position, Quaternion.identity);
+            spawners.RemoveAt(spawnersIndex);
+            propMeshes.RemoveAt(propIndex);
+            
+            //Debug.Log("temp " + spawnersIndex);
+            //Debug.Log("temp2 " + propIndex);
         }
     }
 
@@ -32,7 +37,7 @@ public class Room_PropPlacer : MonoBehaviour
     {
         if (room)
         {
-            Debug.Log("Room_PropPlacer: ");
+            //Debug.Log("Room_PropPlacer: ");
         }
     }
 }
