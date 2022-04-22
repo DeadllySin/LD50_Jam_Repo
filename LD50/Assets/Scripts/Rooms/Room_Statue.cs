@@ -38,8 +38,12 @@ public class Room_Statue : MonoBehaviour
     {
         if (phand.handTarget != null && phand.hand == null)
         {
-            if (sp.state == "ground") PickUp(false);
-            if (sp.state == "Ass") PickUp(true);
+            if (sp.state == "ground")
+            {
+                PickUp(false);
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pPickUp);
+            }
+                if (sp.state == "Ass") PickUp(true);
         }
     }
 
@@ -59,12 +63,10 @@ public class Room_Statue : MonoBehaviour
         phand.hand = sp.gameObject;
         phand.hand.transform.parent = GameManager.gm.player.transform;
         phand.hand.transform.localPosition = new Vector3(1, 1.2f, 2f);
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pPickUp);
-        Debug.Log("Piece pick up sound");
         if (setASNull)
         {
-            Debug.Log("Set as null");
             sp.ss.OnRemovedStatue();
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pRemovePiece);
             if (correctPieces < 2) GameManager.gm.currTunnel.CloseDoor(0);
             sp.ss.assinedStatue = null;
         }
@@ -72,10 +74,10 @@ public class Room_Statue : MonoBehaviour
 
     public void Place()
     {
-        Debug.Log("place2");
+        //Debug.Log("place2");
         if (phand.handStatueTarget != null && phand.hand.GetComponent<Interactable_Statue>().state == "inHand" && phand.handStatueTarget.GetComponent<Interactable_Socket>().assinedStatue == null)
         {
-            Debug.Log("place3");
+            //Debug.Log("place3");
             phand.hand.transform.parent = phand.handStatueTarget.transform;
             phand.hand.GetComponent<Interactable_Statue>().state = "Ass";
             phand.hand.GetComponent<Interactable_Statue>().ss = ss;
