@@ -60,6 +60,7 @@ public class Tunnel : MonoBehaviour
                 default:
                     break;
             }
+            GameManager.gm.roomsCleared++;
             Destroy(room.gameObject);
             GameManager.gm.ceiling.transform.position = new Vector3(GameManager.gm.ceiling.transform.position.x, GameManager.gm.ceiling.transform.position.y, GameManager.gm.ceiling.transform.position.z + 22);
             GameManager.gm.currRoom = Instantiate(GameManager.gm.room, new Vector3(0, 0, room.gameObject.transform.position.z + 22), Quaternion.identity);

@@ -1,13 +1,17 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager gm;
-    bool dieOnlyOnce;
-    [SerializeField] private GameObject blackScreen;
+    private bool isDead;
     public GameObject player;
     public GameObject ceiling;
     public GameObject room;
+    [SerializeField] private Text scoreText;
+    [SerializeField] float slowThresholdSpeed = 1.5f;
+    [SerializeField] private GameObject blackScreen;
     [SerializeField] private float ceilingSpeed;
     [SerializeField] private float deathHeight;
     [SerializeField] private float thresholdToSlower;
@@ -15,7 +19,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public string currRoomType;
     [HideInInspector] public Tunnel currTunnel;
     [HideInInspector] public int lastRoom = 0;
-    [SerializeField] float slowThresholdSpeed = 1.5f;
+    [HideInInspector] public int roomsCleared = 0;
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     FMOD.Studio.EventInstance ceilingDebrisInstance;
@@ -39,30 +43,29 @@ public class GameManager : MonoBehaviour
         ceilingSourceChild = player.transform.GetChild(3).gameObject;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Debug.Log(currRoomType);
-        if (ceiling.transform.position.y <= thresholdToSlower && !dieOnlyOnce)
+        if (!isDead)
         {
-            ceilingSpeed = slowThresholdSpeed;
-            if (ceiling.transform.position.y < deathHeight)
+            if (ceiling.transform.position.y <= thresholdToSlower)
             {
-                FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.deathSFX);
-                ceilingLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                ceilingLoopInstance.release();
-                ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                ceilingDebrisInstance.release();
-                blackScreen.SetActive(true);
-                dieOnlyOnce = true;
-                player.SetActive(false);
-
-                // find a way to release in game music instance after death screen and restart 
+                ceilingSpeed = slowThresholdSpeed;
+                if (ceiling.transform.position.y < deathHeight) OnDeath();
             }
         }
 
-        if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true)
+    }
 
+
+    private void Update()
+    {
+        if (isDead)
+        {
+            if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+        }
+
+        if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true)
         {
             //Debug.Log("ceilling moving in if");
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
@@ -79,6 +82,22 @@ public class GameManager : MonoBehaviour
         ceilingDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceilingSourceChild.transform.position.y);
         //Debug.Log("Height: " + ceilingSourceChild.transform.position.y);
+    }
+
+    private void OnDeath()
+    {
+        if(roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
+        isDead = true;
+        scoreText.text = "You Cleared " + roomsCleared + " Rooms!\n Your Highscore is " + PlayerPrefs.GetInt("roomsCleared");
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.deathSFX);
+        ceilingLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        ceilingLoopInstance.release();
+        ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        ceilingDebrisInstance.release();
+        blackScreen.SetActive(true);
+        player.SetActive(false);
+        // find a way to release in game music instance after death screen and restart 
     }
 
     public void FMOD_PlayCeilingLoops()
