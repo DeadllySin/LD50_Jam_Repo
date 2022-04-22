@@ -63,7 +63,6 @@ public class PlayerHand : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.G))
             {
                 FindObjectOfType<Room_Statue>().Drop();
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pDrop);
             }
         }
     }

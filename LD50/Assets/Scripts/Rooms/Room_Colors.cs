@@ -56,13 +56,24 @@ public class Room_Colors : MonoBehaviour
         if (correctPressesss > 2)
         {
             GameManager.gm.currTunnel.OpenDoor(0);
-            if (correctPressesss == 3) rm.winState = "normal";
-            if (correctPressesss == 4) rm.winState = "good";
-        }
-        else if(correctPressesss < 3)
-        {
-            GameManager.gm.currTunnel.CloseDoor(0);
-            rm.winState = "bad";
+            if (correctPressesss == 3) 
+            {
+                rm.winState = "normal";
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Color_Progress", 0);
+            }
+            
+            if (correctPressesss == 4)
+            {
+                rm.winState = "good";
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Color_Progress", 0);
+            }
+            
+            else if (correctPressesss < 3)
+            {
+                GameManager.gm.currTunnel.CloseDoor(0);
+                rm.winState = "bad";
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Color_Progress", correctPressesss);
+            }
         }
     }
 }
