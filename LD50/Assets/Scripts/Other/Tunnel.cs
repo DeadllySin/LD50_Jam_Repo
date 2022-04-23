@@ -97,13 +97,13 @@ public class Tunnel : MonoBehaviour
     public void CloseDoor(int index)
     {
         if (!door[index].isOpen) return;
-        door[index].door.SetTrigger("isOpen");
-        door[index].isOpen = true;
+        door[index].door.SetTrigger("isClosed");
+        door[index].isOpen = false;
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose, door[index].door.transform.position);
     }
     public void IdleDoor(int index)
     {
-        door[index].door.SetTrigger("isOpen");
+        door[index].door.SetTrigger("isIdle");
         door[index].isOpen = true;
     }
 }
