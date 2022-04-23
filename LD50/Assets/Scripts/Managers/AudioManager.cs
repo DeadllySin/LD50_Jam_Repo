@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
     [Header("Puzzle Math")]
     public FMODUnity.EventReference pSlideUp;
     public FMODUnity.EventReference pSlideDown;
+    public FMODUnity.EventReference pConfirm;
 
     [Header("Puzzle Color")]
     public FMODUnity.EventReference pColorPress;
