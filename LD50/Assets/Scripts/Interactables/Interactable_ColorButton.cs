@@ -4,11 +4,13 @@ public class Interactable_ColorButton : MonoBehaviour
 {
     private PlayerHand ph;
     private bool isPressed;
+    private Animator anim;
     [SerializeField] private string color;
     [HideInInspector] public Room_Colors rc;
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         rc = FindObjectOfType<Room_Colors>();
         ph = FindObjectOfType<PlayerHand>();
     }
@@ -33,6 +35,7 @@ public class Interactable_ColorButton : MonoBehaviour
         if (!isPressed)
         {
             isPressed = true;
+            anim.SetTrigger("isPressed");
             rc.onPressed(color);
         }
     }
