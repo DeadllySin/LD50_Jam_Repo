@@ -1,80 +1,52 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Room_Colors : MonoBehaviour
 {
-    [SerializeField] private Transform[] spawners;
-    [SerializeField] private GameObject[] colorPrefab;
-    private List<string> colorOrder = new List<string>();
-    private List<GameObject> colorList = new List<GameObject>();
-    private int pressedButtons;
-    private bool[] correctPresses = new bool[5];
-    private Room_Main rm;
+    public Animator[] colorOb;
+    [SerializeField] private string[] colorArray;
+    [SerializeField] private float amountOfRandomColors;
+    private List <string> colorOrder = new List<string>();
+    private List <string> colorsPressed = new List<string>();
+    private int buttonsPressedCorrectly;
 
     private void Awake()
     {
-        rm = GetComponentInParent<Room_Main>();
-        for (int i = 0; i < colorPrefab.Length; i++) colorList.Add(colorPrefab[i]);
-        int j = 0;
-        while (colorList.Count > 0)
+        StartCoroutine(colorOrderEnu());
+    }
+
+    IEnumerator colorOrderEnu()
+    {
+        yield return new WaitForSeconds(2f);
+        int i = 0;
+        while (i < amountOfRandomColors)
         {
-            int temp2 = Random.Range(0, colorList.Count - 1);
-            temp2 = Random.Range(0, colorList.Count - 1);
-            temp2 = Random.Range(0, colorList.Count - 1);
-            temp2 = Random.Range(0, colorList.Count - 1);
-            temp2 = Random.Range(0, colorList.Count - 1);
-            GameObject color = Instantiate(colorList[temp2], spawners[j].position, Quaternion.identity);
-            colorOrder.Add(color.GetComponent<Interactable_ColorOrder>().color);
-            colorList.RemoveAt(temp2);
-            j++;
+            int rdm = Random.Range(0, colorArray.Length);
+            rdm = Random.Range(0, colorArray.Length);
+            rdm = Random.Range(0, colorArray.Length);
+            colorOrder.Add(colorArray[rdm]);
+            colorOb[rdm].SetTrigger("isPressed");
+            yield return new WaitForSeconds(1f);
+            i += 1;
+        }
+        for(i = 0; i < colorOb.Length; i++)
+        {
+            colorOb[i].GetComponent<Interactable_ColorButton>().isPressed = false;
         }
     }
 
-    public void onPressed(string color)
+    public void OnPressed(string col)
     {
-        Debug.Log("color" + color + "presed");
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pColorPress);
-
-        if (color == colorOrder[pressedButtons])
-        {
-            correctPresses[pressedButtons] = true;
-        }
-        else
-        {
-            correctPresses[pressedButtons] = false;
-
-        }
-        pressedButtons++;
-
+        colorsPressed.Add(col);
     }
 
     public void OnConfirm()
     {
-        int correctPressesss = 0;
-        for (int i = 0; i < correctPresses.Length; i++) if (correctPresses[i] == true) correctPressesss++;
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Color_Progress", correctPressesss);
-        Debug.Log(correctPressesss + "CorrectPreesssssss");
-        if (correctPressesss > 2)
+        for(int i = 0; i < colorOrder.Count; i++)
         {
-            GameManager.gm.currTunnel.OpenDoor(0);
-            if (correctPressesss == 3) 
-            {
-                rm.winState = "normal";
-                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Color_Progress", 0);
-            }
-            
-            if (correctPressesss == 4)
-            {
-                rm.winState = "good";
-                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Color_Progress", 0);
-            }
-            
-            else if (correctPressesss < 3)
-            {
-                GameManager.gm.currTunnel.CloseDoor(0);
-                rm.winState = "bad";
-                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Color_Progress", correctPressesss);
-            }
+            if(colorOrder[i] == colorsPressed[i]) buttonsPressedCorrectly += 1;
         }
+        Debug.Log("correctPressed = " + buttonsPressedCorrectly);
     }
 }

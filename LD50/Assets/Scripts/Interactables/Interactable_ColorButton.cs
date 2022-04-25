@@ -1,9 +1,10 @@
 using UnityEngine;
+using System.Collections;
 
 public class Interactable_ColorButton : MonoBehaviour
 {
     private PlayerHand ph;
-    private bool isPressed;
+    public bool isPressed = true;
     private Animator anim;
     [SerializeField] private string color;
     [HideInInspector] public Room_Colors rc;
@@ -36,8 +37,15 @@ public class Interactable_ColorButton : MonoBehaviour
         {
             isPressed = true;
             anim.SetTrigger("isPressed");
-            rc.onPressed(color);
+            rc.OnPressed(color);
+            StartCoroutine(buttonCooldown());
         }
+    }
+
+    IEnumerator buttonCooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        isPressed = false;
     }
 
     private void OnMouseExit()

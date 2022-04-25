@@ -7,12 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager gm;
     private bool isDead;
     public GameObject player;
-
     public GameObject room;
     [SerializeField] private Text scoreText;
-    [SerializeField] float slowThresholdSpeed = 1.5f;
     [SerializeField] private GameObject blackScreen;
-
     [HideInInspector] public GameObject currRoom;
     [HideInInspector] public string currRoomType;
     [HideInInspector] public Tunnel currTunnel;
@@ -24,6 +21,7 @@ public class GameManager : MonoBehaviour
     FMOD.Studio.EventInstance mainMenuMusicInstance;
 
     [Header("Ceiling")]
+    [SerializeField] float slowThresholdSpeed = 1.5f;
     public GameObject ceilingSourceChild;
     public GameObject ceiling;
     [SerializeField] private float defaultSpeed;
