@@ -4,7 +4,7 @@ public class PlayerHand : MonoBehaviour
 {
     [HideInInspector] public GameObject hand;
     [HideInInspector] public GameObject handTarget;
-    [HideInInspector] public GameObject handStatueTarget;
+    //[HideInInspector] public GameObject handStatueTarget;
     [SerializeField] private float distance;
     public string lookingAt = "none";
     public GameObject roomRing;
@@ -17,6 +17,7 @@ public class PlayerHand : MonoBehaviour
     {
         Debug.Log(lookingAt);
     }
+
 
     private void Update()
     {
@@ -67,19 +68,25 @@ public class PlayerHand : MonoBehaviour
         }
         if (GameManager.gm.currRoomType == "statue")
         {
+
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (hand == null)
+                if (lookingAt == "statue")
                 {
-                    FindObjectOfType<Room_Statue>().PickUpFrom();
-                }
-
-                else if (hand != null && handStatueTarget != null)
-                {
-                    if (distanceFu(handStatueTarget) == 1)
+                    if (hand == null)
                     {
-                        FindObjectOfType<Room_Statue>().Place();
-                        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
+                        FindObjectOfType<Room_Statue>().PickUpFrom();
+                    }
+                }
+                if(lookingAt == "socket")
+                {
+                    if (hand != null)
+                    {
+                        if (distanceFu(handTarget) == 1)
+                        {
+                            FindObjectOfType<Room_Statue>().Place();
+                            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
+                        }
                     }
                 }
             }

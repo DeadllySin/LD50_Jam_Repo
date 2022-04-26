@@ -62,7 +62,7 @@ public class Room_Statue : MonoBehaviour
         sp.state = "inHand";
         phand.hand = sp.gameObject;
         phand.hand.transform.parent = GameManager.gm.player.transform;
-        phand.hand.transform.localPosition = new Vector3(1, 1.2f, 2f);
+        phand.hand.transform.localPosition = new Vector3(1.5f, 1.2f, 2f);
         if (setASNull)
         {
             sp.ss.OnRemovedStatue();
@@ -75,15 +75,15 @@ public class Room_Statue : MonoBehaviour
     public void Place()
     {
         //Debug.Log("place2");
-        if (phand.handStatueTarget != null && phand.hand.GetComponent<Interactable_Statue>().state == "inHand" && phand.handStatueTarget.GetComponent<Interactable_Socket>().assinedStatue == null)
+        if (phand.handTarget != null && phand.hand.GetComponent<Interactable_Statue>().state == "inHand" && phand.handTarget.GetComponent<Interactable_Socket>().assinedStatue == null)
         {
             //Debug.Log("place3");
-            phand.hand.transform.parent = phand.handStatueTarget.transform;
+            phand.hand.transform.parent = phand.handTarget.transform;
             phand.hand.GetComponent<Interactable_Statue>().state = "Ass";
             phand.hand.GetComponent<Interactable_Statue>().ss = ss;
             phand.hand.GetComponent<Interactable_Statue>().ss.assinedStatue = phand.hand;
             phand.hand.GetComponent<Interactable_Statue>().ss.OnAssienedStatue();
-            phand.hand.transform.position = phand.handStatueTarget.transform.position;
+            phand.hand.transform.position = phand.handTarget.transform.position;
             phand.hand = null;
             if (correctPieces > 1) GameManager.gm.currTunnel.OpenDoor(0);
             if (correctPieces == 2) room.winState = "normal";

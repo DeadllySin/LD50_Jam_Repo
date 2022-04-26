@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Tunnel currTunnel;
     [HideInInspector] public int lastRoom = 0;
     [HideInInspector] public int roomsCleared = 0;
+    public Material highlightMat;
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     FMOD.Studio.EventInstance ceilingDebrisInstance;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Ceiling")]
     [SerializeField] float slowThresholdSpeed = 1.5f;
-    public GameObject ceilingSourceChild;
+    [HideInInspector] public GameObject ceilingSourceChild;
     public GameObject ceiling;
     [SerializeField] private float defaultSpeed;
     [HideInInspector] public float ceilingSpeed;
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
         else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && GameState.gs.playIntroMusic == false)
         {
             //Debug.Log("ceiling moving in else if"); TEST AFTER RESTART 
-            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y + 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
+            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
         }
 
         //Fmod stuff

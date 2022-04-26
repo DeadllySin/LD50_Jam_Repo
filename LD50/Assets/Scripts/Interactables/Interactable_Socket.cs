@@ -28,22 +28,24 @@ public class Interactable_Socket : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        ph.handStatueTarget = gameObject;
+        ph.handTarget = gameObject;
+        ph.lookingAt = "socket";
         rs.ss = this.gameObject.GetComponent<Interactable_Socket>();
     }
 
     private void OnMouseOver()
     {
-        ph.handStatueTarget = gameObject;
+        ph.handTarget = gameObject;
         rs.ss = this.gameObject.GetComponent<Interactable_Socket>();
     }
 
     private void OnMouseExit()
     {
-        if (ph.handStatueTarget == this.gameObject)
+        if (ph.handTarget == this.gameObject)
         {
-            ph.handStatueTarget = null;
+            ph.handTarget = null;
             rs.ss = null;
+            ph.lookingAt = null;
         }
     }
 }
