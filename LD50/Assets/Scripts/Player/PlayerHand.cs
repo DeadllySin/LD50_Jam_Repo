@@ -7,7 +7,12 @@ public class PlayerHand : MonoBehaviour
     [HideInInspector] public GameObject handStatueTarget;
     [SerializeField] private float distance;
     public string lookingAt = "none";
+    public GameObject roomRing;
 
+    void Start()
+    {
+        //roomRing = (GameObject)Room_Ring_Main.instance;
+    }
     private void FixedUpdate()
     {
         Debug.Log(lookingAt);
@@ -45,11 +50,13 @@ public class PlayerHand : MonoBehaviour
                 {
                     handTarget.GetComponent<Interactable_Ring>().rr.MoveUp();
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideUp);
+                    roomRing.GetComponent<Room_Ring_Main>().puzzleFeedback = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.R))
                 {
                     handTarget.GetComponent<Interactable_Ring>().rr.MoveDown();
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideDown);
+                    roomRing.GetComponent<Room_Ring_Main>().puzzleFeedback = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.T))
                 {
@@ -83,6 +90,10 @@ public class PlayerHand : MonoBehaviour
         }
     }
 
+    private void OnMouseEnter()
+    {
+        
+    }
     float distanceFu(GameObject target)
     {
         if (Vector3.Distance(target.transform.position, transform.position) < distance)

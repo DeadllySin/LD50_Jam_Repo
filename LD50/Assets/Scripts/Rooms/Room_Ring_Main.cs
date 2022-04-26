@@ -11,7 +11,7 @@ public class Room_Ring_Main : MonoBehaviour
     [HideInInspector] public List<string> Questions = new List<string>();
     [HideInInspector] public List<string> Solutions = new List<string>();
     public Symbols[] Symbols;
-
+    
     private void Awake()
     {
         int counter = 0;
