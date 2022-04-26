@@ -4,20 +4,14 @@ public class PlayerHand : MonoBehaviour
 {
     [HideInInspector] public GameObject hand;
     [HideInInspector] public GameObject handTarget;
-    //[HideInInspector] public GameObject handStatueTarget;
     [SerializeField] private float distance;
     public string lookingAt = "none";
     public GameObject roomRing;
 
-    void Start()
-    {
-        //roomRing = (GameObject)Room_Ring_Main.instance;
-    }
     private void FixedUpdate()
     {
         Debug.Log(lookingAt);
     }
-
 
     private void Update()
     {
@@ -97,10 +91,6 @@ public class PlayerHand : MonoBehaviour
         }
     }
 
-    private void OnMouseEnter()
-    {
-        
-    }
     float distanceFu(GameObject target)
     {
         if (Vector3.Distance(target.transform.position, transform.position) < distance)
