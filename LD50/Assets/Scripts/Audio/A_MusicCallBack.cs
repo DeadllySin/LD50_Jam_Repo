@@ -69,7 +69,7 @@ class A_MusicCallBack : MonoBehaviour
             musicIntroTriggerOnce = false;
             musicIntroTrigger = true;
             GameState.gs.playIntroMusic = false;
-            GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoops();
+            GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoop();
             //Debug.Log("Play Intro Music and Ceiling Loop after");
             Debug.Log("SET SOMETHING FANCY PLAYING WHEN CEILING IS ON THRESHOLD");
 

@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     public Material highlightMat;
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
-    FMOD.Studio.EventInstance ceilingDebrisInstance;
+    [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
+    [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
     FMOD.Studio.EventInstance mainMenuMusicInstance;
 
     [Header("Ceiling")]
@@ -41,9 +42,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game"); //change to menu once we have 
+        menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMenuMusic);
+        //menuMusicInstance.start();
+        //FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingDebris);
-        ceilingDebrisInstance.start();
         //mainMenuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMenuMusic);
         //mainMenuMusicInstance.start(); ---- Depends on the main menu
     }
@@ -105,7 +107,7 @@ public class GameManager : MonoBehaviour
         // find a way to release in game music instance after death screen and restart 
     }
 
-    public void FMOD_PlayCeilingLoops()
+    public void FMOD_PlayCeilingLoop()
     {
         ceilingLoopInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingLoop);
         ceilingLoopInstance.start();
