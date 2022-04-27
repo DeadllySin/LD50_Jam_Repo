@@ -43,19 +43,19 @@ public class PlayerHand : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    FindObjectOfType<Room_Ring>().MoveUp();
+                    //FindObjectOfType<Room_Ring>().MoveUp();
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideUp);
                     roomRing.GetComponent<Room_Ring_Main>().puzzleFeedback = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.R))
                 {
-                    FindObjectOfType<Room_Ring>().MoveDown();
+                   // FindObjectOfType<Room_Ring>().MoveDown();
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideDown);
                     roomRing.GetComponent<Room_Ring_Main>().puzzleFeedback = true;
                 }
                 else if (Input.GetKeyDown(KeyCode.T))
                 {
-                    FindObjectOfType<Room_Ring_Main>().OnChanged();
+                   // FindObjectOfType<Room_Ring_Main>().OnChanged();
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pConfirm);
                 }
             }
