@@ -10,9 +10,8 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        GameState.gs.menuMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        GameState.gs.menuMusic.release();
-        GameManager.gm.ceilingDebrisInstance.start();
+        GameState.gs.menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        GameState.gs.menuMusicInstance.release();
     }
 
     public void M_QuitGame()

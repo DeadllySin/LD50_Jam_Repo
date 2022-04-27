@@ -7,7 +7,7 @@ public class GameState : MonoBehaviour
     public bool playTheCutsceneOnlyOnce;
 
     public bool playIntroMusic = true;
-    [HideInInspector] public FMOD.Studio.EventInstance menuMusic;
+    [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
 
     private void Awake()
     {
@@ -18,8 +18,11 @@ public class GameState : MonoBehaviour
     {
         gs = this;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
+        menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
+        menuMusicInstance.start();
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");
-        GameManager.gm.menuMusicInstance.start();
+
     }
     private void FixedUpdate()
     {

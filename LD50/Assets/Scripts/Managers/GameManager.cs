@@ -42,12 +42,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMenuMusic);
-        //menuMusicInstance.start();
-        //FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
+        
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingDebris);
-        //mainMenuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.mainMenuMusic);
-        //mainMenuMusicInstance.start(); ---- Depends on the main menu
+        ceilingDebrisInstance.start();
     }
 
     private void FixedUpdate()
