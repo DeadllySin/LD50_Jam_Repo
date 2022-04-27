@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8372689591941707069}
   - component: {fileID: 8372689591941707068}
   - component: {fileID: 8372689591941707011}
+  - component: {fileID: 465569527521948331}
   m_Layer: 0
   m_Name: Statue_Piece
   m_TagString: Untagged
@@ -111,3 +112,46 @@ MonoBehaviour:
   state: ground
   statueNumber: 0
   ss: {fileID: 0}
+--- !u!114 &465569527521948331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8372689591941707010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9174dcef851759c49a3cc56e271db54f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: statue
+  onEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8372689591941707011}
+        m_TargetAssemblyTypeName: Interactable_Statue, Assembly-CSharp
+        m_MethodName: onMouseEnter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8372689591941707011}
+        m_TargetAssemblyTypeName: Interactable_Statue, Assembly-CSharp
+        m_MethodName: onMouseExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

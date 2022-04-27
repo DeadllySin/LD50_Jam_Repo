@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Interactable))]
 public class Interactable_ColorButton : MonoBehaviour
 {
-    private PlayerHand ph;
     public bool isPressed = true;
     private Animator anim;
     [SerializeField] private string color;
@@ -13,22 +13,6 @@ public class Interactable_ColorButton : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rc = FindObjectOfType<Room_Colors>();
-        ph = FindObjectOfType<PlayerHand>();
-    }
-
-    private void OnMouseEnter()
-    {
-        if(color != "confirm")
-        {
-            Debug.Log("Mouse Entered");
-            ph.lookingAt = "color";
-            ph.handTarget = this.gameObject;
-        }
-        else
-        {
-            ph.lookingAt = "confirm";
-            ph.handTarget = this.gameObject;
-        }
     }
 
     public void OnPressed()
@@ -46,11 +30,5 @@ public class Interactable_ColorButton : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         isPressed = false;
-    }
-
-    private void OnMouseExit()
-    {
-        ph.lookingAt = "none";
-        ph.handTarget = null;
     }
 }

@@ -1,15 +1,14 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Interactable))]
 public class Interactable_Socket : MonoBehaviour
 {
-    PlayerHand ph;
     Room_Statue rs;
     [SerializeField] private int correctStatue;
     [HideInInspector] public GameObject assinedStatue;
 
     private void Start()
     {
-        ph = FindObjectOfType<PlayerHand>();
         rs = FindObjectOfType<Room_Statue>();
     }
 
@@ -26,26 +25,13 @@ public class Interactable_Socket : MonoBehaviour
         }
     }
 
-    private void OnMouseEnter()
+    public void onMouseEnter()
     {
-        ph.handTarget = gameObject;
-        ph.lookingAt = "socket";
         rs.ss = this.gameObject.GetComponent<Interactable_Socket>();
     }
 
-    private void OnMouseOver()
+    public void onMouseExit()
     {
-        ph.handTarget = gameObject;
-        rs.ss = this.gameObject.GetComponent<Interactable_Socket>();
-    }
-
-    private void OnMouseExit()
-    {
-        if (ph.handTarget == this.gameObject)
-        {
-            ph.handTarget = null;
-            rs.ss = null;
-            ph.lookingAt = null;
-        }
+        rs.ss = null;
     }
 }

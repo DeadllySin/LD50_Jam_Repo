@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private bool isDead;
     public GameObject player;
     public GameObject room;
+    public Text lookingAtText;
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject blackScreen;
     [HideInInspector] public GameObject currRoom;
@@ -15,7 +16,6 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Tunnel currTunnel;
     [HideInInspector] public int lastRoom = 0;
     [HideInInspector] public int roomsCleared = 0;
-    public Material highlightMat;
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
                 if (ceiling.transform.position.y < deathHeight) OnDeath();
             }
         }
-
     }
 
 
