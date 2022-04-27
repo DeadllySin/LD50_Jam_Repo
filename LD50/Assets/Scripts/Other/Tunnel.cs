@@ -112,5 +112,5 @@ public class Tunnel : MonoBehaviour
 public struct Door
 {
     public Animator door;
-    public bool isOpen;
+    [HideInInspector] public bool isOpen;
 }
