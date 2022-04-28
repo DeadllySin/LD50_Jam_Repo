@@ -21,14 +21,7 @@ public class PlayerHand : MonoBehaviour
                         icb.OnPressed();
                     }
                 }
-                if (lookingAt == "confirm")
-                {
-                    if (DistanceFu(handTarget) == 1)
-                    {
-                        Interactable_ColorButton icb = handTarget.GetComponent<Interactable_ColorButton>();
-                        icb.rc.OnConfirm();
-                    }
-                }
+
             }
             if (GameManager.gm.currRoomType == "ring")
             {
@@ -36,18 +29,11 @@ public class PlayerHand : MonoBehaviour
                 {
                     FindObjectOfType<Room_Ring>().MoveUp(handTarget.GetComponent<Interactable_Pole>().whichPole);
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideUp);
-                    FindObjectOfType<Room_Ring>().puzzleFeedback = true;
                 }
                 if (lookingAt == "ring_down" && DistanceFu(handTarget) == 1)
                 {
                     FindObjectOfType<Room_Ring>().MoveDown(handTarget.GetComponent<Interactable_Pole>().whichPole);
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideDown);
-                    FindObjectOfType<Room_Ring>().puzzleFeedback = true;
-                }
-                if (lookingAt == "ring_confirm" && DistanceFu(handTarget) == 1)
-                {
-                    FindObjectOfType<Room_Ring>().OnChanged();
-                    FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pConfirm);
                 }
             }
             if (GameManager.gm.currRoomType == "statue")

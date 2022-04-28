@@ -4,6 +4,7 @@ using UnityEngine;
 public class Room_Statue : MonoBehaviour
 {
     public int correctPieces;
+    private int placedPieces;
     private PlayerHand phand;
     private Room_Main room;
     readonly List<GameObject> spawners = new List<GameObject>();
@@ -61,10 +62,11 @@ public class Room_Statue : MonoBehaviour
         phand.hand.transform.localPosition = new Vector3(1.5f, 1.2f, 2f);
         if (setASNull)
         {
+            placedPieces--;
             sp.ss.OnRemovedStatue();
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pRemovePiece);
-            if (correctPieces < 2) GameManager.gm.currTunnel.CloseDoor(0);
             sp.ss.assinedStatue = null;
+            OnValueChanged();
         }
     }
 
@@ -73,6 +75,7 @@ public class Room_Statue : MonoBehaviour
         //Debug.Log("place2");
         if (phand.handTarget != null && phand.hand.GetComponent<Interactable_Statue>().state == "inHand" && phand.handTarget.GetComponent<Interactable_Socket>().assinedStatue == null)
         {
+            placedPieces++;
             //Debug.Log("place3");
             phand.hand.transform.parent = phand.handTarget.transform;
             phand.hand.GetComponent<Interactable_Statue>().state = "Ass";
@@ -81,9 +84,24 @@ public class Room_Statue : MonoBehaviour
             phand.hand.GetComponent<Interactable_Statue>().ss.OnAssienedStatue();
             phand.hand.transform.position = phand.handTarget.transform.position;
             phand.hand = null;
-            if (correctPieces > 1) GameManager.gm.currTunnel.OpenDoor(0);
-            if (correctPieces == 2) room.winState = "normal";
-            else if (correctPieces == 3) room.winState = "good";
+            OnValueChanged();
+        }
+    }
+
+    void OnValueChanged()
+    {
+        if (correctPieces == 3)
+        {
+            GameManager.gm.currTunnel.OpenDoor(0);
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
+        }
+        else
+        {
+            if(placedPieces == 3)
+            {
+                GameManager.gm.currTunnel.CloseDoor(0);
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
+            }
         }
     }
 }

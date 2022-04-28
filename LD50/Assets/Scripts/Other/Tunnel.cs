@@ -47,19 +47,6 @@ public class Tunnel : MonoBehaviour
             Room_Main room = GameManager.gm.currRoom.GetComponent<Room_Main>();
             Tunnel tunnel = GameManager.gm.currTunnel.GetComponent<Tunnel>();
             yield return new WaitForSeconds(1);
-            switch (room.winState)
-            {
-                case "normal":
-                    FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
-                    Debug.Log("Wrong Puzzle");
-                    break;
-                case "good":
-                    FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
-                    Debug.Log("Correct Puzzle");
-                    break;
-                default:
-                    break;
-            }
             GameManager.gm.roomsCleared++;
             Destroy(room.gameObject);
             GameManager.gm.ceiling.transform.position = new Vector3(GameManager.gm.ceiling.transform.position.x, GameManager.gm.ceiling.transform.position.y, GameManager.gm.ceiling.transform.position.z + 22);

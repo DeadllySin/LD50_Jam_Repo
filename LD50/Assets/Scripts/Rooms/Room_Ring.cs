@@ -3,50 +3,45 @@ using UnityEngine;
 
 public class Room_Ring : MonoBehaviour
 {
-    private int ringsOnSide = 0;
+    private int[] ringsOnSide = new int[2];
     private int randomQuestion;
-    private string question;
-    private string answer;
-    private Room_Main room;
-    private EnemyAI ai;
-    private int correctSolutions;
     public float[] y_pos;
     [SerializeField] private float x_pos, z_pos;
-    [SerializeField] private int whichPole;
-    [HideInInspector] public bool puzzleFeedback = true;
-    [HideInInspector] public bool[] solutionCorrect = new bool[3];
-    [HideInInspector] public List<string> Questions = new List<string>();
-    [HideInInspector] public List<string> Solutions = new List<string>();
-
+    [HideInInspector] public bool[] solutionCorrect = new bool[2];
     public GameObject[] symbol;
     public Pole[] pole;
 
     private void Awake()
     {
-        ai = GetComponentInChildren<EnemyAI>();
-        room = GetComponentInParent<Room_Main>();
-
-        int counter = 0;
         foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
         {
+            if (line.Length >= 9) break;
             string lineTemp = line;
             string[] splites;
             splites = lineTemp.Split('=');
-            Questions.Add(splites[0]);
-            Solutions.Add(splites[1]);
-            counter++;
+            pole[0].Questions.Add(splites[0]);
+            pole[0].Solutions.Add(splites[1]);
+        }
+        foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
+        {
+            if (line.Length >= 9) break;
+            string lineTemp = line;
+            string[] splites;
+            splites = lineTemp.Split('=');
+            pole[1].Questions.Add(splites[0]);
+            pole[1].Solutions.Add(splites[1]);
         }
         for (int r = 0; r < pole.Length; r++)
         {
-            randomQuestion = Random.Range(0, Questions.Count - 1);
-            answer = Solutions[randomQuestion];
-            question = Questions[randomQuestion];
+            randomQuestion = Random.Range(0, pole[r].Questions.Count - 1);
+            pole[r].answer = pole[r].Solutions[randomQuestion];
+            pole[r].question = pole[r].Questions[randomQuestion];
             int y = 0;
-            for (int i = 0; i < question.Length; i++)
+            for (int i = 0; i < pole[r].question.Length; i++)
             {
                 for (int j = 0; j < symbol.Length; j++)
                 {
-                    if (char.Parse(symbol[j].name) == question[i])
+                    if (char.Parse(symbol[j].name) == pole[r].question[i])
                     {
                         GameObject sym = Instantiate(symbol[j], pole[r].questionSpawners[y].position, Quaternion.identity);
                         sym.transform.localScale = new Vector3(-1, 1, 1);
@@ -76,9 +71,11 @@ public class Room_Ring : MonoBehaviour
                 pole[poleIndex].slot[j].ring = pole[poleIndex].slot[ringMovedIndex].ring;
                 pole[poleIndex].slot[j].ring.transform.localPosition = new Vector3(x_pos, y_pos[j], z_pos);
                 pole[poleIndex].slot[ringMovedIndex].ring = null;
-                ringsOnSide--;
-                if (int.Parse(answer) == ringsOnSide) solutionCorrect[whichPole] = true;
-                else solutionCorrect[whichPole] = false;
+                ringsOnSide[poleIndex]-= 1;
+                Debug.Log(int.Parse(pole[poleIndex].answer) + " " + ringsOnSide[poleIndex]);
+                if (int.Parse(pole[poleIndex].answer) == ringsOnSide[poleIndex]) solutionCorrect[poleIndex] = true;
+                else solutionCorrect[poleIndex] = false;
+                OnValueChanged();
                 return;
             }
         }
@@ -103,61 +100,49 @@ public class Room_Ring : MonoBehaviour
                 pole[poleIndex].slot[j].ring = pole[poleIndex].slot[ringMovedIndex].ring;
                 pole[poleIndex].slot[j].ring.transform.localPosition = new Vector3(x_pos, y_pos[j], z_pos);
                 pole[poleIndex].slot[ringMovedIndex].ring = null;
-                ringsOnSide++;
-                if (int.Parse(answer) == ringsOnSide) solutionCorrect[whichPole] = true;
-                else solutionCorrect[whichPole] = false;
+                ringsOnSide[poleIndex] += 1;
+
+                if (int.Parse(pole[poleIndex].answer) == ringsOnSide[poleIndex])
+                {
+                    solutionCorrect[poleIndex] = true;
+                    Debug.Log(int.Parse(pole[poleIndex].answer) + "true " + ringsOnSide[poleIndex]);
+                }
+                else
+                {
+                    solutionCorrect[poleIndex] = false;
+                    Debug.Log(int.Parse(pole[poleIndex].answer) + "false " + ringsOnSide[poleIndex]);
+                }
+                OnValueChanged();
                 return;
             }
         }
     }
 
-    public void OnChanged()
+    public void OnValueChanged()
     {
-        correctSolutions = 3;
+        int correctSolutions = 3;
         for (int i = 0; i < solutionCorrect.Length; i++) if (solutionCorrect[i] == false) correctSolutions -= 1;
-        if (correctSolutions > 1)
-        {
-            //ai.speed = 0;
-            GameManager.gm.currTunnel.OpenDoor(0);
-        }
-        else if (correctSolutions < 2)
-        {
-            GameManager.gm.currTunnel.CloseDoor(0);
-            //ai.speed = ai.defaultSpeed;
-        }
+        Debug.Log(correctSolutions);
         if (correctSolutions == 2)
         {
-            room.winState = "normal";
-            if (puzzleFeedback == true)
-            {
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
-                puzzleFeedback = false;
-            }
+            GameManager.gm.currTunnel.OpenDoor(0);
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
         }
-        if (correctSolutions < 2)
+        else
         {
-            room.winState = "bad";
-            if (puzzleFeedback == true)
-            {
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
-                puzzleFeedback = false;
-            }
-        }
-        else if (correctSolutions == 3)
-        {
-            room.winState = "good";
-            if (puzzleFeedback == true)
-            {
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
-                puzzleFeedback = false;
-            }
+            GameManager.gm.currTunnel.CloseDoor(0);
+            //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
         }
     }
 }
 
 [System.Serializable]
-public struct Pole
+public class Pole
 {
+    [HideInInspector] public string question;
+    [HideInInspector] public string answer;
+    [HideInInspector] public List<string> Questions = new List<string>();
+    [HideInInspector] public List<string> Solutions = new List<string>();
     public Transform[] questionSpawners;
     public Slot[] slot;
     [HideInInspector] public int ringsOnCorrectSide;

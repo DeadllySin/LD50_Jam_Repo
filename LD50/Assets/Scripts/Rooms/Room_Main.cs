@@ -6,7 +6,6 @@ public class Room_Main : MonoBehaviour
     [Tooltip("currently available rooms: color, ring, statue")][SerializeField] string OverWriteRoomSelection;
     private List<GameObject> rooms = new List<GameObject>();
     private List<string> roomNames = new List<string>();
-    [HideInInspector] public string winState;
 
     private void Awake()
     {
@@ -18,7 +17,6 @@ public class Room_Main : MonoBehaviour
             roomNames.Add(splitted[1]);
 
         }
-
     }
 
     private void Start()
