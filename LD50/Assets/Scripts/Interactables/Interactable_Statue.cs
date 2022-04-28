@@ -9,7 +9,7 @@ public class Interactable_Statue : MonoBehaviour
     public int statueNumber;
     [HideInInspector] public Interactable_Socket ss;
 
-    private void Start()
+    private void Awake()
     {
         rs = FindObjectOfType<Room_Statue>();
     }

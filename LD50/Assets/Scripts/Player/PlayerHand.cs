@@ -5,23 +5,17 @@ public class PlayerHand : MonoBehaviour
     [HideInInspector] public GameObject hand;
     [HideInInspector] public GameObject handTarget;
     [SerializeField] private float distance;
-    public string lookingAt = "none";
-    public GameObject roomRing;
-
-    private void FixedUpdate()
-    {
-        Debug.Log(lookingAt);
-    }
+    [HideInInspector] public string lookingAt = "none";
 
     private void Update()
     {
-        if (GameManager.gm.currRoomType == "color")
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (GameManager.gm.currRoomType == "color")
             {
                 if (lookingAt == "color")
-                {   
-                    if(distanceFu(handTarget) == 1)
+                {
+                    if (DistanceFu(handTarget) == 1)
                     {
                         Interactable_ColorButton icb = handTarget.GetComponent<Interactable_ColorButton>();
                         icb.OnPressed();
@@ -29,77 +23,61 @@ public class PlayerHand : MonoBehaviour
                 }
                 if (lookingAt == "confirm")
                 {
-                    if (distanceFu(handTarget) == 1)
+                    if (DistanceFu(handTarget) == 1)
                     {
                         Interactable_ColorButton icb = handTarget.GetComponent<Interactable_ColorButton>();
                         icb.rc.OnConfirm();
                     }
                 }
             }
-        }
-        if (GameManager.gm.currRoomType == "ring")
-        {
-            if(lookingAt == "ring" && distanceFu(handTarget) == 1)
+            if (GameManager.gm.currRoomType == "ring")
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (lookingAt == "ring_up" && DistanceFu(handTarget) == 1)
                 {
-                    //FindObjectOfType<Room_Ring>().MoveUp();
+                    FindObjectOfType<Room_Ring>().MoveUp(handTarget.GetComponent<Interactable_Pole>().whichPole);
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideUp);
-                   // roomRing.GetComponent<Room_Ring_Main>().puzzleFeedback = true;
+                    FindObjectOfType<Room_Ring>().puzzleFeedback = true;
                 }
-                else if (Input.GetKeyDown(KeyCode.R))
+                if (lookingAt == "ring_down" && DistanceFu(handTarget) == 1)
                 {
-                   // FindObjectOfType<Room_Ring>().MoveDown();
+                    FindObjectOfType<Room_Ring>().MoveDown(handTarget.GetComponent<Interactable_Pole>().whichPole);
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideDown);
-                   // roomRing.GetComponent<Room_Ring_Main>().puzzleFeedback = true;
+                    FindObjectOfType<Room_Ring>().puzzleFeedback = true;
                 }
-                else if (Input.GetKeyDown(KeyCode.T))
+                if (lookingAt == "ring_confirm" && DistanceFu(handTarget) == 1)
                 {
-                   // FindObjectOfType<Room_Ring_Main>().OnChanged();
+                    FindObjectOfType<Room_Ring>().OnChanged();
                     FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pConfirm);
                 }
             }
-        }
-        if (GameManager.gm.currRoomType == "statue")
-        {
-
-            if (Input.GetKeyDown(KeyCode.E))
+            if (GameManager.gm.currRoomType == "statue")
             {
                 if (lookingAt == "statue")
                 {
-                    if (hand == null)
+                    if (hand == null && DistanceFu(handTarget) == 1)
                     {
                         FindObjectOfType<Room_Statue>().PickUpFrom();
                     }
                 }
-                if(lookingAt == "socket")
+                if (lookingAt == "socket" && DistanceFu(handTarget) == 1)
                 {
                     if (hand != null)
                     {
-                        if (distanceFu(handTarget) == 1)
-                        {
-                            FindObjectOfType<Room_Statue>().Place();
-                            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
-                        }
+                        FindObjectOfType<Room_Statue>().Place();
+                        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
                     }
                 }
-            }
-            else if (Input.GetKeyDown(KeyCode.G))
-            {
-                FindObjectOfType<Room_Statue>().Drop();
+                if (lookingAt == "none" && hand != null)
+                {
+                    FindObjectOfType<Room_Statue>().Drop();
+                }
             }
         }
     }
 
-    float distanceFu(GameObject target)
+    public int DistanceFu(GameObject target)
     {
-        if (Vector3.Distance(target.transform.position, transform.position) < distance)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
+        if (Vector3.Distance(target.transform.position, transform.position) < distance) return 1;
+        else return 0;
     }
 }

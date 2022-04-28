@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Interactable))]
 public class Interactable_ColorButton : MonoBehaviour
@@ -9,7 +9,7 @@ public class Interactable_ColorButton : MonoBehaviour
     [SerializeField] private string color;
     [HideInInspector] public Room_Colors rc;
 
-    private void Start()
+    private void Awake()
     {
         anim = GetComponent<Animator>();
         rc = FindObjectOfType<Room_Colors>();

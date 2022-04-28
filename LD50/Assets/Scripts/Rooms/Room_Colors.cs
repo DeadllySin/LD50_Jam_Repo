@@ -1,14 +1,14 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class Room_Colors : MonoBehaviour
 {
     public Animator[] colorOb;
     [SerializeField] private string[] colorArray;
     [SerializeField] private float amountOfRandomColors;
-    private List <string> colorOrder = new List<string>();
-    private List <string> colorsPressed = new List<string>();
+    private List<string> colorOrder = new List<string>();
+    private List<string> colorsPressed = new List<string>();
     private int buttonsPressedCorrectly;
 
     private void Awake()
@@ -30,7 +30,7 @@ public class Room_Colors : MonoBehaviour
             yield return new WaitForSeconds(1f);
             i += 1;
         }
-        for(i = 0; i < colorOb.Length; i++)
+        for (i = 0; i < colorOb.Length; i++)
         {
             colorOb[i].GetComponent<Interactable_ColorButton>().isPressed = false;
         }
@@ -43,9 +43,9 @@ public class Room_Colors : MonoBehaviour
 
     public void OnConfirm()
     {
-        for(int i = 0; i < colorOrder.Count; i++)
+        for (int i = 0; i < colorOrder.Count; i++)
         {
-            if(colorOrder[i] == colorsPressed[i]) buttonsPressedCorrectly += 1;
+            if (colorOrder[i] == colorsPressed[i]) buttonsPressedCorrectly += 1;
         }
         Debug.Log("correctPressed = " + buttonsPressedCorrectly);
     }

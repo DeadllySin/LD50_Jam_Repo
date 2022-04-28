@@ -1,14 +1,14 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Room_Main : MonoBehaviour
 {
-    [Tooltip("currently available rooms: color, ring, statue")] [SerializeField] string OverWriteRoomSelection;
-    private List <GameObject> rooms = new List<GameObject>();
-    private List <string> roomNames = new List<string>();
+    [Tooltip("currently available rooms: color, ring, statue")][SerializeField] string OverWriteRoomSelection;
+    private List<GameObject> rooms = new List<GameObject>();
+    private List<string> roomNames = new List<string>();
     [HideInInspector] public string winState;
 
-    private void Start()
+    private void Awake()
     {
         foreach (Transform child in this.gameObject.GetComponent<Transform>()) rooms.Add(child.gameObject);
         for (int i = 0; i < rooms.Count - 1; i++)
@@ -18,6 +18,11 @@ public class Room_Main : MonoBehaviour
             roomNames.Add(splitted[1]);
 
         }
+
+    }
+
+    private void Start()
+    {
         if (OverWriteRoomSelection == null || OverWriteRoomSelection == "")
         {
             for (int i = 0; i < rooms.Count - 1; i++) rooms[i].SetActive(false);

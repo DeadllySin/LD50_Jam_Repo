@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,9 +8,7 @@ public class GameManager : MonoBehaviour
     private bool isDead;
     public GameObject player;
     public GameObject room;
-    public Text lookingAtText;
-    [SerializeField] private Text scoreText;
-    [SerializeField] private GameObject blackScreen;
+
     [HideInInspector] public GameObject currRoom;
     [HideInInspector] public string currRoomType;
     [HideInInspector] public Tunnel currTunnel;
@@ -21,6 +19,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
     [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
     FMOD.Studio.EventInstance mainMenuMusicInstance;
+
+    [Header("UI")]
+    [SerializeField] private Text scoreText;
+    public Text lookingAtText;
+    [SerializeField] private GameObject deathScreen;
 
     [Header("Ceiling")]
     [SerializeField] float slowThresholdSpeed = 1.5f;
@@ -38,11 +41,6 @@ public class GameManager : MonoBehaviour
         currRoom = FindObjectOfType<Room_Main>().gameObject;
         currTunnel = FindObjectOfType<Tunnel>();
         ceilingSourceChild = player.transform.GetChild(3).gameObject;
-    }
-
-    private void Start()
-    {
-        
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingDebris);
         ceilingDebrisInstance.start();
@@ -90,8 +88,8 @@ public class GameManager : MonoBehaviour
 
     private void OnDeath()
     {
-        if(roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
         isDead = true;
+        if (roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
         scoreText.text = "You Cleared " + roomsCleared + " Rooms!\n Your Highscore is " + PlayerPrefs.GetInt("roomsCleared");
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.deathSFX);
@@ -99,7 +97,7 @@ public class GameManager : MonoBehaviour
         ceilingLoopInstance.release();
         ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         ceilingDebrisInstance.release();
-        blackScreen.SetActive(true);
+        deathScreen.SetActive(true);
         player.SetActive(false);
         // find a way to release in game music instance after death screen and restart 
     }

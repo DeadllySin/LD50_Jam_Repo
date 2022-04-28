@@ -13,11 +13,7 @@ public class Room_PropPlacer : MonoBehaviour
     {
         for (int i = 0; i < propMeshess.Length; i++) propMeshes.Add(propMeshess[i]);
         foreach (Transform child in spawnerParent.transform) spawners.Add(child.gameObject);
-    }
-
-    private void Start()
-    {
-        if(spawnCount < propMeshes.Count)
+        if (spawnCount < propMeshes.Count)
         {
             for (int i = 0; i < spawnCount; i++)
             {
@@ -28,6 +24,5 @@ public class Room_PropPlacer : MonoBehaviour
                 propMeshes.RemoveAt(propIndex);
             }
         }
-
     }
 }

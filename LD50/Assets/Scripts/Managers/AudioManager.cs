@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Puzzle Combine")]
     public FMODUnity.EventReference pInsertPiece;
-    public FMODUnity.EventReference pRemovePiece;    
+    public FMODUnity.EventReference pRemovePiece;
 
     [Header("Puzzle Math")]
     public FMODUnity.EventReference pSlideUp;

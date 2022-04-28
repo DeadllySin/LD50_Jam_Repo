@@ -1,24 +1,23 @@
 using UnityEngine;
-using System;
 using UnityEngine.Events;
-using System.Collections;
 
 public class Interactable : MonoBehaviour
 {
     private PlayerHand ph;
-    [SerializeField] private string type;
     private Color col;
+    [SerializeField] private string type;
     [SerializeField] private UnityEvent onEnter;
     [SerializeField] private UnityEvent onExit;
 
-    private void Start()
+    private void Awake()
     {
+        col = GetComponent<Renderer>().material.color;
         ph = FindObjectOfType<PlayerHand>();
     }
 
     private void OnMouseEnter()
     {
-        if(onEnter != null) onEnter.Invoke();
+        if (onEnter != null) onEnter.Invoke();
         GameManager.gm.lookingAtText.text = "E to Interact";
         ph.handTarget = this.gameObject;
         ph.lookingAt = type;

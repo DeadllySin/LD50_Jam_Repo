@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 1150986499432414818}
   - component: {fileID: 1150986499432414819}
   - component: {fileID: 1150986499432414828}
-  - component: {fileID: 1150986499432414817}
   m_Layer: 8
   m_Name: Capsule
   m_TagString: Player
@@ -157,20 +156,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1150986499432414817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150986499432414830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
-  ListenerNumber: -1
 --- !u!1 &3653882480043813496
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   handTarget: {fileID: 0}
-  handStatueTarget: {fileID: 0}
   distance: 4
   lookingAt: none
 --- !u!114 &3653882480043813501

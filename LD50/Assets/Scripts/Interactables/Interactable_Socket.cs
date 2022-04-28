@@ -7,7 +7,7 @@ public class Interactable_Socket : MonoBehaviour
     [SerializeField] private int correctStatue;
     [HideInInspector] public GameObject assinedStatue;
 
-    private void Start()
+    private void Awake()
     {
         rs = FindObjectOfType<Room_Statue>();
     }

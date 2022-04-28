@@ -20,10 +20,6 @@ public class Room_Statue : MonoBehaviour
         for (int i = 0; i < piecess.Length; i++) pieces.Add(piecess[i]);
         phand = FindObjectOfType<PlayerHand>();
         foreach (Transform child in spawnerParent.transform) spawners.Add(child.gameObject);
-    }
-
-    private void Start()
-    {
         while (pieces.Count > 0)
         {
             int temp = Random.Range(0, spawners.Count - 1);
@@ -43,7 +39,7 @@ public class Room_Statue : MonoBehaviour
                 PickUp(false);
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pPickUp);
             }
-                if (sp.state == "Ass") PickUp(true);
+            if (sp.state == "Ass") PickUp(true);
         }
     }
 
