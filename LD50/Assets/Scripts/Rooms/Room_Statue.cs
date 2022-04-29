@@ -78,6 +78,8 @@ public class Room_Statue : MonoBehaviour
             placedPieces++;
             //Debug.Log("place3");
             phand.hand.transform.parent = phand.handTarget.transform;
+            phand.hand.transform.localRotation = new Quaternion(0, 0, 0, 0);
+            phand.hand.transform.localPosition = phand.handTarget.transform.position;
             phand.hand.GetComponent<Interactable_Statue>().state = "Ass";
             phand.hand.GetComponent<Interactable_Statue>().ss = ss;
             phand.hand.GetComponent<Interactable_Statue>().ss.assinedStatue = phand.hand;
