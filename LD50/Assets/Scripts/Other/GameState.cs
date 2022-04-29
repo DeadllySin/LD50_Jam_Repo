@@ -10,8 +10,13 @@ public class GameState : MonoBehaviour
     [SerializeField] private Image progressBar;
     [SerializeField] private int nextSceneIndex;
     public bool playIntroMusic = true;
-    [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
     //[SerializeField] private Text loadText;
+    
+    public FMOD.Studio.Bus masterBus;
+    public FMOD.Studio.Bus gameplayBus;
+    public FMOD.Studio.Bus UIBus;
+    [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
+    
 
     private void Awake()
     {
@@ -19,6 +24,10 @@ public class GameState : MonoBehaviour
         gs = this;
         StartCoroutine(LoadingScreenAsyncOperation());
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
+        gameplayBus = FMODUnity.RuntimeManager.GetBus("bus:/Gameplay_Bus");
+        UIBus = FMODUnity.RuntimeManager.GetBus("bus:/UI_Bus");
         //menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
         //menuMusicInstance.start();
         //FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");

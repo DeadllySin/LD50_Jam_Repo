@@ -9,8 +9,6 @@ public class AudioManager : MonoBehaviour
     [Header("Player")]
     public FMODUnity.EventReference footsteps; //movement
     public FMODUnity.EventReference deathSFX;
-    public FMODUnity.EventReference pDrop;
-    public FMODUnity.EventReference pPickUp;
 
     [Header("Environment")]
     public FMODUnity.EventReference ceilingLoop;
@@ -28,6 +26,8 @@ public class AudioManager : MonoBehaviour
     [Header("Puzzle Combine")]
     public FMODUnity.EventReference pInsertPiece;
     public FMODUnity.EventReference pRemovePiece;
+    public FMODUnity.EventReference pPickUp;
+    public FMODUnity.EventReference pDrop;
 
     [Header("Puzzle Math")]
     public FMODUnity.EventReference pSlideUp;
@@ -42,13 +42,6 @@ public class AudioManager : MonoBehaviour
     public FMODUnity.EventReference puzzleCorrect;
     public FMODUnity.EventReference puzzleWrong;
     public FMODUnity.EventReference uiClick;
-
-    /*bool isPlaying(FMOD.Studio.EventInstance inGameMusicInstance)
-    {
-        FMOD.Studio.PLAYBACK_STATE state;
-        inGameMusicInstance.getPlaybackState(out state);
-        return state != FMOD.Studio.PLAYBACK_STATE.STOPPED;
-    }*/
 
 
     public void Awake()
