@@ -146,6 +146,8 @@ public class Room_Statue : MonoBehaviour
                         break;
                 }
                 break;
+            default:
+                break;
         }
 
     }
