@@ -101,17 +101,52 @@ public class Room_Statue : MonoBehaviour
 
     void OnValueChanged()
     {
-        switch (correctPieces)
+        int max = piecess.Length;
+        switch (piecess.Length)
         {
+            case 3:
+                switch (correctPieces)
+                {
+                    case 2:
+                        room.state = "ok";
+                        break;
+                    case 3:
+                        room.state = "perfect";
+                        break;
+                    default:
+                        room.state = "bad";
+                        break;
+                }
+                break;
             case 4:
-                room.state = "ok";
+                switch (correctPieces)
+                {
+                    case 3:
+                        room.state = "ok";
+                        break;
+                    case 4:
+                        room.state = "perfect";
+                        break;
+                    default:
+                        room.state = "bad";
+                        break;
+                }
                 break;
             case 5:
-                room.state = "perfect";
+                switch (correctPieces)
+                {
+                    case 4:
+                        room.state = "ok";
+                        break;
+                    case 5:
+                        room.state = "perfect";
+                        break;
+                    default:
+                        room.state = "bad";
+                        break;
+                }
                 break;
-            default:
-                room.state = "bad";
-                break ;
-    }
+        }
+
     }
 }
