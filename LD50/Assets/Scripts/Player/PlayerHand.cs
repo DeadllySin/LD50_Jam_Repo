@@ -57,7 +57,7 @@ public class PlayerHand : MonoBehaviour
 
             if(lookingAt == "confirm")
             {
-                FindObjectOfType<Room_Main>().OnConfirm();
+                FindObjectOfType<Room_Main>().OnConfirm(handTarget);
             }
         }
         if (Input.GetKeyDown(KeyCode.G))

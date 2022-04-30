@@ -59,8 +59,12 @@ public class Room_Statue : MonoBehaviour
         if(setASNull) phand.handTarget.GetComponent<Interactable_Statue>().ss.GetComponent<MeshCollider>().enabled = true;
         sp.state = "inHand";
         phand.hand = sp.gameObject;
-        phand.hand.transform.parent = GameManager.gm.player.transform;
-        phand.hand.transform.localPosition = new Vector3(1.5f, 1.2f, 2f);
+
+        phand.hand.transform.parent = Camera.main.transform;
+        phand.hand.transform.position = new Vector3(0, 0, 0);
+        phand.hand.transform.rotation = new Quaternion(0, 0, 0, 0);
+        phand.hand.transform.localRotation = new Quaternion(0, 0, 0, 0);
+        phand.hand.transform.localPosition = new Vector3(.5f, -.5f, 1.5f);
         if (setASNull)
         {
             placedPieces--;
