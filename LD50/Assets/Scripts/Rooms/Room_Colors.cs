@@ -56,25 +56,16 @@ public class Room_Colors : MonoBehaviour
         buttonsPressedCorrectly = 0;
         for (int i = 0; i < colorOrder.Count; i++)
         {
-            Debug.Log("I" + i);
-            if (colorOrder[i] == colorsPressed[i]) buttonsPressedCorrectly += 1;
+            main.state = "ok";
         }
         Debug.Log(2);
         if (colorsPressed.Count == colorOrder.Count)
         {
-            Debug.Log(2.2);
-            if (colorsPressed.Count == buttonsPressedCorrectly)
-            {
-                Debug.Log(2.3);
-                GameManager.gm.currTunnel.OpenDoor(0);
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
-            }
+             main.state = "perfect";
         }
         else if(colorsPressed.Count > colorOrder.Count)
         {
-            Debug.Log(2.9);
-            GameManager.gm.currTunnel.CloseDoor(0);
-            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
+            main.state = "bad";
         }
         Debug.Log(3);
     }

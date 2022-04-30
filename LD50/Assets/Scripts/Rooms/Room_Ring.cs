@@ -10,9 +10,11 @@ public class Room_Ring : MonoBehaviour
     [HideInInspector] public bool[] solutionCorrect = new bool[2];
     public GameObject[] symbol;
     public Pole[] pole;
+    private Room_Main room;
 
     private void Awake()
     {
+        room = GetComponentInParent<Room_Main>();
         foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
         {
             if (line.Length >= 9) break;
@@ -123,15 +125,17 @@ public class Room_Ring : MonoBehaviour
         int correctSolutions = 3;
         for (int i = 0; i < solutionCorrect.Length; i++) if (solutionCorrect[i] == false) correctSolutions -= 1;
         Debug.Log(correctSolutions);
-        if (correctSolutions == 2)
+        switch (correctSolutions)
         {
-            GameManager.gm.currTunnel.OpenDoor(0);
-            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
-        }
-        else
-        {
-            GameManager.gm.currTunnel.CloseDoor(0);
-            //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
+            case 0:
+                room.state = "bad";
+                break;
+            case 1:
+                room.state = "ok"; 
+                break;
+            case 2:
+                room.state = "perfect";
+                break;
         }
     }
 }

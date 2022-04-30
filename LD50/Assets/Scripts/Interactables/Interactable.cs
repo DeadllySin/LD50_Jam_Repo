@@ -11,7 +11,7 @@ public class Interactable : MonoBehaviour
 
     private void Awake()
     {
-        col = GetComponent<Renderer>().material.color;
+        if(gameObject.GetComponent<Renderer>()) col = GetComponent<Renderer>().material.color;
         ph = FindObjectOfType<PlayerHand>();
     }
 
@@ -21,8 +21,8 @@ public class Interactable : MonoBehaviour
         GameManager.gm.lookingAtText.text = "E to Interact";
         ph.handTarget = this.gameObject;
         ph.lookingAt = type;
-        col = GetComponent<Renderer>().material.color;
-        GetComponent<Renderer>().material.color = Color.gray;
+        if (gameObject.GetComponent<Renderer>()) col = GetComponent<Renderer>().material.color;
+        if (gameObject.GetComponent<Renderer>()) GetComponent<Renderer>().material.color = Color.gray;
     }
 
     private void OnMouseExit()
@@ -30,7 +30,7 @@ public class Interactable : MonoBehaviour
         if (onExit != null) onExit.Invoke();
         GameManager.gm.lookingAtText.text = null;
         ph.lookingAt = "none";
-        GetComponent<Renderer>().material.color = col;
+        if (gameObject.GetComponent<Renderer>()) GetComponent<Renderer>().material.color = col;
         ph.handTarget = null;
     }
 }

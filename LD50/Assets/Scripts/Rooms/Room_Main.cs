@@ -6,6 +6,8 @@ public class Room_Main : MonoBehaviour
     [Tooltip("currently available rooms: color, ring, statue")][SerializeField] string OverWriteRoomSelection;
     private List<GameObject> rooms = new List<GameObject>();
     private List<string> roomNames = new List<string>();
+    [HideInInspector] public string state;
+    [SerializeField] private float speedBoost;
 
     private void Awake()
     {
@@ -15,7 +17,6 @@ public class Room_Main : MonoBehaviour
             string[] splitted = new string[2];
             splitted = rooms[i].name.Split('_');
             roomNames.Add(splitted[1]);
-
         }
     }
 
@@ -42,6 +43,27 @@ public class Room_Main : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+
+    public void OnConfirm()
+    {
+
+        switch (state)
+        {
+            case "perfect":
+                GameManager.gm.currTunnel.OpenDoor(0);
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
+                break;
+            case "ok":
+                GameManager.gm.ceilingSpeed += speedBoost;
+                GameManager.gm.currTunnel.OpenDoor(0);
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
+                break;
+            case "bad":
+                GameManager.gm.currTunnel.CloseDoor(0);
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
+                break;
         }
     }
 }

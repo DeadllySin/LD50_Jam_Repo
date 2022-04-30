@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 9154388833964036985}
   - component: {fileID: 9154388833964036986}
   - component: {fileID: 9154388833964036987}
-  - component: {fileID: 9154388833964036964}
   - component: {fileID: 9154388833964036965}
   - component: {fileID: 7119000552299366181}
+  - component: {fileID: 1635141630336704271}
   m_Layer: 0
   m_Name: Statue_Piece 3
   m_TagString: Untagged
@@ -84,19 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9154388833964036964
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9154388833964036966}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9154388833964036965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +142,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!64 &1635141630336704271
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9154388833964036966}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4661962664460490493, guid: 3f4d77588d5319a45a9e613cd2385de6, type: 3}

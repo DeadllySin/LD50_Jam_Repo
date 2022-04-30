@@ -56,6 +56,7 @@ public class Room_Statue : MonoBehaviour
 
     public void PickUp(bool setASNull = false)
     {
+        if(setASNull) phand.handTarget.GetComponent<Interactable_Statue>().ss.GetComponent<MeshCollider>().enabled = true;
         sp.state = "inHand";
         phand.hand = sp.gameObject;
         phand.hand.transform.parent = GameManager.gm.player.transform;
@@ -75,35 +76,42 @@ public class Room_Statue : MonoBehaviour
         //Debug.Log("place2");
         if (phand.handTarget != null && phand.hand.GetComponent<Interactable_Statue>().state == "inHand" && phand.handTarget.GetComponent<Interactable_Socket>().assinedStatue == null)
         {
-            placedPieces++;
-            //Debug.Log("place3");
-            phand.hand.transform.parent = phand.handTarget.transform;
-            phand.hand.transform.localRotation = new Quaternion(0, 0, 0, 0);
-            phand.hand.transform.localPosition = phand.handTarget.transform.position;
-            phand.hand.GetComponent<Interactable_Statue>().state = "Ass";
-            phand.hand.GetComponent<Interactable_Statue>().ss = ss;
-            phand.hand.GetComponent<Interactable_Statue>().ss.assinedStatue = phand.hand;
-            phand.hand.GetComponent<Interactable_Statue>().ss.OnAssienedStatue();
-            phand.hand.transform.position = phand.handTarget.transform.position;
-            phand.hand = null;
-            OnValueChanged();
+            if (phand.handTarget.GetComponent<Interactable_Socket>().correctStatue == phand.hand.GetComponent<Interactable_Statue>().statueNumber)
+            {
+                placedPieces++;
+                //Debug.Log("place3");
+                phand.hand.transform.parent = phand.handTarget.transform;
+                phand.hand.transform.localRotation = new Quaternion(0, 0, 0, 0);
+                phand.hand.transform.localPosition = phand.handTarget.transform.position;
+                phand.hand.GetComponent<Interactable_Statue>().state = "Ass";
+                phand.hand.GetComponent<Interactable_Statue>().ss = ss;
+                phand.hand.GetComponent<Interactable_Statue>().ss.assinedStatue = phand.hand;
+                phand.hand.GetComponent<Interactable_Statue>().ss.OnAssienedStatue();
+                phand.hand.transform.position = phand.handTarget.transform.position;
+                phand.hand = null;
+                phand.handTarget.GetComponent<Interactable_Socket>().GetComponent<MeshCollider>().enabled = false;
+                OnValueChanged();
+            }
+            else
+            {
+                Debug.Log("wrongStatue");
+            }
         }
     }
 
     void OnValueChanged()
     {
-        if (correctPieces == 3)
+        switch (correctPieces)
         {
-            GameManager.gm.currTunnel.OpenDoor(0);
-            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
-        }
-        else
-        {
-            if(placedPieces == 3)
-            {
-                GameManager.gm.currTunnel.CloseDoor(0);
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
-            }
-        }
+            case 4:
+                room.state = "ok";
+                break;
+            case 5:
+                room.state = "perfect";
+                break;
+            default:
+                room.state = "bad";
+                break ;
+    }
     }
 }

@@ -58,6 +58,11 @@ public class PlayerHand : MonoBehaviour
                     FindObjectOfType<Room_Statue>().Drop();
                 }
             }
+
+            if(lookingAt == "confirm")
+            {
+                FindObjectOfType<Room_Main>().OnConfirm();
+            }
         }
     }
 

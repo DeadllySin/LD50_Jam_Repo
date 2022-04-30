@@ -4,7 +4,7 @@ using UnityEngine;
 public class Interactable_Socket : MonoBehaviour
 {
     Room_Statue rs;
-    [SerializeField] private int correctStatue;
+    public int correctStatue;
     [HideInInspector] public GameObject assinedStatue;
 
     private void Awake()
