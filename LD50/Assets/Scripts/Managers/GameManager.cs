@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Tunnel currTunnel;
     [HideInInspector] public int lastRoom = 0;
     [HideInInspector] public int roomsCleared = 0;
+    [HideInInspector] public int statueRoomPro;
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
@@ -26,13 +27,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject deathScreen;
 
     [Header("Ceiling")]
-    [SerializeField] float slowThresholdSpeed = 1.5f;
-    [HideInInspector] public GameObject ceilingSourceChild;
     public GameObject ceiling;
+    [SerializeField] float slowThresholdSpeed;
     [SerializeField] private float defaultSpeed;
-    [HideInInspector] public float ceilingSpeed;
     [SerializeField] private float deathHeight;
     [SerializeField] private float thresholdToSlower;
+    [HideInInspector] public float ceilingSpeed;
+    [HideInInspector] public GameObject ceilingSourceChild;
 
     private void Awake()
     {

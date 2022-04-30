@@ -53,15 +53,21 @@ public class PlayerHand : MonoBehaviour
                         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
                     }
                 }
-                if (lookingAt == "none" && hand != null)
-                {
-                    FindObjectOfType<Room_Statue>().Drop();
-                }
             }
 
             if(lookingAt == "confirm")
             {
                 FindObjectOfType<Room_Main>().OnConfirm();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (GameManager.gm.currRoomType == "statue")
+            {
+                if (hand != null)
+                {
+                    FindObjectOfType<Room_Statue>().Drop();
+                }
             }
         }
     }

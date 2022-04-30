@@ -211,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   handTarget: {fileID: 0}
-  distance: 4
+  distance: 3
   lookingAt: none
 --- !u!114 &3653882480043813501
 MonoBehaviour:
