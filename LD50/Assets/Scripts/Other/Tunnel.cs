@@ -45,14 +45,16 @@ public class Tunnel : MonoBehaviour
             alreadyColl = true;
             CloseDoor(0);
             Room_Main room = GameManager.gm.currRoom.GetComponent<Room_Main>();
+            float roomPos = room.gameObject.transform.position.z + 22;
             Tunnel tunnel = GameManager.gm.currTunnel.GetComponent<Tunnel>();
             yield return new WaitForSeconds(1);
             GameManager.gm.roomsCleared++;
             Destroy(room.gameObject);
             GameManager.gm.ceiling.transform.position = new Vector3(GameManager.gm.ceiling.transform.position.x, GameManager.gm.ceiling.transform.position.y, GameManager.gm.ceiling.transform.position.z + 22);
-            GameManager.gm.currRoom = Instantiate(GameManager.gm.room, new Vector3(0, 0, room.gameObject.transform.position.z + 22), Quaternion.identity);
+            yield return new WaitForSeconds(.3f);
+            GameManager.gm.currRoom = Instantiate(GameManager.gm.room, new Vector3(0, 0, roomPos), Quaternion.identity);
             GameManager.gm.currTunnel = Instantiate(tunnelPrefab, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(.4f);
             OpenDoor(1);
             IdleDoor(0);
         }

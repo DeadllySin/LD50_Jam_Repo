@@ -24,5 +24,15 @@ public class Room_PropPlacer : MonoBehaviour
                 propMeshes.RemoveAt(propIndex);
             }
         }
+        else
+        {
+            for (int i = 0; i < spawnCount; i++)
+            {
+                int spawnersIndex = Random.Range(0, spawners.Count);
+                int propIndex = Random.Range(0, propMeshes.Count);
+                Instantiate(propMeshes[propIndex], spawners[spawnersIndex].transform.position, Quaternion.identity);
+                spawners.RemoveAt(spawnersIndex);
+            }
+        }
     }
 }
