@@ -15,8 +15,9 @@ public class Cutscene_01_Door : MonoBehaviour
 
     IEnumerator doorEnu()
     {
+        yield return new WaitForSeconds(2.3f);
         butt.GetComponent<Animator>().SetTrigger("isPressed");
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.1f);
         door.GetComponent<Animator>().SetTrigger("isOpen");
         yield return new WaitForSeconds(doorClose);
         door.GetComponent<Animator>().SetTrigger("isClosed");
