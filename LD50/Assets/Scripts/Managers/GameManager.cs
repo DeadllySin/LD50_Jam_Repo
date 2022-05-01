@@ -73,10 +73,12 @@ public class GameManager : MonoBehaviour
         {
             if (!isPaused)
             {
+                isPaused = true;
                 Time.timeScale = 0;
             }
             else
             {
+                isPaused = false;
                 Time.timeScale = 1;
             }
 
