@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float ceilingSpeed;
     [HideInInspector] public GameObject ceilingSourceChild;
 
+    bool isPaused;
+
     private void Awake()
     {
         ceilingSpeed = defaultSpeed;
@@ -66,6 +68,18 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (!isPaused)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+
         }
 
         if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true)
