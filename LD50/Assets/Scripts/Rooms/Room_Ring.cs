@@ -73,7 +73,7 @@ public class Room_Ring : MonoBehaviour
                 pole[poleIndex].slot[j].ring = pole[poleIndex].slot[ringMovedIndex].ring;
                 pole[poleIndex].slot[j].ring.transform.localPosition = new Vector3(x_pos, y_pos[j], z_pos);
                 pole[poleIndex].slot[ringMovedIndex].ring = null;
-                ringsOnSide[poleIndex]-= 1;
+                ringsOnSide[poleIndex] -= 1;
                 Debug.Log(int.Parse(pole[poleIndex].answer) + " " + ringsOnSide[poleIndex]);
                 if (int.Parse(pole[poleIndex].answer) == ringsOnSide[poleIndex]) solutionCorrect[poleIndex] = true;
                 else solutionCorrect[poleIndex] = false;
@@ -131,7 +131,7 @@ public class Room_Ring : MonoBehaviour
                 room.state = "bad";
                 break;
             case 1:
-                room.state = "ok"; 
+                room.state = "ok";
                 break;
             case 2:
                 room.state = "perfect";

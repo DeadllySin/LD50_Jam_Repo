@@ -11,7 +11,7 @@ public class Interactable : MonoBehaviour
 
     private void Awake()
     {
-        if(gameObject.GetComponent<Renderer>()) col = GetComponent<Renderer>().material.color;
+        if (gameObject.GetComponent<Renderer>()) col = GetComponent<Renderer>().material.color;
         ph = FindObjectOfType<PlayerHand>();
     }
 

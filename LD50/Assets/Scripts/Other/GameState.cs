@@ -11,12 +11,12 @@ public class GameState : MonoBehaviour
     [SerializeField] private int nextSceneIndex;
     public bool playIntroMusic = true;
     //[SerializeField] private Text loadText;
-    
+
     public FMOD.Studio.Bus masterBus;
     public FMOD.Studio.Bus gameplayBus;
     public FMOD.Studio.Bus UIBus;
     [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
-    
+
 
     private void Awake()
     {

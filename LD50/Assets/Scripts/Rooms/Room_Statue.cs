@@ -56,7 +56,7 @@ public class Room_Statue : MonoBehaviour
 
     public void PickUp(bool setASNull = false)
     {
-        if(setASNull) phand.handTarget.GetComponent<Interactable_Statue>().ss.GetComponent<MeshCollider>().enabled = true;
+        if (setASNull) phand.handTarget.GetComponent<Interactable_Statue>().ss.GetComponent<MeshCollider>().enabled = true;
         sp.state = "inHand";
         phand.hand = sp.gameObject;
 

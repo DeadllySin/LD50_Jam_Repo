@@ -53,7 +53,7 @@ namespace FMODUnity
                 Settings.Instance.BanksToLoad.Clear();
         }
 
-        static private void AffirmEventCache()
+        private static void AffirmEventCache()
         {
             if (eventCache == null)
             {
@@ -61,7 +61,7 @@ namespace FMODUnity
             }
         }
 
-        static private string UpdateCache()
+        private static string UpdateCache()
         {
             if (eventCache == null)
             {

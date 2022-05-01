@@ -9,7 +9,6 @@ public class Room_Colors : MonoBehaviour
     [SerializeField] private float amountOfRandomColors;
     private List<string> colorOrder = new List<string>();
     private List<string> colorsPressed = new List<string>();
-    private int buttonsPressedCorrectly;
     private int butPressed;
     private Room_Main main;
 
@@ -43,7 +42,7 @@ public class Room_Colors : MonoBehaviour
     {
         colorsPressed.Add(col);
         butPressed += 1;
-        if(butPressed == amountOfRandomColors)
+        if (butPressed == amountOfRandomColors)
         {
             OnValueChanged();
         }
@@ -53,7 +52,6 @@ public class Room_Colors : MonoBehaviour
     public void OnValueChanged()
     {
         Debug.Log(1);
-        buttonsPressedCorrectly = 0;
         for (int i = 0; i < colorOrder.Count; i++)
         {
             main.state = "ok";
@@ -61,9 +59,9 @@ public class Room_Colors : MonoBehaviour
         Debug.Log(2);
         if (colorsPressed.Count == colorOrder.Count)
         {
-             main.state = "perfect";
+            main.state = "perfect";
         }
-        else if(colorsPressed.Count > colorOrder.Count)
+        else if (colorsPressed.Count > colorOrder.Count)
         {
             main.state = "bad";
         }

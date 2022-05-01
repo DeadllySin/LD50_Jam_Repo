@@ -6,15 +6,15 @@ public class Room_Statue_Main : MonoBehaviour
 
     private void Awake()
     {
-        if(GameManager.gm.statueRoomPro < 2)
+        if (GameManager.gm.statueRoomPro < 2)
         {
             statueRooms[0].SetActive(true);
         }
-        else if(GameManager.gm.statueRoomPro < 4 && GameManager.gm.statueRoomPro > 1)
+        else if (GameManager.gm.statueRoomPro < 4 && GameManager.gm.statueRoomPro > 1)
         {
             statueRooms[1].SetActive(true);
         }
-        else if(GameManager.gm.statueRoomPro > 3)
+        else if (GameManager.gm.statueRoomPro > 3)
         {
             statueRooms[2].SetActive(true);
         }

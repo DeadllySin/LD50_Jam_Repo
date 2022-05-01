@@ -615,7 +615,7 @@ namespace FMODUnity
                 }
             }
 
-            new public State state
+            public new State state
             {
                 get
                 {
