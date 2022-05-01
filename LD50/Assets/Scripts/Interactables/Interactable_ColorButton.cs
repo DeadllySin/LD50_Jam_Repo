@@ -6,7 +6,7 @@ public class Interactable_ColorButton : MonoBehaviour
 {
     public bool isPressed = true;
     private Animator anim;
-    [SerializeField] private string color;
+    public string color;
     [HideInInspector] public Room_Colors rc;
 
     private void Awake()
@@ -28,7 +28,7 @@ public class Interactable_ColorButton : MonoBehaviour
 
     IEnumerator buttonCooldown()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.55f);
         isPressed = false;
     }
 }

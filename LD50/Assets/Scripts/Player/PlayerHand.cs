@@ -21,6 +21,14 @@ public class PlayerHand : MonoBehaviour
                         icb.OnPressed();
                     }
                 }
+                if (lookingAt == "restart")
+                {
+                    if (DistanceFu(handTarget) == 1)
+                    {
+                        handTarget.GetComponent<Animator>().SetTrigger("isPressed");
+                        FindObjectOfType<Room_Colors>().Restart();
+                    }
+                }
 
             }
             if (GameManager.gm.currRoomType == "ring")

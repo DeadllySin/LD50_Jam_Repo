@@ -34,29 +34,33 @@ public class Tunnel : MonoBehaviour
     {
         if (!alreadyColl)
         {
-            for (int i = 0; i < 3; i++) statue = FindObjectsOfType<Interactable_Statue>();
-            yield return new WaitForSeconds(.1f);
-
-            for (int i = 0; i < statue.Length; i++)
-            {
-                Destroy(statue[i].gameObject);
-            }
-            yield return new WaitForSeconds(.1f);
             alreadyColl = true;
             CloseDoor(0);
+
+            yield return new WaitForSeconds(.5f);
+
+            for (int i = 0; i < 3; i++) statue = FindObjectsOfType<Interactable_Statue>();
             Room_Main room = GameManager.gm.currRoom.GetComponent<Room_Main>();
-            float roomPos = room.gameObject.transform.position.z + 22;
             Tunnel tunnel = GameManager.gm.currTunnel.GetComponent<Tunnel>();
-            yield return new WaitForSeconds(1);
+            GameObject ceiling = GameManager.gm.ceiling;
+            float roomPos = room.gameObject.transform.position.z + 22;
             GameManager.gm.roomsCleared++;
+            Vector3 newCelPos = new Vector3(ceiling.transform.position.x, ceiling.transform.position.y, ceiling.transform.position.z + 22);
+            GameManager.gm.ceiling.transform.position = newCelPos;
+
+            yield return new WaitForSeconds(.1f);
+
+            for (int i = 0; i < statue.Length; i++) Destroy(statue[i].gameObject);
             Destroy(room.gameObject);
-            GameManager.gm.ceiling.transform.position = new Vector3(GameManager.gm.ceiling.transform.position.x, GameManager.gm.ceiling.transform.position.y, GameManager.gm.ceiling.transform.position.z + 22);
-            yield return new WaitForSeconds(.3f);
+
+            yield return new WaitForSeconds(.1f);
+
             GameManager.gm.currRoom = Instantiate(GameManager.gm.room, new Vector3(0, 0, roomPos), Quaternion.identity);
             GameManager.gm.currTunnel = Instantiate(tunnelPrefab, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>();
-            yield return new WaitForSeconds(.4f);
-            OpenDoor(1);
+
+            yield return new WaitForSeconds(.5f);
             IdleDoor(0);
+            OpenDoor(1);
         }
     }
 
