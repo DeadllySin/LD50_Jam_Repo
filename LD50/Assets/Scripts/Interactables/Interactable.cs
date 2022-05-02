@@ -9,14 +9,10 @@ public class Interactable : MonoBehaviour
     [SerializeField] private UnityEvent onEnter;
     [SerializeField] private UnityEvent onExit;
 
-    private void Awake()
-    {
-        if (gameObject.GetComponent<Renderer>()) col = GetComponent<Renderer>().material.color;
-        ph = FindObjectOfType<PlayerHand>();
-    }
-
     private void OnMouseEnter()
     {
+        if (gameObject.GetComponent<Renderer>()) col = GetComponent<Renderer>().material.color;
+        ph = GameManager.gm.player.GetComponent<PlayerHand>();
         if (onEnter != null) onEnter.Invoke();
         GameManager.gm.lookingAtText.text = "E to Interact";
         ph.handTarget = this.gameObject;
