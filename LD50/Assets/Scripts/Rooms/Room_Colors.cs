@@ -67,7 +67,7 @@ public class Room_Colors : MonoBehaviour
 
     public void Restart()
     {
-        for(int i = 0; i < colorOb.Length; i++)
+        for (int i = 0; i < colorOb.Length; i++)
         {
             colorOb[i].GetComponent<Interactable_ColorButton>().isPressed = true;
         }
@@ -89,7 +89,7 @@ public class Room_Colors : MonoBehaviour
     {
         for (int i = 0; i < colorOrder.Count; i++)
         {
-            if(colorOrder[i] == colorsPressed[i])
+            if (colorOrder[i] == colorsPressed[i])
             {
                 pressedCorr++;
             }

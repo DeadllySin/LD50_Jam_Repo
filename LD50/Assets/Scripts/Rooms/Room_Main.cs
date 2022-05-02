@@ -41,10 +41,8 @@ public class Room_Main : MonoBehaviour
         {
             for (int i = 0; i < rooms.Count - 1; i++)
             {
-                Debug.Log(roomNames[i] + OverWriteRoomSelection);
                 if (roomNames[i] == OverWriteRoomSelection)
                 {
-
                     for (int k = 0; k < rooms.Count - 1; k++) rooms[k].SetActive(false);
                     rooms[i].SetActive(true);
                     GameManager.gm.currRoomType = roomNames[i];
