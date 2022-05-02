@@ -66,7 +66,11 @@ public class GameManager : MonoBehaviour
     {
         if (isDead)
         {
-            if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                
+            }
             if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
         }
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -86,12 +90,12 @@ public class GameManager : MonoBehaviour
 
         if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true)
         {
-            //Debug.Log("ceilling moving in if");
+            //Debug.Log("ceilling moving in if -- musicIntroTrigger == true");
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
         }
         else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && GameState.gs.playIntroMusic == false)
         {
-            //Debug.Log("ceiling moving in else if"); TEST AFTER RESTART 
+            //Debug.Log("ceiling moving in else if -- musicIntroTrigger == false");
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
         }
 
@@ -108,14 +112,17 @@ public class GameManager : MonoBehaviour
         isDead = true;
         if (roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
         scoreText.text = "You Cleared " + roomsCleared + " Rooms!\n Your Highscore is " + PlayerPrefs.GetInt("roomsCleared");
+        deathScreen.SetActive(true);
+        player.SetActive(false);
+        
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.deathSFX);
         ceilingLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         ceilingLoopInstance.release();
         ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         ceilingDebrisInstance.release();
-        deathScreen.SetActive(true);
-        player.SetActive(false);
+
         // find a way to release in game music instance after death screen and restart 
     }
 

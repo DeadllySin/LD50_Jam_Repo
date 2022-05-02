@@ -46,7 +46,7 @@ class A_MusicCallBack : MonoBehaviour
 
         // control variables
         musicIntroTriggerOnce = true;
-        musicIntroTrigger = false;
+        //musicIntroTrigger = false;
     }
 
     void OnDestroy()
@@ -64,21 +64,27 @@ class A_MusicCallBack : MonoBehaviour
 
     void Update()
     {
-        if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == true && GameState.gs.playIntroMusic == true)
+        if (timelineInfo.currentMusicBar >= 9 && musicIntroTrigger == false && GameState.gs.playIntroMusic == false)
+        {
+            //Debug.Log("Playing skipped intro Ceiling Loop");
+            GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoop();
+            musicIntroTriggerOnce = false;
+            musicIntroTrigger = true;
+
+            return;
+        }
+        else if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == true && GameState.gs.playIntroMusic == true)
         {
             musicIntroTriggerOnce = false;
             musicIntroTrigger = true;
             GameState.gs.playIntroMusic = false;
+            
             GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoop();
             //Debug.Log("Play Intro Music and Ceiling Loop after");
-            Debug.Log("SET SOMETHING FANCY PLAYING WHEN CEILING IS ON THRESHOLD");
+            //Debug.Log("SET SOMETHING FANCY PLAYING WHEN CEILING IS ON THRESHOLD");
 
         }
-        else if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == false && GameState.gs.playIntroMusic == false)
-        {
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
-            //Debug.Log("Music Intro skipped and ceiling started"); NEED RESTART TO TEST
-        }
+
     }
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
