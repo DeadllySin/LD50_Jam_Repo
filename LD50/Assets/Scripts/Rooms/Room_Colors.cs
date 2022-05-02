@@ -5,7 +5,8 @@ using UnityEngine;
 public class Room_Colors : MonoBehaviour
 {
     public Animator[] colorOb;
-    [SerializeField] private float amountOfRandomColors;
+    [SerializeField] private int[] colorAmountProgress;
+    private int colAmount;
     private List<string> colorOrder = new List<string>();
     private List<string> colorsPressed = new List<string>();
     private int butPressed;
@@ -14,14 +15,41 @@ public class Room_Colors : MonoBehaviour
 
     private void Awake()
     {
+        switch (GameManager.gm.colorRoomPro)
+        {
+            case 0:
+                colAmount = colorAmountProgress[0];
+                break;
+            case 1:
+                colAmount = colorAmountProgress[0];
+                break;
+            case 2:
+                colAmount = colorAmountProgress[1];
+                break;
+            case 3:
+                colAmount = colorAmountProgress[1];
+                break;
+            case 4:
+                colAmount = colorAmountProgress[2];
+                break;
+            case 5:
+                colAmount = colorAmountProgress[2];
+                break;
+
+        }
+        GameManager.gm.colorRoomPro++;
         main = GetComponentInParent<Room_Main>();
     }
 
     IEnumerator colorOrderEnu()
     {
+        colorOrder.Clear();
+        colorsPressed.Clear();
+        pressedCorr = 0;
+        butPressed = 0;
         yield return new WaitForSeconds(1.5f);
         int i = 0;
-        while (i < amountOfRandomColors)
+        while (i < colAmount)
         {
             int rdm = Random.Range(0, colorOb.Length);
             rdm = Random.Range(0, colorOb.Length);
@@ -50,7 +78,7 @@ public class Room_Colors : MonoBehaviour
     {
         colorsPressed.Add(col);
         butPressed += 1;
-        if (butPressed == amountOfRandomColors)
+        if (butPressed == colAmount)
         {
             OnValueChanged();
         }

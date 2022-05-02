@@ -10,6 +10,7 @@ public class Room_Main : MonoBehaviour
     [HideInInspector] public string state;
     [SerializeField] private float speedBoost;
     private bool canConfirm = true;
+    private string lastRoom = "none";
 
     private void Awake()
     {
@@ -26,8 +27,13 @@ public class Room_Main : MonoBehaviour
     {
         if (OverWriteRoomSelection == null || OverWriteRoomSelection == "")
         {
+            int rdm = rdm = Random.Range(0, rooms.Count - 1);
             for (int i = 0; i < rooms.Count - 1; i++) rooms[i].SetActive(false);
-            int rdm = Random.Range(0, rooms.Count - 1);
+            while (roomNames[rdm] == lastRoom)
+            {
+                rdm = Random.Range(0, rooms.Count - 1);
+            }
+            lastRoom = roomNames[rdm];
             rooms[rdm].SetActive(true);
             GameManager.gm.currRoomType = roomNames[rdm];
         }

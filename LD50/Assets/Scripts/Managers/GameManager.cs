@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int lastRoom = 0;
     [HideInInspector] public int roomsCleared = 0;
     [HideInInspector] public int statueRoomPro;
+    [HideInInspector] public int colorRoomPro;
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
