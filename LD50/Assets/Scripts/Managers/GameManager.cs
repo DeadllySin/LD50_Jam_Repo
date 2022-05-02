@@ -62,7 +62,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private void Update()
     {
         if (isDead)
@@ -82,7 +81,6 @@ public class GameManager : MonoBehaviour
                 isPaused = false;
                 Time.timeScale = 1;
             }
-
         }
 
         if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true)
