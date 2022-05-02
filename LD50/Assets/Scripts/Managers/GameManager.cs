@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Ceiling")]
     public GameObject ceiling;
+    public float speedBoost;
     [SerializeField] float slowThresholdSpeed;
     [SerializeField] private float defaultSpeed;
     [SerializeField] private float deathHeight;
