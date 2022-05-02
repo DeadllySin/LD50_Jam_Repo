@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int lastRoom = 0;
     [HideInInspector] public int roomsCleared = 0;
     [HideInInspector] public int statueRoomPro;
+    [HideInInspector] public int colorRoomPro;
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
@@ -61,7 +62,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private void Update()
     {
         if (isDead)
@@ -85,7 +85,6 @@ public class GameManager : MonoBehaviour
                 isPaused = false;
                 Time.timeScale = 1;
             }
-
         }
 
         if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true)
