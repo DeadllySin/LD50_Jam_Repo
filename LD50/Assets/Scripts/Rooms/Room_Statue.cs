@@ -19,7 +19,6 @@ public class Room_Statue : MonoBehaviour
     {
         room = GetComponentInParent<Room_Main>();
         for (int i = 0; i < piecess.Length; i++) pieces.Add(piecess[i]);
-        phand = FindObjectOfType<PlayerHand>();
         foreach (Transform child in spawnerParent.transform) spawners.Add(child.gameObject);
         while (pieces.Count > 0)
         {
@@ -33,6 +32,7 @@ public class Room_Statue : MonoBehaviour
 
     public void PickUpFrom()
     {
+        phand = GameManager.gm.player.GetComponent<PlayerHand>();
         if (phand.handTarget != null && phand.hand == null)
         {
             if (sp.state == "ground")
