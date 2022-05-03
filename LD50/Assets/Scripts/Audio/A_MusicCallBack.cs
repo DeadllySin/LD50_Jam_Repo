@@ -68,7 +68,7 @@ public class A_MusicCallBack : MonoBehaviour
     {
         if (timelineInfo.currentMusicBar >= 9 && musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
         {
-            //Debug.Log("Playing skipped intro Ceiling Loop");
+            Debug.Log("Playing skipped intro Ceiling Loop");
             GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoop();
             musicIntroTriggerOnce = false;
             musicIntroTrigger = true;
@@ -82,7 +82,7 @@ public class A_MusicCallBack : MonoBehaviour
             AudioManager.am.playIntroMusic = false;
             
             GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoop();
-            //Debug.Log("Play Intro Music and Ceiling Loop after");
+            Debug.Log("Play Intro Music and Ceiling Loop after");
             //Debug.Log("SET SOMETHING FANCY PLAYING WHEN CEILING IS ON THRESHOLD");
 
         }
