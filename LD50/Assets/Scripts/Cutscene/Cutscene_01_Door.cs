@@ -32,15 +32,16 @@ public class Cutscene_01_Door : MonoBehaviour
 
     IEnumerator play()
     {
+        float orMoveSpeed = player.GetComponent<StarterAssets.FirstPersonController>().MoveSpeed;
+        player.GetComponent<StarterAssets.FirstPersonController>().MoveSpeed = 0;
         yield return new WaitForSeconds(22);
         player.transform.position = this.transform.position;
         cutscene.SetActive(false);
         cineCutscene.SetActive(false);
-
-        yield return new WaitForSeconds(1);
         cinePlayer.SetActive(true);
         player.SetActive(true);
-
+        yield return new WaitForSeconds(1);
+        player.GetComponent<StarterAssets.FirstPersonController>().MoveSpeed = orMoveSpeed;
 
     }
 }
