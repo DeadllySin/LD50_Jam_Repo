@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03531af918adc0b48a22c304cdf18bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playIntroMusic: 1
   footsteps:
     Guid:
       Data1: 1880838797
@@ -384,7 +385,7 @@ MonoBehaviour:
       Data2: 1116387076
       Data3: 540175267
       Data4: 25633268
-    Path: event:/Puzzles/Color/Color_Timer
+    Path: event:/Puzzles/Color/Color_Order_Light
   puzzleCorrect:
     Guid:
       Data1: 620300921
@@ -1163,7 +1164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &546449533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2700,7 +2701,6 @@ MonoBehaviour:
   playTheCutsceneOnlyOnce: 0
   progressBar: {fileID: 0}
   nextSceneIndex: 1
-  playIntroMusic: 1
 --- !u!1 &1709652607
 GameObject:
   m_ObjectHideFlags: 0

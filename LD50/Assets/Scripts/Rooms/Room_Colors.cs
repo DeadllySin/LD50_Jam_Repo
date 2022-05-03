@@ -78,6 +78,7 @@ public class Room_Colors : MonoBehaviour
     {
         colorsPressed.Add(col);
         butPressed += 1;
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pColorPress);
         if (butPressed == colAmount)
         {
             OnValueChanged();

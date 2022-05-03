@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
             ceilingMove();
 
         }
-        else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && GameState.gs.playIntroMusic == false)
+        else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
         {
             ceilingMove();    
         }
