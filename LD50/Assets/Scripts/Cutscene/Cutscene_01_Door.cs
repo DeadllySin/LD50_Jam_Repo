@@ -11,9 +11,11 @@ public class Cutscene_01_Door : MonoBehaviour
     [SerializeField] private GameObject cutscene;
     [SerializeField] private GameObject cinePlayer;
     [SerializeField] private GameObject cineCutscene;
+    private StarterAssets.FirstPersonController fps;
 
     private void Start()
     {
+        fps = player.GetComponent<StarterAssets.FirstPersonController>();
         StartCoroutine(play());
         StartCoroutine(doorEnu());
     }
@@ -32,16 +34,12 @@ public class Cutscene_01_Door : MonoBehaviour
 
     IEnumerator play()
     {
-        float orMoveSpeed = player.GetComponent<StarterAssets.FirstPersonController>().MoveSpeed;
-        player.GetComponent<StarterAssets.FirstPersonController>().MoveSpeed = 0;
-        yield return new WaitForSeconds(22);
+        fps.MoveSpeed = 0;
+        yield return new WaitForSeconds(21);
         player.transform.position = this.transform.position;
-        cutscene.SetActive(false);
         cineCutscene.SetActive(false);
         cinePlayer.SetActive(true);
-        player.SetActive(true);
-        yield return new WaitForSeconds(1);
-        player.GetComponent<StarterAssets.FirstPersonController>().MoveSpeed = orMoveSpeed;
+        fps.MoveSpeed = 4;
 
     }
 }
