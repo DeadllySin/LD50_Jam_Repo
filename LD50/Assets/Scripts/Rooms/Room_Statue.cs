@@ -46,6 +46,7 @@ public class Room_Statue : MonoBehaviour
 
     public void Drop()
     {
+        phand = GameManager.gm.player.GetComponent<PlayerHand>();
         if (phand.hand == null) return;
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pDrop);
         phand.hand.GetComponent<Interactable_Statue>().state = "ground";
@@ -56,6 +57,7 @@ public class Room_Statue : MonoBehaviour
 
     public void PickUp(bool setASNull = false)
     {
+        phand = GameManager.gm.player.GetComponent<PlayerHand>();
         if (setASNull) phand.handTarget.GetComponent<Interactable_Statue>().ss.GetComponent<MeshCollider>().enabled = true;
         sp.state = "inHand";
         phand.hand = sp.gameObject;
@@ -77,6 +79,7 @@ public class Room_Statue : MonoBehaviour
 
     public void Place()
     {
+        phand = GameManager.gm.player.GetComponent<PlayerHand>();
         //Debug.Log("place2");
         if (phand.handTarget != null && phand.hand.GetComponent<Interactable_Statue>().state == "inHand" && phand.handTarget.GetComponent<Interactable_Socket>().assinedStatue == null)
         {
