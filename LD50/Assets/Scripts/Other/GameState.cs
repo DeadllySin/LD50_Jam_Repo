@@ -41,7 +41,7 @@ public class GameState : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 }

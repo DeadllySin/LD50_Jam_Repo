@@ -60,6 +60,9 @@ public class AudioManager : MonoBehaviour
         }
         am = this;
         DontDestroyOnLoad(this.gameObject);
+
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
     }
     void Start()
     {
@@ -67,11 +70,9 @@ public class AudioManager : MonoBehaviour
         gameplayBus = FMODUnity.RuntimeManager.GetBus("bus:/Gameplay_Bus");
         musicBus = FMODUnity.RuntimeManager.GetBus("bus:/Music_Bus");
         UIBus = FMODUnity.RuntimeManager.GetBus("bus:/UI_Bus");
-        //menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
-        //menuMusicInstance.start();
         
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
+        menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
+        menuMusicInstance.start();
     }
     void Update()
     {
