@@ -35,7 +35,7 @@ public class Cutscene_01_Door : MonoBehaviour
     IEnumerator play()
     {
         fps.MoveSpeed = 0;
-        yield return new WaitForSeconds(21);
+        yield return new WaitForSeconds(24);
         player.transform.position = this.transform.position;
         cineCutscene.SetActive(false);
         cinePlayer.SetActive(true);
