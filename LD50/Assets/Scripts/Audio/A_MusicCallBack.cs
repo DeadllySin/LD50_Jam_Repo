@@ -2,10 +2,10 @@ using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-class A_MusicCallBack : MonoBehaviour
+public class A_MusicCallBack : MonoBehaviour
 {
     bool musicIntroTriggerOnce = true;
-    public bool musicIntroTrigger = false;
+    public bool musicIntroTrigger = true;
 
     class TimelineInfo
     {
@@ -19,15 +19,17 @@ class A_MusicCallBack : MonoBehaviour
     public FMODUnity.EventReference musicCallBackInstance;
 
     FMOD.Studio.EVENT_CALLBACK beatCallback;
-    FMOD.Studio.EventInstance musicInstance;
+    public FMOD.Studio.EventInstance musicInstance;
 
     void Reset()
     {
         musicCallBackInstance = FMODUnity.EventReference.Find("event:/Music/Main_Music");
     }
 
-    void Start()
+    public void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
+        
         timelineInfo = new TimelineInfo();
 
         // Explicitly create the delegate object and assign it to a member so it doesn't get freed
@@ -42,7 +44,7 @@ class A_MusicCallBack : MonoBehaviour
         musicInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
 
         musicInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
-        musicInstance.start();
+        //musicInstance.start();
 
         // control variables
         musicIntroTriggerOnce = true;
@@ -66,7 +68,7 @@ class A_MusicCallBack : MonoBehaviour
     {
         if (timelineInfo.currentMusicBar >= 9 && musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
         {
-            //Debug.Log("Playing skipped intro Ceiling Loop");
+            Debug.Log("Playing skipped intro Ceiling Loop");
             GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoop();
             musicIntroTriggerOnce = false;
             musicIntroTrigger = true;
@@ -80,7 +82,7 @@ class A_MusicCallBack : MonoBehaviour
             AudioManager.am.playIntroMusic = false;
             
             GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoop();
-            //Debug.Log("Play Intro Music and Ceiling Loop after");
+            Debug.Log("Play Intro Music and Ceiling Loop after");
             //Debug.Log("SET SOMETHING FANCY PLAYING WHEN CEILING IS ON THRESHOLD");
 
         }

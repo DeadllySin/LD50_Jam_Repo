@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
-    [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
-    FMOD.Studio.EventInstance mainMenuMusicInstance;
 
     [Header("UI")]
     [SerializeField] private Text scoreText;
