@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -37,20 +38,37 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float ceilingSpeed;
     [HideInInspector] public GameObject ceilingSourceChild;
 
+    private float startTime;
+    private string minutes;
+    private string seconds;
+    
     bool isPaused;
 
     private void Awake()
     {
+        //defaultSpeed = ceilingSpeedScale(defaultSpeed, 0f, 10f, 0f, 0.5f);
+        //Debug.Log(defaultSpeed);
+
+        //Speed up testing
+        //Time.timeScale = 2;
+        
+        //Timer
+        startTime = Time.time;
+        
         ceilingSpeed = defaultSpeed;
         gm = this;
         currRoom = FindObjectOfType<Room_Main>().gameObject;
         currTunnel = FindObjectOfType<Tunnel>();
         ceilingSourceChild = player.transform.GetChild(3).gameObject;
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
-        ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingDebris);
-        ceilingDebrisInstance.start();
     }
 
+    public void Start()
+    {
+        //set to the button when there's one
+        //FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
+        ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingDebris);
+        //ceilingDebrisInstance.start();
+    }
     private void FixedUpdate()
     {
         if (!isDead)
@@ -61,8 +79,14 @@ public class GameManager : MonoBehaviour
                 if (ceiling.transform.position.y < deathHeight) OnDeath();
             }
         }
+        //Debug.Log(ceilingSpeed);
     }
 
+    public static float ceilingSpeedScale(float input, float oldLow, float oldHigh, float newLow, float newHigh)
+    {
+        float t = Mathf.InverseLerp(oldLow, oldHigh, input);
+        return Mathf.Lerp(newLow, newHigh, t);
+    }
     private void Update()
     {
         if (isDead)
@@ -90,13 +114,12 @@ public class GameManager : MonoBehaviour
 
         if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true)
         {
-            //Debug.Log("ceilling moving in if -- musicIntroTrigger == true");
-            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
+            ceilingMove();
+
         }
         else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && GameState.gs.playIntroMusic == false)
         {
-            //Debug.Log("ceiling moving in else if -- musicIntroTrigger == false");
-            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
+            ceilingMove();    
         }
 
         //Fmod stuff
@@ -122,10 +145,19 @@ public class GameManager : MonoBehaviour
         ceilingLoopInstance.release();
         ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         ceilingDebrisInstance.release();
+        // find a way to release in game music instance after death screen and restart
 
-        // find a way to release in game music instance after death screen and restart 
+        //timer
+        float t = Time.time - startTime;
+        minutes = ((int)t / 60).ToString();
+        seconds = (t % 60).ToString("f0");
+        Debug.Log(minutes + " mins" + seconds + " secs");
     }
 
+    public void ceilingMove()
+    {
+        ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
+    }
     public void FMOD_PlayCeilingLoop()
     {
         ceilingLoopInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingLoop);

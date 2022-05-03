@@ -14,6 +14,7 @@ public class GameState : MonoBehaviour
 
     public FMOD.Studio.Bus masterBus;
     public FMOD.Studio.Bus gameplayBus;
+    public FMOD.Studio.Bus musicBus;
     public FMOD.Studio.Bus UIBus;
     [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
 
@@ -27,7 +28,8 @@ public class GameState : MonoBehaviour
 
         masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
         gameplayBus = FMODUnity.RuntimeManager.GetBus("bus:/Gameplay_Bus");
-        //UIBus = FMODUnity.RuntimeManager.GetBus("bus:/UI_Bus");
+        musicBus = FMODUnity.RuntimeManager.GetBus("bus:/Music_Bus");
+        UIBus = FMODUnity.RuntimeManager.GetBus("bus:/UI_Bus");
         //menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
         //menuMusicInstance.start();
         //FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");

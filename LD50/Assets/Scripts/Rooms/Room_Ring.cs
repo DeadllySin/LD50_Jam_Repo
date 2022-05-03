@@ -107,12 +107,12 @@ public class Room_Ring : MonoBehaviour
                 if (int.Parse(pole[poleIndex].answer) == ringsOnSide[poleIndex])
                 {
                     solutionCorrect[poleIndex] = true;
-                    Debug.Log(int.Parse(pole[poleIndex].answer) + "true " + ringsOnSide[poleIndex]);
+                    //Debug.Log(int.Parse(pole[poleIndex].answer) + "true " + ringsOnSide[poleIndex]);
                 }
                 else
                 {
                     solutionCorrect[poleIndex] = false;
-                    Debug.Log(int.Parse(pole[poleIndex].answer) + "false " + ringsOnSide[poleIndex]);
+                    //Debug.Log(int.Parse(pole[poleIndex].answer) + "false " + ringsOnSide[poleIndex]);
                 }
                 OnValueChanged();
                 return;

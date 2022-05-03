@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-
     public static AudioManager am;
     GameManager gm;
 
@@ -51,20 +50,15 @@ public class AudioManager : MonoBehaviour
             Debug.Log("AudioManager already exists or not loaded");
         }
         am = this;
+        DontDestroyOnLoad(this.gameObject);
     }
-
-    // Start is called before the first frame update
     void Start()
     {
-        //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
     }
-
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("t"))
-        {
-            //FMODUnity.RuntimeManager.PlayOneShot(testSound);
-        }
+
     }
 }
