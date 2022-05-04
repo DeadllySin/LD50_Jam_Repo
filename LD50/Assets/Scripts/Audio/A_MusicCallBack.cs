@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class A_MusicCallBack : MonoBehaviour
 {
-    bool musicIntroTriggerOnce = true;
     public bool musicIntroTrigger = true;
 
     class TimelineInfo
@@ -47,7 +46,6 @@ public class A_MusicCallBack : MonoBehaviour
         //musicInstance.start();
 
         // control variables
-        musicIntroTriggerOnce = true;
         //musicIntroTrigger = false;
     }
 
@@ -61,23 +59,22 @@ public class A_MusicCallBack : MonoBehaviour
 
     void OnGUI()
     {
-        //GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
+        GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
     }
 
     void Update()
     {
         if (timelineInfo.currentMusicBar >= 9 && musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
         {
-            Debug.Log("Playing skipped intro Ceiling Loop");
+            
             GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoop();
-            musicIntroTriggerOnce = false;
+            Debug.Log("Playing skipped intro Ceiling Loop");
             musicIntroTrigger = true;
 
             return;
         }
-        else if (timelineInfo.currentMusicBar >= 9 && musicIntroTriggerOnce == true && AudioManager.am.playIntroMusic == true)
+        else if (timelineInfo.currentMusicBar >= 9 && AudioManager.am.playIntroMusic == true)
         {
-            musicIntroTriggerOnce = false;
             musicIntroTrigger = true;
             AudioManager.am.playIntroMusic = false;
             

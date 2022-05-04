@@ -18,7 +18,9 @@ public class MainMenu : MonoBehaviour
         cutscene.GetComponent<Cutscene_01_Door>().StartCutscene();
         cutscene.GetComponent<Animator>().SetTrigger("play");
         this.gameObject.SetActive(false);
+        
         AudioManager.am.menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        AudioManager.am.menuMusicInstance.release();
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         AudioManager.am.GetComponent<A_MusicCallBack>().musicInstance.start();
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);

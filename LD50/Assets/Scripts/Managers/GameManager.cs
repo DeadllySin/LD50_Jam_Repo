@@ -62,15 +62,19 @@ public class GameManager : MonoBehaviour
     {
         if (!GameState.gs.skipCutscene)
         {
+            Debug.Log("not skipped");
             cutsceneCine.SetActive(true);
+
         }
         else
         {
+            Debug.Log("skipped");
             playerCine.SetActive(true);
             door.SetActive(true);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         }
-        //set to the button when there's one
-        //FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
+
         ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingDebris);
         //ceilingDebrisInstance.start();
     }
@@ -100,6 +104,11 @@ public class GameManager : MonoBehaviour
 
         }
 
+        /*else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
+        {
+            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
+        }*/
+
         //Fmod stuff
         ceilingSourceChild.transform.position = new Vector3(player.transform.position.x, ceiling.transform.position.y - 0.5f, player.transform.position.z);
         ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
@@ -123,6 +132,7 @@ public class GameManager : MonoBehaviour
         ceilingLoopInstance.release();
         ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         ceilingDebrisInstance.release();
+        AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger = false;
         // find a way to release in game music instance after death screen and restart
 
         //timer
