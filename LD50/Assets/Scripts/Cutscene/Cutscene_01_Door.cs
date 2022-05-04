@@ -24,9 +24,9 @@ public class Cutscene_01_Door : MonoBehaviour
     {
         yield return new WaitForSeconds(7.5f);
         butt.GetComponent<Animator>().SetTrigger("isPressed");
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         door.GetComponent<Animator>().SetTrigger("isOpen");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         door.SetActive(false);
         yield return new WaitForSeconds(doorClose);
         dooropen.SetActive(true);

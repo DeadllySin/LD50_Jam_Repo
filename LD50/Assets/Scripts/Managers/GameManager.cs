@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -18,6 +16,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int statueRoomPro;
     [HideInInspector] public int colorRoomPro;
     [HideInInspector] public int ringRoomPro;
+    [SerializeField] private GameObject playerCine;
+    [SerializeField] private GameObject cutsceneCine;
+    [SerializeField] private GameObject door;
 
     FMOD.Studio.EventInstance ceilingLoopInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
@@ -40,11 +41,7 @@ public class GameManager : MonoBehaviour
     private float startTime;
     private string minutes;
     private string seconds;
-    bool isPaused;
 
-    [SerializeField] private GameObject playerCine;
-    [SerializeField] private GameObject cutsceneCine;
-    [SerializeField] private GameObject door;
 
     private void Awake()
     {
@@ -96,29 +93,6 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (isDead)
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                
-            }
-            if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
-        }
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (!isPaused)
-            {
-                isPaused = true;
-                Time.timeScale = 0;
-            }
-            else
-            {
-                isPaused = false;
-                Time.timeScale = 1;
-            }
-        }
-
         if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true || AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
         {
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
