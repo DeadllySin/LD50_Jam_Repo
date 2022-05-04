@@ -13,7 +13,7 @@ public class Room_Ring : MonoBehaviour
     private Room_Main room;
     private int maxSymbols;
 
-    private void Start()
+    private void Awake()
     {
         switch (GameManager.gm.ringRoomPro)
         {

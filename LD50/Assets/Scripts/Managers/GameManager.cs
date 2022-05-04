@@ -87,7 +87,6 @@ public class GameManager : MonoBehaviour
                 if (ceiling.transform.position.y < deathHeight) OnDeath();
             }
         }
-        //Debug.Log(ceilingSpeed);
     }
 
     public static float ceilingSpeedScale(float input, float oldLow, float oldHigh, float newLow, float newHigh)
@@ -120,14 +119,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true)
+        if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true || AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
         {
-            ceilingMove();
+            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
 
-        }
-        else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
-        {
-            ceilingMove();    
         }
 
         //Fmod stuff
@@ -162,10 +157,6 @@ public class GameManager : MonoBehaviour
         Debug.Log(minutes + " mins" + seconds + " secs");
     }
 
-    public void ceilingMove()
-    {
-        ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
-    }
     public void FMOD_PlayCeilingLoop()
     {
         ceilingLoopInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingLoop);

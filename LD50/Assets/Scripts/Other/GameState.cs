@@ -11,7 +11,6 @@ public class GameState : MonoBehaviour
     [SerializeField] private int nextSceneIndex;
     //[SerializeField] private Text loadText;
 
-
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

@@ -11,14 +11,17 @@ public class Interactable : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (gameObject.GetComponent<Renderer>()) col = GetComponent<Renderer>().material.color;
+        if (gameObject.GetComponent<Renderer>())
+        {
+            col = GetComponent<Renderer>().material.color;
+            GetComponent<Renderer>().material.color = Color.gray;
+        }
+
         ph = GameManager.gm.player.GetComponent<PlayerHand>();
-        if (onEnter != null) onEnter.Invoke();
         GameManager.gm.lookingAtText.text = "E to Interact";
+        if (onEnter != null) onEnter.Invoke();
         ph.handTarget = this.gameObject;
         ph.lookingAt = type;
-        if (gameObject.GetComponent<Renderer>()) col = GetComponent<Renderer>().material.color;
-        if (gameObject.GetComponent<Renderer>()) GetComponent<Renderer>().material.color = Color.gray;
     }
 
     private void OnMouseExit()

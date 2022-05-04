@@ -80,6 +80,7 @@ public class Tunnel : MonoBehaviour
         Destroy(tunnelParent);
     }
 
+    #region DoorAnimations
     public void OpenDoor(int index)
     {
         if (door[index].isOpen) return;
@@ -99,6 +100,7 @@ public class Tunnel : MonoBehaviour
         door[index].door.SetTrigger("isIdle");
         door[index].isOpen = true;
     }
+    #endregion
 }
 
 [System.Serializable]
