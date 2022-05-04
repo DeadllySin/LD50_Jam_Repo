@@ -11,9 +11,29 @@ public class Room_Ring : MonoBehaviour
     public GameObject[] symbol;
     public Pole[] pole;
     private Room_Main room;
+    private int maxSymbols;
 
     private void Awake()
     {
+        switch (GameManager.gm.ringRoomPro)
+        {
+            case 0:
+                maxSymbols = 5;
+                break;
+            case 1:
+                maxSymbols = 5;
+                break;
+            case 2:
+                maxSymbols = 7;
+                break;
+            case 3:
+                maxSymbols = 7;
+                break;
+            default:
+                maxSymbols = 9;
+                break;
+        }
+        GameManager.gm.ringRoomPro++;
         room = GetComponentInParent<Room_Main>();
         foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
         {
@@ -38,6 +58,13 @@ public class Room_Ring : MonoBehaviour
             randomQuestion = Random.Range(0, pole[r].Questions.Count - 1);
             pole[r].answer = pole[r].Solutions[randomQuestion];
             pole[r].question = pole[r].Questions[randomQuestion];
+            while (pole[r].question.Length > maxSymbols)
+            {
+                randomQuestion = Random.Range(0, pole[r].Questions.Count - 1);
+                pole[r].answer = pole[r].Solutions[randomQuestion];
+                pole[r].question = pole[r].Questions[randomQuestion];
+            }
+
             int y = 0;
             for (int i = 0; i < pole[r].question.Length; i++)
             {
