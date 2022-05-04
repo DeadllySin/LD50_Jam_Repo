@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
     {
         if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true || AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
         {
+            Debug.Log("ceiling is movin");
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
 
         }
