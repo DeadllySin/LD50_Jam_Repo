@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class Room_Ring : MonoBehaviour
 {
-    private int[] ringsOnSide = new int[2];
-    private int randomQuestion;
-    public float[] y_pos;
+    [SerializeField] private float[] y_pos;
     [SerializeField] private float x_pos, z_pos;
-    [HideInInspector] public bool[] solutionCorrect = new bool[2];
-    public GameObject[] symbol;
-    public Pole[] pole;
+    [SerializeField] private GameObject[] symbol;
+    [SerializeField] private Pole[] pole;
     private Room_Main room;
     private int maxSymbols;
+    private int[] ringsOnSide = new int[2];
+    private int randomQuestion;
+    [HideInInspector] public bool[] solutionCorrect = new bool[2];
 
     private void Awake()
     {
@@ -135,16 +135,8 @@ public class Room_Ring : MonoBehaviour
                 pole[poleIndex].slot[ringMovedIndex].ring = null;
                 ringsOnSide[poleIndex] += 1;
 
-                if (int.Parse(pole[poleIndex].answer) == ringsOnSide[poleIndex])
-                {
-                    solutionCorrect[poleIndex] = true;
-                    //Debug.Log(int.Parse(pole[poleIndex].answer) + "true " + ringsOnSide[poleIndex]);
-                }
-                else
-                {
-                    solutionCorrect[poleIndex] = false;
-                    //Debug.Log(int.Parse(pole[poleIndex].answer) + "false " + ringsOnSide[poleIndex]);
-                }
+                if (int.Parse(pole[poleIndex].answer) == ringsOnSide[poleIndex]) solutionCorrect[poleIndex] = true;
+                else solutionCorrect[poleIndex] = false;
                 OnValueChanged();
                 return;
             }
