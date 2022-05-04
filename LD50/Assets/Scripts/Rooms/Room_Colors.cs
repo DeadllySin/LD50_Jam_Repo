@@ -29,10 +29,7 @@ public class Room_Colors : MonoBehaviour
             case 3:
                 colAmount = colorAmountProgress[1];
                 break;
-            case 4:
-                colAmount = colorAmountProgress[2];
-                break;
-            case 5:
+            default:
                 colAmount = colorAmountProgress[2];
                 break;
 
@@ -79,33 +76,17 @@ public class Room_Colors : MonoBehaviour
         colorsPressed.Add(col);
         butPressed += 1;
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pColorPress);
-        if (butPressed == colAmount)
-        {
-            OnValueChanged();
-        }
-
+        if (butPressed == colAmount) OnValueChanged();
     }
 
     public void OnValueChanged()
     {
         for (int i = 0; i < colorOrder.Count; i++)
         {
-            if (colorOrder[i] == colorsPressed[i])
-            {
-                pressedCorr++;
-            }
+            if (colorOrder[i] == colorsPressed[i]) pressedCorr++;
         }
-        if (pressedCorr == colorOrder.Count)
-        {
-            main.state = "perfect";
-        }
-        if (pressedCorr == colorOrder.Count - 1)
-        {
-            main.state = "ok";
-        }
-        else if (colorsPressed.Count > colorOrder.Count)
-        {
-            main.state = "bad";
-        }
+        if (pressedCorr == colorOrder.Count) main.state = "perfect";
+        else if (pressedCorr == colorOrder.Count - 1) main.state = "ok";
+        else if (colorsPressed.Count > colorOrder.Count) main.state = "bad";
     }
 }
