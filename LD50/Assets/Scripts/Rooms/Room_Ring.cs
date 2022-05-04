@@ -13,7 +13,7 @@ public class Room_Ring : MonoBehaviour
     private Room_Main room;
     private int maxSymbols;
 
-    private void Awake()
+    private void Start()
     {
         switch (GameManager.gm.ringRoomPro)
         {
@@ -29,9 +29,13 @@ public class Room_Ring : MonoBehaviour
             case 3:
                 maxSymbols = 7;
                 break;
-            default:
+            case 4:
                 maxSymbols = 9;
                 break;
+            case 5:
+                maxSymbols = 9;
+                break;
+
         }
         GameManager.gm.ringRoomPro++;
         room = GetComponentInParent<Room_Main>();

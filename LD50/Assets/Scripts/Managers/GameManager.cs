@@ -40,22 +40,22 @@ public class GameManager : MonoBehaviour
     private float startTime;
     private string minutes;
     private string seconds;
-    
     bool isPaused;
+
+    [SerializeField] private GameObject playerCine;
+    [SerializeField] private GameObject cutsceneCine;
+    [SerializeField] private GameObject door;
 
     private void Awake()
     {
+        gm = this;
         //defaultSpeed = ceilingSpeedScale(defaultSpeed, 0f, 10f, 0f, 0.5f);
         //Debug.Log(defaultSpeed);
-
         //Speed up testing
         //Time.timeScale = 2;
-        
         //Timer
         startTime = Time.time;
-        
         ceilingSpeed = defaultSpeed;
-        gm = this;
         currRoom = FindObjectOfType<Room_Main>().gameObject;
         currTunnel = FindObjectOfType<Tunnel>();
         ceilingSourceChild = player.transform.GetChild(3).gameObject;
@@ -63,6 +63,15 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        if (!GameState.gs.skipCutscene)
+        {
+            cutsceneCine.SetActive(true);
+        }
+        else
+        {
+            playerCine.SetActive(true);
+            door.SetActive(true);
+        }
         //set to the button when there's one
         //FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingDebris);

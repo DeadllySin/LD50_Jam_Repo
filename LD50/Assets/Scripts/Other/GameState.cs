@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameState : MonoBehaviour
 {
     public static GameState gs;
-    public bool playTheCutsceneOnlyOnce;
+    public bool skipCutscene;
     [SerializeField] private Image progressBar;
     [SerializeField] private int nextSceneIndex;
     //[SerializeField] private Text loadText;
@@ -41,7 +41,7 @@ public class GameState : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

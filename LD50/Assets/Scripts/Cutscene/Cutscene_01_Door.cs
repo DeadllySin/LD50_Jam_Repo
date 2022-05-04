@@ -13,7 +13,7 @@ public class Cutscene_01_Door : MonoBehaviour
     [SerializeField] private GameObject cineCutscene;
     private StarterAssets.FirstPersonController fps;
 
-    private void Start()
+    public void StartCutscene()
     {
         fps = player.GetComponent<StarterAssets.FirstPersonController>();
         StartCoroutine(play());
