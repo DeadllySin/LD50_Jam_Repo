@@ -9,13 +9,16 @@ public class DeathMenu : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             GameState.gs.skipCutscene = true;
+            AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
+            AudioManager.am.FMODRestarted = true;
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             GameState.gs.skipCutscene = false;
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
+            AudioManager.am.FMOD_MainMenuState();
+            GameState.gs.introFinished = false;
         }
         if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
     }

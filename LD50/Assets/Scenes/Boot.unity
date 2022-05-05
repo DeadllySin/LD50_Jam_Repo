@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 61787876}
   - component: {fileID: 61787875}
   - component: {fileID: 61787874}
-  - component: {fileID: 61787877}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -154,7 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2722043060003e4e97e762206a8a2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicIntroTrigger: 0
+  FMODIntroDoOnce: 1
+  CBStartCounter: 0
+  CBFinalCounter: 0
+  CBStarted: 0
+  CBDeath: 0
   musicCallBackInstance:
     Guid:
       Data1: 1129507240
@@ -174,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03531af918adc0b48a22c304cdf18bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playIntroMusic: 1
+  FMODRestarted: 0
   footsteps:
     Guid:
       Data1: 1880838797
@@ -329,6 +332,13 @@ MonoBehaviour:
       Data3: 758568595
       Data4: 2088136972
     Path: event:/UI/UI_Click
+  pauseSS:
+    Guid:
+      Data1: -1430503589
+      Data2: 1187315118
+      Data3: 1677360046
+      Data4: 1494430627
+    Path: snapshot:/PauseMenu
 --- !u!4 &61787876
 Transform:
   m_ObjectHideFlags: 0
@@ -343,26 +353,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &61787877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61787873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2722043060003e4e97e762206a8a2ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicIntroTrigger: 0
-  musicCallBackInstance:
-    Guid:
-      Data1: 1129507240
-      Data2: 1260476724
-      Data3: 1320635057
-      Data4: 645242537
-    Path: event:/Music/Main_Music
 --- !u!1 &399166696
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368655d35958fc546aabb3d53ef1c041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipCutscene: 0
+  skipCutscene: 1
+  introFinished: 0
   progressBar: {fileID: 0}
   nextSceneIndex: 1

@@ -5,7 +5,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager am;
     GameManager gm;
 
-    public bool playIntroMusic = true;
+    public bool FMODRestarted = false;
 
     [Header("Player")]
     public FMODUnity.EventReference footsteps; //movement
@@ -48,7 +48,17 @@ public class AudioManager : MonoBehaviour
     public FMOD.Studio.Bus gameplayBus;
     public FMOD.Studio.Bus musicBus;
     public FMOD.Studio.Bus UIBus;
-    [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;    
+
+    [Header("Snapshots")]
+    public FMODUnity.EventReference pauseSS;
+
+    //Generic Enviromental and Audio Instances
+    [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
+    [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
+    [HideInInspector] public FMOD.Studio.EventInstance ceilingLoopInstance;
+    
+    //Snapshots
+    [HideInInspector] public FMOD.Studio.EventInstance pauseSSInstance;
 
 
     public void Awake()
@@ -66,31 +76,97 @@ public class AudioManager : MonoBehaviour
     }
     void Start()
     {
+        FMODRestarted = false;
+
         masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
         gameplayBus = FMODUnity.RuntimeManager.GetBus("bus:/Gameplay_Bus");
         musicBus = FMODUnity.RuntimeManager.GetBus("bus:/Music_Bus");
         UIBus = FMODUnity.RuntimeManager.GetBus("bus:/UI_Bus");
-        
+
         menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
-        
+        pauseSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.pauseSS);
         if (GameState.gs.skipCutscene == true)
         {
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
-            am.GetComponent<A_MusicCallBack>().musicInstance.start();
-            am.GetComponent<A_MusicCallBack>().musicIntroTrigger = false;
+            FMOD_InGameState();
         }
         else
         {
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
-            menuMusicInstance.start();
+            FMOD_MainMenuState();
         }
+    }
 
+    public void FMOD_InGameState()
+    {
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
         
+        am.menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        am.menuMusicInstance.release();
+        am.GetComponent<A_MusicCallBack>().musicInstance.start();
+        am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
+        FMODRestarted = true;
+    }
+
+    public void FMOD_MainMenuState()
+    {
+        FMODRestarted = false;
+
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
+        pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        FMOD_StopCeilingLoop();
+        menuMusicInstance.start();
+    }
+
+    public void FMOD_PauseState()
+    {
+        pauseSSInstance.start();
+    }
+
+    public void FMOD_DeadState()
+    {
+        //FMODUnity.RuntimeManager.PlayOneShot(am.deathSFX);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
+
+        ceilingLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        ceilingLoopInstance.release();
+        ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        ceilingDebrisInstance.release();
+    }
+
+    public void FMOD_PlayCeilingLoop()
+    {
+        ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(am.ceilingDebris);
+        ceilingDebrisInstance.start();
+        ceilingLoopInstance = FMODUnity.RuntimeManager.CreateInstance(am.ceilingLoop);
+        ceilingLoopInstance.start();
+    }
+
+    public void FMOD_StopCeilingLoop()
+    {
+        ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        ceilingDebrisInstance.release();
+        ceilingLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        ceilingLoopInstance.release();
+    }    
+
+    public void FMOD_LoadInGameInstances()
+    {
+
     }
     void Update()
     {
-
+        if (GameState.gs.introFinished == true)
+        {
+            if (FMODRestarted == true)
+            {
+                //ceilingDebrisInstance.start();
+            }
+        }
+        else if (GameState.gs.introFinished == false)
+        {
+            //ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
     }
 }

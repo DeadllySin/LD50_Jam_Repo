@@ -7,6 +7,7 @@ public class GameState : MonoBehaviour
 {
     public static GameState gs;
     public bool skipCutscene;
+    public bool introFinished = false;
     [SerializeField] private Image progressBar;
     [SerializeField] private int nextSceneIndex;
     //[SerializeField] private Text loadText;

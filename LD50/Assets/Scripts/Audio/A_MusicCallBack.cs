@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class A_MusicCallBack : MonoBehaviour
 {
-    public bool musicIntroTrigger = true;
-
+    public bool FMODIntroDoOnce = true;
+    public bool CBDeath = false;
     class TimelineInfo
     {
         public int currentMusicBar = 0;
@@ -46,7 +46,7 @@ public class A_MusicCallBack : MonoBehaviour
         //musicInstance.start();
 
         // control variables
-        //musicIntroTrigger = false;
+
     }
 
     void OnDestroy()
@@ -59,31 +59,44 @@ public class A_MusicCallBack : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
+        //GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
     }
 
     void Update()
     {
-        if (timelineInfo.currentMusicBar >= 9 && musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
+        if ((string)timelineInfo.lastMarker == "Death")
         {
-            
-            GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoop();
-            Debug.Log("Playing skipped intro Ceiling Loop");
-            musicIntroTrigger = true;
-
-            return;
+            CBDeath = true;
         }
-        else if (timelineInfo.currentMusicBar >= 9 && AudioManager.am.playIntroMusic == true)
+        else
         {
-            musicIntroTrigger = true;
-            AudioManager.am.playIntroMusic = false;
-            
-            GameManager.gm.GetComponent<GameManager>().FMOD_PlayCeilingLoop();
-            Debug.Log("Play Intro Music and Ceiling Loop after");
-            //Debug.Log("SET SOMETHING FANCY PLAYING WHEN CEILING IS ON THRESHOLD");
-
+            CBDeath = false;
         }
 
+        if (timelineInfo.currentMusicBar >= 9)
+        {
+            if (FMODIntroDoOnce == false && GameState.gs.introFinished == true && AudioManager.am.FMODRestarted == true)
+            {
+                FMODIntroDoOnce = true;
+                GameState.gs.introFinished = true;
+
+                AudioManager.am.FMOD_PlayCeilingLoop();
+                Debug.Log("Skipped intro and play Ceiling Loop");
+
+                //return;
+            }
+
+            else if (FMODIntroDoOnce == false && GameState.gs.introFinished == false)
+            {
+                FMODIntroDoOnce = true;
+                AudioManager.am.FMODRestarted = false;
+                GameState.gs.introFinished = true;
+
+                AudioManager.am.FMOD_PlayCeilingLoop();
+                Debug.Log("Play Intro Sequence and Ceiling Loop after");
+                //Debug.Log("SET SOMETHING FANCY PLAYING WHEN CEILING IS ON THRESHOLD");
+            }
+        }
     }
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]

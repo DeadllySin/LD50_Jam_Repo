@@ -19,14 +19,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerCine;
     [SerializeField] private GameObject cutsceneCine;
     [SerializeField] private GameObject door;
-
-    FMOD.Studio.EventInstance ceilingLoopInstance;
-    [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
-
+    
     [Header("UI")]
     [SerializeField] private Text scoreText;
     public Text lookingAtText;
     [SerializeField] private GameObject deathScreen;
+    [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject mainMenu;
 
     [Header("Ceiling")]
     public GameObject ceiling;
@@ -64,28 +63,33 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("not skipped");
             cutsceneCine.SetActive(true);
-
         }
         else
         {
             Debug.Log("skipped");
             playerCine.SetActive(true);
             door.SetActive(true);
+            
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
             FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         }
-
-        ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingDebris);
-        //ceilingDebrisInstance.start();
     }
     private void FixedUpdate()
     {
+        Debug.Log(AudioManager.am.GetComponent<A_MusicCallBack>().CBDeath);
         if (!isDead)
         {
             if (ceiling.transform.position.y <= thresholdToSlower)
             {
                 ceilingSpeed = slowThresholdSpeed;
-                if (ceiling.transform.position.y < deathHeight) OnDeath();
+                if (ceiling.transform.position.y < deathHeight)
+                {
+                    FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
+                    if (AudioManager.am.GetComponent<A_MusicCallBack>().CBDeath == true)
+                    {
+                        OnDeath();
+                    }
+                }
             }
         }
     }
@@ -97,9 +101,9 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == true || AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
+        if (GameState.gs.introFinished == true) //|| AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce == true)
         {
-            Debug.Log("ceiling is movin");
+            Debug.Log("ceiling is moving");
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
 
         }
@@ -109,10 +113,36 @@ public class GameManager : MonoBehaviour
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
         }*/
 
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            if (pauseScreen.activeSelf)//unpause
+            {
+                pauseScreen.SetActive(false);
+                player.SetActive(true);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                Debug.Log("unpause");
+                
+                AudioManager.am.pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
+
+            else if (!pauseScreen.activeSelf && !mainMenu.activeSelf && GameState.gs.introFinished == true) //pause
+            {
+                pauseScreen.SetActive(true);
+                player.SetActive(false);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                Debug.Log("pause");
+                
+                AudioManager.am.pauseSSInstance.start();
+            }
+
+        }
+
         //Fmod stuff
         ceilingSourceChild.transform.position = new Vector3(player.transform.position.x, ceiling.transform.position.y - 0.5f, player.transform.position.z);
-        ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
-        ceilingDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
+        AudioManager.am.ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
+        AudioManager.am.ceilingDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceilingSourceChild.transform.position.y);
         //Debug.Log("Height: " + ceilingSourceChild.transform.position.y);
     }
@@ -124,27 +154,12 @@ public class GameManager : MonoBehaviour
         scoreText.text = "You Cleared " + roomsCleared + " Rooms!\n Your Highscore is " + PlayerPrefs.GetInt("roomsCleared");
         deathScreen.SetActive(true);
         player.SetActive(false);
-        
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.deathSFX);
-        ceilingLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        ceilingLoopInstance.release();
-        ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        ceilingDebrisInstance.release();
-        AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger = false;
-        // find a way to release in game music instance after death screen and restart
+        AudioManager.am.FMOD_DeadState();
 
         //timer
         float t = Time.time - startTime;
         minutes = ((int)t / 60).ToString();
         seconds = (t % 60).ToString("f0");
         Debug.Log(minutes + " mins" + seconds + " secs");
-    }
-
-    public void FMOD_PlayCeilingLoop()
-    {
-        ceilingLoopInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.ceilingLoop);
-        ceilingLoopInstance.start();
     }
 }
