@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerCine;
     [SerializeField] private GameObject cutsceneCine;
     [SerializeField] private GameObject door;
-    
+
     [Header("UI")]
     [SerializeField] private Text scoreText;
     public Text lookingAtText;
@@ -69,14 +69,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("skipped");
             playerCine.SetActive(true);
             door.SetActive(true);
-            
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         }
     }
     private void FixedUpdate()
     {
-        Debug.Log(AudioManager.am.GetComponent<A_MusicCallBack>().CBDeath);
         if (!isDead)
         {
             if (ceiling.transform.position.y <= thresholdToSlower)
@@ -107,13 +103,12 @@ public class GameManager : MonoBehaviour
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
 
         }
+            /*else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
+            {
+                ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
+            }*/
 
-        /*else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
-        {
-            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
-        }*/
-
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+            if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             if (pauseScreen.activeSelf)//unpause
             {
