@@ -23,7 +23,6 @@ public class Cutscene_01_Door : MonoBehaviour
     {
         fps = player.GetComponent<StarterAssets.FirstPersonController>();
         StartCoroutine(play());
-        StartCoroutine(doorEnu());  
     }
 
     [System.Obsolete]
@@ -47,33 +46,19 @@ public class Cutscene_01_Door : MonoBehaviour
         door.GetComponent<Animator>().SetTrigger("isOpen");
     }
 
-    public void Anim_CloseDoor()
+    public void Anim_EnableDoor()
     {
-        door.GetComponent<Animator>().SetTrigger("isClosed");
+        dooropen.SetActive(true);
     }
 
     public void Anim_PressButton()
     {
         butt.GetComponent<Animator>().SetTrigger("isPressed");
     }
-    IEnumerator doorEnu()
+
+    public void Anim_DeleteDoor()
     {
-        yield return new WaitForSeconds(7.5f);
-        butt.GetComponent<Animator>().SetTrigger("isPressed");
-        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pConfirm);
-        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
-
-        yield return new WaitForSeconds(2.9f);
-        door.GetComponent<Animator>().SetTrigger("isOpen");
-        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen);
-
-        yield return new WaitForSeconds(2f);
         door.SetActive(false);
-        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose);
-        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
-
-        yield return new WaitForSeconds(doorClose);
-        dooropen.SetActive(true);
     }
 
     IEnumerator play()
