@@ -62,9 +62,9 @@ public class AudioManager : MonoBehaviour
 
     //Slider
     [SerializeField] [Range (0f, 100f)]
-    //public float masterVolume;
-
     public float masterVolume;
+
+    
 
     public void Awake()
     {
@@ -81,6 +81,8 @@ public class AudioManager : MonoBehaviour
     }
     void Start()
     {
+        //Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
         FMODRestarted = false;
 
         masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
@@ -92,9 +94,11 @@ public class AudioManager : MonoBehaviour
 
         menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
         pauseSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.pauseSS);
+        
         if (GameState.gs.skipCutscene == true)
         {
             FMOD_InGameState();
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
         }
         else
         {
@@ -111,7 +115,7 @@ public class AudioManager : MonoBehaviour
         am.menuMusicInstance.release();
         am.GetComponent<A_MusicCallBack>().musicInstance.start();
         am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
-        FMODRestarted = true;
+        //FMODRestarted = true;
     }
 
     public void FMOD_MainMenuState()
@@ -175,14 +179,13 @@ public class AudioManager : MonoBehaviour
         {
             //ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
-
-        FMOD_MasterSlider();
-
-
+        
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("OptionsVolume", masterVolume);
+        //need testing cursor doesnt click 
     }
 
-    public void FMOD_MasterSlider()
+    public void FMOD_MasterSlider(float newMasterVolume)
     {
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("OptionsVolume", masterVolume);
+        masterVolume = newMasterVolume;
     }
 }

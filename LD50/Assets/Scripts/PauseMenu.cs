@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             //GameState.gs.skipCutscene = true;
             //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
-            //AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger = false;
+            //AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger = false;            
         }
         if (Input.GetKeyDown(KeyCode.M))
         {

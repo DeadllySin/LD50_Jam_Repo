@@ -23,7 +23,7 @@ public class Cutscene_01_Door : MonoBehaviour
     {
         fps = player.GetComponent<StarterAssets.FirstPersonController>();
         StartCoroutine(play());
-        //StartCoroutine(doorEnu());  
+        StartCoroutine(doorEnu());  
     }
 
     [System.Obsolete]
@@ -56,7 +56,7 @@ public class Cutscene_01_Door : MonoBehaviour
     {
         butt.GetComponent<Animator>().SetTrigger("isPressed");
     }
-    /*IEnumerator doorEnu()
+    IEnumerator doorEnu()
     {
         yield return new WaitForSeconds(7.5f);
         butt.GetComponent<Animator>().SetTrigger("isPressed");
@@ -74,7 +74,7 @@ public class Cutscene_01_Door : MonoBehaviour
 
         yield return new WaitForSeconds(doorClose);
         dooropen.SetActive(true);
-    }*/
+    }
 
     IEnumerator play()
     {

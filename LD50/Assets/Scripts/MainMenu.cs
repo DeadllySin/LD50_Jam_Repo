@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
         GameState.gs.introFinished = false;
         AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = true;
         AudioManager.am.FMOD_InGameState();
-        AudioManager.am.FMOD_LoadInGameInstances();
+        //AudioManager.am.FMOD_LoadInGameInstances();
     }
 
     public void QuitGame()

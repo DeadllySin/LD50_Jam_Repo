@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private Text scoreText;
+    [SerializeField] private Text timeText;
     public Text lookingAtText;
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject pauseScreen;
@@ -97,17 +98,14 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        //Debug control variables
+        //Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart" + AudioManager.am.FMODRestarted);
         if (GameState.gs.introFinished == true) //|| AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce == true)
         {
             Debug.Log("ceiling is moving");
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
 
         }
-            /*else if (AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger == false && AudioManager.am.playIntroMusic == false)
-            {
-                ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
-            }*/
-
             if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             if (pauseScreen.activeSelf)//unpause
@@ -147,6 +145,7 @@ public class GameManager : MonoBehaviour
         isDead = true;
         if (roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
         scoreText.text = "You Cleared " + roomsCleared + " Rooms!\n Your Highscore is " + PlayerPrefs.GetInt("roomsCleared");
+        timeText.text = "You lasted " + minutes + " minutes and " + seconds + " seconds!";
         deathScreen.SetActive(true);
         player.SetActive(false);
         AudioManager.am.FMOD_DeadState();
