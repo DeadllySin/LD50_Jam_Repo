@@ -23,7 +23,7 @@ public class Cutscene_01_Door : MonoBehaviour
     {
         fps = player.GetComponent<StarterAssets.FirstPersonController>();
         StartCoroutine(play());
-        StartCoroutine(doorEnu());  
+        //StartCoroutine(doorEnu());  
     }
 
     [System.Obsolete]
@@ -41,25 +41,40 @@ public class Cutscene_01_Door : MonoBehaviour
             dustStorm.playbackSpeed = Mathf.Lerp(spedVFXSpeed, normalVFXSpeed, VFXFade);
         }
     }
-    IEnumerator doorEnu()
+
+    public void Anim_OpenDoor()
+    {
+        door.GetComponent<Animator>().SetTrigger("isOpen");
+    }
+
+    public void Anim_CloseDoor()
+    {
+        door.GetComponent<Animator>().SetTrigger("isClosed");
+    }
+
+    public void Anim_PressButton()
+    {
+        butt.GetComponent<Animator>().SetTrigger("isPressed");
+    }
+    /*IEnumerator doorEnu()
     {
         yield return new WaitForSeconds(7.5f);
         butt.GetComponent<Animator>().SetTrigger("isPressed");
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pConfirm);
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
+        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pConfirm);
+        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
 
         yield return new WaitForSeconds(2.9f);
         door.GetComponent<Animator>().SetTrigger("isOpen");
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen);
+        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorOpen);
 
         yield return new WaitForSeconds(2f);
         door.SetActive(false);
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose);
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
+        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose);
+        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
 
         yield return new WaitForSeconds(doorClose);
         dooropen.SetActive(true);
-    }
+    }*/
 
     IEnumerator play()
     {
