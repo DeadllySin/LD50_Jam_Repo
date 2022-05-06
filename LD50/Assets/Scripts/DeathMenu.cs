@@ -13,6 +13,7 @@ public class DeathMenu : MonoBehaviour
             AudioManager.am.FMODRestarted = true;
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
             FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
+            //re enable sandstorm
         }
         if (Input.GetKeyDown(KeyCode.M))
         {

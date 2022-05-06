@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
         firstButton.Select();
     }
 
+    [System.Obsolete]
     public void StartGame()
     {
         cutscene.GetComponent<Cutscene_01_Door>().StartCutscene();
