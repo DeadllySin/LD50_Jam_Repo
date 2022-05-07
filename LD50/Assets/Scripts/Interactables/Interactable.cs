@@ -18,7 +18,6 @@ public class Interactable : MonoBehaviour
         }
 
         ph = GameManager.gm.player.GetComponent<PlayerHand>();
-        GameManager.gm.lookingAtText.text = "E to Interact";
         if (onEnter != null) onEnter.Invoke();
         ph.handTarget = this.gameObject;
         ph.lookingAt = type;
@@ -27,7 +26,6 @@ public class Interactable : MonoBehaviour
     private void OnMouseExit()
     {
         if (onExit != null) onExit.Invoke();
-        GameManager.gm.lookingAtText.text = null;
         ph.lookingAt = "none";
         if (gameObject.GetComponent<Renderer>()) GetComponent<Renderer>().material.color = col;
         ph.handTarget = null;

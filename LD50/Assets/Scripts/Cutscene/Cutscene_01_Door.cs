@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Cutscene_01_Door : MonoBehaviour
@@ -23,19 +22,13 @@ public class Cutscene_01_Door : MonoBehaviour
     FMOD.Studio.EventInstance doorCloseInstance;
 
     [System.Obsolete]
-    public void StartCutscene()
-    {
-        fps = player.GetComponent<StarterAssets.FirstPersonController>();
-        StartCoroutine(play());
-    }
-
-    [System.Obsolete]
     private void Start()
     {
+        fps = player.GetComponent<StarterAssets.FirstPersonController>();
+        fps.MoveSpeed = 0;
         dustStorm.playbackSpeed = spedVFXSpeed;
         doorOpenInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.doorOpen);
         doorCloseInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.doorClose);
-        
     }
 
     [System.Obsolete]
@@ -47,17 +40,18 @@ public class Cutscene_01_Door : MonoBehaviour
             dustStorm.playbackSpeed = Mathf.Lerp(spedVFXSpeed, normalVFXSpeed, VFXFade);
             //Anim_FadeParticles(); to finish fade out partciles
         }
-        
+
         if (dooropen.activeSelf)
         {
             Anim_FadeParticles();
         }
 
-            doorOpenInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(door));
+        doorOpenInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(door));
         //doorOpenInstance.setVolume(AudioManager.am.sfxVolume);
         doorCloseInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(door));
     }
 
+    [System.Obsolete]
     public void Anim_FadeParticles()
     {
         VFXFade -= Time.deltaTime / 2.5f;
@@ -66,11 +60,11 @@ public class Cutscene_01_Door : MonoBehaviour
         col.a = col.a * VFXFade;
 
         //dustStorm.playbackSpeed = Mathf.Lerp(spedVFXSpeed, normalVFXSpeed, VFXFade);
-        
+
         Debug.Log("final" + col.a);
         dustStorm.startColor = col;
     }
-    
+
     public void Anim_OpenDoor()
     {
         door.GetComponent<Animator>().SetTrigger("isOpen");
@@ -99,13 +93,11 @@ public class Cutscene_01_Door : MonoBehaviour
     public void Anim_ReleaseFMODInstances()
     {
         doorOpenInstance.release();
-        doorCloseInstance.release();    
+        doorCloseInstance.release();
     }
 
-    IEnumerator play()
+    public void turnPlayerOn()
     {
-        fps.MoveSpeed = 0;
-        yield return new WaitForSeconds(24);
         player.transform.position = this.transform.position;
         cineCutscene.SetActive(false);
         cinePlayer.SetActive(true);

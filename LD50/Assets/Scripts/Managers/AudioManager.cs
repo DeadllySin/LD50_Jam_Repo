@@ -56,15 +56,16 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
     [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingLoopInstance;
-    
+
     //Snapshots
     [HideInInspector] public FMOD.Studio.EventInstance pauseSSInstance;
 
     //Slider
-    [SerializeField] [Range (0f, 100f)]
+    [SerializeField]
+    [Range(0f, 100f)]
     public float masterVolume;
 
-    
+
 
     public void Awake()
     {
@@ -94,7 +95,7 @@ public class AudioManager : MonoBehaviour
 
         menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
         pauseSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.pauseSS);
-        
+
         if (GameState.gs.skipCutscene == true)
         {
             FMOD_InGameState();
@@ -110,7 +111,7 @@ public class AudioManager : MonoBehaviour
     {
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
-        
+
         am.menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         am.menuMusicInstance.release();
         am.GetComponent<A_MusicCallBack>().musicInstance.start();
@@ -160,7 +161,7 @@ public class AudioManager : MonoBehaviour
         ceilingDebrisInstance.release();
         ceilingLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         ceilingLoopInstance.release();
-    }    
+    }
 
     public void FMOD_LoadInGameInstances()
     {
@@ -179,7 +180,7 @@ public class AudioManager : MonoBehaviour
         {
             //ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
-        
+
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("OptionsVolume", masterVolume);
         //need testing cursor doesnt click 
     }

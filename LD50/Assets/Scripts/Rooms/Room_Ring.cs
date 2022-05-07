@@ -7,7 +7,7 @@ public class Room_Ring : MonoBehaviour
     [SerializeField] private float x_pos, z_pos;
     [SerializeField] private GameObject[] symbol;
     [SerializeField] private Pole[] pole;
-    private Room_Main room;
+    private Room_Main main;
     private int maxSymbols;
     private int[] ringsOnSide = new int[2];
     private int randomQuestion;
@@ -38,7 +38,7 @@ public class Room_Ring : MonoBehaviour
 
         }
         GameManager.gm.ringRoomPro++;
-        room = GetComponentInParent<Room_Main>();
+        main = GetComponentInParent<Room_Main>();
         foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
         {
             if (line.Length >= 9) break;
@@ -77,6 +77,7 @@ public class Room_Ring : MonoBehaviour
                     if (char.Parse(symbol[j].name) == pole[r].question[i])
                     {
                         GameObject sym = Instantiate(symbol[j], pole[r].questionSpawners[y].position, Quaternion.identity);
+                        sym.transform.parent = main.transform;
                         sym.transform.localScale = new Vector3(-1, 1, 1);
                         y++;
                     }
@@ -151,13 +152,13 @@ public class Room_Ring : MonoBehaviour
         switch (correctSolutions)
         {
             case 0:
-                room.state = "bad";
+                main.state = "bad";
                 break;
             case 1:
-                room.state = "ok";
+                main.state = "ok";
                 break;
             case 2:
-                room.state = "perfect";
+                main.state = "perfect";
                 break;
         }
     }

@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Text scoreText;
     [SerializeField] private Text timeText;
-    public Text lookingAtText;
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject mainMenu;
@@ -106,7 +105,7 @@ public class GameManager : MonoBehaviour
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
 
         }
-            if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseScreen.activeSelf)//unpause
             {
@@ -115,7 +114,7 @@ public class GameManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 Debug.Log("unpause");
-                
+
                 AudioManager.am.pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             }
 
@@ -126,7 +125,7 @@ public class GameManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 Debug.Log("pause");
-                
+
                 AudioManager.am.pauseSSInstance.start();
             }
 

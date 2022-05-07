@@ -28,7 +28,7 @@ public class A_MusicCallBack : MonoBehaviour
     public void Start()
     {
         DontDestroyOnLoad(this.gameObject);
-        
+
         timelineInfo = new TimelineInfo();
 
         // Explicitly create the delegate object and assign it to a member so it doesn't get freed
