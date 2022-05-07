@@ -11,7 +11,7 @@ public class Cutscene_01_Door : MonoBehaviour
     [SerializeField] private GameObject cinePlayer;
     [SerializeField] private GameObject cineCutscene;
     private StarterAssets.FirstPersonController fps;
-    [SerializeField] ParticleSystem dustStorm;
+    //[SerializeField] ParticleSystem dustStorm;
 
     float normalVFXSpeed = 1f;
     float spedVFXSpeed = 3f;
@@ -26,7 +26,7 @@ public class Cutscene_01_Door : MonoBehaviour
     {
         fps = player.GetComponent<StarterAssets.FirstPersonController>();
         fps.MoveSpeed = 0;
-        dustStorm.playbackSpeed = spedVFXSpeed;
+        //dustStorm.playbackSpeed = spedVFXSpeed;
         doorOpenInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.doorOpen);
         doorCloseInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.doorClose);
     }
@@ -34,12 +34,12 @@ public class Cutscene_01_Door : MonoBehaviour
     [System.Obsolete]
     private void Update()
     {
-        if (dustStorm.playbackSpeed >= normalVFXSpeed)
-        {
-            VFXFade += Time.deltaTime / 2.5f;
-            dustStorm.playbackSpeed = Mathf.Lerp(spedVFXSpeed, normalVFXSpeed, VFXFade);
-            //Anim_FadeParticles(); to finish fade out partciles
-        }
+       // if (dustStorm.playbackSpeed >= normalVFXSpeed)
+        //{
+        //    VFXFade += Time.deltaTime / 2.5f;
+      //      dustStorm.playbackSpeed = Mathf.Lerp(spedVFXSpeed, normalVFXSpeed, VFXFade);
+       //     //Anim_FadeParticles(); to finish fade out partciles
+     //   }
 
         if (dooropen.activeSelf)
         {
@@ -55,14 +55,14 @@ public class Cutscene_01_Door : MonoBehaviour
     public void Anim_FadeParticles()
     {
         VFXFade -= Time.deltaTime / 2.5f;
-        Color col = dustStorm.startColor;
-        Debug.Log("initial color " + col.a);
-        col.a = col.a * VFXFade;
+       // Color col = dustStorm.startColor;
+    //    Debug.Log("initial color " + col.a);
+       // col.a = col.a * VFXFade;
 
         //dustStorm.playbackSpeed = Mathf.Lerp(spedVFXSpeed, normalVFXSpeed, VFXFade);
 
-        Debug.Log("final" + col.a);
-        dustStorm.startColor = col;
+     //   Debug.Log("final" + col.a);
+       // dustStorm.startColor = col;
     }
 
     public void Anim_OpenDoor()

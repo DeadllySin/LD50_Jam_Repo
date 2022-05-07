@@ -8,6 +8,7 @@ public class Room_Ring : MonoBehaviour
     [SerializeField] private GameObject[] symbol;
     [SerializeField] private Pole[] pole;
     private Room_Main main;
+    [ SerializeField] private EnemyAI ai;
     private int maxSymbols;
     private int[] ringsOnSide = new int[2];
     private int randomQuestion;
@@ -77,8 +78,10 @@ public class Room_Ring : MonoBehaviour
                     if (char.Parse(symbol[j].name) == pole[r].question[i])
                     {
                         GameObject sym = Instantiate(symbol[j], pole[r].questionSpawners[y].position, Quaternion.identity);
-                        sym.transform.parent = main.transform;
+                        sym.transform.parent = this.transform;
                         sym.transform.localScale = new Vector3(-1, 1, 1);
+                        sym.transform.Rotate(0.0f, 270f, 0.0f, Space.World);
+                        sym.transform.localPosition = pole[r].questionSpawners[y].position;
                         y++;
                     }
                 }
@@ -153,11 +156,14 @@ public class Room_Ring : MonoBehaviour
         {
             case 0:
                 main.state = "bad";
+                ai.speed = 2;
                 break;
             case 1:
                 main.state = "ok";
+                ai.speed = 0;
                 break;
             case 2:
+                ai.speed = 0;
                 main.state = "perfect";
                 break;
         }
