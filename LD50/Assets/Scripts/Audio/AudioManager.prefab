@@ -234,7 +234,7 @@ MonoBehaviour:
       Data3: 1677360046
       Data4: 1494430627
     Path: snapshot:/PauseMenu
-  masterVolume: 0
+  masterVolume: 100
 --- !u!114 &4973544759690259808
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,8 @@ public class Room_Colors : MonoBehaviour
     private Room_Main main;
     private int pressedCorr;
 
-    FMOD.Studio.EventInstance colorOrderSFXInstance;
+    FMOD.Studio.EventInstance colorPressInstance;
+
     private void Awake()
     {
         switch (GameManager.gm.colorRoomPro)
@@ -37,6 +38,11 @@ public class Room_Colors : MonoBehaviour
         }
         GameManager.gm.colorRoomPro++;
         main = GetComponentInParent<Room_Main>();
+    }
+
+    private void Start()
+    {
+        colorPressInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.pColorPress);
     }
 
     IEnumerator colorOrderEnu()
@@ -72,19 +78,19 @@ public class Room_Colors : MonoBehaviour
                 Debug.Log("Error");
                 break;
             case "green":
-                Debug.Log("dada");
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderGreen", colorOb[0].gameObject);
                 break;
             case "blue":
-                Debug.Log("dada");
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderBlue", colorOb[2].gameObject);
                 break;
             case "red":
-                Debug.Log("dada");
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderRed", colorOb[1].gameObject);
                 break;
             case "yellow":
-                Debug.Log("dada");
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderYellow", colorOb[4].gameObject);
                 break;
             case "orange":
-                Debug.Log("dada");
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderOrange", colorOb[3].gameObject);
                 break;      
         } 
     }
@@ -103,6 +109,7 @@ public class Room_Colors : MonoBehaviour
     {
         colorsPressed.Add(col);
         butPressed += 1;
+        colorPressInstance.start();
         FMOD_PlayColorOrder(col);
         if (butPressed == colAmount) OnValueChanged();
     }
