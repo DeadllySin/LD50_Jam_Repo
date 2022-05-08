@@ -84,7 +84,8 @@ public class Room_Ring : MonoBehaviour
                         GameObject sym = Instantiate(symbol[j], pole[r].questionSpawners[y].position, Quaternion.identity);
                         sym.GetComponentInChildren<MeshRenderer>().material = pole[r].gem.material;
                         sym.transform.parent = pole[r].questionSpawners[y].parent;
-                        sym.transform.Rotate(0.0f, 270f, 0.0f, Space.World);
+                        if(r == 0) sym.transform.Rotate(0.0f, 270f, 0.0f, Space.World);
+                        else sym.transform.Rotate(0.0f, 90f, 0.0f, Space.World);
                         sym.transform.position = pole[r].questionSpawners[y].position;
                         y++;
                     }
