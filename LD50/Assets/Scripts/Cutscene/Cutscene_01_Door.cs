@@ -11,11 +11,6 @@ public class Cutscene_01_Door : MonoBehaviour
     [SerializeField] private GameObject cinePlayer;
     [SerializeField] private GameObject cineCutscene;
     private StarterAssets.FirstPersonController fps;
-    //[SerializeField] ParticleSystem dustStorm;
-
-    float normalVFXSpeed = 1f;
-    float spedVFXSpeed = 3f;
-    float VFXFade = 0f;
 
     //FMOD
     FMOD.Studio.EventInstance doorOpenInstance;
@@ -34,35 +29,9 @@ public class Cutscene_01_Door : MonoBehaviour
     [System.Obsolete]
     private void Update()
     {
-       // if (dustStorm.playbackSpeed >= normalVFXSpeed)
-        //{
-        //    VFXFade += Time.deltaTime / 2.5f;
-      //      dustStorm.playbackSpeed = Mathf.Lerp(spedVFXSpeed, normalVFXSpeed, VFXFade);
-       //     //Anim_FadeParticles(); to finish fade out partciles
-     //   }
-
-        if (dooropen.activeSelf)
-        {
-            Anim_FadeParticles();
-        }
-
         doorOpenInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(door));
         //doorOpenInstance.setVolume(AudioManager.am.sfxVolume);
         doorCloseInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(door));
-    }
-
-    [System.Obsolete]
-    public void Anim_FadeParticles()
-    {
-        VFXFade -= Time.deltaTime / 2.5f;
-       // Color col = dustStorm.startColor;
-    //    Debug.Log("initial color " + col.a);
-       // col.a = col.a * VFXFade;
-
-        //dustStorm.playbackSpeed = Mathf.Lerp(spedVFXSpeed, normalVFXSpeed, VFXFade);
-
-     //   Debug.Log("final" + col.a);
-       // dustStorm.startColor = col;
     }
 
     public void Anim_OpenDoor()
@@ -75,6 +44,7 @@ public class Cutscene_01_Door : MonoBehaviour
     {
         dooropen.SetActive(true);
         doorCloseInstance.start();
+        Debug.Log("test");
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
     }
 
@@ -102,5 +72,6 @@ public class Cutscene_01_Door : MonoBehaviour
         cineCutscene.SetActive(false);
         cinePlayer.SetActive(true);
         fps.MoveSpeed = 4;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

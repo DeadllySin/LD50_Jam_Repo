@@ -7,12 +7,17 @@ public class Room_Ring : MonoBehaviour
     [SerializeField] private float x_pos, z_pos;
     [SerializeField] private GameObject[] symbol;
     [SerializeField] private Pole[] pole;
+
+    [SerializeField] private GameObject playerSpawn;
     private Room_Main main;
-    [ SerializeField] private EnemyAI ai;
     private int maxSymbols;
     private int[] ringsOnSide = new int[2];
     private int randomQuestion;
     [HideInInspector] public bool[] solutionCorrect = new bool[2];
+
+    [Header("Enemy")]
+    [SerializeField] private EnemyAI ai;
+    [SerializeField] private Transform spawn;
 
     private void Awake()
     {
@@ -79,13 +84,21 @@ public class Room_Ring : MonoBehaviour
                     {
                         GameObject sym = Instantiate(symbol[j], pole[r].questionSpawners[y].position, Quaternion.identity);
                         sym.transform.parent = this.transform;
-                        sym.transform.localScale = new Vector3(-1, 1, 1);
                         sym.transform.Rotate(0.0f, 270f, 0.0f, Space.World);
                         sym.transform.localPosition = pole[r].questionSpawners[y].position;
                         y++;
                     }
                 }
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if(Vector3.Distance(GameManager.gm.player.transform.position, ai.gameObject.transform.position) < 1)
+        {
+            GameManager.gm.player.transform.position = playerSpawn.transform.position;
+            ai.transform.position = spawn.transform.position;
         }
     }
 
