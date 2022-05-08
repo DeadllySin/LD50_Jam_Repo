@@ -171,6 +171,13 @@ MonoBehaviour:
       Data3: 2089318293
       Data4: 1168233550
     Path: event:/Puzzles/Color/Color_Press
+  pColorStart:
+    Guid:
+      Data1: 1649394032
+      Data2: 1234672410
+      Data3: -1469203538
+      Data4: -434900364
+    Path: event:/Puzzles/Color/Color_Start
   pColorOrderGreen:
     Guid:
       Data1: 1923118949
