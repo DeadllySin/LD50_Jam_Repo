@@ -13,6 +13,7 @@ public class Room_Colors : MonoBehaviour
     private Room_Main main;
     private int pressedCorr;
 
+    FMOD.Studio.EventInstance colorOrderSFXInstance;
     private void Awake()
     {
         switch (GameManager.gm.colorRoomPro)
@@ -52,6 +53,7 @@ public class Room_Colors : MonoBehaviour
             rdm = Random.Range(0, colorOb.Length);
             rdm = Random.Range(0, colorOb.Length);
             colorOrder.Add(colorOb[rdm].GetComponent<Interactable_ColorButton>().color);
+            FMOD_PlayColorOrder(colorOb[rdm].GetComponent<Interactable_ColorButton>().color);
             colorOb[rdm].SetTrigger("isPressed");
             yield return new WaitForSeconds(1f);
             i += 1;
@@ -61,6 +63,32 @@ public class Room_Colors : MonoBehaviour
             colorOb[i].GetComponent<Interactable_ColorButton>().isPressed = false;
         }
     }
+
+    public void FMOD_PlayColorOrder(string col)
+    {
+        switch (col)
+        {
+            default:
+                Debug.Log("Error");
+                break;
+            case "green":
+                Debug.Log("dada");
+                break;
+            case "blue":
+                Debug.Log("dada");
+                break;
+            case "red":
+                Debug.Log("dada");
+                break;
+            case "yellow":
+                Debug.Log("dada");
+                break;
+            case "orange":
+                Debug.Log("dada");
+                break;      
+        } 
+    }
+
 
     public void Restart()
     {
@@ -75,7 +103,7 @@ public class Room_Colors : MonoBehaviour
     {
         colorsPressed.Add(col);
         butPressed += 1;
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pColorPress);
+        FMOD_PlayColorOrder(col);
         if (butPressed == colAmount) OnValueChanged();
     }
 

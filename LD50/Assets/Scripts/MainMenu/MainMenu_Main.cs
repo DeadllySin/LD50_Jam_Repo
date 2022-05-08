@@ -25,6 +25,7 @@ public class MainMenu_Main : MonoBehaviour
     public void OnValueChanged(Slider sl)
     {
         //Is Between 0 and 100. Use this value to change the volume
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("OptionsVolume", sl.value);
         Debug.Log(sl.value);
     }
 

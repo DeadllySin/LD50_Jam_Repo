@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4973544759690259811}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.60127115, y: 3.1341462, z: 0.4223945}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -171,13 +171,41 @@ MonoBehaviour:
       Data3: 2089318293
       Data4: 1168233550
     Path: event:/Puzzles/Color/Color_Press
-  pColorTimer:
+  pColorOrderGreen:
     Guid:
       Data1: 1923118949
       Data2: 1116387076
       Data3: 540175267
       Data4: 25633268
-    Path: event:/Puzzles/Color/Color_Order_Light
+    Path: event:/Puzzles/Color/ColorOrderGreen
+  pColorOrderBlue:
+    Guid:
+      Data1: 1010718462
+      Data2: 1210672755
+      Data3: -760355422
+      Data4: -1597238679
+    Path: event:/Puzzles/Color/ColorOrderBlue
+  pColorOrderYellow:
+    Guid:
+      Data1: -338179670
+      Data2: 1282463078
+      Data3: 814017723
+      Data4: -983099066
+    Path: event:/Puzzles/Color/ColorOrderYellow
+  pColorOrderOrange:
+    Guid:
+      Data1: -1610455144
+      Data2: 1096871657
+      Data3: 453223083
+      Data4: -1735719844
+    Path: event:/Puzzles/Color/ColorOrderOrange
+  pColorOrderRed:
+    Guid:
+      Data1: -523473453
+      Data2: 1301505093
+      Data3: -934403694
+      Data4: -968425110
+    Path: event:/Puzzles/Color/ColorOrderRed
   puzzleCorrect:
     Guid:
       Data1: 620300921

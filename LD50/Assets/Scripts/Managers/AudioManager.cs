@@ -36,7 +36,11 @@ public class AudioManager : MonoBehaviour
 
     [Header("Puzzle Color")]
     public FMODUnity.EventReference pColorPress;
-    public FMODUnity.EventReference pColorTimer;
+    public FMODUnity.EventReference pColorOrderGreen;
+    public FMODUnity.EventReference pColorOrderBlue;
+    public FMODUnity.EventReference pColorOrderYellow;
+    public FMODUnity.EventReference pColorOrderOrange;
+    public FMODUnity.EventReference pColorOrderRed;   
 
     [Header("UI")]
     public FMODUnity.EventReference puzzleCorrect;
