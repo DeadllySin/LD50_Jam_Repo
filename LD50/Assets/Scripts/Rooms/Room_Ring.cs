@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Room_Ring : MonoBehaviour
 {
@@ -7,20 +8,18 @@ public class Room_Ring : MonoBehaviour
     [SerializeField] private float x_pos, z_pos;
     [SerializeField] private GameObject[] symbol;
     [SerializeField] private Pole[] pole;
-
-    [SerializeField] private GameObject playerSpawn;
     private Room_Main main;
     private int maxSymbols;
     private int[] ringsOnSide = new int[2];
     private int randomQuestion;
     [HideInInspector] public bool[] solutionCorrect = new bool[2];
 
-    [Header("Enemy")]
-    [SerializeField] private EnemyAI ai;
-    [SerializeField] private Transform spawn;
 
     private void Awake()
     {
+
+        foreach (Transform child in pole[0].questionSpawnerParent) pole[0].questionSpawners.Add(child.gameObject.GetComponent<Transform>());
+        foreach (Transform child in pole[1].questionSpawnerParent) pole[1].questionSpawners.Add(child.gameObject.GetComponent<Transform>());
         switch (GameManager.gm.ringRoomPro)
         {
             case 0:
@@ -83,22 +82,14 @@ public class Room_Ring : MonoBehaviour
                     if (char.Parse(symbol[j].name) == pole[r].question[i])
                     {
                         GameObject sym = Instantiate(symbol[j], pole[r].questionSpawners[y].position, Quaternion.identity);
-                        sym.transform.parent = this.transform;
+                        sym.GetComponentInChildren<MeshRenderer>().material = pole[r].gem.material;
+                        sym.transform.parent = pole[r].questionSpawners[y].parent;
                         sym.transform.Rotate(0.0f, 270f, 0.0f, Space.World);
-                        sym.transform.localPosition = pole[r].questionSpawners[y].position;
+                        sym.transform.position = pole[r].questionSpawners[y].position;
                         y++;
                     }
                 }
             }
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if(Vector3.Distance(GameManager.gm.player.transform.position, ai.gameObject.transform.position) < 1)
-        {
-            GameManager.gm.player.transform.position = playerSpawn.transform.position;
-            ai.transform.position = spawn.transform.position;
         }
     }
 
@@ -169,14 +160,11 @@ public class Room_Ring : MonoBehaviour
         {
             case 0:
                 main.state = "bad";
-                ai.speed = 2;
                 break;
             case 1:
                 main.state = "ok";
-                ai.speed = 0;
                 break;
             case 2:
-                ai.speed = 0;
                 main.state = "perfect";
                 break;
         }
@@ -190,8 +178,10 @@ public class Pole
     [HideInInspector] public string answer;
     [HideInInspector] public List<string> Questions = new List<string>();
     [HideInInspector] public List<string> Solutions = new List<string>();
-    public Transform[] questionSpawners;
+    [HideInInspector] public List <Transform> questionSpawners = new List<Transform>();
+    public Transform questionSpawnerParent;
     public Slot[] slot;
+    public MeshRenderer gem;
     [HideInInspector] public int ringsOnCorrectSide;
 
     [System.Serializable]
