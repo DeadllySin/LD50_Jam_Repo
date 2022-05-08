@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private Text scoreText;
-    [SerializeField] private Text timeText;
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject mainMenu;
@@ -137,8 +136,7 @@ public class GameManager : MonoBehaviour
     {
         isDead = true;
         if (roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
-        scoreText.text = "you cleared " + roomsCleared + " rooms!\n your highscore is " + PlayerPrefs.GetInt("roomsCleared");
-        timeText.text = "you lasted " + minutes + " minutes and " + seconds + " seconds!";
+        scoreText.text = "you cleared " + roomsCleared + " rooms!\n your highscore is " + PlayerPrefs.GetInt("roomsCleared") + "\nyou lasted " + minutes + " minutes and " + seconds + " seconds!" + "\npress r to restart\npress m to go to the main menu\npress esc to quit";
         deathScreen.SetActive(true);
         player.SetActive(false);
         AudioManager.am.FMOD_DeadState();
