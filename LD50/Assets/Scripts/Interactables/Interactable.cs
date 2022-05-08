@@ -5,13 +5,14 @@ public class Interactable : MonoBehaviour
 {
     private PlayerHand ph;
     private Color col;
+    [SerializeField] private bool highlight = true;
     [SerializeField] private string type;
     [SerializeField] private UnityEvent onEnter;
     [SerializeField] private UnityEvent onExit;
 
     private void OnMouseEnter()
     {
-        if (gameObject.GetComponent<Renderer>())
+        if (gameObject.GetComponent<Renderer>() && highlight)
         {
             col = GetComponent<Renderer>().material.color;
             GetComponent<Renderer>().material.color = Color.gray;
@@ -27,7 +28,7 @@ public class Interactable : MonoBehaviour
     {
         if (onExit != null) onExit.Invoke();
         ph.lookingAt = "none";
-        if (gameObject.GetComponent<Renderer>()) GetComponent<Renderer>().material.color = col;
+        if (gameObject.GetComponent<Renderer>() && highlight) GetComponent<Renderer>().material.color = col;
         ph.handTarget = null;
     }
 }
