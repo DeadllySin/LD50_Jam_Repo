@@ -65,13 +65,6 @@ public class AudioManager : MonoBehaviour
     //Snapshots
     [HideInInspector] public FMOD.Studio.EventInstance pauseSSInstance;
 
-    //Slider
-    [SerializeField]
-    [Range(0f, 100f)]
-    public float masterVolume;
-
-
-
     public void Awake()
     {
         if (am != null)
@@ -95,8 +88,6 @@ public class AudioManager : MonoBehaviour
         gameplayBus = FMODUnity.RuntimeManager.GetBus("bus:/Gameplay_Bus");
         musicBus = FMODUnity.RuntimeManager.GetBus("bus:/Music_Bus");
         UIBus = FMODUnity.RuntimeManager.GetBus("bus:/UI_Bus");
-
-        masterVolume = 100f;
 
         menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
         pauseSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.pauseSS);
@@ -185,13 +176,5 @@ public class AudioManager : MonoBehaviour
         {
             //ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
-
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("OptionsVolume", masterVolume);
-        //need testing cursor doesnt click 
-    }
-
-    public void FMOD_MasterSlider(float newMasterVolume)
-    {
-        masterVolume = newMasterVolume;
     }
 }

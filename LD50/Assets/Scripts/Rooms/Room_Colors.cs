@@ -79,18 +79,23 @@ public class Room_Colors : MonoBehaviour
                 break;
             case "green":
                 FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderGreen", colorOb[0].gameObject);
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Color_Order_Pitch", "Green");
                 break;
             case "blue":
                 FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderBlue", colorOb[2].gameObject);
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Color_Order_Pitch", "Blue");
                 break;
             case "red":
                 FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderRed", colorOb[1].gameObject);
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Color_Order_Pitch", "Red");
                 break;
             case "yellow":
                 FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderYellow", colorOb[4].gameObject);
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Color_Order_Pitch", "Yellow");
                 break;
             case "orange":
                 FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderOrange", colorOb[3].gameObject);
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Color_Order_Pitch", "Orange");
                 break;      
         } 
     }
@@ -102,6 +107,7 @@ public class Room_Colors : MonoBehaviour
         {
             colorOb[i].GetComponent<Interactable_ColorButton>().isPressed = true;
         }
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pColorStart);
         StartCoroutine(colorOrderEnu());
     }
 
@@ -111,6 +117,7 @@ public class Room_Colors : MonoBehaviour
         butPressed += 1;
         colorPressInstance.start();
         FMOD_PlayColorOrder(col);
+        //FMOD_PlayColorOrder(GetComponent<Interactable_ColorButton>().color);
         if (butPressed == colAmount) OnValueChanged();
     }
 
