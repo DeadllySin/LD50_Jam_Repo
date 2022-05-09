@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) //resume
         {
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             //GameState.gs.skipCutscene = true;
             //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
@@ -14,6 +15,7 @@ public class PauseMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             GameState.gs.skipCutscene = false;
             GameState.gs.introFinished = false;

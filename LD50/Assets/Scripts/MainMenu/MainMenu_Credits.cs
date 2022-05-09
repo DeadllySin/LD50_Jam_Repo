@@ -10,7 +10,7 @@ public class MainMenu_Credits : MonoBehaviour
         {
             main.SetActive(true);
             this.gameObject.SetActive(false);
-
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
         }
     }
 }

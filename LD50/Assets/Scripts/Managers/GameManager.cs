@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour
         {
             if (pauseScreen.activeSelf)//unpause
             {
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
                 pauseScreen.SetActive(false);
                 player.SetActive(true);
                 Cursor.lockState = CursorLockMode.Locked;
@@ -121,6 +122,7 @@ public class GameManager : MonoBehaviour
 
             else if (!pauseScreen.activeSelf && !mainMenu.activeSelf && GameState.gs.introFinished == true) //pause
             {
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
                 pauseScreen.SetActive(true);
                 player.SetActive(false);
                 Cursor.lockState = CursorLockMode.None;

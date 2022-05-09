@@ -47,6 +47,7 @@ public class AudioManager : MonoBehaviour
     public FMODUnity.EventReference puzzleCorrect;
     public FMODUnity.EventReference puzzleWrong;
     public FMODUnity.EventReference uiClick;
+    public FMODUnity.EventReference uiSelect;
 
     [Header("Bus")]
     public FMOD.Studio.Bus masterBus;
@@ -77,6 +78,7 @@ public class AudioManager : MonoBehaviour
 
         //FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");
         //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
+        
     }
     void Start()
     {
@@ -88,6 +90,8 @@ public class AudioManager : MonoBehaviour
         gameplayBus = FMODUnity.RuntimeManager.GetBus("bus:/Gameplay_Bus");
         musicBus = FMODUnity.RuntimeManager.GetBus("bus:/Music_Bus");
         UIBus = FMODUnity.RuntimeManager.GetBus("bus:/UI_Bus");
+
+        gameplayBus.setMute(true);
 
         menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
         pauseSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.pauseSS);
@@ -113,6 +117,8 @@ public class AudioManager : MonoBehaviour
         am.GetComponent<A_MusicCallBack>().musicInstance.start();
         am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
         //FMODRestarted = true;
+
+        gameplayBus.setMute(false);
     }
 
     public void FMOD_MainMenuState()
@@ -124,6 +130,8 @@ public class AudioManager : MonoBehaviour
         pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FMOD_StopCeilingLoop();
         menuMusicInstance.start();
+
+        gameplayBus.setMute(true);
     }
 
     public void FMOD_PauseState()
