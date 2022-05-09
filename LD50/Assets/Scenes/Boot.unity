@@ -221,6 +221,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4973544759690259809, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
+      propertyPath: uiSelect.Path
+      value: event:/UI/UI_Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973544759690259809, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
+      propertyPath: uiSelect.Guid.Data1
+      value: -2075530142
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973544759690259809, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
+      propertyPath: uiSelect.Guid.Data2
+      value: 1236565594
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973544759690259809, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
+      propertyPath: uiSelect.Guid.Data3
+      value: -1029313903
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973544759690259809, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
+      propertyPath: uiSelect.Guid.Data4
+      value: 450898579
+      objectReference: {fileID: 0}
     - target: {fileID: 4973544759690259811, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
       propertyPath: m_Name
       value: AudioManager
