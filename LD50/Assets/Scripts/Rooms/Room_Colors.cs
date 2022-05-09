@@ -12,6 +12,7 @@ public class Room_Colors : MonoBehaviour
     private int butPressed;
     private Room_Main main;
     private int pressedCorr;
+    private bool seqCooldown;
 
     private void Awake()
     {
@@ -40,6 +41,12 @@ public class Room_Colors : MonoBehaviour
 
     IEnumerator colorOrderEnu()
     {
+        for (int g = 0; g < colorOb.Length; g++)
+        {
+            colorOb[g].GetComponent<Interactable_ColorButton>().isPressed = true;
+        }
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("PressingColButtons", 0);
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pColorStart);
         colorOrder.Clear();
         colorsPressed.Clear();
         pressedCorr = 0;
@@ -61,6 +68,7 @@ public class Room_Colors : MonoBehaviour
         {
             colorOb[i].GetComponent<Interactable_ColorButton>().isPressed = false;
         }
+        seqCooldown = false;
     }
 
     public void FMOD_PlayColorOrder(string col)
@@ -89,14 +97,11 @@ public class Room_Colors : MonoBehaviour
     }
 
 
-    public void Restart()
+    public void Restart(Animator anim)
     {
-        for (int i = 0; i < colorOb.Length; i++)
-        {
-            colorOb[i].GetComponent<Interactable_ColorButton>().isPressed = true;
-        }
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("PressingColButtons", 0);
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pColorStart);
+        if (seqCooldown) return;
+        anim.SetTrigger("isPressed");
+        seqCooldown = true;
         StartCoroutine(colorOrderEnu());
     }
 

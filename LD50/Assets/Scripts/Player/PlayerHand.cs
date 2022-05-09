@@ -25,8 +25,7 @@ public class PlayerHand : MonoBehaviour
                 {
                     if (DistanceFu(handTarget) == 1)
                     {
-                        handTarget.GetComponent<Animator>().SetTrigger("isPressed");
-                        FindObjectOfType<Room_Colors>().Restart();
+                        FindObjectOfType<Room_Colors>().Restart(handTarget.GetComponent<Animator>());
                     }
                 }
 
