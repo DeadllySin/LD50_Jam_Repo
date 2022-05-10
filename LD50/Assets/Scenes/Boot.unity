@@ -213,7 +213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skipCutscene: 1
   introFinished: 0
-  nextSceneIndex: 1
+  killFast: 0
+  overWriteRoom: color
 --- !u!1001 &4973544759633716098
 PrefabInstance:
   m_ObjectHideFlags: 0

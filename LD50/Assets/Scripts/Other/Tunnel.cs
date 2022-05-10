@@ -14,6 +14,7 @@ public class Tunnel : MonoBehaviour
     {
         if (GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.parent = GameManager.gm.ceiling.transform;
 
+        /*
         if (Input.GetKeyDown("h"))
         {
             OpenDoor(0);
@@ -21,7 +22,7 @@ public class Tunnel : MonoBehaviour
         if (Input.GetKeyDown("j"))
         {
             CloseDoor(0);
-        }
+        }*/
 
     }
 

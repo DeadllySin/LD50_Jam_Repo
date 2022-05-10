@@ -8,7 +8,8 @@ public class GameState : MonoBehaviour
     public static GameState gs;
     public bool skipCutscene;
     public bool introFinished = false;
-    [SerializeField] private int nextSceneIndex;
+    public bool killFast;
+    public string overWriteRoom;
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class GameState : MonoBehaviour
     IEnumerator LoadingScreenAsyncOperation()
     {
         yield return null;
-        AsyncOperation loadScene = SceneManager.LoadSceneAsync(nextSceneIndex);
+        AsyncOperation loadScene = SceneManager.LoadSceneAsync(1);
     }
     private void FixedUpdate()
     {
