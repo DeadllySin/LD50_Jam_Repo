@@ -59,11 +59,19 @@ public class Room_Main : MonoBehaviour
         canConfirm = true;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            this.state = "ok";
+            OnConfirm(null);
+        }
+    }
     public void OnConfirm(GameObject but)
     {
         if (!canConfirm) return;
         canConfirm = false;
-        but.GetComponent<Animator>().SetTrigger("isPressed");
+        //but.GetComponent<Animator>().SetTrigger("isPressed");
         switch (state)
         {
             case "perfect":
@@ -74,16 +82,17 @@ public class Room_Main : MonoBehaviour
                 GameManager.gm.ceilingSpeed += GameManager.gm.speedBoost;
                 GameManager.gm.currTunnel.OpenDoor(0);
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
+                AudioManager.am.FMOD_CeilingFasterOneShot();
                 break;
             case "bad":
                 StartCoroutine(ConfirmCool());
                 GameManager.gm.currTunnel.CloseDoor(0);
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleFullWrong);
                 break;
             default:
                 StartCoroutine(ConfirmCool());
                 GameManager.gm.currTunnel.CloseDoor(0);
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleFullWrong);
                 break;
 
         }

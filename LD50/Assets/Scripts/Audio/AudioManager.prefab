@@ -66,13 +66,13 @@ MonoBehaviour:
       Data3: -1496786253
       Data4: 856932879
     Path: event:/Environment/Ceiling/Ceiling_Loop
-  ceilingDebris:
+  ceilingFeedbackDebris:
     Guid:
-      Data1: -399963291
-      Data2: 1092534417
-      Data3: 731208867
-      Data4: 815161791
-    Path: event:/Environment/Ceiling/Generic_Debris
+      Data1: -1891113955
+      Data2: 1268122050
+      Data3: 2143884190
+      Data4: -2089574328
+    Path: event:/Environment/Ceiling/Ceiling_Faster_Feedback
   doorOpen:
     Guid:
       Data1: -1683764075
@@ -227,6 +227,13 @@ MonoBehaviour:
       Data3: -406815824
       Data4: 1806189794
     Path: event:/UI/Puzzle_Wrong
+  puzzleFullWrong:
+    Guid:
+      Data1: 741658720
+      Data2: 1184538466
+      Data3: 1297524415
+      Data4: -331172398
+    Path: event:/UI/Puzzle_Full_Wrong
   uiClick:
     Guid:
       Data1: -60722240
@@ -234,6 +241,13 @@ MonoBehaviour:
       Data3: 758568595
       Data4: 2088136972
     Path: event:/UI/UI_Click
+  uiSelect:
+    Guid:
+      Data1: -2075530142
+      Data2: 1236565594
+      Data3: -1029313903
+      Data4: 450898579
+    Path: event:/UI/UI_Select
   pauseSS:
     Guid:
       Data1: -1430503589
@@ -241,7 +255,13 @@ MonoBehaviour:
       Data3: 1677360046
       Data4: 1494430627
     Path: snapshot:/PauseMenu
-  masterVolume: 100
+  ceilingFeedbackSS:
+    Guid:
+      Data1: -688415564
+      Data2: 1164479548
+      Data3: -98496881
+      Data4: -2098934210
+    Path: snapshot:/CeilingFasterOn
 --- !u!114 &4973544759690259808
 MonoBehaviour:
   m_ObjectHideFlags: 0

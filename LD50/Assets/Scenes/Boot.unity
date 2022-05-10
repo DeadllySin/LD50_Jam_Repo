@@ -211,10 +211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368655d35958fc546aabb3d53ef1c041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipCutscene: 0
+  skipCutscene: 1
   introFinished: 0
   killFast: 0
-  overWriteRoom: 
+  overWriteRoom: statue
 --- !u!1001 &4973544759633716098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,26 +222,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4973544759690259809, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
-      propertyPath: uiSelect.Path
-      value: event:/UI/UI_Select
-      objectReference: {fileID: 0}
-    - target: {fileID: 4973544759690259809, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
-      propertyPath: uiSelect.Guid.Data1
-      value: -2075530142
-      objectReference: {fileID: 0}
-    - target: {fileID: 4973544759690259809, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
-      propertyPath: uiSelect.Guid.Data2
-      value: 1236565594
-      objectReference: {fileID: 0}
-    - target: {fileID: 4973544759690259809, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
-      propertyPath: uiSelect.Guid.Data3
-      value: -1029313903
-      objectReference: {fileID: 0}
-    - target: {fileID: 4973544759690259809, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
-      propertyPath: uiSelect.Guid.Data4
-      value: 450898579
-      objectReference: {fileID: 0}
     - target: {fileID: 4973544759690259811, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
       propertyPath: m_Name
       value: AudioManager

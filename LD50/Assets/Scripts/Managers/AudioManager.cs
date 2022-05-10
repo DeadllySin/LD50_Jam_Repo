@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -13,7 +14,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Environment")]
     public FMODUnity.EventReference ceilingLoop;
-    public FMODUnity.EventReference ceilingDebris;
+    public FMODUnity.EventReference ceilingFeedbackDebris;
     public FMODUnity.EventReference doorOpen;
     public FMODUnity.EventReference doorClose;
 
@@ -46,6 +47,7 @@ public class AudioManager : MonoBehaviour
     [Header("UI")]
     public FMODUnity.EventReference puzzleCorrect;
     public FMODUnity.EventReference puzzleWrong;
+    public FMODUnity.EventReference puzzleFullWrong;
     public FMODUnity.EventReference uiClick;
     public FMODUnity.EventReference uiSelect;
 
@@ -57,14 +59,16 @@ public class AudioManager : MonoBehaviour
 
     [Header("Snapshots")]
     public FMODUnity.EventReference pauseSS;
+    public FMODUnity.EventReference ceilingFeedbackSS;
 
     //Generic Enviromental and Audio Instances
-    [HideInInspector] public FMOD.Studio.EventInstance ceilingDebrisInstance;
+    [HideInInspector] public FMOD.Studio.EventInstance ceilingFBDebrisInstance;
     [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingLoopInstance;
 
     //Snapshots
     [HideInInspector] public FMOD.Studio.EventInstance pauseSSInstance;
+    [HideInInspector] public FMOD.Studio.EventInstance ceilingFeedbackSSInstance;
 
     public void Awake()
     {
@@ -95,6 +99,7 @@ public class AudioManager : MonoBehaviour
 
         menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
         pauseSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.pauseSS);
+        ceilingFeedbackSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.ceilingFeedbackSS);
 
         if (GameState.gs.skipCutscene == true)
         {
@@ -108,7 +113,21 @@ public class AudioManager : MonoBehaviour
         am.GetComponent<A_MusicCallBack>().musicInstance.start();
     }
 
-    public void FMOD_InGameState()
+    public void FMOD_CeilingFasterOneShot()
+    {
+        Debug.Log("ok puzzle call feedback");
+        StartCoroutine(CeilingFeedbackDebris());
+    }
+
+    IEnumerator CeilingFeedbackDebris()
+    {
+        ceilingFeedbackSSInstance.start();
+        yield return new WaitForSeconds(1f);
+        ceilingFBDebrisInstance.start();
+        ceilingFeedbackSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+        public void FMOD_InGameState()
     {
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
@@ -149,24 +168,22 @@ public class AudioManager : MonoBehaviour
 
         ceilingLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         ceilingLoopInstance.release();
-        ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        ceilingDebrisInstance.release();
+        ceilingFBDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        ceilingFBDebrisInstance.release();
     }
 
     public void FMOD_PlayCeilingLoop()
     {
-        ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(am.ceilingDebris);
-        ceilingDebrisInstance.start();
+        ceilingFBDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(am.ceilingFeedbackDebris);
+        ceilingFBDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(GameManager.gm.ceilingSourceChild));
         ceilingLoopInstance = FMODUnity.RuntimeManager.CreateInstance(am.ceilingLoop);
         ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(GameManager.gm.ceilingSourceChild));
-        ceilingDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(GameManager.gm.ceilingSourceChild));
         ceilingLoopInstance.start();
     }
 
     public void FMOD_StopCeilingLoop()
     {
-        ceilingDebrisInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        ceilingDebrisInstance.release();
+        ceilingFBDebrisInstance.release();
         ceilingLoopInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         ceilingLoopInstance.release();
     }

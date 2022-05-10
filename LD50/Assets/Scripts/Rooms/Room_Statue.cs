@@ -111,7 +111,7 @@ public class Room_Statue : MonoBehaviour
             }
             else
             {
-                Debug.Log("wrongStatue");
+                //Debug.Log("wrongStatue");
             }
         }
     }
