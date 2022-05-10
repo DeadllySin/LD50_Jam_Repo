@@ -67,7 +67,7 @@ public class Room_Ring : MonoBehaviour
             randomQuestion = Random.Range(0, pole[r].Questions.Count - 1);
             pole[r].answer = pole[r].Solutions[randomQuestion];
             pole[r].question = pole[r].Questions[randomQuestion];
-            while (pole[r].question.Length > maxSymbols)
+            while (pole[r].question.Length != maxSymbols)
             {
                 randomQuestion = Random.Range(0, pole[r].Questions.Count - 1);
                 pole[r].answer = pole[r].Solutions[randomQuestion];

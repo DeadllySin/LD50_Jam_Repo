@@ -11,55 +11,53 @@ public class PlayerHand : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (GameManager.gm.currRoomType == "color")
+            if (handTarget == null) return;
+            if (DistanceFu(handTarget) != 1) return;
+                switch (GameManager.gm.currRoomType)
             {
-                if (lookingAt == "color")
-                {
-                    if (DistanceFu(handTarget) == 1)
+                case "color":
                     {
-                        Interactable_ColorButton icb = handTarget.GetComponent<Interactable_ColorButton>();
-                        icb.OnPressed();
+                        if (lookingAt == "color")
+                        {
+                            Interactable_ColorButton icb = handTarget.GetComponent<Interactable_ColorButton>();
+                            icb.OnPressed();
+                        }
+                        if (lookingAt == "restart")
+                        {
+                            FindObjectOfType<Room_Colors>().Restart(handTarget.GetComponent<Animator>());
+                        }
+                        break;
                     }
-                }
-                if (lookingAt == "restart")
-                {
-                    if (DistanceFu(handTarget) == 1)
-                    {
-                        FindObjectOfType<Room_Colors>().Restart(handTarget.GetComponent<Animator>());
-                    }
-                }
 
-            }
-            if (GameManager.gm.currRoomType == "ring")
-            {
-                if (lookingAt == "ring_up" && DistanceFu(handTarget) == 1)
-                {
-                    FindObjectOfType<Room_Ring>().MoveUp(handTarget.GetComponent<Interactable_Pole>().whichPole);
-                    FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideUp);
-                }
-                if (lookingAt == "ring_down" && DistanceFu(handTarget) == 1)
-                {
-                    FindObjectOfType<Room_Ring>().MoveDown(handTarget.GetComponent<Interactable_Pole>().whichPole);
-                    FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideDown);
-                }
-            }
-            if (GameManager.gm.currRoomType == "statue")
-            {
-                if (lookingAt == "statue")
-                {
-                    if (hand == null && DistanceFu(handTarget) == 1)
+                case "ring":
+                    if (lookingAt == "ring_up")
                     {
-                        FindObjectOfType<Room_Statue>().PickUpFrom();
+                        FindObjectOfType<Room_Ring>().MoveUp(handTarget.GetComponent<Interactable_Pole>().whichPole);
+                        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideUp);
                     }
-                }
-                if (lookingAt == "socket" && DistanceFu(handTarget) == 1)
-                {
-                    if (hand != null)
+                    if (lookingAt == "ring_down")
                     {
-                        FindObjectOfType<Room_Statue>().Place();
-                        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
+                        FindObjectOfType<Room_Ring>().MoveDown(handTarget.GetComponent<Interactable_Pole>().whichPole);
+                        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideDown);
                     }
-                }
+                    break;
+                case "statue":
+                    if (lookingAt == "statue")
+                    {
+                        if (hand == null)
+                        {
+                            FindObjectOfType<Room_Statue>().PickUpFrom();
+                        }
+                    }
+                    if (lookingAt == "socket")
+                    {
+                        if (hand != null)
+                        {
+                            FindObjectOfType<Room_Statue>().Place();
+                            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
+                        }
+                    }
+                    break;
             }
 
             if (lookingAt == "confirm")
