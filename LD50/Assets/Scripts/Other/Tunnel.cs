@@ -9,6 +9,10 @@ public class Tunnel : MonoBehaviour
     [SerializeField] private GameObject ceil;
     [SerializeField] private GameObject fakeDoor;
     [SerializeField] private GameObject tunnelPrefab;
+    private void Awake()
+    {
+        IdleOponDoor(2);
+    }
 
     private void Update()
     {
@@ -72,10 +76,10 @@ public class Tunnel : MonoBehaviour
 
     IEnumerator RemoveTunnelEnu()
     {
-        CloseDoor(1);
+        CloseDoor(2);
         GameObject tunnelParent = GetComponentInParent<Transform>().GetComponentInParent<Tunnel>().gameObject;
         yield return new WaitForSeconds(.8f);
-        Vector3 fakeDoorPos = new Vector3(8.75f, 1, tunnelParent.GetComponent<Tunnel>().door[1].door.gameObject.transform.position.z);
+        Vector3 fakeDoorPos = new Vector3(8.75f, 1, tunnelParent.GetComponent<Tunnel>().door[1].door.gameObject.transform.position.z + 0.5f);
         GameObject fakeDoorTemp = Instantiate(fakeDoor, fakeDoorPos, Quaternion.Euler(new Vector3(0, 90, 0)));
         fakeDoorTemp.transform.parent = GameManager.gm.currRoom.transform;
         Destroy(tunnelParent);
@@ -99,6 +103,12 @@ public class Tunnel : MonoBehaviour
     public void IdleDoor(int index)
     {
         door[index].door.SetTrigger("isIdle");
+        door[index].isOpen = true;
+    }
+
+    public void IdleOponDoor(int index)
+    {
+        door[index].door.SetTrigger("isIdleOpen");
         door[index].isOpen = true;
     }
     #endregion

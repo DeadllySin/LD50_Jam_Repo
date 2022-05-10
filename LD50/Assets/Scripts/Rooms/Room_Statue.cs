@@ -15,7 +15,7 @@ public class Room_Statue : MonoBehaviour
     [HideInInspector] public Interactable_Socket ss;
 
 
-    private void Awake()
+    private void Start()
     {
         room = GetComponentInParent<Room_Main>();
         for (int i = 0; i < piecess.Length; i++) pieces.Add(piecess[i]);
@@ -24,7 +24,11 @@ public class Room_Statue : MonoBehaviour
         {
             int temp = Random.Range(0, spawners.Count - 1);
             int temp2 = Random.Range(0, pieces.Count - 1);
-            Instantiate(pieces[temp2], spawners[temp].transform.position, Quaternion.identity);
+            GameObject stat = Instantiate(pieces[temp2], spawners[temp].transform.position, Quaternion.identity);
+            if (stat.GetComponent<Interactable_Statue>().isHead)
+            {
+                stat.transform.position = new Vector3(spawners[temp].transform.position.x, .60f, spawners[temp].transform.position.z);
+            }
             spawners.RemoveAt(temp);
             pieces.RemoveAt(temp2);
         }
@@ -52,6 +56,11 @@ public class Room_Statue : MonoBehaviour
         phand.hand.GetComponent<Interactable_Statue>().state = "ground";
         phand.hand.transform.parent = null;
         phand.hand.transform.position = new Vector3(phand.transform.position.x, 1, phand.transform.position.z);
+        if(phand.hand.GetComponent<Interactable_Statue>().isHead)
+        {
+            phand.hand.transform.position = new Vector3(phand.transform.position.x, .6f, phand.transform.position.z);
+        }
+        phand.hand.transform.rotation = Quaternion.Euler(0, 0, 0);
         phand.hand = null;
     }
 
@@ -66,7 +75,7 @@ public class Room_Statue : MonoBehaviour
         phand.hand.transform.position = new Vector3(0, 0, 0);
         phand.hand.transform.rotation = new Quaternion(0, 0, 0, 0);
         phand.hand.transform.localRotation = new Quaternion(0, 0, 0, 0);
-        phand.hand.transform.localPosition = new Vector3(.5f, -.5f, 1.5f);
+        phand.hand.transform.localPosition = new Vector3(.5f, -.5f, 1f);
         if (setASNull)
         {
             placedPieces--;

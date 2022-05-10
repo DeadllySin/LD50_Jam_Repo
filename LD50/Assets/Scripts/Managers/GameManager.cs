@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private bool isDead;
     public GameObject player;
     public GameObject room;
-
+    public Light l;
     [HideInInspector] public GameObject currRoom;
     [HideInInspector] public string currRoomType;
     [HideInInspector] public Tunnel currTunnel;
@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        if (GameState.gs.introFinished) l.gameObject.SetActive(false);
 
 
 

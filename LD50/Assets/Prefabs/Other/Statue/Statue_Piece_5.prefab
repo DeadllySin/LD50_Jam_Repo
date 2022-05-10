@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: ground
   statueNumber: 0
+  isHead: 1
   ss: {fileID: 0}
 --- !u!114 &465569527521948331
 MonoBehaviour:
