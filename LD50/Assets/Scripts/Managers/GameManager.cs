@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     [Header("Ceiling")]
     public GameObject ceiling;
     public float speedBoost;
-    [SerializeField] private bool testOutDeath;
+    private bool testOutDeath;
     [SerializeField] float slowThresholdSpeed;
     [SerializeField] private float defaultSpeed;
     [SerializeField] private float deathHeight;
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gm = this;
+        testOutDeath = GameState.gs.killFast;
         Cursor.lockState = CursorLockMode.Locked;
         playerCine.SetActive(GameState.gs.skipCutscene);
         cutsceneCam.SetActive(!GameState.gs.skipCutscene);

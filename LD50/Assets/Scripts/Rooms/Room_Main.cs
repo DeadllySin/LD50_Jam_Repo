@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Room_Main : MonoBehaviour
 {
-    [Tooltip("currently available rooms: color, ring, statue")][SerializeField] string OverWriteRoomSelection;
+    string OverWriteRoomSelection;
     private List<GameObject> rooms = new List<GameObject>();
     private List<string> roomNames = new List<string>();
     [HideInInspector] public string state;
@@ -14,6 +14,7 @@ public class Room_Main : MonoBehaviour
 
     private void Awake()
     {
+        OverWriteRoomSelection = GameState.gs.overWriteRoom;
         foreach (Transform child in this.gameObject.GetComponent<Transform>()) rooms.Add(child.gameObject);
         for (int i = 0; i < rooms.Count - 1; i++)
         {

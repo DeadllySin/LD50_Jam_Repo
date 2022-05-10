@@ -34,10 +34,7 @@ public class Room_Ring : MonoBehaviour
             case 3:
                 maxSymbols = 7;
                 break;
-            case 4:
-                maxSymbols = 9;
-                break;
-            case 5:
+            default:
                 maxSymbols = 9;
                 break;
 
@@ -46,34 +43,32 @@ public class Room_Ring : MonoBehaviour
         main = GetComponentInParent<Room_Main>();
         foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
         {
-            if (line.Length >= 9) break;
-            string lineTemp = line;
-            string[] splites;
-            splites = lineTemp.Split('=');
-            pole[0].Questions.Add(splites[0]);
-            pole[0].Solutions.Add(splites[1]);
+            if(line.Length == maxSymbols + 2)
+            {
+                string lineTemp = line;
+                string[] splites;
+                splites = lineTemp.Split('=');
+                pole[0].Questions.Add(splites[0]);
+                pole[0].Solutions.Add(splites[1]);
+            }
+
         }
         foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
         {
-            if (line.Length >= 9) break;
-            string lineTemp = line;
-            string[] splites;
-            splites = lineTemp.Split('=');
-            pole[1].Questions.Add(splites[0]);
-            pole[1].Solutions.Add(splites[1]);
+            if (line.Length == maxSymbols + 2)
+            {
+                string lineTemp = line;
+                string[] splites;
+                splites = lineTemp.Split('=');
+                pole[1].Questions.Add(splites[0]);
+                pole[1].Solutions.Add(splites[1]);
+            }
         }
         for (int r = 0; r < pole.Length; r++)
         {
             randomQuestion = Random.Range(0, pole[r].Questions.Count - 1);
             pole[r].answer = pole[r].Solutions[randomQuestion];
             pole[r].question = pole[r].Questions[randomQuestion];
-            while (pole[r].question.Length != maxSymbols)
-            {
-                randomQuestion = Random.Range(0, pole[r].Questions.Count - 1);
-                pole[r].answer = pole[r].Solutions[randomQuestion];
-                pole[r].question = pole[r].Questions[randomQuestion];
-            }
-
             int y = 0;
             for (int i = 0; i < pole[r].question.Length; i++)
             {

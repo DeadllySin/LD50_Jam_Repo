@@ -13,7 +13,7 @@ public class PlayerHand : MonoBehaviour
         {
             if (handTarget == null) return;
             if (DistanceFu(handTarget) != 1) return;
-                switch (GameManager.gm.currRoomType)
+            switch (GameManager.gm.currRoomType)
             {
                 case "color":
                     {
@@ -67,12 +67,9 @@ public class PlayerHand : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            if (GameManager.gm.currRoomType == "statue")
+            if (GameManager.gm.currRoomType == "statue" && hand != null)
             {
-                if (hand != null)
-                {
-                    FindObjectOfType<Room_Statue>().Drop();
-                }
+                FindObjectOfType<Room_Statue>().Drop();
             }
         }
     }
