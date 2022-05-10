@@ -158,6 +158,8 @@ public class AudioManager : MonoBehaviour
         ceilingDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(am.ceilingDebris);
         ceilingDebrisInstance.start();
         ceilingLoopInstance = FMODUnity.RuntimeManager.CreateInstance(am.ceilingLoop);
+        ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(GameManager.gm.ceilingSourceChild));
+        ceilingDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(GameManager.gm.ceilingSourceChild));
         ceilingLoopInstance.start();
     }
 

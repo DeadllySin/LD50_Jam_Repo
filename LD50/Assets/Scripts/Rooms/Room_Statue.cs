@@ -86,6 +86,7 @@ public class Room_Statue : MonoBehaviour
             if (phand.handTarget.GetComponent<Interactable_Socket>().correctStatue == phand.hand.GetComponent<Interactable_Statue>().statueNumber)
             {
                 placedPieces++;
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
                 //Debug.Log("place3");
                 phand.hand.transform.parent = phand.handTarget.transform;
                 phand.hand.transform.localRotation = new Quaternion(0, 0, 0, 0);

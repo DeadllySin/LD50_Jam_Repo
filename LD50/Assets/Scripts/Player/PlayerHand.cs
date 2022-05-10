@@ -54,7 +54,7 @@ public class PlayerHand : MonoBehaviour
                         if (hand != null)
                         {
                             FindObjectOfType<Room_Statue>().Place();
-                            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
+                            //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
                         }
                     }
                     break;
