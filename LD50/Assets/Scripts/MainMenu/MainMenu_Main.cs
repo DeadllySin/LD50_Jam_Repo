@@ -7,6 +7,10 @@ public class MainMenu_Main : MonoBehaviour
     [SerializeField] private GameObject credits;
     [SerializeField] private GameObject howToPlay;
 
+    [SerializeField] private CanvasGroup mainMenuUIGroup;
+    [SerializeField] private bool fadeIn;
+    [SerializeField] private bool fadeOut;
+
     private void Update()
     {
         if (this.isActiveAndEnabled)
@@ -16,7 +20,39 @@ public class MainMenu_Main : MonoBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
             }
         }
-            
+        
+        if (fadeIn == true)
+        {
+            if (mainMenuUIGroup.alpha < 1)
+            {
+                mainMenuUIGroup.alpha += Time.deltaTime;
+                if (mainMenuUIGroup.alpha >= 1)
+                {
+                    fadeIn = false;
+                }
+            }
+        }
+        if (fadeOut == true)
+        {
+            if (mainMenuUIGroup.alpha >= 0)
+            {
+                mainMenuUIGroup.alpha -= Time.deltaTime;
+                if (mainMenuUIGroup.alpha == 1)
+                {
+                    fadeOut = false;
+                }
+            }
+        }
+    }
+
+    public void ShowUI()
+    {
+        fadeIn = true;
+    }
+
+    public void HideUI()
+    {
+        fadeOut = true;
     }
     public void StartGame()
     {

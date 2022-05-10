@@ -21,7 +21,6 @@ public class Cutscene_01_Door : MonoBehaviour
     {
         fps = player.GetComponent<StarterAssets.FirstPersonController>();
         fps.MoveSpeed = 0;
-        //dustStorm.playbackSpeed = spedVFXSpeed;
         doorOpenInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.doorOpen);
         doorCloseInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.doorClose);
     }

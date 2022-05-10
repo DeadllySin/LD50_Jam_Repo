@@ -105,6 +105,7 @@ public class AudioManager : MonoBehaviour
         {
             FMOD_MainMenuState();
         }
+        am.GetComponent<A_MusicCallBack>().musicInstance.start();
     }
 
     public void FMOD_InGameState()
@@ -117,7 +118,7 @@ public class AudioManager : MonoBehaviour
         am.GetComponent<A_MusicCallBack>().musicInstance.start();
         am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
         //FMODRestarted = true;
-
+        //am.GetComponent<A_MusicCallBack>().musicInstance.start();
         gameplayBus.setMute(false);
     }
 
@@ -129,7 +130,8 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
         pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FMOD_StopCeilingLoop();
-        menuMusicInstance.start();
+        //am.GetComponent<A_MusicCallBack>().musicInstance.start();
+        //menuMusicInstance.start();
 
         gameplayBus.setMute(true);
     }
