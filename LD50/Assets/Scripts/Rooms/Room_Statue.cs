@@ -51,7 +51,7 @@ public class Room_Statue : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pDrop);
         phand.hand.GetComponent<Interactable_Statue>().state = "ground";
         phand.hand.transform.parent = null;
-        phand.hand.transform.position = new Vector3(phand.transform.position.x, 1.5f, phand.transform.position.z);
+        phand.hand.transform.position = new Vector3(phand.transform.position.x, 1, phand.transform.position.z);
         phand.hand = null;
     }
 
