@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,7 +60,7 @@ namespace FMODUnity
             }
         }
 
-        protected override void Start()
+        protected override void Start() 
         {
             RuntimeUtils.EnforceLibraryOrder();
             if (Preload)
@@ -170,7 +171,7 @@ namespace FMODUnity
                 PlayInstance();
             }
         }
-
+        
         public void PlayInstance()
         {
             if (!instance.isValid())

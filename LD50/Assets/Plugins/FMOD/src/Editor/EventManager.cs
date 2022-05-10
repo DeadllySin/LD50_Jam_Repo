@@ -1,12 +1,12 @@
-﻿using System;
+﻿using UnityEngine;
+using UnityEditor;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using UnityEditor;
 using UnityEditor.Build;
+using System.Reflection;
 using UnityEditor.Build.Reporting;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace FMODUnity
@@ -53,7 +53,7 @@ namespace FMODUnity
                 Settings.Instance.BanksToLoad.Clear();
         }
 
-        private static void AffirmEventCache()
+        static private void AffirmEventCache()
         {
             if (eventCache == null)
             {
@@ -61,7 +61,7 @@ namespace FMODUnity
             }
         }
 
-        private static string UpdateCache()
+        static private string UpdateCache()
         {
             if (eventCache == null)
             {
@@ -237,7 +237,7 @@ namespace FMODUnity
                     stringsBankRef.LastModified = stringBankFileInfo.LastWriteTime;
                     stringsBankRef.Exists = true;
                     stringsBankRef.FileSizes.Clear();
-
+                  
                     if (Settings.Instance.HasPlatforms)
                     {
                         for (int i = 0; i < bankPlatforms.Length; i++)
@@ -381,7 +381,7 @@ namespace FMODUnity
             // Clear out any cached events from this bank
             eventCache.EditorEvents.ForEach((x) => x.Banks.Remove(bankRef));
 
-            FMOD.Studio.Bank bank;
+            FMOD.Studio.Bank bank; 
             FMOD.RESULT loadResult = EditorUtils.System.loadBankFile(bankRef.Path, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL, out bank);
 
             if (loadResult == FMOD.RESULT.OK)
@@ -458,8 +458,7 @@ namespace FMODUnity
                                 eventRef.Parameters.Add(paramRef);
                             }
 
-                            InitializeParamRef(paramRef, param, (labelIndex) =>
-                            {
+                            InitializeParamRef(paramRef, param, (labelIndex) => {
                                 string label;
                                 eventDesc.getParameterLabelByIndex(paramIndex, labelIndex, out label);
                                 return label;
@@ -492,8 +491,7 @@ namespace FMODUnity
                                 eventCache.EditorParameters.Add(paramRef);
                             }
 
-                            InitializeParamRef(paramRef, param, (index) =>
-                            {
+                            InitializeParamRef(paramRef, param, (index) => {
                                 string label;
                                 EditorUtils.System.getParameterLabelByID(param.id, index, out label);
                                 return label;
@@ -554,21 +552,18 @@ namespace FMODUnity
 
         static EventManager()
         {
-            BuildStatusWatcher.OnBuildStarted += () =>
-            {
+            BuildStatusWatcher.OnBuildStarted += () => {
                 BuildTargetChanged();
                 CopyToStreamingAssets(EditorUserBuildSettings.activeBuildTarget);
             };
-            BuildStatusWatcher.OnBuildEnded += () =>
-            {
+            BuildStatusWatcher.OnBuildEnded += () => {
                 UpdateBankStubAssets(EditorUserBuildSettings.activeBuildTarget);
             };
         }
 
         public static void Startup()
         {
-            EventReference.GuidLookupDelegate = (path) =>
-            {
+            EventReference.GuidLookupDelegate = (path) => {
                 EditorEventRef editorEventRef = EventFromPath(path);
 
                 return (editorEventRef != null) ? editorEventRef.Guid : new FMOD.GUID();
@@ -692,7 +687,7 @@ namespace FMODUnity
                 {
                     return false;
                 }
-
+                
                 if (eventReference.Path != editorEventRef.Path)
                 {
                     RuntimeUtils.DebugLogWarningFormat(
@@ -711,7 +706,7 @@ namespace FMODUnity
                 {
                     return false;
                 }
-
+                
                 if (eventReference.Guid != editorEventRef.Guid)
                 {
                     RuntimeUtils.DebugLogWarningFormat(
@@ -833,7 +828,7 @@ namespace FMODUnity
 
                 RemoveEmptyFMODFolders(bankTargetFolder);
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 RuntimeUtils.DebugLogErrorFormat("FMOD Studio: copy banks for platform {0} : copying banks from {1} to {2}",
                     platform.DisplayName, bankSourceFolder, bankTargetFolder);
@@ -867,7 +862,7 @@ namespace FMODUnity
             }
 
             string bankTargetFolder = Application.dataPath;
-
+            
             if (!string.IsNullOrEmpty(Settings.Instance.TargetAssetPath))
             {
                 bankTargetFolder += "/" + Settings.Instance.TargetAssetPath;
@@ -970,7 +965,7 @@ namespace FMODUnity
 
                 RemoveEmptyFMODFolders(bankTargetFolder);
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 Debug.LogErrorFormat("FMOD: Updating bank stubs in {0} to match {1}",
                     bankTargetFolder, bankSourceFolder);
@@ -1028,9 +1023,9 @@ namespace FMODUnity
         private static void BuildTargetChanged()
         {
             RefreshBanks();
-#if UNITY_ANDROID
+            #if UNITY_ANDROID
             Settings.Instance.AndroidUseOBB = PlayerSettings.Android.useAPKExpansionFiles;
-#endif
+            #endif
         }
 
         static void OnCacheChange()
@@ -1119,7 +1114,7 @@ namespace FMODUnity
         }
 
         public static List<EditorBankRef> MasterBanks
-        {
+        { 
             get
             {
                 AffirmEventCache();
@@ -1212,7 +1207,7 @@ namespace FMODUnity
 
         public class ActiveBuildTargetListener : IActiveBuildTargetChanged
         {
-            public int callbackOrder { get { return 0; } }
+            public int callbackOrder{ get { return 0; } }
             public void OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
             {
                 BuildTargetChanged();
@@ -1289,7 +1284,7 @@ namespace FMODUnity
             {
                 return;
             }
-
+            
             if (!Directory.Exists(to))
             {
                 Directory.CreateDirectory(to);
@@ -1338,4 +1333,4 @@ namespace FMODUnity
             }
         }
     }
-}
+} 

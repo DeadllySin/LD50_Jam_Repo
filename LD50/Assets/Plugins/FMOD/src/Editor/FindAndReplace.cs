@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
+using System.Collections.Generic;
 
 namespace FMODUnity
 {
@@ -186,6 +186,6 @@ namespace FMODUnity
             ReplaceText(emitters[lastMatch]);
             FindNext();
         }
-
+        
     }
 }

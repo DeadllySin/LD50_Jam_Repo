@@ -400,8 +400,7 @@ namespace FMODUnity
 
         public void SortPlatformChildren(Platform platform)
         {
-            platform.ChildIdentifiers.Sort((a, b) =>
-            {
+            platform.ChildIdentifiers.Sort((a, b) => {
                 Platform platformA = RuntimeSettings.FindPlatform(a);
                 Platform platformB = RuntimeSettings.FindPlatform(b);
 
@@ -492,7 +491,7 @@ namespace FMODUnity
 
         private void PostprocessBuild(BuildTarget target)
         {
-            foreach (string path in binaryCompatibilitiesBeforeBuild.Keys)
+            foreach(string path in binaryCompatibilitiesBeforeBuild.Keys)
             {
                 PluginImporter importer = AssetImporter.GetAtPath(path) as PluginImporter;
 
@@ -515,8 +514,7 @@ namespace FMODUnity
             {
                 if (scriptingBackend == ScriptingImplementation.IL2CPP)
                 {
-                    Action<string> reportError = message =>
-                    {
+                    Action<string> reportError = message => {
                         RuntimeUtils.DebugLogWarningFormat("FMOD: Error processing static plugins for platform {0}: {1}",
                             platform.DisplayName, message);
                     };

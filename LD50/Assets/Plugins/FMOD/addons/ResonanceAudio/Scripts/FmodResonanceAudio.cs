@@ -12,11 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using FMODUnity;
+using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using UnityEngine;
+using FMODUnity;
 
 namespace FMODUnityResonance
 {
