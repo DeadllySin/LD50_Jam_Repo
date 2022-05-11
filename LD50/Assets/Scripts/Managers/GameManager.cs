@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int colorRoomPro;
     [HideInInspector] public int ringRoomPro;
     [SerializeField] private GameObject playerCine;
+    [SerializeField] private GameObject dustStorm;
 
     [Header("Cutscene")]
     [SerializeField] private GameObject cutscene;
@@ -81,13 +82,15 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        if (GameState.gs.introFinished) l.gameObject.SetActive(false);
+        if (GameState.gs.introFinished) 
 
 
 
         if (GameState.gs.introFinished == true) //|| AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce == true)
         {
             Debug.Log("ceiling is moving");
+            dustStorm.SetActive(false);
+            l.gameObject.SetActive(false);
             ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
             //Fmod stuff
             ceilingSourceChild.transform.position = new Vector3(player.transform.position.x, ceiling.transform.position.y - 0.5f, player.transform.position.z);
