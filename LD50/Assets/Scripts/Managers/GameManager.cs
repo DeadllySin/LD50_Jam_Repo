@@ -104,24 +104,10 @@ public class GameManager : MonoBehaviour
     {
         //Debug control variables
         //Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart" + AudioManager.am.FMODRestarted);
-
-        /* test pause menu when skip cutscene active
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            mainMenu.SetActive(false);
-        }*/
         
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && GameState.gs.introFinished)
         {
-            if (pauseScreen.activeSelf)
-            {
-                UnPause();
-            }
-
-            else if (!pauseScreen.activeSelf && !mainMenu.activeSelf && !deathScreen.activeSelf && GameState.gs.introFinished == true)
-            {
-                Pause();
-            }
+            Pause();
         }
     }
 
@@ -141,22 +127,13 @@ public class GameManager : MonoBehaviour
         Debug.Log(minutes + " mins" + seconds + " secs");
     }
 
-    public void UnPause()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-        pauseScreen.SetActive(false);
-        player.SetActive(true);
-        Debug.Log("unpause");
-        AudioManager.am.pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-    }
-
     public void Pause()
     {
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-        pauseScreen.SetActive(true);
-        player.SetActive(false);
-        Debug.Log("pause");
-        AudioManager.am.pauseSSInstance.start();
+        pauseScreen.SetActive(!pauseScreen.activeSelf);
+        player.SetActive(!player.activeSelf);
+        if(!player.activeInHierarchy) AudioManager.am.pauseSSInstance.start();
+        else AudioManager.am.pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
-    
+
 }

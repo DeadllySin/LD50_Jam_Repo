@@ -17,7 +17,6 @@ public class Room_Ring : MonoBehaviour
 
     private void Awake()
     {
-
         foreach (Transform child in pole[0].questionSpawnerParent) pole[0].questionSpawners.Add(child.gameObject.GetComponent<Transform>());
         foreach (Transform child in pole[1].questionSpawnerParent) pole[1].questionSpawners.Add(child.gameObject.GetComponent<Transform>());
         switch (GameManager.gm.ringRoomPro)

@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
     public void M_Return()
     {
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-        GameManager.gm.UnPause();
+        GameManager.gm.Pause();
     }
 
     public void M_MainMenu()
