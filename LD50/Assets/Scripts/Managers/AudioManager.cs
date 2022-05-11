@@ -73,6 +73,11 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public FMOD.Studio.EventInstance ceilingFeedbackSSInstance;
     [HideInInspector] public FMOD.Studio.EventInstance tunnelOcclusionSSInstance;
 
+    public float initialTimeCB = 0f;
+    public float finalTimeCB;
+    public bool startTimerCB = false;
+    
+
     public void Awake()
     {
         if (am != null)
@@ -114,9 +119,26 @@ public class AudioManager : MonoBehaviour
         {
             FMOD_MainMenuState();
         }
-        am.GetComponent<A_MusicCallBack>().musicInstance.start();
+        //am.GetComponent<A_MusicCallBack>().musicInstance.start();
     }
-    
+
+    public void FMOD_MenuCBTimer()
+    {
+        //timer
+        float t = Time.time;
+        finalTimeCB = (t % 60);
+        Debug.Log(finalTimeCB);
+        //Debug.Log(finalTimeCB);
+    }
+
+    public void FixedUpdate()
+    {
+        if (startTimerCB == true)
+        {
+            FMOD_MenuCBTimer();
+        }
+    }
+
     public void FMOD_CeilingFasterOneShot()
     {
         Debug.Log("ok puzzle call feedback");
@@ -137,12 +159,16 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
 
-        am.menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        am.menuMusicInstance.release();
-        am.GetComponent<A_MusicCallBack>().musicInstance.start();
-        am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
+        //am.menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        //am.menuMusicInstance.release();
+        //am.GetComponent<A_MusicCallBack>().musicInstance.start();
+        //am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
         //FMODRestarted = true;
         //am.GetComponent<A_MusicCallBack>().musicInstance.start();
+        
+        am.GetComponent<A_MusicCallBack>().ResetMenuCB();
+        am.GetComponent<A_MusicCallBack>().MusicCB();
+
         gameplayBus.setMute(false);
     }
 
@@ -157,6 +183,9 @@ public class AudioManager : MonoBehaviour
         //am.GetComponent<A_MusicCallBack>().musicInstance.start();
         //menuMusicInstance.start();
 
+        am.GetComponent<A_MusicCallBack>().ResetMenuCB();
+        am.GetComponent<A_MusicCallBack>().MenuCB();
+
         gameplayBus.setMute(true);
     }
 
@@ -167,7 +196,6 @@ public class AudioManager : MonoBehaviour
 
     public void FMOD_DeadState()
     {
-        //FMODUnity.RuntimeManager.PlayOneShot(am.deathSFX);
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
 

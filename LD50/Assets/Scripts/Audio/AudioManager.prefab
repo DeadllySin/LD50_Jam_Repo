@@ -276,6 +276,9 @@ MonoBehaviour:
       Data3: -989886794
       Data4: 1324581492
     Path: snapshot:/TunnelOcclusion
+  initialTimeCB: 0
+  finalTimeCB: 0
+  startTimerCB: 0
 --- !u!114 &4973544759690259808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,3 +300,10 @@ MonoBehaviour:
       Data3: 1320635057
       Data4: 645242537
     Path: event:/Music/Main_Music
+  menuCallBackInstance:
+    Guid:
+      Data1: 1009332111
+      Data2: 1155464542
+      Data3: -1067238465
+      Data4: -742220504
+    Path: event:/Music/Main_Menu

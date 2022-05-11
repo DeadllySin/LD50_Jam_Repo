@@ -16,17 +16,21 @@ public class A_MusicCallBack : MonoBehaviour
     GCHandle timelineHandle;
 
     public FMODUnity.EventReference musicCallBackInstance;
+    public FMODUnity.EventReference menuCallBackInstance;
 
     FMOD.Studio.EVENT_CALLBACK beatCallback;
     public FMOD.Studio.EventInstance musicInstance;
+    public FMOD.Studio.EventInstance menuInstance;
 
     void Reset()
     {
         musicCallBackInstance = FMODUnity.EventReference.Find("event:/Music/Main_Music");
+        menuCallBackInstance = FMODUnity.EventReference.Find("event:/Music/Main_Menu");
     }
 
     public void Start()
     {
+        Debug.Log("Started");
         DontDestroyOnLoad(this.gameObject);
 
         timelineInfo = new TimelineInfo();
@@ -36,6 +40,7 @@ public class A_MusicCallBack : MonoBehaviour
         beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
 
         musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
+        
 
         // Pin the class that will store the data modified during the callback
         timelineHandle = GCHandle.Alloc(timelineInfo);
@@ -49,6 +54,44 @@ public class A_MusicCallBack : MonoBehaviour
 
     }
 
+    public void MusicCB()
+    {
+        Debug.Log("music CB");
+        timelineInfo = new TimelineInfo();
+        beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
+        musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
+        timelineHandle = GCHandle.Alloc(timelineInfo);
+        musicInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
+        musicInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
+        //musicInstance.start();
+    }
+    public void MenuCB()
+    {
+        Debug.Log("menu CB");        
+        timelineInfo = new TimelineInfo();
+        beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
+        menuInstance = FMODUnity.RuntimeManager.CreateInstance(menuCallBackInstance);
+        timelineHandle = GCHandle.Alloc(timelineInfo);
+        menuInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
+        menuInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
+        menuInstance.start();
+    }
+
+    public void ResetMenuCB()
+    {
+        menuInstance.setUserData(IntPtr.Zero);
+        //menuInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        //menuInstance.release();
+        timelineHandle.Free();
+    }
+
+    public void ResetMusicCB()
+    {
+        musicInstance.setUserData(IntPtr.Zero);
+        //musicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        //musicInstance.release();
+        timelineHandle.Free();
+    }
     void OnDestroy()
     {
         musicInstance.setUserData(IntPtr.Zero);
@@ -64,6 +107,15 @@ public class A_MusicCallBack : MonoBehaviour
 
     void Update()
     {
+        if ((string)timelineInfo.lastMarker == "CB_MenuToGame")
+        {
+            AudioManager.am.startTimerCB = false;
+        }
+        else
+        {
+            
+        }
+
         if ((string)timelineInfo.lastMarker == "Death")
         {
             CBDeath = true;

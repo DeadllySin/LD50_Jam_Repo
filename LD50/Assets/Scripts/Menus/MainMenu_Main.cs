@@ -36,10 +36,12 @@ public class MainMenu_Main : MonoBehaviour
         {
             if (mainMenuUIGroup.alpha >= 0)
             {
-                mainMenuUIGroup.alpha -= Time.deltaTime;
+                //mainMenuUIGroup.alpha -= Time.deltaTime;
+                mainMenuUIGroup.alpha -= AudioManager.am.finalTimeCB;
                 if (mainMenuUIGroup.alpha == 1)
                 {
                     fadeOut = false;
+                    AudioManager.am.startTimerCB = false;
                 }
             }
         }
@@ -59,6 +61,7 @@ public class MainMenu_Main : MonoBehaviour
         cutscene.GetComponent<Animator>().SetTrigger("play");
         this.gameObject.SetActive(false);
         GameState.gs.introFinished = false;
+        AudioManager.am.startTimerCB = true;
         AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = true;
         AudioManager.am.FMOD_InGameState();
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
