@@ -7,20 +7,29 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) //resume
         {
-            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            //GameState.gs.skipCutscene = true;
-            //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
-            //AudioManager.am.GetComponent<A_MusicCallBack>().musicIntroTrigger = false;            
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            GameState.gs.skipCutscene = false;
-            GameState.gs.introFinished = false;
-            this.enabled = false;
-            AudioManager.am.FMOD_MainMenuState();
+            M_Return();
         }
     }
-}
+
+    public void M_Return()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+    }
+
+    public void M_MainMenu()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+        AudioManager.am.FMOD_MainMenuState();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameState.gs.skipCutscene = false;
+        GameState.gs.introFinished = false;
+        this.enabled = false;
+    }
+
+    public void M_Quit()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+        Application.Quit();
+    }
+
+    }

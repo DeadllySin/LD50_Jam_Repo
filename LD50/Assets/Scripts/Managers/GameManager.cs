@@ -108,32 +108,23 @@ public class GameManager : MonoBehaviour
         //Debug control variables
         //Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart" + AudioManager.am.FMODRestarted);
 
-        /*
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            mainMenu.SetActive(false);
+        }
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pauseScreen.activeSelf)//unpause
+            if (pauseScreen.activeSelf)
             {
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-                pauseScreen.SetActive(false);
-                player.SetActive(true);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                Debug.Log("unpause");
-                AudioManager.am.pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                UnPause();
             }
 
-            else if (!pauseScreen.activeSelf && !mainMenu.activeSelf && GameState.gs.introFinished == true) //pause
+            else if (!pauseScreen.activeSelf && !mainMenu.activeSelf && !deathScreen.activeSelf && GameState.gs.introFinished == true)
             {
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-                pauseScreen.SetActive(true);
-                player.SetActive(false);
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                Debug.Log("pause");
-
-                AudioManager.am.pauseSSInstance.start();
+                Pause();
             }
-        }*/
+        }
     }
 
     private void OnDeath()
@@ -151,4 +142,23 @@ public class GameManager : MonoBehaviour
         seconds = (t % 60).ToString("f0");
         Debug.Log(minutes + " mins" + seconds + " secs");
     }
+
+    public void UnPause()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+        pauseScreen.SetActive(false);
+        player.SetActive(true);
+        Debug.Log("unpause");
+        AudioManager.am.pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void Pause()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+        pauseScreen.SetActive(true);
+        player.SetActive(false);
+        Debug.Log("pause");
+        AudioManager.am.pauseSSInstance.start();
+    }
+    
 }
