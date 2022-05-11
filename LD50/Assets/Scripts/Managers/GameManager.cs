@@ -75,16 +75,10 @@ public class GameManager : MonoBehaviour
                 if (ceiling.transform.position.y < deathHeight)
                 {
                     FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
-                    if (AudioManager.am.GetComponent<A_MusicCallBack>().CBDeath == true)
-                    {
-                        OnDeath();
-                    }
+                    if (AudioManager.am.GetComponent<A_MusicCallBack>().CBDeath == true) OnDeath();
                 }
             }
         }
-        if (GameState.gs.introFinished) 
-
-
 
         if (GameState.gs.introFinished == true) //|| AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce == true)
         {
@@ -117,7 +111,7 @@ public class GameManager : MonoBehaviour
             mainMenu.SetActive(false);
         }*/
         
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (pauseScreen.activeSelf)
             {
