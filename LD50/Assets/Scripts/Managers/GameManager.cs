@@ -111,10 +111,11 @@ public class GameManager : MonoBehaviour
         //Debug control variables
         //Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart" + AudioManager.am.FMODRestarted);
 
+        /* test pause menu when skip cutscene active
         if (Input.GetKeyDown(KeyCode.H))
         {
             mainMenu.SetActive(false);
-        }
+        }*/
         
         if (Input.GetKeyDown(KeyCode.Escape))
         {

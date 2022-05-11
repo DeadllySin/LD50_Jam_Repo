@@ -9,11 +9,19 @@ public class PauseMenu : MonoBehaviour
         {
             M_Return();
         }
+        if (this.enabled)
+        {
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
+            }
+        }
     }
 
     public void M_Return()
     {
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+        GameManager.gm.UnPause();
     }
 
     public void M_MainMenu()
