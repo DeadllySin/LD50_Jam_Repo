@@ -4,7 +4,6 @@ using UnityEngine;
 public class Room_Statue : MonoBehaviour
 {
     public int correctPieces;
-    private int placedPieces;
     private PlayerHand phand;
     private Room_Main room;
     readonly List<GameObject> spawners = new List<GameObject>();
@@ -78,7 +77,6 @@ public class Room_Statue : MonoBehaviour
         phand.hand.transform.localPosition = new Vector3(.5f, -.5f, 1f);
         if (setASNull)
         {
-            placedPieces--;
             sp.ss.OnRemovedStatue();
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pRemovePiece);
             sp.ss.assinedStatue = null;
@@ -89,14 +87,11 @@ public class Room_Statue : MonoBehaviour
     public void Place()
     {
         phand = GameManager.gm.player.GetComponent<PlayerHand>();
-        //Debug.Log("place2");
         if (phand.handTarget != null && phand.hand.GetComponent<Interactable_Statue>().state == "inHand" && phand.handTarget.GetComponent<Interactable_Socket>().assinedStatue == null)
         {
             if (phand.handTarget.GetComponent<Interactable_Socket>().correctStatue == phand.hand.GetComponent<Interactable_Statue>().statueNumber)
             {
-                placedPieces++;
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
-                //Debug.Log("place3");
                 phand.hand.transform.parent = phand.handTarget.transform;
                 phand.hand.transform.localRotation = new Quaternion(0, 0, 0, 0);
                 phand.hand.transform.localPosition = phand.handTarget.transform.position;
@@ -108,10 +103,6 @@ public class Room_Statue : MonoBehaviour
                 phand.hand = null;
                 phand.handTarget.GetComponent<Interactable_Socket>().GetComponent<MeshCollider>().enabled = false;
                 OnValueChanged();
-            }
-            else
-            {
-                //Debug.Log("wrongStatue");
             }
         }
     }
