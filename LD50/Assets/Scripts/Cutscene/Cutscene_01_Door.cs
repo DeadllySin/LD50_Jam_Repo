@@ -20,7 +20,7 @@ public class Cutscene_01_Door : MonoBehaviour
     private void Start()
     {
         fps = player.GetComponent<StarterAssets.FirstPersonController>();
-        fps.MoveSpeed = 0;
+        //fps.MoveSpeed = 0;
         doorOpenInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.doorOpen);
         doorCloseInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.doorClose);
     }
@@ -70,7 +70,8 @@ public class Cutscene_01_Door : MonoBehaviour
         player.transform.position = this.transform.position;
         cineCutscene.SetActive(false);
         cinePlayer.SetActive(true);
-        fps.MoveSpeed = 4;
+        GameManager.gm.player.SetActive(true);
+        //fps.MoveSpeed = 4;
         Cursor.lockState = CursorLockMode.Locked;
     }
 }

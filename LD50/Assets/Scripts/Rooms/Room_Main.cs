@@ -71,7 +71,7 @@ public class Room_Main : MonoBehaviour
     {
         if (!canConfirm) return;
         canConfirm = false;
-        //but.GetComponent<Animator>().SetTrigger("isPressed");
+        but.GetComponent<Animator>().SetTrigger("isPressed");
         switch (state)
         {
             case "perfect":
