@@ -248,6 +248,13 @@ MonoBehaviour:
       Data3: -1029313903
       Data4: 450898579
     Path: event:/UI/UI_Select
+  reverbTunnelSS:
+    Guid:
+      Data1: 1632045093
+      Data2: 1136423165
+      Data3: 1312284840
+      Data4: -744100944
+    Path: snapshot:/ReverbTunnel
   pauseSS:
     Guid:
       Data1: -1430503589
@@ -262,6 +269,13 @@ MonoBehaviour:
       Data3: -98496881
       Data4: -2098934210
     Path: snapshot:/CeilingFasterOn
+  tunnelOcclusionSS:
+    Guid:
+      Data1: 1244656587
+      Data2: 1326870969
+      Data3: -989886794
+      Data4: 1324581492
+    Path: snapshot:/TunnelOcclusion
 --- !u!114 &4973544759690259808
 MonoBehaviour:
   m_ObjectHideFlags: 0

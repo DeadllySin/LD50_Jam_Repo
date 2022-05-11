@@ -66,6 +66,7 @@ public class Tunnel : MonoBehaviour
             yield return new WaitForSeconds(.5f);
             IdleDoor(0);
             OpenDoor(1);
+            AudioManager.am.tunnelOcclusionSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 

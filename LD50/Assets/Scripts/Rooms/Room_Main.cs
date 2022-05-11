@@ -63,6 +63,7 @@ public class Room_Main : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
             this.state = "ok";
             OnConfirm(null);
         }

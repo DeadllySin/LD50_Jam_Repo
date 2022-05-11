@@ -96,17 +96,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static float ceilingSpeedScale(float input, float oldLow, float oldHigh, float newLow, float newHigh)
+    /*public static float ceilingSpeedScale(float input, float oldLow, float oldHigh, float newLow, float newHigh)
     {
         float t = Mathf.InverseLerp(oldLow, oldHigh, input);
         return Mathf.Lerp(newLow, newHigh, t);
-    }
+    }*/
     private void Update()
     {
         //Debug control variables
         //Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart" + AudioManager.am.FMODRestarted);
+
+        /*//test pause menu when skip cutscene active
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            mainMenu.SetActive(false);
+        }*/
         
-        if (Input.GetKeyDown(KeyCode.Tab) && GameState.gs.introFinished)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             Pause();
         }

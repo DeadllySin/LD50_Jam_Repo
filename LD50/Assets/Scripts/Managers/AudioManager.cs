@@ -4,12 +4,11 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager am;
-    GameManager gm;
 
     public bool FMODRestarted = false;
 
     [Header("Player")]
-    public FMODUnity.EventReference footsteps; //movement
+    public FMODUnity.EventReference footsteps;
     public FMODUnity.EventReference deathSFX;
 
     [Header("Environment")]
@@ -58,8 +57,10 @@ public class AudioManager : MonoBehaviour
     public FMOD.Studio.Bus UIBus;
 
     [Header("Snapshots")]
+    public FMODUnity.EventReference reverbTunnelSS;
     public FMODUnity.EventReference pauseSS;
     public FMODUnity.EventReference ceilingFeedbackSS;
+    public FMODUnity.EventReference tunnelOcclusionSS;
 
     //Generic Enviromental and Audio Instances
     [HideInInspector] public FMOD.Studio.EventInstance ceilingFBDebrisInstance;
@@ -67,8 +68,10 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public FMOD.Studio.EventInstance ceilingLoopInstance;
 
     //Snapshots
+    [HideInInspector] public FMOD.Studio.EventInstance reverbTunnelSSInstance;
     [HideInInspector] public FMOD.Studio.EventInstance pauseSSInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingFeedbackSSInstance;
+    [HideInInspector] public FMOD.Studio.EventInstance tunnelOcclusionSSInstance;
 
     public void Awake()
     {
@@ -86,8 +89,6 @@ public class AudioManager : MonoBehaviour
     }
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.None;
-        //Cursor.visible = true;
         FMODRestarted = false;
 
         masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
@@ -98,8 +99,11 @@ public class AudioManager : MonoBehaviour
         gameplayBus.setMute(true);
 
         menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
+
         pauseSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.pauseSS);
         ceilingFeedbackSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.ceilingFeedbackSS);
+        reverbTunnelSSInstance = FMODUnity.RuntimeManager.CreateInstance(reverbTunnelSS);
+        tunnelOcclusionSSInstance = FMODUnity.RuntimeManager.CreateInstance(tunnelOcclusionSS);
 
         if (GameState.gs.skipCutscene == true)
         {
@@ -112,7 +116,7 @@ public class AudioManager : MonoBehaviour
         }
         am.GetComponent<A_MusicCallBack>().musicInstance.start();
     }
-
+    
     public void FMOD_CeilingFasterOneShot()
     {
         Debug.Log("ok puzzle call feedback");
@@ -124,6 +128,7 @@ public class AudioManager : MonoBehaviour
         ceilingFeedbackSSInstance.start();
         yield return new WaitForSeconds(1f);
         ceilingFBDebrisInstance.start();
+        yield return new WaitForSeconds(1f);
         ceilingFeedbackSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
