@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         gm = this;
         testOutDeath = GameState.gs.killFast;
         Cursor.lockState = CursorLockMode.Locked;
+        mainMenu.SetActive(GameState.gs.introFinished);
         playerCine.SetActive(GameState.gs.skipCutscene);
         cutsceneCam.SetActive(!GameState.gs.skipCutscene);
         cutscene.SetActive(!GameState.gs.skipCutscene);

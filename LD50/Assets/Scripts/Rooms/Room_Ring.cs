@@ -16,52 +16,58 @@ public class Room_Ring : MonoBehaviour
 
     private void Awake()
     {
-        foreach (Transform child in pole[0].questionSpawnerParent) pole[0].questionSpawners.Add(child.gameObject.GetComponent<Transform>());
-        foreach (Transform child in pole[1].questionSpawnerParent) pole[1].questionSpawners.Add(child.gameObject.GetComponent<Transform>());
-        switch (GameManager.gm.ringRoomPro)
+        int p = 0;
+        while(p < 2)
         {
-            case 0:
-                maxSymbols = 5;
-                break;
-            case 1:
-                maxSymbols = 5;
-                break;
-            case 2:
-                maxSymbols = 7;
-                break;
-            case 3:
-                maxSymbols = 7;
-                break;
-            default:
-                maxSymbols = 9;
-                break;
+            foreach (Transform child in pole[p].questionSpawnerParent) pole[p].questionSpawners.Add(child.gameObject.GetComponent<Transform>());
+            switch (GameManager.gm.ringRoomPro)
+            {
+                case 0:
+                    maxSymbols = 5;
+                    pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
+                    pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
+                    pole[p].questionSpawners.RemoveAt(0);
+                    pole[p].questionSpawners.RemoveAt(0);
+                    break;
+                case 1:
+                    maxSymbols = 5;
+                    pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
+                    pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
+                    pole[p].questionSpawners.RemoveAt(0);
+                    pole[p].questionSpawners.RemoveAt(0);
+                    break;
+                case 2:
+                    maxSymbols = 7;
+                    pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
+                    pole[p].questionSpawners.RemoveAt(0);
+                    break;
+                case 3:
+                    maxSymbols = 7;
+                    pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
+                    pole[p].questionSpawners.RemoveAt(0);
+                    break;
+                default:
+                    maxSymbols = 9;
+                    break;
+            }
 
+            foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
+            {
+                if (line.Length == maxSymbols + 2)
+                {
+                    string lineTemp = line;
+                    string[] splites;
+                    splites = lineTemp.Split('=');
+                    pole[p].Questions.Add(splites[0]);
+                    pole[p].Solutions.Add(splites[1]);
+                }
+            }
+            p++;
         }
+
         GameManager.gm.ringRoomPro++;
         main = GetComponentInParent<Room_Main>();
-        foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
-        {
-            if(line.Length == maxSymbols + 2)
-            {
-                string lineTemp = line;
-                string[] splites;
-                splites = lineTemp.Split('=');
-                pole[0].Questions.Add(splites[0]);
-                pole[0].Solutions.Add(splites[1]);
-            }
 
-        }
-        foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
-        {
-            if (line.Length == maxSymbols + 2)
-            {
-                string lineTemp = line;
-                string[] splites;
-                splites = lineTemp.Split('=');
-                pole[1].Questions.Add(splites[0]);
-                pole[1].Solutions.Add(splites[1]);
-            }
-        }
         for (int r = 0; r < pole.Length; r++)
         {
             randomQuestion = Random.Range(0, pole[r].Questions.Count - 1);
