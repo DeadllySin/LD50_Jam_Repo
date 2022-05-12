@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Room_Colors : MonoBehaviour
 {
-    public Animator[] colorOb;
+    [SerializeField] private Animator[] colorOb;
     [SerializeField] private int[] colorAmountProgress;
     private int colAmount;
     private List<string> colorOrder = new List<string>();
@@ -95,7 +95,6 @@ public class Room_Colors : MonoBehaviour
                 break;      
         } 
     }
-
 
     public void Restart(Animator anim)
     {

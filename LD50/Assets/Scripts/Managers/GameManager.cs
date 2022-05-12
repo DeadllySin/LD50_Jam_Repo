@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gm = this;
+        dustStorm.SetActive(true);
         testOutDeath = GameState.gs.killFast;
         Cursor.lockState = CursorLockMode.Locked;
         playerCine.SetActive(GameState.gs.skipCutscene);
