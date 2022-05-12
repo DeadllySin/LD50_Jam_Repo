@@ -7,6 +7,8 @@ public class Timer : MonoBehaviour
     int minutes;
     public static Timer timer;
     public bool countTime;
+    public int ms;
+    public int s;
     [HideInInspector] public string time;
 
     private void Awake()
@@ -19,9 +21,11 @@ public class Timer : MonoBehaviour
         if(countTime)
         {
             miliseconds += 20;
+            ms += 20;
             if (miliseconds > 999)
             {
                 seconds += 1;
+                s += 1;
                 miliseconds = 0;
             }
             if (seconds > 59)
