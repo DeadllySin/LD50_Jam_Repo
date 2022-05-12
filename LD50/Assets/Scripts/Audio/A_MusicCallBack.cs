@@ -32,9 +32,12 @@ public class A_MusicCallBack : MonoBehaviour
 
     public void Start()
     {
-        //Debug.Log("Started");
+        Debug.Log("Started");
         DontDestroyOnLoad(this.gameObject);
+        AudioManager.am.InitCB = true;
+        MenuMusicStart();
         MenuCB();
+        
         // ------------ timelineInfo = new TimelineInfo();
 
         // Explicitly create the delegate object and assign it to a member so it doesn't get freed
@@ -43,40 +46,51 @@ public class A_MusicCallBack : MonoBehaviour
 
         // ------------- musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
 
-
         // Pin the class that will store the data modified during the callback
         // ------------- timelineHandle = GCHandle.Alloc(timelineInfo);
         // Pass the object through the userdata of the instance
         // -------------- musicInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
-
         // -------------- musicInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
-        //musicInstance.start();
-
-        // control variables
-
+        // -------------- musicInstance.start();
     }
 
+    public void MenuMusicStart()
+    {
+        menuInstance = FMODUnity.RuntimeManager.CreateInstance(menuCallBackInstance);
+        menuInstance.start();
+    }
+    public void MenuMusicStop()
+    {
+        menuInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        menuInstance.release();
+    }
+    public void InGameMusicStart()
+    {
+        musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
+        musicInstance.start();
+    }
+    public void InGameMusicStop()
+    {
+        musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        musicInstance.release();
+    }
     public void MusicCB()
     {
         Debug.Log("music CB");
         timelineInfo = new TimelineInfo();
         beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
-        //musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
         timelineHandle = GCHandle.Alloc(timelineInfo);
         musicInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
         musicInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
-        //musicInstance.start();
     }
     public void MenuCB()
     {
         Debug.Log("menu CB");        
         timelineInfo = new TimelineInfo();
         beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
-        menuInstance = FMODUnity.RuntimeManager.CreateInstance(menuCallBackInstance);
         timelineHandle = GCHandle.Alloc(timelineInfo);
         menuInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
         menuInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
-        menuInstance.start();
     }
 
     public void ResetMenuCB()
@@ -99,15 +113,14 @@ public class A_MusicCallBack : MonoBehaviour
 
     void OnGUI()
     {
-        //GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
+        GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
     }
     
     void Update()
     {
         if ((string)timelineInfo.lastMarker == "CB_MenuToGame" && CBDoOnce == true) 
         {
-            musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
-            musicInstance.start();
+            InGameMusicStart();
             GameManager.gm.cutscene.GetComponent<Animator>().SetTrigger("play");
             CBDoOnce = false;
             //AudioManager.am.startTimerCB = false;
@@ -116,8 +129,7 @@ public class A_MusicCallBack : MonoBehaviour
         if ((string)timelineInfo.lastMarker == "ResetCB")
         {
             ResetMenuCB();
-            menuInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-            menuInstance.release();
+            MenuMusicStop();
             MusicCB();
         }
 

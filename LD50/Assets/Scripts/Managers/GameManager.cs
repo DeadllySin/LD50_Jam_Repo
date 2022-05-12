@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         cutscene.SetActive(!GameState.gs.skipCutscene);
         door.SetActive(GameState.gs.skipCutscene);
         player.SetActive(GameState.gs.skipCutscene);
-        if (testOutDeath) defaultSpeed = 2; slowThresholdSpeed = 2;
+        if (testOutDeath) defaultSpeed = 1.5f; slowThresholdSpeed = 1.5f;
         //defaultSpeed = ceilingSpeedScale(defaultSpeed, 0f, 10f, 0f, 0.5f);
         startTime = Time.time;
         ceilingSpeed = defaultSpeed;
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //Debug control variables
-        Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart " + AudioManager.am.FMODRestarted + "|| FMOD DO ONCE " + AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce);
+        //Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart " + AudioManager.am.FMODRestarted + "|| FMOD DO ONCE " + AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce);
 
         /*//test pause menu when skip cutscene active
         if (Input.GetKeyDown(KeyCode.H))
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         float t = Time.time - startTime;
         minutes = ((int)t / 60).ToString();
         seconds = (t % 60).ToString("f0");
-        Debug.Log(minutes + " mins" + seconds + " secs");
+        //Debug.Log(minutes + " mins" + seconds + " secs");
     }
 
     public void Pause()

@@ -77,7 +77,7 @@ public class AudioManager : MonoBehaviour
     public float finalTimeCB;
     public bool startTimerCB = false;
     public bool MenuCB = false;
-
+    public bool InitCB = false;
     public void Awake()
     {
         if (am != null)
@@ -151,34 +151,22 @@ public class AudioManager : MonoBehaviour
         ceilingFeedbackSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
-        public void FMOD_InGameState()
+    public void FMOD_InGameState()
     {
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
-
-        //am.menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        //am.menuMusicInstance.release();
-        //am.GetComponent<A_MusicCallBack>().musicInstance.start();
-        am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
-        //FMODRestarted = true;
-        //am.GetComponent<A_MusicCallBack>().musicInstance.start();
         
-        //am.GetComponent<A_MusicCallBack>().ResetMenuCB();
-        //StartCoroutine(CallMusicCB());
-        //am.GetComponent<A_MusicCallBack>().MusicCB();
+        am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
+
+        //Menu music Stop in timeline ResetCB
+        //In Game Music started in timeline CB_MenuToGame
+
+        //FMODRestarted = true;
 
         gameplayBus.setMute(false);
     }
 
-    /*IEnumerator CallMusicCB()
-    {
-        yield return new WaitForSeconds(3f);
-        Debug.Log("routine call music cb");
-        //am.GetComponent<A_MusicCallBack>().menuInstance.release();
-        am.GetComponent<A_MusicCallBack>().MusicCB();
-    }*/
-
-        public void FMOD_MainMenuState()
+    public void FMOD_MainMenuState()
     {
         FMODRestarted = false;
 
@@ -186,14 +174,19 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
         pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FMOD_StopCeilingLoop();
-        //am.GetComponent<A_MusicCallBack>().musicInstance.start();
 
-        am.GetComponent<A_MusicCallBack>().musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        am.GetComponent<A_MusicCallBack>().musicInstance.release();
+        am.GetComponent<A_MusicCallBack>().InGameMusicStop();
+        
+        if (InitCB == false)
+        {
+            Debug.Log("init false");
+            am.GetComponent<A_MusicCallBack>().ResetMusicCB();
+            //am.GetComponent<A_MusicCallBack>().InGameMusicStop();
+            am.GetComponent<A_MusicCallBack>().MenuMusicStart();
+            am.GetComponent<A_MusicCallBack>().MenuCB();
+        }
 
-        //am.GetComponent<A_MusicCallBack>().ResetMusicCB();
-        //am.GetComponent<A_MusicCallBack>().MenuCB();
-
+        InitCB = false;
         gameplayBus.setMute(true);
     }
 
