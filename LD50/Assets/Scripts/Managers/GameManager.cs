@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gm = this;
-        GameState.gs.introFinished = GameState.gs.skipCutscene;
         testOutDeath = GameState.gs.killFast;
         Cursor.lockState = CursorLockMode.Locked;
         mainMenu.SetActive(!GameState.gs.introFinished);
