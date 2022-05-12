@@ -4,7 +4,7 @@ using UnityEngine;
 public class Room_Statue : MonoBehaviour
 {
     public int correctPieces;
-    private PlayerHand phand;
+    private Player_Hand phand;
     private Room_Main room;
     readonly List<GameObject> spawners = new List<GameObject>();
     readonly List<GameObject> pieces = new List<GameObject>();
@@ -35,7 +35,7 @@ public class Room_Statue : MonoBehaviour
 
     public void PickUpFrom()
     {
-        phand = GameManager.gm.player.GetComponent<PlayerHand>();
+        phand = GameManager.gm.player.GetComponent<Player_Hand>();
         if (phand.handTarget != null && phand.hand == null)
         {
             if (sp.state == "ground")
@@ -49,7 +49,7 @@ public class Room_Statue : MonoBehaviour
 
     public void Drop()
     {
-        phand = GameManager.gm.player.GetComponent<PlayerHand>();
+        phand = GameManager.gm.player.GetComponent<Player_Hand>();
         if (phand.hand == null) return;
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pDrop);
         phand.hand.GetComponent<Interactable_Statue>().state = "ground";
@@ -65,7 +65,7 @@ public class Room_Statue : MonoBehaviour
 
     public void PickUp(bool setASNull = false)
     {
-        phand = GameManager.gm.player.GetComponent<PlayerHand>();
+        phand = GameManager.gm.player.GetComponent<Player_Hand>();
         if (setASNull) phand.handTarget.GetComponent<Interactable_Statue>().ss.GetComponent<MeshCollider>().enabled = true;
         sp.state = "inHand";
         phand.hand = sp.gameObject;
@@ -86,7 +86,7 @@ public class Room_Statue : MonoBehaviour
 
     public void Place()
     {
-        phand = GameManager.gm.player.GetComponent<PlayerHand>();
+        phand = GameManager.gm.player.GetComponent<Player_Hand>();
         if (phand.handTarget != null && phand.hand.GetComponent<Interactable_Statue>().state == "inHand" && phand.handTarget.GetComponent<Interactable_Socket>().assinedStatue == null)
         {
             if (phand.handTarget.GetComponent<Interactable_Socket>().correctStatue == phand.hand.GetComponent<Interactable_Statue>().statueNumber)

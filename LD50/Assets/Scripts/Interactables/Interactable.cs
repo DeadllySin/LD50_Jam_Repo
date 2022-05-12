@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    private PlayerHand ph;
+    private Player_Hand ph;
     private Color col;
     [SerializeField] private bool highlight = true;
     [SerializeField] private string type;
@@ -18,7 +18,7 @@ public class Interactable : MonoBehaviour
             GetComponent<Renderer>().material.color = Color.gray;
         }
 
-        ph = GameManager.gm.player.GetComponent<PlayerHand>();
+        ph = GameManager.gm.player.GetComponent<Player_Hand>();
         if (onEnter != null) onEnter.Invoke();
         ph.handTarget = this.gameObject;
         ph.lookingAt = type;

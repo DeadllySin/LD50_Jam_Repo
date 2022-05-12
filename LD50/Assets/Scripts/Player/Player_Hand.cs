@@ -1,12 +1,10 @@
 using UnityEngine;
-
-public class PlayerHand : MonoBehaviour
+public class Player_Hand : MonoBehaviour
 {
     [HideInInspector] public GameObject hand;
     [HideInInspector] public GameObject handTarget;
     [SerializeField] private float distance;
     [HideInInspector] public string lookingAt = "none";
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -17,44 +15,36 @@ public class PlayerHand : MonoBehaviour
             {
                 case "color":
                     {
-                        if (lookingAt == "color")
-                        {
-                            Interactable_ColorButton icb = handTarget.GetComponent<Interactable_ColorButton>();
-                            icb.OnPressed();
-                        }
-                        if (lookingAt == "restart")
-                        {
-                            FindObjectOfType<Room_Colors>().Restart(handTarget.GetComponent<Animator>());
-                        }
-                        break;
+                    if (lookingAt == "color")
+                    {
+                        handTarget.GetComponent<Interactable_ColorButton>().OnPressed();
                     }
-
+                    if (lookingAt == "restart")
+                    {
+                         GameManager.gm.currRoom.GetComponentInChildren<Room_Colors>().Restart(handTarget.GetComponent<Animator>());
+                    }
+                    break;
+                    }
                 case "ring":
                     if (lookingAt == "ring_up")
                     {
-                        FindObjectOfType<Room_Ring>().MoveUp(handTarget.GetComponent<Interactable_Pole>().whichPole);
+                        GameManager.gm.currRoom.GetComponentInChildren<Room_Ring>().MoveUp(handTarget.GetComponent<Interactable_Pole>().whichPole);
                         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideUp);
                     }
                     if (lookingAt == "ring_down")
                     {
-                        FindObjectOfType<Room_Ring>().MoveDown(handTarget.GetComponent<Interactable_Pole>().whichPole);
+                        GameManager.gm.currRoom.GetComponentInChildren<Room_Ring>().MoveDown(handTarget.GetComponent<Interactable_Pole>().whichPole);
                         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideDown);
                     }
                     break;
                 case "statue":
-                    if (lookingAt == "statue")
+                    if (lookingAt == "statue" && hand == null)
                     {
-                        if (hand == null)
-                        {
-                            FindObjectOfType<Room_Statue>().PickUpFrom();
-                        }
+                        GameManager.gm.currRoom.GetComponentInChildren<Room_Statue>().PickUpFrom();
                     }
-                    if (lookingAt == "socket")
+                    if (lookingAt == "socket" && hand != null)
                     {
-                        if (hand != null)
-                        {
-                            FindObjectOfType<Room_Statue>().Place();
-                        }
+                        GameManager.gm.currRoom.GetComponentInChildren<Room_Statue>().Place();
                     }
                     break;
             }
