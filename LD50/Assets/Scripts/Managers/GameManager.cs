@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dustStorm;
 
     [Header("Cutscene")]
-    [SerializeField] private GameObject cutscene;
+    [SerializeField] public GameObject cutscene;
     [SerializeField] private GameObject cutsceneCam;
     [SerializeField] private GameObject door;
 
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject pauseScreen;
-    [SerializeField] private GameObject mainMenu;
+    [SerializeField] public GameObject mainMenu;
 
     [Header("Ceiling")]
     public GameObject ceiling;
@@ -104,14 +104,14 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //Debug control variables
-        //Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart" + AudioManager.am.FMODRestarted);
+        Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart " + AudioManager.am.FMODRestarted + "|| FMOD DO ONCE " + AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce);
 
         /*//test pause menu when skip cutscene active
         if (Input.GetKeyDown(KeyCode.H))
         {
             mainMenu.SetActive(false);
         }*/
-        
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             Pause();

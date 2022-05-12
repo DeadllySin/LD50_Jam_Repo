@@ -58,7 +58,7 @@ public class MainMenu_Main : MonoBehaviour
     }
     public void StartGame()
     {
-        cutscene.GetComponent<Animator>().SetTrigger("play");
+        //cutscene.GetComponent<Animator>().SetTrigger("play");
         this.gameObject.SetActive(false);
         GameState.gs.introFinished = false;
         AudioManager.am.startTimerCB = true;

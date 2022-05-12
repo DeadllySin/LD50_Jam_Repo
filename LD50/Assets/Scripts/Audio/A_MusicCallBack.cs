@@ -6,6 +6,8 @@ public class A_MusicCallBack : MonoBehaviour
 {
     public bool FMODIntroDoOnce = true;
     public bool CBDeath = false;
+    bool CBDoOnce = true;
+    string sExitPattern;
     class TimelineInfo
     {
         public int currentMusicBar = 0;
@@ -59,11 +61,11 @@ public class A_MusicCallBack : MonoBehaviour
         Debug.Log("music CB");
         timelineInfo = new TimelineInfo();
         beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
-        musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
+        //musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
         timelineHandle = GCHandle.Alloc(timelineInfo);
         musicInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
         musicInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
-        musicInstance.start();
+        //musicInstance.start();
     }
     public void MenuCB()
     {
@@ -80,16 +82,11 @@ public class A_MusicCallBack : MonoBehaviour
     public void ResetMenuCB()
     {
         menuInstance.setUserData(IntPtr.Zero);
-        //menuInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        //menuInstance.release();
         timelineHandle.Free();
     }
-
     public void ResetMusicCB()
     {
         musicInstance.setUserData(IntPtr.Zero);
-        //musicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        //musicInstance.release();
         timelineHandle.Free();
     }
     void OnDestroy()
@@ -102,22 +99,32 @@ public class A_MusicCallBack : MonoBehaviour
 
     void OnGUI()
     {
-        if(timelineInfo != null || timelineHandle != null)
-        {
-            //GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
-        }
-        GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
+        //GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
     }
-
+    
     void Update()
     {
-        if ((string)timelineInfo.lastMarker == "CB_MenuToGame")
+        if ((string)timelineInfo.lastMarker == "CB_MenuToGame" && CBDoOnce == true) 
         {
-            AudioManager.am.startTimerCB = false;
+            musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
+            musicInstance.start();
+            GameManager.gm.cutscene.GetComponent<Animator>().SetTrigger("play");
+            CBDoOnce = false;
+            //AudioManager.am.startTimerCB = false;
         }
-        else
+
+        if ((string)timelineInfo.lastMarker == "ResetCB")
         {
-            
+            ResetMenuCB();
+            menuInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            menuInstance.release();
+            MusicCB();
+        }
+
+        if ((string)timelineInfo.lastMarker == "Exit_1" || (string)timelineInfo.lastMarker == "Exit_2" || (string)timelineInfo.lastMarker == "Exit_3" || (string)timelineInfo.lastMarker == "E_FullStop")
+        {
+            AudioManager.am.MenuCB = true;
+            //AudioManager.am.startTimerCB = true;
         }
 
         if ((string)timelineInfo.lastMarker == "Death")
@@ -129,7 +136,7 @@ public class A_MusicCallBack : MonoBehaviour
             CBDeath = false;
         }
 
-        if (timelineInfo.currentMusicBar >= 9 && (string)timelineInfo.lastMarker != "Menu")
+        if (timelineInfo.currentMusicBar >= 9 && (string)timelineInfo.lastMarker == "A")
         {
             if (FMODIntroDoOnce == false && GameState.gs.introFinished == true && AudioManager.am.FMODRestarted == true)
             {
@@ -144,9 +151,9 @@ public class A_MusicCallBack : MonoBehaviour
 
             else if (FMODIntroDoOnce == false && GameState.gs.introFinished == false)
             {
-                FMODIntroDoOnce = true;
                 AudioManager.am.FMODRestarted = false;
                 GameState.gs.introFinished = true;
+                FMODIntroDoOnce = true;
 
                 AudioManager.am.FMOD_PlayCeilingLoop();
                 Debug.Log("Play Intro Sequence and Ceiling Loop after");

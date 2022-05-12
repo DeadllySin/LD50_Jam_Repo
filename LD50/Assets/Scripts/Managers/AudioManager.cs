@@ -5,8 +5,6 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager am;
 
-    public bool FMODRestarted = false;
-
     [Header("Player")]
     public FMODUnity.EventReference footsteps;
     public FMODUnity.EventReference deathSFX;
@@ -18,8 +16,8 @@ public class AudioManager : MonoBehaviour
     public FMODUnity.EventReference doorClose;
 
     [Header("Music")]
-    public FMODUnity.EventReference inGameMusic;
-    public FMODUnity.EventReference mainMenuMusic;
+    public FMODUnity.EventReference inGameMusic; //controlled with Call Back
+    public FMODUnity.EventReference mainMenuMusic; //controlled with Call Back
     public FMODUnity.EventReference deadMusic;
     public FMODUnity.EventReference introStinger;
 
@@ -64,7 +62,6 @@ public class AudioManager : MonoBehaviour
 
     //Generic Enviromental and Audio Instances
     [HideInInspector] public FMOD.Studio.EventInstance ceilingFBDebrisInstance;
-    [HideInInspector] public FMOD.Studio.EventInstance menuMusicInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingLoopInstance;
 
     //Snapshots
@@ -73,10 +70,13 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public FMOD.Studio.EventInstance ceilingFeedbackSSInstance;
     [HideInInspector] public FMOD.Studio.EventInstance tunnelOcclusionSSInstance;
 
+    public bool FMODRestarted = false;
+    bool AMDoOnce = true;
+
     public float initialTimeCB = 0f;
     public float finalTimeCB;
     public bool startTimerCB = false;
-    
+    public bool MenuCB = false;
 
     public void Awake()
     {
@@ -90,16 +90,12 @@ public class AudioManager : MonoBehaviour
     }
     void Start()
     {
-        FMODRestarted = false;
-
         masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
         gameplayBus = FMODUnity.RuntimeManager.GetBus("bus:/Gameplay_Bus");
         musicBus = FMODUnity.RuntimeManager.GetBus("bus:/Music_Bus");
         UIBus = FMODUnity.RuntimeManager.GetBus("bus:/UI_Bus");
 
         gameplayBus.setMute(true);
-
-        menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Main_Menu");
 
         pauseSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.pauseSS);
         ceilingFeedbackSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.ceilingFeedbackSS);
@@ -115,7 +111,6 @@ public class AudioManager : MonoBehaviour
         {
             FMOD_MainMenuState();
         }
-        //am.GetComponent<A_MusicCallBack>().musicInstance.start();
     }
 
     public void FMOD_MenuCBTimer()
@@ -132,6 +127,13 @@ public class AudioManager : MonoBehaviour
         {
             FMOD_MenuCBTimer();
         }
+
+        if (AMDoOnce == true && MenuCB == true)
+        {
+            AMDoOnce = false;
+            MenuCB = false;
+        }
+        
     }
 
     public void FMOD_CeilingFasterOneShot()
@@ -157,24 +159,24 @@ public class AudioManager : MonoBehaviour
         //am.menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         //am.menuMusicInstance.release();
         //am.GetComponent<A_MusicCallBack>().musicInstance.start();
-        //am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
+        am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
         //FMODRestarted = true;
         //am.GetComponent<A_MusicCallBack>().musicInstance.start();
         
-        am.GetComponent<A_MusicCallBack>().ResetMenuCB();
-        StartCoroutine(CallMusicCB());
+        //am.GetComponent<A_MusicCallBack>().ResetMenuCB();
+        //StartCoroutine(CallMusicCB());
         //am.GetComponent<A_MusicCallBack>().MusicCB();
 
         gameplayBus.setMute(false);
     }
 
-    IEnumerator CallMusicCB()
+    /*IEnumerator CallMusicCB()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         Debug.Log("routine call music cb");
         //am.GetComponent<A_MusicCallBack>().menuInstance.release();
         am.GetComponent<A_MusicCallBack>().MusicCB();
-    }
+    }*/
 
         public void FMOD_MainMenuState()
     {
@@ -185,7 +187,9 @@ public class AudioManager : MonoBehaviour
         pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FMOD_StopCeilingLoop();
         //am.GetComponent<A_MusicCallBack>().musicInstance.start();
-        //menuMusicInstance.start();
+
+        am.GetComponent<A_MusicCallBack>().musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        am.GetComponent<A_MusicCallBack>().musicInstance.release();
 
         //am.GetComponent<A_MusicCallBack>().ResetMusicCB();
         //am.GetComponent<A_MusicCallBack>().MenuCB();
