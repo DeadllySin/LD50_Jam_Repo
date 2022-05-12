@@ -1,3 +1,4 @@
+
 using System;
 using System.IO;
 using UnityEditor;
@@ -11,7 +12,7 @@ public class SS_MenuBar_Test : MonoBehaviour
     [MenuItem("ScreenshotMenu/CaptureEditorScreenshot %&S")]
     private static void CaptureEditorScreenshot()
     {
-        var path = Path.Combine(Application.dataPath, DateTime.Now.ToString("yyyy_MM_dd-hh_mm_ss") + ".png");
+        var path = Path.Combine(Application.dataPath + "/Screenshots", DateTime.Now.ToString("yyyy_MM_dd-hh_mm_ss") + ".png");
 
         CaptureEditorScreenshot(path);
     }
