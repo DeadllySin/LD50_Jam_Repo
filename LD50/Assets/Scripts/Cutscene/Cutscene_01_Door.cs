@@ -10,15 +10,22 @@ public class Cutscene_01_Door : MonoBehaviour
     [SerializeField] private GameObject cutscene;
     [SerializeField] private GameObject cinePlayer;
     [SerializeField] private GameObject cineCutscene;
+    private StarterAssets.FirstPersonController fps;
 
     //FMOD
     FMOD.Studio.EventInstance doorOpenInstance;
     FMOD.Studio.EventInstance doorCloseInstance;
+
+    [System.Obsolete]
     private void Start()
     {
+        fps = player.GetComponent<StarterAssets.FirstPersonController>();
+        //fps.MoveSpeed = 0;
         doorOpenInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.doorOpen);
         doorCloseInstance = FMODUnity.RuntimeManager.CreateInstance(AudioManager.am.doorClose);
     }
+
+    [System.Obsolete]
     private void Update()
     {
         doorOpenInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(door));
@@ -64,6 +71,7 @@ public class Cutscene_01_Door : MonoBehaviour
         cineCutscene.SetActive(false);
         cinePlayer.SetActive(true);
         GameManager.gm.player.SetActive(true);
+        //fps.MoveSpeed = 4;
         Cursor.lockState = CursorLockMode.Locked;
     }
 }
