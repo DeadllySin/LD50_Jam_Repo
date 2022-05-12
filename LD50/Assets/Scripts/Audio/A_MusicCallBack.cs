@@ -30,24 +30,24 @@ public class A_MusicCallBack : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log("Started");
+        //Debug.Log("Started");
         DontDestroyOnLoad(this.gameObject);
-
-        timelineInfo = new TimelineInfo();
+        MenuCB();
+        // ------------ timelineInfo = new TimelineInfo();
 
         // Explicitly create the delegate object and assign it to a member so it doesn't get freed
         // by the garbage collected while it's being used
-        beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
+        // ------------ beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
 
-        musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
-        
+        // ------------- musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
+
 
         // Pin the class that will store the data modified during the callback
-        timelineHandle = GCHandle.Alloc(timelineInfo);
+        // ------------- timelineHandle = GCHandle.Alloc(timelineInfo);
         // Pass the object through the userdata of the instance
-        musicInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
+        // -------------- musicInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
 
-        musicInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
+        // -------------- musicInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
         //musicInstance.start();
 
         // control variables
@@ -63,7 +63,7 @@ public class A_MusicCallBack : MonoBehaviour
         timelineHandle = GCHandle.Alloc(timelineInfo);
         musicInstance.setUserData(GCHandle.ToIntPtr(timelineHandle));
         musicInstance.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
-        //musicInstance.start();
+        musicInstance.start();
     }
     public void MenuCB()
     {
@@ -102,6 +102,10 @@ public class A_MusicCallBack : MonoBehaviour
 
     void OnGUI()
     {
+        if(timelineInfo != null || timelineHandle != null)
+        {
+            //GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
+        }
         GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
     }
 

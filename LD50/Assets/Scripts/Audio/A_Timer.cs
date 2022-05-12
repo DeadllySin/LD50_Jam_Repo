@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using static System.Net.Mime.MediaTypeNames;
 
 public class A_Timer : MonoBehaviour
 {
     //public Text timerText;
 
     // a callback (like onClick for Buttons) for doing stuff when Countdown finished
-    public UnityEvent OnCountdownFinished;
+    //public UnityEvent OnCountdownFinished;
 
     // here the countdown runs later
     private float timer;
@@ -19,6 +17,8 @@ public class A_Timer : MonoBehaviour
 
     // just a control flag to avoid continue without pausing before
     private bool isPaused;
+
+    float seconds;
 
     // start countdown with duration
     public void StartCountdown(float duration)
@@ -42,12 +42,19 @@ public class A_Timer : MonoBehaviour
             Finished();
         }
 
-        // reduces the timer value by the time passed since last frame
-        timer -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            runTimer = true;
+            isPaused = false;
+            timer = 0;
+        }
+            // reduces the timer value by the time passed since last frame
+            timer -= Time.deltaTime;
 
-        string minutes = ((int)timer / 60).ToString();
-        string seconds = (timer % 60).ToString("f2");
+        //string minutes = ((int)timer / 60).ToString();
+        seconds = (timer % 60);
 
+        Debug.Log(seconds);
         // a bit more readable
         //timerText.text = string.Format("{0}:{1}", minutes, seconds);
     }
@@ -68,7 +75,7 @@ public class A_Timer : MonoBehaviour
 
         // simpliest way is to call the UnityEvent and set up the rest via inspector
         // (same way as with onClick on Buttons)
-        OnCountdownFinished.Invoke();
+        //OnCountdownFinished.Invoke();
 
         // and reset the countdown
         ResetCountdown();

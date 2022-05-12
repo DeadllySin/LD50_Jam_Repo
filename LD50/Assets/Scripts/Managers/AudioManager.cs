@@ -87,10 +87,6 @@ public class AudioManager : MonoBehaviour
         }
         am = this;
         DontDestroyOnLoad(this.gameObject);
-
-        //FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");
-        //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
-        
     }
     void Start()
     {
@@ -127,8 +123,7 @@ public class AudioManager : MonoBehaviour
         //timer
         float t = Time.time;
         finalTimeCB = (t % 60);
-        Debug.Log(finalTimeCB);
-        //Debug.Log(finalTimeCB);
+        //Debug.Log(finalTimeCB); starts counting at start
     }
 
     public void FixedUpdate()
@@ -167,12 +162,21 @@ public class AudioManager : MonoBehaviour
         //am.GetComponent<A_MusicCallBack>().musicInstance.start();
         
         am.GetComponent<A_MusicCallBack>().ResetMenuCB();
-        am.GetComponent<A_MusicCallBack>().MusicCB();
+        StartCoroutine(CallMusicCB());
+        //am.GetComponent<A_MusicCallBack>().MusicCB();
 
         gameplayBus.setMute(false);
     }
 
-    public void FMOD_MainMenuState()
+    IEnumerator CallMusicCB()
+    {
+        yield return new WaitForSeconds(1f);
+        Debug.Log("routine call music cb");
+        //am.GetComponent<A_MusicCallBack>().menuInstance.release();
+        am.GetComponent<A_MusicCallBack>().MusicCB();
+    }
+
+        public void FMOD_MainMenuState()
     {
         FMODRestarted = false;
 
@@ -183,8 +187,8 @@ public class AudioManager : MonoBehaviour
         //am.GetComponent<A_MusicCallBack>().musicInstance.start();
         //menuMusicInstance.start();
 
-        am.GetComponent<A_MusicCallBack>().ResetMenuCB();
-        am.GetComponent<A_MusicCallBack>().MenuCB();
+        //am.GetComponent<A_MusicCallBack>().ResetMusicCB();
+        //am.GetComponent<A_MusicCallBack>().MenuCB();
 
         gameplayBus.setMute(true);
     }
