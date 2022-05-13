@@ -19,6 +19,6 @@ public class Room_Statue_Main : MonoBehaviour
             statueRooms[2].SetActive(true);
         }
 
-        GameManager.gm.statueRoomPro++;
+
     }
 }
