@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
     {
         //Debug.Log("OnDeath Game Manager");
         isDead = true;
+        Timer.timer.countTime = false;
         if (roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
         scoreText.text = "you cleared " + roomsCleared + " rooms!\n your highscore is " + PlayerPrefs.GetInt("roomsCleared") + "\nyou survived for " + Timer.timer.time + "\npress r to restart\npress m to go to the main menu\npress esc to quit";
         deathScreen.SetActive(true);
