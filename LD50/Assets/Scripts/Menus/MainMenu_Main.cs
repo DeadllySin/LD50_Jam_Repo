@@ -26,10 +26,9 @@ public class MainMenu_Main : MonoBehaviour
     {
         if (fadeIn == true)
         {
-            Debug.Log("fade out false ");
             if (mainMenuUIGroup.alpha < 1)
             {
-                mainMenuUIGroup.alpha += Time.deltaTime;
+                mainMenuUIGroup.alpha += Time.deltaTime * 0.5f;
                 if (mainMenuUIGroup.alpha >= 1)
                 {
                     fadeIn = false;
@@ -38,24 +37,25 @@ public class MainMenu_Main : MonoBehaviour
         }
         if (fadeOut == true)
         {
-            Debug.Log("fade out tru ");
             if (mainMenuUIGroup.alpha >= 0)
             {
-                //delta time is 0.02
                 var seconds = A_Timer.a_timer.a_s * 0.1f;
                 mainMenuUIGroup.alpha -= Time.deltaTime * seconds;
-                //mainMenuUIGroup.alpha -= (Mathf.Sin(Time.time * A_Timer.a_timer.a_ms) + 1.0f) / 2.0f; 
-                //Debug.Log("ALPHA IS " + mainMenuUIGroup.alpha);
-                //Debug.Log("TIME IS " + A_Timer.timer.s);
-                Debug.Log(seconds);
+                //Debug.Log(seconds);
                 if (AudioManager.am.startTimerCB == false)
                 {
-                    Debug.Log("stop counter");
                     fadeOut = false;
                     this.gameObject.SetActive(false);
+                    A_Timer.a_timer.a_s = 0;
                 }
             }
         }
+    }
+
+    private void Start()
+    {
+        mainMenuUIGroup.alpha = 0;
+        fadeIn = true;
     }
     private void OnEnable()
     {
