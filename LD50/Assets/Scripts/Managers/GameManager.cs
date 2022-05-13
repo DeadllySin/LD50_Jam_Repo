@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         cutscene.SetActive(!GameState.gs.skipCutscene);
         door.SetActive(GameState.gs.skipCutscene);
         player.SetActive(GameState.gs.skipCutscene);
-        if (testOutDeath) defaultSpeed = 1.5f; slowThresholdSpeed = 1.5f;
+        //if (testOutDeath) defaultSpeed = 1.5f; slowThresholdSpeed = 1.5f;
         //defaultSpeed = ceilingSpeedScale(defaultSpeed, 0f, 10f, 0f, 0.5f);
         mainMenu.SetActive(!GameState.gs.skipCutscene);
         startTime = Time.time;

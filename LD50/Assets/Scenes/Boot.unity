@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368655d35958fc546aabb3d53ef1c041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipCutscene: 1
+  skipCutscene: 0
   introFinished: 0
   killFast: 0
   overWriteRoom: 
