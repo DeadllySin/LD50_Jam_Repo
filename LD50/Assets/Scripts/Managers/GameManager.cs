@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
         float t = Time.time - startTime;
         minutes = ((int)t / 60).ToString();
         seconds = (t % 60).ToString("f0");
-        //Debug.Log(minutes + " mins" + seconds + " secs");
+        Debug.Log(minutes + " mins" + seconds + " secs");
     }
 
     public void Pause()
