@@ -51,7 +51,7 @@ public class Room_Ring : MonoBehaviour
                     break;
             }
 
-            foreach (string line in System.IO.File.ReadLines(Application.dataPath + "/Math.txt"))
+            foreach (string line in System.IO.File.ReadLines(Application.streamingAssetsPath + "/Math.txt"))
             {
                 if (line.Length == maxSymbols + 2)
                 {
