@@ -29,12 +29,11 @@ public class Player_Hand : MonoBehaviour
                     if (lookingAt == "ring_up")
                     {
                         GameManager.gm.currRoom.GetComponentInChildren<Room_Ring>().MoveUp(handTarget.GetComponent<Interactable_Pole>().whichPole);
-                        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideUp);
+                        
                     }
                     if (lookingAt == "ring_down")
                     {
                         GameManager.gm.currRoom.GetComponentInChildren<Room_Ring>().MoveDown(handTarget.GetComponent<Interactable_Pole>().whichPole);
-                        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideDown);
                     }
                     break;
                 case "statue":

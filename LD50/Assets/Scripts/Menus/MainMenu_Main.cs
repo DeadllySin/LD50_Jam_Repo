@@ -65,13 +65,11 @@ public class MainMenu_Main : MonoBehaviour
     public void StartGame()
     {
         GameState.gs.introFinished = false;
-        //mainMenuUIGroup.alpha = 1f;
         AudioManager.am.startTimerCB = true;
         fadeOut = true;
         AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = true;
         AudioManager.am.FMOD_InGameState(); //não mexer que está ligado ás variáveis call back
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-        //AudioManager.am.FMOD_LoadInGameInstances();
     }
 
     public void Credits()

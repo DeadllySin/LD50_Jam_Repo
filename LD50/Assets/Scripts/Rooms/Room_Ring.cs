@@ -102,6 +102,7 @@ public class Room_Ring : MonoBehaviour
             {
                 if (j == pole[poleIndex].slot.Length - 1) return;
                 ringMovedIndex = j + 1;
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideDown);
                 break;
             }
         }
@@ -130,6 +131,7 @@ public class Room_Ring : MonoBehaviour
             {
                 if (j == 0) return;
                 ringMovedIndex = j - 1;
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pSlideUp);
                 break;
             }
         }
