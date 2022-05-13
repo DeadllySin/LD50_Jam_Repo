@@ -52,6 +52,11 @@ public class Player_Hand : MonoBehaviour
             if (lookingAt == "confirm")
             {
                 FindObjectOfType<Room_Main>().OnConfirm(handTarget);
+                if (handTarget.GetComponent<Interactable>().arg == "light")
+                {
+                    hand.GetComponentInChildren<Light>().gameObject.SetActive(false);
+                    Invoke(nameof(Disablelight), .3f);
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.G))
@@ -61,6 +66,11 @@ public class Player_Hand : MonoBehaviour
                 FindObjectOfType<Room_Statue>().Drop();
             }
         }
+    }
+
+    void Disablelight(GameObject light)
+    {
+        light.SetActive(true);
     }
 
     public int DistanceFu(GameObject target)
