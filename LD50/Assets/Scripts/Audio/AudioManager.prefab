@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4973544759690259814}
   - component: {fileID: 4973544759690259809}
   - component: {fileID: 4973544759690259808}
+  - component: {fileID: 4973544759633716100}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -44,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03531af918adc0b48a22c304cdf18bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FMODRestarted: 0
   footsteps:
     Guid:
       Data1: 1880838797
@@ -59,6 +59,13 @@ MonoBehaviour:
       Data3: 2031722919
       Data4: 109258761
     Path: event:/Player/Death
+  introSteps:
+    Guid:
+      Data1: 1408499522
+      Data2: 1336019078
+      Data3: -1666174553
+      Data4: -1016992728
+    Path: event:/Player/Intro_Footsteps
   ceilingLoop:
     Guid:
       Data1: 1734490846
@@ -276,9 +283,12 @@ MonoBehaviour:
       Data3: -989886794
       Data4: 1324581492
     Path: snapshot:/TunnelOcclusion
+  FMODRestarted: 0
   initialTimeCB: 0
   finalTimeCB: 0
   startTimerCB: 0
+  MenuCB: 0
+  InitCB: 0
 --- !u!114 &4973544759690259808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,3 +317,15 @@ MonoBehaviour:
       Data3: -1067238465
       Data4: -742220504
     Path: event:/Music/Main_Menu
+--- !u!114 &4973544759633716100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4973544759690259811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41083950c28bac54586caaaaea81b583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -36,7 +36,7 @@ public class Cutscene_01_Door : MonoBehaviour
     {
         dooropen.SetActive(true);
         doorCloseInstance.start();
-        Debug.Log("test");
+        //Debug.Log("test");
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
     }
 
@@ -56,6 +56,16 @@ public class Cutscene_01_Door : MonoBehaviour
     {
         doorOpenInstance.release();
         doorCloseInstance.release();
+    }
+
+    public void Anim_FMODStepsSand()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.introSteps);
+    }
+
+    public void Anim_FMODStepsStone()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.footsteps);
     }
 
     public void turnPlayerOn()

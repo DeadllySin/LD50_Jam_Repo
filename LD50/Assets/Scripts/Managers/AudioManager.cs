@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     [Header("Player")]
     public FMODUnity.EventReference footsteps;
     public FMODUnity.EventReference deathSFX;
+    public FMODUnity.EventReference introSteps;
 
     [Header("Environment")]
     public FMODUnity.EventReference ceilingLoop;
@@ -161,31 +162,30 @@ public class AudioManager : MonoBehaviour
         //Menu music Stop in timeline ResetCB
         //In Game Music started in timeline CB_MenuToGame
 
-        //FMODRestarted = true;
-
         gameplayBus.setMute(false);
     }
 
     public void FMOD_MainMenuState()
     {
         FMODRestarted = false;
-
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
         pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FMOD_StopCeilingLoop();
-
         am.GetComponent<A_MusicCallBack>().InGameMusicStop();
-        
+        //don't reset before starting
+        //am.GetComponent<A_MusicCallBack>().InGameMusicStop();
+        //am.GetComponent<A_MusicCallBack>().musicInstance.release();
+        //Menu drone or music riser is louder the second time but isntances are not duplicated???
         if (InitCB == false)
         {
             Debug.Log("init false");
             am.GetComponent<A_MusicCallBack>().ResetMusicCB();
-            //am.GetComponent<A_MusicCallBack>().InGameMusicStop();
-            am.GetComponent<A_MusicCallBack>().MenuMusicStart();
+            am.GetComponent<A_MusicCallBack>().InGameMusicStop();
+            
             am.GetComponent<A_MusicCallBack>().MenuCB();
+            am.GetComponent<A_MusicCallBack>().MenuMusicStart(); //starts in fmod main music command event
         }
-
         InitCB = false;
         gameplayBus.setMute(true);
     }

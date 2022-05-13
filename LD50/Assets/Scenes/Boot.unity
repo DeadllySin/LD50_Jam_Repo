@@ -213,7 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skipCutscene: 0
   introFinished: 0
-  killFast: 0
+  killFast: 1
   overWriteRoom: statue
 --- !u!1001 &4973544759633716098
 PrefabInstance:
@@ -272,20 +272,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
---- !u!1 &4973544759633716099 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4973544759690259811, guid: b0a600ad7802d8542929b6b24126a9ec, type: 3}
-  m_PrefabInstance: {fileID: 4973544759633716098}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4973544759633716100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4973544759633716099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41083950c28bac54586caaaaea81b583, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

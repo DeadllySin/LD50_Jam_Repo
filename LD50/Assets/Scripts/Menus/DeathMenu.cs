@@ -18,6 +18,7 @@ public class DeathMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
+            //Debug.Log("Death Menu pressed M");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             GameState.gs.skipCutscene = false;
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);

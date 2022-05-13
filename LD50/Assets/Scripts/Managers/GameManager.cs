@@ -82,17 +82,28 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (GameState.gs.introFinished == true) //|| AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce == true)
+        if (GameState.gs.introFinished == true && isDead == false)
         {
             Debug.Log("ceiling is moving");
             dustStorm.SetActive(false);
             l.gameObject.SetActive(false);
-            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
+            
             //Fmod stuff
+            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
             ceilingSourceChild.transform.position = new Vector3(player.transform.position.x, ceiling.transform.position.y - 0.5f, player.transform.position.z);
             AudioManager.am.ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
             AudioManager.am.ceilingFBDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
-            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceilingSourceChild.transform.position.y);
+            //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceilingSourceChild.transform.position.y);
+            if (AudioManager.am.GetComponent<A_MusicCallBack>().AllowCeilingParam == true)
+            {
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceilingSourceChild.transform.position.y);
+                Debug.Log("following parameter");
+            }
+            else
+            {
+                Debug.Log("NOT following parameter");
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", 11f);
+            }
             //Debug.Log("Height: " + ceilingSourceChild.transform.position.y);
         }
     }
@@ -106,7 +117,7 @@ public class GameManager : MonoBehaviour
     {
         //Debug control variables
         //Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart " + AudioManager.am.FMODRestarted + "|| FMOD DO ONCE " + AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce);
-
+        //Debug.Log(ceilingSourceChild.transform.position.y);
         /*//test pause menu when skip cutscene active
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -121,12 +132,15 @@ public class GameManager : MonoBehaviour
 
     private void OnDeath()
     {
+        //Debug.Log("OnDeath Game Manager");
         isDead = true;
         if (roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
         scoreText.text = "you cleared " + roomsCleared + " rooms!\n your highscore is " + PlayerPrefs.GetInt("roomsCleared") + "\npress r to restart\npress m to go to the main menu\npress esc to quit";
         deathScreen.SetActive(true);
         player.SetActive(false);
         AudioManager.am.FMOD_DeadState();
+        AudioManager.am.GetComponent<A_MusicCallBack>().AllowCeilingParam = false;
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", 11f);
 
         //timer
         float t = Time.time - startTime;
