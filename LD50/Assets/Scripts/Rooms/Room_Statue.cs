@@ -8,16 +8,82 @@ public class Room_Statue : MonoBehaviour
     private Room_Main room;
     readonly List<GameObject> spawners = new List<GameObject>();
     readonly List<GameObject> pieces = new List<GameObject>();
-    [SerializeField] private GameObject[] piecess;
+    readonly List<GameObject> prePlaced = new List<GameObject>();
+    readonly List<GameObject> rams = new List<GameObject>();
+    readonly List<Transform> ramPos = new List<Transform>();
+
+    public StatuePiece[] sps;
+    [SerializeField] private GameObject ramParent;
     [SerializeField] private GameObject spawnerParent;
     [HideInInspector] public Interactable_Statue sp;
     [HideInInspector] public Interactable_Socket ss;
+    private int totalStatues;
 
-
+    /*
+    private void Awake()
+    {
+        foreach (Transform child in ramParent.transform)
+        {
+            rams.Add(child.gameObject);
+            ramPos.Add(child.transform);
+        }
+        int i = 0;
+        while (i < rams.Count)
+        {
+            int rdm = Random.Range(0, ramPos.Count - 1);
+            Debug.Log("isowkringfmi0aDf");
+            rams[i].gameObject.transform.position = ramPos[rdm].position;
+            rams[i].gameObject.transform.rotation = ramPos[rdm].rotation;
+            ramPos.RemoveAt(rdm);
+            rams.RemoveAt(i);
+            i++;
+        }
+    }*/
     private void Start()
     {
+
         room = GetComponentInParent<Room_Main>();
-        for (int i = 0; i < piecess.Length; i++) pieces.Add(piecess[i]);
+        for (int i = 0; i < sps.Length; i++)
+        {
+            pieces.Add(sps[i].piecePrefab);
+            prePlaced.Add(sps[i].prePlaced);
+        }
+        Debug.Log(GameManager.gm.statueRoomPro);
+        switch (GameManager.gm.statueRoomPro)
+        {
+            case 0:
+                int rdm = Random.Range(0, pieces.Count - 1);
+                pieces.RemoveAt(rdm);
+                prePlaced[rdm].SetActive(true);
+                prePlaced.RemoveAt(rdm);
+                int rdm1 = Random.Range(0, pieces.Count - 1);
+                pieces.RemoveAt(rdm1);
+                prePlaced[rdm1].SetActive(true);
+                prePlaced.RemoveAt(rdm1);
+                totalStatues = 3;
+                break;
+            case 1:
+                int rdm2 = Random.Range(0, pieces.Count - 1);
+                pieces.RemoveAt(rdm2);
+                prePlaced[rdm2].SetActive(true);
+                int rdm3 = Random.Range(0, pieces.Count - 1);
+                pieces.RemoveAt(rdm3);
+                prePlaced[rdm3].SetActive(true);
+                totalStatues = 3;
+                break;
+            case 2:
+                int rdm4 = Random.Range(0, pieces.Count - 1);
+                pieces.RemoveAt(rdm4);
+                prePlaced[rdm4].SetActive(true);
+                totalStatues = 4;
+                break;
+            case 3:
+                int rdm5 = Random.Range(0, pieces.Count - 1);
+                pieces.RemoveAt(rdm5);
+                prePlaced[rdm5].SetActive(true);
+                totalStatues = 4;
+                break;
+        }
         foreach (Transform child in spawnerParent.transform) spawners.Add(child.gameObject);
         while (pieces.Count > 0)
         {
@@ -31,6 +97,16 @@ public class Room_Statue : MonoBehaviour
             spawners.RemoveAt(temp);
             pieces.RemoveAt(temp2);
         }
+
+        GameManager.gm.statueRoomPro++;
+    }
+
+    private void Remove()
+    {
+        int rdm = Random.Range(0, pieces.Count - 1);
+        pieces.RemoveAt(rdm);
+        prePlaced[rdm].SetActive(true);
+        prePlaced.RemoveAt(rdm);
     }
 
     public void PickUpFrom()
@@ -101,7 +177,7 @@ public class Room_Statue : MonoBehaviour
                 phand.hand.GetComponent<Interactable_Statue>().ss.OnAssienedStatue();
                 phand.hand.transform.position = phand.handTarget.transform.position;
                 phand.hand = null;
-                phand.handTarget.GetComponent<Interactable_Socket>().GetComponent<MeshCollider>().enabled = false;
+                if(phand.handTarget.GetComponent<MeshCollider>()) phand.handTarget.GetComponent<Interactable_Socket>().GetComponent<MeshCollider>().enabled = false;
                 OnValueChanged();
             }
         }
@@ -109,8 +185,8 @@ public class Room_Statue : MonoBehaviour
 
     void OnValueChanged()
     {
-        int max = piecess.Length;
-        switch (piecess.Length)
+        int max = pieces.Count;
+        switch (totalStatues)
         {
             case 3:
                 switch (correctPieces)
@@ -140,7 +216,7 @@ public class Room_Statue : MonoBehaviour
                         break;
                 }
                 break;
-            case 5:
+            default:
                 switch (correctPieces)
                 {
                     case 4:
@@ -154,9 +230,14 @@ public class Room_Statue : MonoBehaviour
                         break;
                 }
                 break;
-            default:
-                break;
         }
 
     }
+}
+
+[System.Serializable]
+public class StatuePiece{
+    public GameObject piecePrefab;
+    public GameObject prePlaced;
+
 }
