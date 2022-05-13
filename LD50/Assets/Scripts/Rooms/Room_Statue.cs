@@ -9,8 +9,6 @@ public class Room_Statue : MonoBehaviour
     readonly List<GameObject> spawners = new List<GameObject>();
     readonly List<GameObject> pieces = new List<GameObject>();
     readonly List<GameObject> prePlaced = new List<GameObject>();
-    readonly List<GameObject> rams = new List<GameObject>();
-    readonly List<Transform> ramPos = new List<Transform>();
 
     public StatuePiece[] sps;
     [SerializeField] private GameObject ramParent;
@@ -101,14 +99,6 @@ public class Room_Statue : MonoBehaviour
         GameManager.gm.statueRoomPro++;
     }
 
-    private void Remove()
-    {
-        int rdm = Random.Range(0, pieces.Count - 1);
-        pieces.RemoveAt(rdm);
-        prePlaced[rdm].SetActive(true);
-        prePlaced.RemoveAt(rdm);
-    }
-
     public void PickUpFrom()
     {
         phand = GameManager.gm.player.GetComponent<Player_Hand>();
@@ -147,8 +137,7 @@ public class Room_Statue : MonoBehaviour
         phand.hand = sp.gameObject;
 
         phand.hand.transform.parent = Camera.main.transform;
-        phand.hand.transform.position = new Vector3(0, 0, 0);
-        phand.hand.transform.rotation = new Quaternion(0, 0, 0, 0);
+        phand.hand.transform.SetPositionAndRotation(new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
         phand.hand.transform.localRotation = new Quaternion(0, 0, 0, 0);
         phand.hand.transform.localPosition = new Vector3(.5f, -.5f, 1f);
         if (setASNull)
@@ -185,7 +174,6 @@ public class Room_Statue : MonoBehaviour
 
     void OnValueChanged()
     {
-        int max = pieces.Count;
         switch (totalStatues)
         {
             case 3:
@@ -231,13 +219,12 @@ public class Room_Statue : MonoBehaviour
                 }
                 break;
         }
-
     }
 }
 
 [System.Serializable]
-public class StatuePiece{
+public class StatuePiece
+{
     public GameObject piecePrefab;
     public GameObject prePlaced;
-
 }

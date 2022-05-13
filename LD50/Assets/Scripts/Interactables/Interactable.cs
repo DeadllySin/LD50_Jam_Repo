@@ -5,6 +5,7 @@ public class Interactable : MonoBehaviour
 {
     private Player_Hand ph;
     private Color col;
+    public string arg;
     [SerializeField] private bool highlight = true;
     [SerializeField] private string type;
     [SerializeField] private UnityEvent onEnter;

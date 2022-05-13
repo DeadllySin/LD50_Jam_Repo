@@ -52,6 +52,7 @@ public class Player_Hand : MonoBehaviour
             if (lookingAt == "confirm")
             {
                 FindObjectOfType<Room_Main>().OnConfirm(handTarget);
+
             }
         }
         if (Input.GetKeyDown(KeyCode.G))
@@ -62,6 +63,8 @@ public class Player_Hand : MonoBehaviour
             }
         }
     }
+
+
 
     public int DistanceFu(GameObject target)
     {
