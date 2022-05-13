@@ -143,7 +143,7 @@ public class A_MusicCallBack : MonoBehaviour
             InGameMusicStart();
             GameManager.gm.cutscene.GetComponent<Animator>().SetTrigger("play");
             CBDoOnce = false;
-            Timer.timer.countTime = false;
+            A_Timer.a_timer.a_countTime = false;
             AudioManager.am.startTimerCB = false;
         }
 
@@ -178,6 +178,7 @@ public class A_MusicCallBack : MonoBehaviour
                 FMODIntroDoOnce = true;
                 AllowCeilingParam = true;
                 GameState.gs.introFinished = true;
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("IntroSFXDuck", 0);
                 AudioManager.am.FMOD_PlayCeilingLoop();
                 Debug.Log("Skipped intro and play Ceiling Loop");
 
@@ -188,6 +189,7 @@ public class A_MusicCallBack : MonoBehaviour
             {
                 AudioManager.am.FMODRestarted = false;
                 GameState.gs.introFinished = true;
+                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("IntroSFXDuck", 0);
                 FMODIntroDoOnce = true;
                 AllowCeilingParam = true;
 

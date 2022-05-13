@@ -1,7 +1,6 @@
 using UnityEngine;
 public class Timer : MonoBehaviour
 {
-
     double miliseconds;
     int seconds;
     int minutes;
@@ -18,17 +17,6 @@ public class Timer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (AudioManager.am.startTimerCB == true)
-        {
-            countTime = true;
-        }
-            
-        else
-        {
-            countTime = false;
-        }
-            
-        
         if (countTime)
         {
             miliseconds += 20;
@@ -50,8 +38,6 @@ public class Timer : MonoBehaviour
             string sec = seconds.ToString();
             string min = minutes.ToString();
             time = min.PadLeft(2, '0') + ":" + sec.PadLeft(2, '0') + ":" + mil;
-
-            //Debug.Log("TIME IS " + Timer.timer.ms);
         }
         
     }

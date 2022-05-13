@@ -170,6 +170,7 @@ public class AudioManager : MonoBehaviour
         FMODRestarted = false;
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Main_Menu");
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("IntroSFXDuck", 1);
         pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FMOD_StopCeilingLoop();
         am.GetComponent<A_MusicCallBack>().InGameMusicStop();

@@ -1,83 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class A_Timer : MonoBehaviour
 {
-    //public Text timerText;
 
-    // a callback (like onClick for Buttons) for doing stuff when Countdown finished
-    //public UnityEvent OnCountdownFinished;
+    double a_miliseconds;
+    int a_seconds;
+    int a_minutes;
+    public static A_Timer a_timer;
+    public bool a_countTime = false;
+    public int a_ms;
+    public int a_s;
+    [HideInInspector] public string a_time;
 
-    // here the countdown runs later
-    private float timer;
-
-    // for starting, pausing and stopping the countdown
-    private bool runTimer;
-
-    // just a control flag to avoid continue without pausing before
-    private bool isPaused;
-
-    float seconds;
-
-    // start countdown with duration
-    public void StartCountdown(float duration)
+    private void Awake()
     {
-        timer = duration;
-        runTimer = true;
+        a_timer = this;
     }
 
-    // stop and reset the countdown
-    public void StopCountdown()
+    private void FixedUpdate()
     {
-        ResetCountdown();
-    }
-
-    private void Update()
-    {
-        if (!runTimer) return;
-
-        if (timer <= 0)
+        if (AudioManager.am.startTimerCB == true)
         {
-            Finished();
+            a_countTime = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        else
         {
-            runTimer = true;
-            isPaused = false;
-            timer = 0;
+            a_countTime = false;
         }
-            // reduces the timer value by the time passed since last frame
-            timer -= Time.deltaTime;
-
-        //string minutes = ((int)timer / 60).ToString();
-        seconds = (timer % 60);
-
-        Debug.Log(seconds);
-        // a bit more readable
-        //timerText.text = string.Format("{0}:{1}", minutes, seconds);
-    }
 
 
-    private void ResetCountdown()
-    {
-        //timerText.text = "0:00";
-        runTimer = false;
-        isPaused = false;
-        timer = 0;
-    }
+        if (a_countTime)
+        {
+            a_miliseconds += 20;
+            a_ms += 20;
+            if (a_miliseconds > 999)
+            {
+                a_seconds += 1;
+                a_s += 1;
+                a_miliseconds = 0;
+            }
+            if (a_seconds > 59)
+            {
+                a_minutes += 1;
+                a_seconds = 0;
+            }
+            string mil = a_miliseconds.ToString();
+            mil = mil.PadLeft(2, '0');
+            mil = mil.Remove(mil.Length - 1);
+            string sec = a_seconds.ToString();
+            string min = a_minutes.ToString();
+            a_time = min.PadLeft(2, '0') + ":" + sec.PadLeft(2, '0') + ":" + mil;
 
-    // called when the countdown exceeds and wasn't stopped before
-    private void Finished()
-    {
-        // do what ever should happen when the countdown is finished
+            //Debug.Log("TIME IS " + Timer.timer.ms);
+        }
 
-        // simpliest way is to call the UnityEvent and set up the rest via inspector
-        // (same way as with onClick on Buttons)
-        //OnCountdownFinished.Invoke();
-
-        // and reset the countdown
-        ResetCountdown();
     }
 }

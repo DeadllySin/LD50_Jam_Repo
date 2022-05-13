@@ -1,5 +1,5 @@
 
-using System;
+/*using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -70,4 +70,4 @@ public class SS_MenuBar_Test : MonoBehaviour
         Debug.Log("Screenshot written to file " + filePath);
     }
 
-}
+}*/

@@ -41,14 +41,16 @@ public class MainMenu_Main : MonoBehaviour
             Debug.Log("fade out tru ");
             if (mainMenuUIGroup.alpha >= 0)
             {
-
-                //mainMenuUIGroup.alpha -= Time.deltaTime;
-                //mainMenuUIGroup.alpha -= Timer.timer.s;
-                Debug.Log("ALPHA IS " + mainMenuUIGroup.alpha);
+                //delta time is 0.02
+                var seconds = A_Timer.a_timer.a_s * 0.1f;
+                mainMenuUIGroup.alpha -= Time.deltaTime * seconds;
+                //mainMenuUIGroup.alpha -= Timer.timer.ms;
+                //Debug.Log("ALPHA IS " + mainMenuUIGroup.alpha);
                 //Debug.Log("TIME IS " + Timer.timer.s);
-                Debug.Log(Time.deltaTime);
+                Debug.Log(seconds);
                 if (AudioManager.am.startTimerCB == false)
                 {
+                    Debug.Log("stop counter");
                     fadeOut = false;
                     this.gameObject.SetActive(false);
                 }
