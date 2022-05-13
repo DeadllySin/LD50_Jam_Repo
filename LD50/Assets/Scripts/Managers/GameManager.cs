@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     [Header("Ceiling")]
     public GameObject ceiling;
     public float speedBoost;
-    private bool testOutDeath;
     [SerializeField] float slowThresholdSpeed;
     [SerializeField] private float defaultSpeed;
     [SerializeField] private float deathHeight;
@@ -51,14 +50,12 @@ public class GameManager : MonoBehaviour
     {
         gm = this;
         dustStorm.SetActive(true);
-        testOutDeath = GameState.gs.killFast;
         Cursor.lockState = CursorLockMode.Locked;
         playerCine.SetActive(GameState.gs.skipCutscene);
         cutsceneCam.SetActive(!GameState.gs.skipCutscene);
         cutscene.SetActive(!GameState.gs.skipCutscene);
         door.SetActive(GameState.gs.skipCutscene);
         player.SetActive(GameState.gs.skipCutscene);
-        //if (testOutDeath) defaultSpeed = 1.5f; slowThresholdSpeed = 1.5f;
         //defaultSpeed = ceilingSpeedScale(defaultSpeed, 0f, 10f, 0f, 0.5f);
         mainMenu.SetActive(!GameState.gs.skipCutscene);
         startTime = Time.time;
@@ -117,20 +114,7 @@ public class GameManager : MonoBehaviour
     }*/
     private void Update()
     {
-        //Debug control variables
-        
-        //Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart " + AudioManager.am.FMODRestarted + "|| FMOD DO ONCE " + AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce);
-        //Debug.Log(ceilingSourceChild.transform.position.y);
-        /*//test pause menu when skip cutscene active
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            mainMenu.SetActive(false);
-        }*/
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            Pause();
-        }
+        if (Input.GetKeyDown(KeyCode.Tab)) Pause();
     }
 
     private void OnDeath()

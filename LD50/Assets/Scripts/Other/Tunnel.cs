@@ -17,17 +17,6 @@ public class Tunnel : MonoBehaviour
     private void Update()
     {
         if (GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.parent = GameManager.gm.ceiling.transform;
-
-        /*
-        if (Input.GetKeyDown("h"))
-        {
-            OpenDoor(0);
-        }
-        if (Input.GetKeyDown("j"))
-        {
-            CloseDoor(0);
-        }*/
-
     }
 
     public void NewRoom()

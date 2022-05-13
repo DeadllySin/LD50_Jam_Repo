@@ -39,5 +39,4 @@ public class PauseMenu : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
         Application.Quit();
     }
-
-    }
+}
