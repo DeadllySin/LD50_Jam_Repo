@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float thresholdToSlower;
     [HideInInspector] public float ceilingSpeed;
     [HideInInspector] public GameObject ceilingSourceChild;
-
+    private bool doOnce;
     private float startTime;
     private string minutes;
     private string seconds;
@@ -83,9 +83,15 @@ public class GameManager : MonoBehaviour
             }
             if (GameState.gs.introFinished)
             {
+                if (!doOnce)
+                {
+                    doOnce = true;
+                    dustStorm.SetActive(false);
+                    l.gameObject.SetActive(false);
+                    Timer.timer.countTime = true;
+                }
                 Debug.Log("ceiling is moving");
-                dustStorm.SetActive(false);
-                l.gameObject.SetActive(false);
+
 
                 //Fmod stuff
                 ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
@@ -132,7 +138,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log("OnDeath Game Manager");
         isDead = true;
         if (roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
-        scoreText.text = "you cleared " + roomsCleared + " rooms!\n your highscore is " + PlayerPrefs.GetInt("roomsCleared") + "\npress r to restart\npress m to go to the main menu\npress esc to quit";
+        scoreText.text = "you cleared " + roomsCleared + " rooms!\n your highscore is " + PlayerPrefs.GetInt("roomsCleared") + "\nyou survived for " + Timer.timer.time + "\npress r to restart\npress m to go to the main menu\npress esc to quit";
         deathScreen.SetActive(true);
         player.SetActive(false);
         AudioManager.am.FMOD_DeadState();
