@@ -44,9 +44,9 @@ public class MainMenu_Main : MonoBehaviour
                 //delta time is 0.02
                 var seconds = A_Timer.a_timer.a_s * 0.1f;
                 mainMenuUIGroup.alpha -= Time.deltaTime * seconds;
-                //mainMenuUIGroup.alpha -= Timer.timer.ms;
+                //mainMenuUIGroup.alpha -= (Mathf.Sin(Time.time * A_Timer.a_timer.a_ms) + 1.0f) / 2.0f; 
                 //Debug.Log("ALPHA IS " + mainMenuUIGroup.alpha);
-                //Debug.Log("TIME IS " + Timer.timer.s);
+                //Debug.Log("TIME IS " + A_Timer.timer.s);
                 Debug.Log(seconds);
                 if (AudioManager.am.startTimerCB == false)
                 {
@@ -64,7 +64,6 @@ public class MainMenu_Main : MonoBehaviour
     
     public void StartGame()
     {
-        //this.gameObject.SetActive(false);
         GameState.gs.introFinished = false;
         //mainMenuUIGroup.alpha = 1f;
         AudioManager.am.startTimerCB = true;

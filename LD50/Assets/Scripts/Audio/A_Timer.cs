@@ -16,6 +16,14 @@ public class A_Timer : MonoBehaviour
         a_timer = this;
     }
 
+    private void Start()
+    {
+        a_miliseconds = 0;
+        a_seconds = 0;
+        a_minutes = 0;
+        a_s = 0;
+        a_ms = 0;
+    }
     private void FixedUpdate()
     {
         if (AudioManager.am.startTimerCB == true)

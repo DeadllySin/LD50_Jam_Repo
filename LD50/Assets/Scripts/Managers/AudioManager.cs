@@ -56,6 +56,7 @@ public class AudioManager : MonoBehaviour
     public FMOD.Studio.Bus UIBus;
 
     [Header("Snapshots")]
+    public FMODUnity.EventReference ceilingLookAtSS;
     public FMODUnity.EventReference reverbTunnelSS;
     public FMODUnity.EventReference pauseSS;
     public FMODUnity.EventReference ceilingFeedbackSS;
@@ -66,19 +67,16 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public FMOD.Studio.EventInstance ceilingLoopInstance;
 
     //Snapshots
+    [HideInInspector] public FMOD.Studio.EventInstance ceilingSSInstance;
     [HideInInspector] public FMOD.Studio.EventInstance reverbTunnelSSInstance;
     [HideInInspector] public FMOD.Studio.EventInstance pauseSSInstance;
     [HideInInspector] public FMOD.Studio.EventInstance ceilingFeedbackSSInstance;
     [HideInInspector] public FMOD.Studio.EventInstance tunnelOcclusionSSInstance;
 
-    public bool FMODRestarted = false;
-    bool AMDoOnce = true;
+    [HideInInspector] public bool FMODRestarted = false;
 
-    public float initialTimeCB = 0f;
-    public float finalTimeCB;
-    public bool startTimerCB = false;
-    public bool MenuCB = false;
-    public bool InitCB = false;
+    [HideInInspector] public bool startTimerCB = false;
+    [HideInInspector] public bool InitCB = false;
     public void Awake()
     {
         if (am != null)
@@ -98,6 +96,7 @@ public class AudioManager : MonoBehaviour
 
         gameplayBus.setMute(true);
 
+        ceilingSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.ceilingLookAtSS);
         pauseSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.pauseSS);
         ceilingFeedbackSSInstance = FMODUnity.RuntimeManager.CreateInstance(this.ceilingFeedbackSS);
         reverbTunnelSSInstance = FMODUnity.RuntimeManager.CreateInstance(reverbTunnelSS);
@@ -105,36 +104,15 @@ public class AudioManager : MonoBehaviour
 
         if (GameState.gs.skipCutscene == true)
         {
+            AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
             FMOD_InGameState();
+            
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
         }
         else
         {
             FMOD_MainMenuState();
         }
-    }
-
-    public void FMOD_MenuCBTimer()
-    {
-        //timer
-        float t = Time.time;
-        finalTimeCB = (t % 60);
-        //Debug.Log(finalTimeCB); starts counting at start
-    }
-
-    public void FixedUpdate()
-    {
-        if (startTimerCB == true)
-        {
-            //FMOD_MenuCBTimer();
-        }
-
-        if (AMDoOnce == true && MenuCB == true)
-        {
-            AMDoOnce = false;
-            MenuCB = false;
-        }
-        
     }
 
     public void FMOD_CeilingFasterOneShot()

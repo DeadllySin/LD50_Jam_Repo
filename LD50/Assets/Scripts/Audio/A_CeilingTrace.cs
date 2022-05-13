@@ -8,13 +8,11 @@ public class A_CeilingTrace : MonoBehaviour
     [SerializeField] Transform EyesTest;
     bool isLookingAtCeiling;
 
-    FMOD.Studio.EventInstance ceilingSSInstance;
+    
 
     private void Start()
     {
         isLookingAtCeiling = false;
-
-        ceilingSSInstance = FMODUnity.RuntimeManager.CreateInstance("snapshot:/LookingAtCeiling");
     }
 
     private void Update()
@@ -28,14 +26,14 @@ public class A_CeilingTrace : MonoBehaviour
             if (hit.collider.gameObject.tag == "Ceiling" && isLookingAtCeiling == false && GameManager.gm.ceiling.transform.position.y > 8f)
             {
                 isLookingAtCeiling = true;
-                ceilingSSInstance.start();
+                AudioManager.am.ceilingSSInstance.start();
 
                 //Debug.Log("true");
             }
             else if (hit.collider.gameObject.tag != "Ceiling" && isLookingAtCeiling == true)
             {
                 isLookingAtCeiling = false;
-                ceilingSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                AudioManager.am.ceilingSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
                 //Debug.Log("false");
             }

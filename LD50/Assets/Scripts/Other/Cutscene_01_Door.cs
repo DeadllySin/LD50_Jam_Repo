@@ -68,6 +68,15 @@ public class Cutscene_01_Door : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.footsteps);
     }
 
+    public void Anim_FMODSSLookAtCeillingON()
+    {
+        AudioManager.am.ceilingSSInstance.start();
+    }
+
+    public void Anim_FMODSSLookAtCeillingOFF()
+    {
+        AudioManager.am.ceilingSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
     public void turnPlayerOn()
     {
         player.transform.position = this.transform.position;

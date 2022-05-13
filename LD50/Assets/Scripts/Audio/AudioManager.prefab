@@ -255,6 +255,13 @@ MonoBehaviour:
       Data3: -1029313903
       Data4: 450898579
     Path: event:/UI/UI_Select
+  ceilingLookAtSS:
+    Guid:
+      Data1: -398336590
+      Data2: 1129449244
+      Data3: 456338359
+      Data4: -1245715447
+    Path: snapshot:/LookingAtCeiling
   reverbTunnelSS:
     Guid:
       Data1: 1632045093
@@ -287,7 +294,6 @@ MonoBehaviour:
   initialTimeCB: 0
   finalTimeCB: 0
   startTimerCB: 0
-  MenuCB: 0
   InitCB: 0
 --- !u!114 &4973544759690259808
 MonoBehaviour:
@@ -303,6 +309,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FMODIntroDoOnce: 1
   CBDeath: 0
+  CBDoOnce: 1
+  AllowCeilingParam: 0
   musicCallBackInstance:
     Guid:
       Data1: 1129507240
@@ -329,3 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41083950c28bac54586caaaaea81b583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  a_countTime: 0
+  a_ms: 0
+  a_s: 0
+  a_time: 

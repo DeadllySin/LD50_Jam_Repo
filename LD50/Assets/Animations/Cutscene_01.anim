@@ -1743,6 +1743,20 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 21.166666
+    functionName: Anim_FMODSSLookAtCeillingON
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 22.983334
+    functionName: Anim_FMODSSLookAtCeillingOFF
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 24
     functionName: Anim_ReleaseFMODInstances
     data: 

@@ -159,7 +159,7 @@ public class A_MusicCallBack : MonoBehaviour
             
         if ((string)timelineInfo.lastMarker == "Exit_1" || (string)timelineInfo.lastMarker == "Exit_2" || (string)timelineInfo.lastMarker == "Exit_3" || (string)timelineInfo.lastMarker == "E_FullStop")
         {
-            AudioManager.am.MenuCB = true;
+            
         }
 
         if ((string)timelineInfo.lastMarker == "Death")
