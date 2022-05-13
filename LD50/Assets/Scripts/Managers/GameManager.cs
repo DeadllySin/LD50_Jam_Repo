@@ -81,28 +81,26 @@ public class GameManager : MonoBehaviour
                     if (AudioManager.am.GetComponent<A_MusicCallBack>().CBDeath == true) OnDeath();
                 }
             }
-        }
+            if (GameState.gs.introFinished)
+            {
+                Debug.Log("ceiling is moving");
+                dustStorm.SetActive(false);
+                l.gameObject.SetActive(false);
 
-        if (GameState.gs.introFinished == true && isDead == false)
-        {
-            Debug.Log("ceiling is moving");
-            dustStorm.SetActive(false);
-            l.gameObject.SetActive(false);
-            
-            //Fmod stuff
-            ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
-            ceilingSourceChild.transform.position = new Vector3(player.transform.position.x, ceiling.transform.position.y - 0.5f, player.transform.position.z);
-            AudioManager.am.ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
-            AudioManager.am.ceilingFBDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
-            if (AudioManager.am.GetComponent<A_MusicCallBack>().AllowCeilingParam == true)
-            {
-                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceilingSourceChild.transform.position.y);
+                //Fmod stuff
+                ceiling.transform.position = Vector3.MoveTowards(ceiling.transform.position, new Vector3(ceiling.transform.position.x, ceiling.transform.position.y - 7, ceiling.transform.position.z), ceilingSpeed * Time.deltaTime);
+                ceilingSourceChild.transform.position = new Vector3(player.transform.position.x, ceiling.transform.position.y - 0.5f, player.transform.position.z);
+                AudioManager.am.ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
+                AudioManager.am.ceilingFBDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
+                if (AudioManager.am.GetComponent<A_MusicCallBack>().AllowCeilingParam == true)
+                {
+                    FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceilingSourceChild.transform.position.y);
+                }
+                else
+                {
+                    FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", 11f);
+                }
             }
-            else
-            {
-                FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", 11f);
-            }
-            //Debug.Log("Height: " + ceilingSourceChild.transform.position.y);
         }
     }
 
