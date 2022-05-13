@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject deathScreen;
     [SerializeField] private GameObject pauseScreen;
-    [SerializeField] public GameObject mainMenu;
+    public GameObject mainMenu;
 
     [Header("Ceiling")]
     public GameObject ceiling;
@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         player.SetActive(GameState.gs.skipCutscene);
         if (testOutDeath) defaultSpeed = 1.5f; slowThresholdSpeed = 1.5f;
         //defaultSpeed = ceilingSpeedScale(defaultSpeed, 0f, 10f, 0f, 0.5f);
+        mainMenu.SetActive(!GameState.gs.skipCutscene);
         startTime = Time.time;
         ceilingSpeed = defaultSpeed;
         currRoom = FindObjectOfType<Room_Main>().gameObject;

@@ -7,9 +7,9 @@ public class MainMenu_Main : MonoBehaviour
     [SerializeField] private GameObject credits;
     [SerializeField] private GameObject howToPlay;
 
-    [SerializeField] private CanvasGroup mainMenuUIGroup;
-    [SerializeField] private bool fadeIn;
-    [SerializeField] private bool fadeOut;
+    public CanvasGroup mainMenuUIGroup;
+    [HideInInspector] public bool fadeIn = false;
+    [HideInInspector] public bool fadeOut = false;
 
     private void Update()
     {
@@ -20,9 +20,13 @@ public class MainMenu_Main : MonoBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
             }
         }
-        
+    }
+
+    private void FixedUpdate()
+    {
         if (fadeIn == true)
         {
+            Debug.Log("fade out false ");
             if (mainMenuUIGroup.alpha < 1)
             {
                 mainMenuUIGroup.alpha += Time.deltaTime;
@@ -34,35 +38,35 @@ public class MainMenu_Main : MonoBehaviour
         }
         if (fadeOut == true)
         {
+            Debug.Log("fade out tru ");
             if (mainMenuUIGroup.alpha >= 0)
             {
-                Debug.Log(mainMenuUIGroup.alpha -= Timer.timer.ms * 0.001f);
+
                 //mainMenuUIGroup.alpha -= Time.deltaTime;
-                mainMenuUIGroup.alpha -= Timer.timer.ms * 0.001f;
-                if (mainMenuUIGroup.alpha == 1)
+                //mainMenuUIGroup.alpha -= Timer.timer.s;
+                Debug.Log("ALPHA IS " + mainMenuUIGroup.alpha);
+                //Debug.Log("TIME IS " + Timer.timer.s);
+                Debug.Log(Time.deltaTime);
+                if (AudioManager.am.startTimerCB == false)
                 {
                     fadeOut = false;
-                    AudioManager.am.startTimerCB = false;
+                    this.gameObject.SetActive(false);
                 }
             }
         }
     }
-
-    public void ShowUI()
+    private void OnEnable()
     {
-        fadeIn = true;
+        mainMenuUIGroup.alpha = 1f;
     }
-
-    public void HideUI()
-    {
-        fadeOut = true;
-    }
+    
     public void StartGame()
     {
-        //cutscene.GetComponent<Animator>().SetTrigger("play");
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
         GameState.gs.introFinished = false;
+        //mainMenuUIGroup.alpha = 1f;
         AudioManager.am.startTimerCB = true;
+        fadeOut = true;
         AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = true;
         AudioManager.am.FMOD_InGameState(); //não mexer que está ligado ás variáveis call back
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);

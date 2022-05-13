@@ -19,9 +19,15 @@ public class Timer : MonoBehaviour
     private void FixedUpdate()
     {
         if (AudioManager.am.startTimerCB == true)
+        {
             countTime = true;
+        }
+            
         else
+        {
             countTime = false;
+        }
+            
         
         if (countTime)
         {

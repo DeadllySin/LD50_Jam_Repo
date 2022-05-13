@@ -33,7 +33,7 @@ public class A_MusicCallBack : MonoBehaviour
 
     public void Start()
     {
-        Debug.Log("Started");
+        //Debug.Log("Started");
         DontDestroyOnLoad(this.gameObject);
         AudioManager.am.InitCB = true;
         menuInstance = FMODUnity.RuntimeManager.CreateInstance(menuCallBackInstance);
