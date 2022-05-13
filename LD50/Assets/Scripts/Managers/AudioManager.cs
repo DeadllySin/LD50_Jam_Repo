@@ -126,7 +126,7 @@ public class AudioManager : MonoBehaviour
     {
         if (startTimerCB == true)
         {
-            FMOD_MenuCBTimer();
+            //FMOD_MenuCBTimer();
         }
 
         if (AMDoOnce == true && MenuCB == true)

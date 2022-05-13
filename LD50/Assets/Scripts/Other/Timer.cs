@@ -6,7 +6,7 @@ public class Timer : MonoBehaviour
     int seconds;
     int minutes;
     public static Timer timer;
-    public bool countTime;
+    public bool countTime = false;
     public int ms;
     public int s;
     [HideInInspector] public string time;
@@ -18,7 +18,12 @@ public class Timer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(countTime)
+        if (AudioManager.am.startTimerCB == true)
+            countTime = true;
+        else
+            countTime = false;
+        
+        if (countTime)
         {
             miliseconds += 20;
             ms += 20;
@@ -39,6 +44,9 @@ public class Timer : MonoBehaviour
             string sec = seconds.ToString();
             string min = minutes.ToString();
             time = min.PadLeft(2, '0') + ":" + sec.PadLeft(2, '0') + ":" + mil;
+
+            //Debug.Log("TIME IS " + Timer.timer.ms);
         }
+        
     }
 }

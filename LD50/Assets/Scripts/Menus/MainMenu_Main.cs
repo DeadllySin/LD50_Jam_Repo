@@ -36,8 +36,9 @@ public class MainMenu_Main : MonoBehaviour
         {
             if (mainMenuUIGroup.alpha >= 0)
             {
+                Debug.Log(mainMenuUIGroup.alpha -= Timer.timer.ms * 0.001f);
                 //mainMenuUIGroup.alpha -= Time.deltaTime;
-                mainMenuUIGroup.alpha -= AudioManager.am.finalTimeCB;
+                mainMenuUIGroup.alpha -= Timer.timer.ms * 0.001f;
                 if (mainMenuUIGroup.alpha == 1)
                 {
                     fadeOut = false;

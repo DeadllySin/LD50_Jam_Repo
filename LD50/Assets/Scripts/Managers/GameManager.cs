@@ -93,15 +93,12 @@ public class GameManager : MonoBehaviour
             ceilingSourceChild.transform.position = new Vector3(player.transform.position.x, ceiling.transform.position.y - 0.5f, player.transform.position.z);
             AudioManager.am.ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
             AudioManager.am.ceilingFBDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(ceilingSourceChild));
-            //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceilingSourceChild.transform.position.y);
             if (AudioManager.am.GetComponent<A_MusicCallBack>().AllowCeilingParam == true)
             {
                 FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", ceilingSourceChild.transform.position.y);
-                Debug.Log("following parameter");
             }
             else
             {
-                Debug.Log("NOT following parameter");
                 FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", 11f);
             }
             //Debug.Log("Height: " + ceilingSourceChild.transform.position.y);
@@ -116,7 +113,8 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //Debug control variables
-        //Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart " + AudioManager.am.FMODRestarted + "|| FMOD DO ONCE " + AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce);
+        
+        Debug.Log("intro finished " + GameState.gs.introFinished + "|| skip cutscene " + GameState.gs.skipCutscene + "|| fmod restart " + AudioManager.am.FMODRestarted + "|| FMOD DO ONCE " + AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce);
         //Debug.Log(ceilingSourceChild.transform.position.y);
         /*//test pause menu when skip cutscene active
         if (Input.GetKeyDown(KeyCode.H))

@@ -143,7 +143,8 @@ public class A_MusicCallBack : MonoBehaviour
             InGameMusicStart();
             GameManager.gm.cutscene.GetComponent<Animator>().SetTrigger("play");
             CBDoOnce = false;
-            //AudioManager.am.startTimerCB = false;
+            Timer.timer.countTime = false;
+            AudioManager.am.startTimerCB = false;
         }
 
         if ((string)timelineInfo.lastMarker == "ResetCB")
@@ -155,11 +156,10 @@ public class A_MusicCallBack : MonoBehaviour
             MusicCB();
             
         }
-
+            
         if ((string)timelineInfo.lastMarker == "Exit_1" || (string)timelineInfo.lastMarker == "Exit_2" || (string)timelineInfo.lastMarker == "Exit_3" || (string)timelineInfo.lastMarker == "E_FullStop")
         {
             AudioManager.am.MenuCB = true;
-            //AudioManager.am.startTimerCB = true;
         }
 
         if ((string)timelineInfo.lastMarker == "Death")
