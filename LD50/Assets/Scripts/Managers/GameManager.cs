@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
                 if (!doOnce)
                 {
                     doOnce = true;
+                    startTime = Time.time;
                     dustStorm.SetActive(false);
                     l.gameObject.SetActive(false);
                     Timer.timer.countTime = true;
@@ -123,7 +124,7 @@ public class GameManager : MonoBehaviour
         isDead = true;
         Timer.timer.countTime = false;
         if (roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
-        scoreText.text = "you cleared " + roomsCleared + " rooms!\n your highscore is " + PlayerPrefs.GetInt("roomsCleared") + "\nyou survived for " + Timer.timer.time + "\npress r to restart\npress m to go to the main menu\npress esc to quit";
+        scoreText.text = "you cleared " + roomsCleared + " rooms!\n your highscore is " + PlayerPrefs.GetInt("roomsCleared") + "\nyou survived for " + Timer.timer.time + "\npress r to restart\npress m return to main menu\npress esc to quit";
         deathScreen.SetActive(true);
         player.SetActive(false);
         AudioManager.am.FMOD_DeadState();

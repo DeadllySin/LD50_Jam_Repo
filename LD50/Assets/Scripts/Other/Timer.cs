@@ -37,7 +37,7 @@ public class Timer : MonoBehaviour
             mil = mil.Remove(mil.Length - 1);
             string sec = seconds.ToString();
             string min = minutes.ToString();
-            time = min.PadLeft(2, '0') + ":" + sec.PadLeft(2, '0') + ":" + mil;
+            time = min.PadLeft(2, '0') + ":" + sec.PadLeft(2, '0') + " : " + mil;
         }
     }
 }
