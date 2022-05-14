@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour
     private void OnDeath()
     {
         //Debug.Log("OnDeath Game Manager");
+        Destroy(FindObjectOfType<Room_Main>().gameObject);
         isDead = true;
         Timer.timer.countTime = false;
         if (roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
