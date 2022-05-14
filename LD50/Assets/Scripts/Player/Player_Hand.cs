@@ -50,7 +50,7 @@ public class Player_Hand : MonoBehaviour
 
             if (lookingAt == "confirm")
             {
-                FindObjectOfType<Room_Main>().OnConfirm(handTarget);
+                FindObjectOfType<Room_Main>().OnConfirm();
 
             }
         }

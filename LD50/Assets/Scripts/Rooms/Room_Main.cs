@@ -66,10 +66,10 @@ public class Room_Main : MonoBehaviour
         {
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
             this.state = "ok";
-            OnConfirm(null);
+            OnConfirm();
         }
     }
-    public void OnConfirm(GameObject but)
+    public void OnConfirm()
     {
         if (!canConfirm) return;
         canConfirm = false;
@@ -107,7 +107,7 @@ public class Room_Main : MonoBehaviour
             confirmBut.GetComponentInChildren<Light>().enabled = false;
             Invoke(nameof(Disablelight), .5f);
         }
-        but.GetComponent<Animator>().SetTrigger("isPressed");
+        confirmBut.GetComponent<Animator>().SetTrigger("isPressed");
     }
 
     void Disablelight()
