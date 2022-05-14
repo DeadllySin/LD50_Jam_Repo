@@ -33,7 +33,6 @@ public class A_MusicCallBack : MonoBehaviour
 
     public void Start()
     {
-        //Debug.Log("Started");
         DontDestroyOnLoad(this.gameObject);
         AudioManager.am.InitCB = true;
         menuInstance = FMODUnity.RuntimeManager.CreateInstance(menuCallBackInstance);
@@ -133,7 +132,7 @@ public class A_MusicCallBack : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
+        //GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
     }
     
     void Update()

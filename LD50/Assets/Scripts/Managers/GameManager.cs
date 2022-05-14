@@ -145,8 +145,8 @@ public class GameManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
         pauseScreen.SetActive(!pauseScreen.activeSelf);
         player.SetActive(!player.activeSelf);
-        if(!player.activeInHierarchy) AudioManager.am.pauseSSInstance.start();
-        else AudioManager.am.pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        //if(!player.activeInHierarchy) AudioManager.am.pauseSSInstance.start();
+        //else AudioManager.am.pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
 }
