@@ -17,7 +17,7 @@ public class GameState : MonoBehaviour
         if (PlayerPrefs.GetInt("first") == 0)
         {
             PlayerPrefs.SetInt("first", 1);
-            PlayerPrefs.SetFloat("vol", .5f);
+            PlayerPrefs.SetFloat("vol", 1f);
         }
         AudioManager.am.masterBus.setVolume(PlayerPrefs.GetFloat("vol"));
     }

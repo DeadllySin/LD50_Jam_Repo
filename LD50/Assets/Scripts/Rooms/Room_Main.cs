@@ -68,6 +68,13 @@ public class Room_Main : MonoBehaviour
             this.state = "ok";
             OnConfirm();
         }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
+            this.state = "perfect";
+            OnConfirm();
+        }
     }
     public void OnConfirm()
     {
