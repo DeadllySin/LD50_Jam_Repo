@@ -1,38 +1,29 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DisplayHighscores : MonoBehaviour 
 {
-    List  <Text> rScores = new List<Text>();
     HighScores myScores;
-    [SerializeField] private GameObject textParent;
-
-    private void Awake()
-    {
-        foreach(Transform child in textParent.transform)
-        {
-            rScores.Add(child.GetComponent<Text>());
-        }
-    }
+    [SerializeField] private Text leaderboard;
+    [SerializeField] private Text lead2;
+    [SerializeField] private Text kingPlayer;
     void Start() //Fetches the Data at the beginning
     {
-        for (int i = 0; i < rScores.Count;i ++)
-        {
-            rScores[i].text = i + 1 + ". Fetching...";
-        }
         myScores = GetComponent<HighScores>();
-        StartCoroutine("RefreshHighscores");
+        StartCoroutine(RefreshHighscores());
     }
     public void SetScoresToMenu(PlayerScore[] highscoreList) //Assigns proper name and score for each text value
     {
-        for (int i = 0; i < rScores.Count; i ++)
+        kingPlayer.text = "1. " + highscoreList[0].username + " " + highscoreList[0].score.ToString();
+        leaderboard.text = null;
+        lead2.text = null;
+        for (int i = 0; i < 10; i ++)
         {
-            rScores[i].text = i + 1 + ". ";
             if (highscoreList.Length > i)
             {
-                rScores[i].text = (i  + 1) + ". " + highscoreList[i].username + " " + highscoreList[i].score.ToString();
+                leaderboard.text += (i + 1) + ". " + highscoreList[i].username + "\n";
+                lead2.text += highscoreList[i].score.ToString() + "\n";
             }
         }
     }

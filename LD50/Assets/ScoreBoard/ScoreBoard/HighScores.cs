@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HighScores : MonoBehaviour
@@ -17,15 +16,34 @@ public class HighScores : MonoBehaviour
         instance = this; //Sets Static Instance
         myDisplay = GetComponent<DisplayHighscores>();
     }
-    
+
+    [System.Obsolete]
     public static void UploadScore(string username, int score)  //CALLED when Uploading new Score to WEBSITE
     {//STATIC to call from other scripts easily
         instance.StartCoroutine(instance.DatabaseUpload(username,score)); //Calls Instance
     }
 
+    [System.Obsolete]
     IEnumerator DatabaseUpload(string userame, int score) //Called when sending new score to Website
     {
         WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(userame) + "/" + score);
+        yield return www;
+
+        if (string.IsNullOrEmpty(www.error))
+        {
+            print("Upload Successful");
+            DownloadScores();
+        }
+        else print("Error uploading" + www.error);
+    }
+
+    public static void RemoveScore(string username)
+    {
+        instance.StartCoroutine(instance.DatabaseRemove(username));
+    }
+    IEnumerator DatabaseRemove(string userame)
+    {
+        WWW www = new WWW(webURL + privateCode + "/delete/" + WWW.EscapeURL(userame));
         yield return www;
 
         if (string.IsNullOrEmpty(www.error))
@@ -40,6 +58,8 @@ public class HighScores : MonoBehaviour
     {
         StartCoroutine("DatabaseDownload");
     }
+
+    [System.Obsolete]
     IEnumerator DatabaseDownload()
     {
         //WWW www = new WWW(webURL + publicCode + "/pipe/"); //Gets the whole list

@@ -6,7 +6,7 @@ public class MainMenu_Base : MonoBehaviour
 {
     [SerializeField] private Button firstButton;
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(sel());
     }
