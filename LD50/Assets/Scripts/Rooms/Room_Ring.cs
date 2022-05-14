@@ -81,7 +81,7 @@ public class Room_Ring : MonoBehaviour
                     if (char.Parse(symbol[j].name) == pole[r].question[i])
                     {
                         GameObject sym = Instantiate(symbol[j], pole[r].questionSpawners[y].position, Quaternion.identity);
-                        sym.GetComponentInChildren<MeshRenderer>().material = pole[r].gem.material;
+                        sym.GetComponentInChildren<MeshRenderer>().material = pole[r].gem;
                         sym.transform.parent = pole[r].questionSpawners[y].parent;
                         if(r == 0) sym.transform.Rotate(0.0f, 90f, 0.0f, Space.World);
                         else sym.transform.Rotate(0.0f, 270f, 0.0f, Space.World);
@@ -181,7 +181,7 @@ public class Pole
     [HideInInspector] public List <Transform> questionSpawners = new List<Transform>();
     public Transform questionSpawnerParent;
     public Slot[] slot;
-    public MeshRenderer gem;
+    public Material gem;
     [HideInInspector] public int ringsOnCorrectSide;
 
     [System.Serializable]

@@ -105,7 +105,7 @@ public class A_MusicCallBack : MonoBehaviour
 
     public void MusicCB()
     {
-        Debug.Log("music CB");
+        //Debug.Log("music CB");
         timelineInfo = new TimelineInfo();
         beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
         timelineHandle = GCHandle.Alloc(timelineInfo);
@@ -114,7 +114,7 @@ public class A_MusicCallBack : MonoBehaviour
     }
     public void MenuCB()
     {
-        Debug.Log("menu CB");        
+        //Debug.Log("menu CB");        
         timelineInfo = new TimelineInfo();
         beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
         timelineHandle = GCHandle.Alloc(timelineInfo);
