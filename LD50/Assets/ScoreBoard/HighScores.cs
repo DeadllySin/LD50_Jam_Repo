@@ -62,7 +62,6 @@ public class HighScores : MonoBehaviour
     [System.Obsolete]
     IEnumerator DatabaseDownload()
     {
-        //WWW www = new WWW(webURL + publicCode + "/pipe/"); //Gets the whole list
         WWW www = new WWW(webURL + publicCode + "/pipe/0/10"); //Gets top 10
         yield return www;
 
