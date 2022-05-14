@@ -1,45 +1,25 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Room_Statue : MonoBehaviour
 {
-    public int correctPieces;
+    
     private Player_Hand phand;
     private Room_Main room;
-    readonly List<GameObject> spawners = new List<GameObject>();
-    readonly List<GameObject> pieces = new List<GameObject>();
-    readonly List<GameObject> prePlaced = new List<GameObject>();
+    private int totalStatues;
+    List<GameObject> spawners = new List<GameObject>();
+    List<GameObject> pieces = new List<GameObject>();
+    List<GameObject> prePlaced = new List<GameObject>();
 
     public StatuePiece[] sps;
     [SerializeField] private GameObject ramParent;
     [SerializeField] private GameObject spawnerParent;
+    [HideInInspector] public int correctPieces;
     [HideInInspector] public Interactable_Statue sp;
     [HideInInspector] public Interactable_Socket ss;
-    private int totalStatues;
-
-    /*
-    private void Awake()
+    IEnumerator Start()
     {
-        foreach (Transform child in ramParent.transform)
-        {
-            rams.Add(child.gameObject);
-            ramPos.Add(child.transform);
-        }
-        int i = 0;
-        while (i < rams.Count)
-        {
-            int rdm = Random.Range(0, ramPos.Count - 1);
-            Debug.Log("isowkringfmi0aDf");
-            rams[i].gameObject.transform.position = ramPos[rdm].position;
-            rams[i].gameObject.transform.rotation = ramPos[rdm].rotation;
-            ramPos.RemoveAt(rdm);
-            rams.RemoveAt(i);
-            i++;
-        }
-    }*/
-    private void Start()
-    {
-
         room = GetComponentInParent<Room_Main>();
         for (int i = 0; i < sps.Length; i++)
         {
@@ -54,6 +34,7 @@ public class Room_Statue : MonoBehaviour
                 pieces.RemoveAt(rdm);
                 prePlaced[rdm].SetActive(true);
                 prePlaced.RemoveAt(rdm);
+                yield return new WaitForSeconds(.05f);
                 int rdm1 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm1);
                 prePlaced[rdm1].SetActive(true);
@@ -64,6 +45,7 @@ public class Room_Statue : MonoBehaviour
                 int rdm2 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm2);
                 prePlaced[rdm2].SetActive(true);
+                yield return new WaitForSeconds(.05f);
                 int rdm3 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm3);
                 prePlaced[rdm3].SetActive(true);
@@ -97,6 +79,7 @@ public class Room_Statue : MonoBehaviour
         }
 
         GameManager.gm.statueRoomPro++;
+        yield return 0;
     }
 
     public void PickUpFrom()

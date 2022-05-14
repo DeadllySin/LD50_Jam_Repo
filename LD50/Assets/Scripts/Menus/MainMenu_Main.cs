@@ -11,6 +11,16 @@ public class MainMenu_Main : MonoBehaviour
     [HideInInspector] public bool fadeIn = false;
     [HideInInspector] public bool fadeOut = false;
 
+    private void Awake()
+    {
+        if(PlayerPrefs.GetInt("first") == 0)
+        {
+            PlayerPrefs.SetInt("first", 1);
+            PlayerPrefs.SetFloat("vol", .5f);
+        }
+        FindObjectOfType<Slider>().value = PlayerPrefs.GetFloat("vol");
+        AudioManager.am.masterBus.setVolume(PlayerPrefs.GetFloat("vol"));
+    }
     private void Update()
     {
         if (this.isActiveAndEnabled)
@@ -82,6 +92,7 @@ public class MainMenu_Main : MonoBehaviour
     public void OnValueChanged(Slider sl)
     {
         AudioManager.am.masterBus.setVolume(sl.value);
+        PlayerPrefs.SetFloat("vol", sl.value);
     }
 
     public void HowToPlay()

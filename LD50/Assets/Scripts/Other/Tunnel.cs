@@ -16,7 +16,7 @@ public class Tunnel : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.parent = GameManager.gm.ceiling.transform;
+        if (GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.position = new Vector3(ceil.transform.position.x,GameManager.gm.ceiling.transform.position.y, ceil.transform.position.z);
     }
 
     public void NewRoom()

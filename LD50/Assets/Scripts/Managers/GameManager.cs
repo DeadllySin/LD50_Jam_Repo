@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (player.transform.position.y < -1) OnDeath();
         if (!isDead)
         {
             if (ceiling.transform.position.y <= thresholdToSlower)
