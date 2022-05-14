@@ -3,7 +3,6 @@ using UnityEngine.UI;
 public class MainMenu_Main : MonoBehaviour
 {
     [SerializeField] private GameObject cutscene;
-
     public CanvasGroup mainMenuUIGroup;
     [HideInInspector] public bool fadeIn = false;
     [HideInInspector] public bool fadeOut = false;
