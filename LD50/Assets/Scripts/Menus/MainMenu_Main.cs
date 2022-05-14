@@ -1,11 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-
 public class MainMenu_Main : MonoBehaviour
 {
     [SerializeField] private GameObject cutscene;
-    [SerializeField] private GameObject credits;
-    [SerializeField] private GameObject howToPlay;
 
     public CanvasGroup mainMenuUIGroup;
     [HideInInspector] public bool fadeIn = false;
@@ -13,15 +10,13 @@ public class MainMenu_Main : MonoBehaviour
 
     private void Awake()
     {
-
         FindObjectOfType<Slider>().value = PlayerPrefs.GetFloat("vol");
-
     }
     private void Update()
     {
         if (this.isActiveAndEnabled)
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
             {
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
             }
@@ -58,6 +53,13 @@ public class MainMenu_Main : MonoBehaviour
         }
     }
 
+    public void changemenu(GameObject menu)
+    {
+        menu.SetActive(true);
+        this.gameObject.SetActive(false);
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+    }
+
     private void Start()
     {
         mainMenuUIGroup.alpha = 0;
@@ -78,24 +80,10 @@ public class MainMenu_Main : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
     }
 
-    public void Credits()
-    {
-        credits.SetActive(true);
-        this.gameObject.SetActive(false);
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-    }
-
     public void OnValueChanged(Slider sl)
     {
         AudioManager.am.masterBus.setVolume(sl.value);
         PlayerPrefs.SetFloat("vol", sl.value);
-    }
-
-    public void HowToPlay()
-    {
-        howToPlay.SetActive(true);
-        this.gameObject.SetActive(false);
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
     }
 
     public void FMOD_Click()
