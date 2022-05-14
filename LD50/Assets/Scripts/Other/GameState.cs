@@ -7,7 +7,6 @@ public class GameState : MonoBehaviour
     public static GameState gs;
     public bool skipCutscene;
     public bool introFinished = false;
-    public bool killFast;
     public string overWriteRoom;
 
     private void Awake()
@@ -15,6 +14,12 @@ public class GameState : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         gs = this;
         StartCoroutine(LoadingScreenAsyncOperation());
+        if (PlayerPrefs.GetInt("first") == 0)
+        {
+            PlayerPrefs.SetInt("first", 1);
+            PlayerPrefs.SetFloat("vol", .5f);
+        }
+        AudioManager.am.masterBus.setVolume(PlayerPrefs.GetFloat("vol"));
     }
 
     IEnumerator LoadingScreenAsyncOperation()

@@ -13,13 +13,9 @@ public class MainMenu_Main : MonoBehaviour
 
     private void Awake()
     {
-        if(PlayerPrefs.GetInt("first") == 0)
-        {
-            PlayerPrefs.SetInt("first", 1);
-            PlayerPrefs.SetFloat("vol", .5f);
-        }
+
         FindObjectOfType<Slider>().value = PlayerPrefs.GetFloat("vol");
-        AudioManager.am.masterBus.setVolume(PlayerPrefs.GetFloat("vol"));
+
     }
     private void Update()
     {
