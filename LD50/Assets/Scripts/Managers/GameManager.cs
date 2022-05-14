@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
     }*/
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && GameState.gs.introFinished) Pause();
+        if (Input.GetKeyDown(KeyCode.Escape) && GameState.gs.introFinished) Pause();
     }
 
     private void OnDeath()
