@@ -78,7 +78,6 @@ public class Room_Statue : MonoBehaviour
             spawners.RemoveAt(temp);
             pieces.RemoveAt(temp2);
         }
-
         GameManager.gm.statueRoomPro++;
         yield return 0;
     }

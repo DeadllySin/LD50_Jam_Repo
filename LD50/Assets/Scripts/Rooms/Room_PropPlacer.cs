@@ -6,13 +6,12 @@ public class Room_PropPlacer : MonoBehaviour
     readonly List<GameObject> spawners = new List<GameObject>();
     readonly List<GameObject> propMeshes = new List<GameObject>();
     [SerializeField] private GameObject[] propMeshess;
-    [SerializeField] private GameObject spawnerParent;
     [SerializeField] private int spawnCount = 0;
 
     private void Awake()
     {
         for (int i = 0; i < propMeshess.Length; i++) propMeshes.Add(propMeshess[i]);
-        foreach (Transform child in spawnerParent.transform) spawners.Add(child.gameObject);
+        foreach (Transform child in gameObject.transform) spawners.Add(child.gameObject);
         if (spawnCount < propMeshes.Count)
         {
             for (int i = 0; i < spawnCount; i++)
