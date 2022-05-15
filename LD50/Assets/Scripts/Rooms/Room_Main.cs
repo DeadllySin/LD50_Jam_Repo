@@ -60,9 +60,10 @@ public class Room_Main : MonoBehaviour
         canConfirm = true;
     }
 
-    private void Update()
+
+    /*private void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
             this.state = "ok";
@@ -74,8 +75,9 @@ public class Room_Main : MonoBehaviour
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
             this.state = "perfect";
             OnConfirm();
-        }*/
-    }
+        }
+    }*/
+
     public void OnConfirm()
     {
         if (!canConfirm) return;

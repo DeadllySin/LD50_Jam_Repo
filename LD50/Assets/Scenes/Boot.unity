@@ -211,9 +211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368655d35958fc546aabb3d53ef1c041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipCutscene: 0
+  skipCutscene: 1
   introFinished: 0
-  overWriteRoom: 
+  overWriteRoom: statue
 --- !u!1001 &4973544759633716098
 PrefabInstance:
   m_ObjectHideFlags: 0

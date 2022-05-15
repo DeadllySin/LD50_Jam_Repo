@@ -13,19 +13,6 @@ public class Interactable_Socket : MonoBehaviour
         rs = FindObjectOfType<Room_Statue>();
     }
 
-    public void OnAssienedStatue()
-    {
-        if (assinedStatue.GetComponent<Interactable_Statue>().statueNumber == correctStatue) rs.correctPieces++;
-    }
-
-    public void OnRemovedStatue()
-    {
-        if (assinedStatue.GetComponent<Interactable_Statue>().statueNumber == correctStatue)
-        {
-            rs.correctPieces--;
-        }
-    }
-
     public void onMouseEnter()
     {
         rs.ss = this.gameObject.GetComponent<Interactable_Socket>();
