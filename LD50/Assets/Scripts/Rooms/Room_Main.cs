@@ -80,6 +80,7 @@ public class Room_Main : MonoBehaviour
     {
         if (!canConfirm) return;
         canConfirm = false;
+        //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pConfirm);
 
         switch (state)
         {
@@ -92,6 +93,7 @@ public class Room_Main : MonoBehaviour
                 confirmBut.arg = null;
                 GameManager.gm.ceilingSpeed += GameManager.gm.speedBoost;
                 GameManager.gm.currTunnel.OpenDoor(0);
+                //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleFullWrong);
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
                 AudioManager.am.FMOD_CeilingFasterOneShot();
                 break;

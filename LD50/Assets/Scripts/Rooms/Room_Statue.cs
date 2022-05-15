@@ -46,23 +46,30 @@ public class Room_Statue : MonoBehaviour
                 int rdm2 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm2);
                 prePlaced[rdm2].GetComponent<MeshRenderer>().material = ramMaterial;
+                prePlaced.RemoveAt(rdm2);
                 yield return new WaitForSeconds(.05f);
                 int rdm3 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm3);
                 prePlaced[rdm3].GetComponent<MeshRenderer>().material = ramMaterial;
+                prePlaced.RemoveAt(rdm3);
                 totalStatues = 3;
                 break;
             case 2:
                 int rdm4 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm4);
                 prePlaced[rdm4].GetComponent<MeshRenderer>().material = ramMaterial;
+                prePlaced.RemoveAt(rdm4);
                 totalStatues = 4;
                 break;
             case 3:
                 int rdm5 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm5);
                 prePlaced[rdm5].GetComponent<MeshRenderer>().material = ramMaterial;
+                prePlaced.RemoveAt(rdm5);
                 totalStatues = 4;
+                break;
+            default:
+                totalStatues = 5;
                 break;
         }
         foreach (Transform child in spawnerParent.transform) spawners.Add(child.gameObject);
