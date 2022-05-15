@@ -5,6 +5,7 @@ public class Interactable_Socket : MonoBehaviour
 {
     Room_Statue rs;
     public int correctStatue;
+    public GameObject placeHolder;
     [HideInInspector] public GameObject assinedStatue;
 
     private void Awake()

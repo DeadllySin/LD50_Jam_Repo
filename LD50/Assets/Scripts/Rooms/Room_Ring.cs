@@ -23,31 +23,31 @@ public class Room_Ring : MonoBehaviour
             switch (GameManager.gm.ringRoomPro)
             {
                 case 0:
-                    maxSymbols = 5;
+                    maxSymbols = 3;
                     pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
                     pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
                     pole[p].questionSpawners.RemoveAt(0);
                     pole[p].questionSpawners.RemoveAt(0);
                     break;
                 case 1:
-                    maxSymbols = 5;
+                    maxSymbols = 3;
                     pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
                     pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
                     pole[p].questionSpawners.RemoveAt(0);
                     pole[p].questionSpawners.RemoveAt(0);
                     break;
                 case 2:
-                    maxSymbols = 7;
+                    maxSymbols = 5;
                     pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
                     pole[p].questionSpawners.RemoveAt(0);
                     break;
                 case 3:
-                    maxSymbols = 7;
+                    maxSymbols = 5;
                     pole[p].questionSpawners.RemoveAt(pole[p].questionSpawners.Count - 1);
                     pole[p].questionSpawners.RemoveAt(0);
                     break;
                 default:
-                    maxSymbols = 9;
+                    maxSymbols = 7;
                     break;
             }
 

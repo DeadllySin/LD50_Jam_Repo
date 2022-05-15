@@ -4,11 +4,13 @@ public class MainMenu_Main : MonoBehaviour
 {
     [SerializeField] private GameObject cutscene;
     public CanvasGroup mainMenuUIGroup;
+    [SerializeField] private Text versionText;
     [HideInInspector] public bool fadeIn = false;
     [HideInInspector] public bool fadeOut = false;
 
     private void Awake()
     {
+        versionText.text = "Version "+ Application.version;
         FindObjectOfType<Slider>().value = PlayerPrefs.GetFloat("vol");
     }
     private void Update()

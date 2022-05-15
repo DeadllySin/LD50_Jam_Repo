@@ -11,14 +11,14 @@ public class MainMenu_Lead : MonoBehaviour
 
     private void Start()
     {
-        youScore.text = "your score:" + PlayerPrefs.GetString("roomsCleared");
+        youScore.text = "your score: " + PlayerPrefs.GetInt("roomsCleared").ToString();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
+            if(!inf.IsActive()) FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
         }
     }
 

@@ -18,6 +18,7 @@ public class Room_Statue : MonoBehaviour
     [HideInInspector] public int correctPieces;
     [HideInInspector] public Interactable_Statue sp;
     [HideInInspector] public Interactable_Socket ss;
+    [SerializeField] private Material ramMaterial;
     IEnumerator Start()
     {
         room = GetComponentInParent<Room_Main>();
@@ -32,35 +33,35 @@ public class Room_Statue : MonoBehaviour
             case 0:
                 int rdm = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm);
-                prePlaced[rdm].SetActive(true);
+                prePlaced[rdm].GetComponent<MeshRenderer>().material = ramMaterial;
                 prePlaced.RemoveAt(rdm);
                 yield return new WaitForSeconds(.05f);
                 int rdm1 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm1);
-                prePlaced[rdm1].SetActive(true);
+                prePlaced[rdm1].GetComponent<MeshRenderer>().material = ramMaterial;
                 prePlaced.RemoveAt(rdm1);
                 totalStatues = 3;
                 break;
             case 1:
                 int rdm2 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm2);
-                prePlaced[rdm2].SetActive(true);
+                prePlaced[rdm2].GetComponent<MeshRenderer>().material = ramMaterial;
                 yield return new WaitForSeconds(.05f);
                 int rdm3 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm3);
-                prePlaced[rdm3].SetActive(true);
+                prePlaced[rdm3].GetComponent<MeshRenderer>().material = ramMaterial;
                 totalStatues = 3;
                 break;
             case 2:
                 int rdm4 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm4);
-                prePlaced[rdm4].SetActive(true);
+                prePlaced[rdm4].GetComponent<MeshRenderer>().material = ramMaterial;
                 totalStatues = 4;
                 break;
             case 3:
                 int rdm5 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm5);
-                prePlaced[rdm5].SetActive(true);
+                prePlaced[rdm5].GetComponent<MeshRenderer>().material = ramMaterial;
                 totalStatues = 4;
                 break;
         }
@@ -143,6 +144,7 @@ public class Room_Statue : MonoBehaviour
                 phand.hand.transform.parent = phand.handTarget.transform;
                 phand.hand.transform.localRotation = new Quaternion(0, 0, 0, 0);
                 phand.hand.transform.localPosition = phand.handTarget.transform.position;
+                Destroy(phand.handTarget.GetComponent<Interactable_Socket>().placeHolder);
                 phand.hand.GetComponent<Interactable_Statue>().state = "Ass";
                 phand.hand.GetComponent<Interactable_Statue>().ss = ss;
                 phand.hand.GetComponent<Interactable_Statue>().ss.assinedStatue = phand.hand;
