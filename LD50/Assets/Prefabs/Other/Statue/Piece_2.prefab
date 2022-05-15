@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4883361009177963260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.623, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4381935171988242300}
@@ -129,7 +129,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: ground
   statueNumber: 2
-  isHead: 0
   ss: {fileID: 0}
 --- !u!114 &6774548098781560511
 MonoBehaviour:

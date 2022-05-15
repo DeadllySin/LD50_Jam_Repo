@@ -39,7 +39,7 @@ public class Player_Hand : MonoBehaviour
                 case "statue":
                     if (lookingAt == "statue" && hand == null)
                     {
-                        GameManager.gm.currRoom.GetComponentInChildren<Room_Statue>().PickUpFrom();
+                        GameManager.gm.currRoom.GetComponentInChildren<Room_Statue>().PickUp();
                     }
                     if (lookingAt == "socket" && hand != null)
                     {
@@ -62,8 +62,6 @@ public class Player_Hand : MonoBehaviour
             }
         }
     }
-
-
 
     public int DistanceFu(GameObject target)
     {

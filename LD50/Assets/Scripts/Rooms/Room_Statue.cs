@@ -15,7 +15,6 @@ public class Room_Statue : MonoBehaviour
     [SerializeField] private GameObject ramParent;
     [SerializeField] private GameObject spawnerParent;
     [HideInInspector] public Interactable_Statue sp;
-    [HideInInspector] public Interactable_Socket ss;
     [SerializeField] private Material ramMaterial;
     IEnumerator Start()
     {
@@ -84,14 +83,9 @@ public class Room_Statue : MonoBehaviour
         yield return 0;
     }
 
-    public void PickUpFrom()
-    {
-        phand = GameManager.gm.player.GetComponent<Player_Hand>();
-         PickUp();
-    }
-
     public void Drop()
     {
+
         phand = GameManager.gm.player.GetComponent<Player_Hand>();
         if (phand.hand == null) return;
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pDrop);
@@ -104,6 +98,7 @@ public class Room_Statue : MonoBehaviour
 
     public void PickUp()
     {
+        phand = GameManager.gm.player.GetComponent<Player_Hand>();
         if (phand.handTarget != null && phand.hand == null)
         {
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pPickUp);
@@ -121,16 +116,13 @@ public class Room_Statue : MonoBehaviour
     public void Place()
     {
         phand = GameManager.gm.player.GetComponent<Player_Hand>();
-        if (phand.handTarget != null && phand.hand.GetComponent<Interactable_Statue>().state == "inHand" && phand.handTarget.GetComponent<Interactable_Socket>().assinedStatue == null)
+        if (phand.handTarget != null && phand.handTarget.GetComponent<Interactable_Socket>().correctStatue == phand.hand.GetComponent<Interactable_Statue>().statueNumber)
         {
-            if (phand.handTarget.GetComponent<Interactable_Socket>().correctStatue == phand.hand.GetComponent<Interactable_Statue>().statueNumber)
-            {
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
-                phand.handTarget.GetComponent<Interactable_Socket>().placeHolder.GetComponent<MeshRenderer>().material = ramMaterial;
-                Destroy(phand.hand);
-                phand.hand = null;
-                OnValueChanged();
-            }
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
+            phand.handTarget.GetComponent<Interactable_Socket>().placeHolder.GetComponent<MeshRenderer>().material = ramMaterial;
+            Destroy(phand.hand);
+            phand.hand = null;
+            OnValueChanged();
         }
     }
 
