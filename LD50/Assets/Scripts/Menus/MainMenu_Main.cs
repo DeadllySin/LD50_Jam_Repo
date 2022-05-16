@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 public class MainMenu_Main : MonoBehaviour
 {
     [SerializeField] private GameObject cutscene;
@@ -73,6 +74,7 @@ public class MainMenu_Main : MonoBehaviour
     
     public void StartGame()
     {
+        FindObjectOfType<EventSystem>().enabled = false;
         GameState.gs.introFinished = false;
         AudioManager.am.startTimerCB = true;
         fadeOut = true;

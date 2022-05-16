@@ -18,8 +18,9 @@ public class Room_PropPlacer : MonoBehaviour
             {
                 int spawnersIndex = Random.Range(0, spawners.Count);
                 int propIndex = Random.Range(0, propMeshes.Count);
-                GameObject prop = Instantiate(propMeshes[propIndex], spawners[spawnersIndex].transform.position, Quaternion.identity);
-                prop.transform.parent = gameObject.GetComponentInParent<Transform>();
+                GameObject prop = Instantiate(propMeshes[propIndex], spawners[spawnersIndex].transform.position, spawners[spawnersIndex].transform.rotation);
+                prop.transform.parent = spawners[spawnersIndex].GetComponentInParent<Transform>();
+                prop.transform.localPosition = Vector3.zero;
                 spawners.RemoveAt(spawnersIndex);
                 propMeshes.RemoveAt(propIndex);
             }
@@ -30,7 +31,7 @@ public class Room_PropPlacer : MonoBehaviour
             {
                 int spawnersIndex = Random.Range(0, spawners.Count);
                 int propIndex = Random.Range(0, propMeshes.Count);
-                GameObject prop = Instantiate(propMeshes[propIndex], spawners[spawnersIndex].transform.position, Quaternion.identity);
+                GameObject prop = Instantiate(propMeshes[propIndex], spawners[spawnersIndex].transform.position, spawners[spawnersIndex].transform.rotation);
                 prop.transform.parent = gameObject.GetComponentInParent<Transform>();
                 spawners.RemoveAt(spawnersIndex);
             }

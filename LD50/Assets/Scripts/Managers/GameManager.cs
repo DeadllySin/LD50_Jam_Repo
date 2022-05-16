@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -142,6 +143,7 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
+        FindObjectOfType<EventSystem>().enabled = (!FindObjectOfType<EventSystem>().enabled);
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
         pauseScreen.SetActive(!pauseScreen.activeSelf);
         player.SetActive(!player.activeSelf);
