@@ -104806,10 +104806,6 @@ PrefabInstance:
       propertyPath: EyesTest
       value: 
       objectReference: {fileID: 2067324099}
-    - target: {fileID: 3653882480043813491, guid: b1da252acba09e343b0614a36e6f53f7, type: 3}
-      propertyPath: distance
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3653882480043813496, guid: b1da252acba09e343b0614a36e6f53f7, type: 3}
       propertyPath: m_Name
       value: Player
