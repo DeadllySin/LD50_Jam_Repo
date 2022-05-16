@@ -16,6 +16,7 @@ public class Room_Statue : MonoBehaviour
     [SerializeField] private GameObject spawnerParent;
     [HideInInspector] public Interactable_Statue sp;
     [SerializeField] private Material ramMaterial;
+    [SerializeField] private GameObject[] propSpawners;
     IEnumerator Start()
     {
         room = GetComponentInParent<Room_Main>();
@@ -28,6 +29,7 @@ public class Room_Statue : MonoBehaviour
         switch (GameManager.gm.statueRoomPro)
         {
             case 0:
+                propSpawners[0].SetActive(true);
                 int rdm = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm);
                 prePlaced[rdm].GetComponent<MeshRenderer>().material = ramMaterial;
@@ -40,6 +42,7 @@ public class Room_Statue : MonoBehaviour
                 totalStatues = 3;
                 break;
             case 1:
+                propSpawners[0].SetActive(true);
                 int rdm2 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm2);
                 prePlaced[rdm2].GetComponent<MeshRenderer>().material = ramMaterial;
@@ -52,6 +55,7 @@ public class Room_Statue : MonoBehaviour
                 totalStatues = 3;
                 break;
             case 2:
+                propSpawners[1].SetActive(true);
                 int rdm4 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm4);
                 prePlaced[rdm4].GetComponent<MeshRenderer>().material = ramMaterial;
@@ -59,6 +63,7 @@ public class Room_Statue : MonoBehaviour
                 totalStatues = 4;
                 break;
             case 3:
+                propSpawners[1].SetActive(true);
                 int rdm5 = Random.Range(0, pieces.Count - 1);
                 pieces.RemoveAt(rdm5);
                 prePlaced[rdm5].GetComponent<MeshRenderer>().material = ramMaterial;
@@ -66,6 +71,7 @@ public class Room_Statue : MonoBehaviour
                 totalStatues = 4;
                 break;
             default:
+                propSpawners[2].SetActive(true);
                 totalStatues = 5;
                 break;
         }

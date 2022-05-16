@@ -8,6 +8,8 @@ TagManager:
   - Transition
   - Transition2
   - Ceiling
+  - Fire
+  - stand
   layers:
   - Default
   - TransparentFX

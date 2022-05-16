@@ -9,6 +9,8 @@ public class Room_Main : MonoBehaviour
     private List<string> roomNames = new List<string>();
     [HideInInspector] public string state;
     [SerializeField] private Interactable confirmBut;
+    [SerializeField] private Color perfectCol;
+    [SerializeField] private Color okCol;
 
     private bool canConfirm = true;
     private string lastRoom = "none";
@@ -87,11 +89,13 @@ public class Room_Main : MonoBehaviour
         switch (state)
         {
             case "perfect":
+                confirmBut.GetComponentInChildren<Light>().color = perfectCol;
                 confirmBut.arg = null;
                 GameManager.gm.currTunnel.OpenDoor(0);
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
                 break;
             case "ok":
+                confirmBut.GetComponentInChildren<Light>().color = okCol;
                 confirmBut.arg = null;
                 GameManager.gm.ceilingSpeed += GameManager.gm.speedBoost;
                 GameManager.gm.currTunnel.OpenDoor(0);
