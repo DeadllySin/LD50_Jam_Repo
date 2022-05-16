@@ -61,7 +61,7 @@ public class Room_Main : MonoBehaviour
     }
 
 
-    /*private void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -76,7 +76,7 @@ public class Room_Main : MonoBehaviour
             this.state = "perfect";
             OnConfirm();
         }
-    }*/
+    }
 
     public void OnConfirm()
     {
