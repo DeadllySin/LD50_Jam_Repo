@@ -7,6 +7,7 @@ public class Interactable_ColorButton : MonoBehaviour
     public bool isPressed = true;
     private Animator anim;
     public string color;
+    [SerializeField] private Color coL;
     [HideInInspector] public Room_Colors rc;
 
     private void Awake()
@@ -19,6 +20,7 @@ public class Interactable_ColorButton : MonoBehaviour
     {
         if (!isPressed)
         {
+            GetComponentInChildren<Light>().color = coL;
             isPressed = true;
             anim.SetTrigger("isPressed");
             rc.OnPressed(color);

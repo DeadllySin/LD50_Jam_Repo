@@ -5,6 +5,7 @@ using UnityEngine;
 public class Room_Colors : MonoBehaviour
 {
     [SerializeField] private Animator[] colorOb;
+    [SerializeField] private Color[] lightColor;
     [SerializeField] private int[] colorAmountProgress;
     private int colAmount;
     private List<string> colorOrder = new List<string>();
@@ -58,6 +59,7 @@ public class Room_Colors : MonoBehaviour
             int rdm = Random.Range(0, colorOb.Length);
             rdm = Random.Range(0, colorOb.Length);
             rdm = Random.Range(0, colorOb.Length);
+            colorOb[rdm].GetComponentInChildren<Light>().color = lightColor[rdm];
             colorOrder.Add(colorOb[rdm].GetComponent<Interactable_ColorButton>().color);
             FMOD_PlayColorOrder(colorOb[rdm].GetComponent<Interactable_ColorButton>().color);
             colorOb[rdm].SetTrigger("isPressed");
