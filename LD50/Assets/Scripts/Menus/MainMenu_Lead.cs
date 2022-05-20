@@ -11,7 +11,7 @@ public class MainMenu_Lead : MonoBehaviour
 
     private void Start()
     {
-        youScore.text = "your score: " + PlayerPrefs.GetInt("roomsCleared").ToString();
+        youScore.text = PlayerPrefs.GetInt("roomsCleared").ToString();
     }
 
     private void Update()

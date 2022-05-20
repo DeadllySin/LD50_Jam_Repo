@@ -8,6 +8,7 @@ public class DisplayHighscores : MonoBehaviour
     [SerializeField] private Text leaderboard;
     [SerializeField] private Text lead2;
     [SerializeField] private Text kingPlayer;
+    [SerializeField] private Text scoreText;
     void Start() //Fetches the Data at the beginning
     {
         myScores = GetComponent<HighScores>();

@@ -38,7 +38,7 @@ public class Cutscene_01_Door : MonoBehaviour
         dooropen.SetActive(true);
         doorCloseInstance.start();
         //Debug.Log("test");
-        l.gameObject.SetActive(false);
+        //l.gameObject.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
     }
 

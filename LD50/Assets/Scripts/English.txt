@@ -1,0 +1,11 @@
+ply=play
+optns=options
+how=how to play
+quit=quit the game
+flea=full leaderboard
+lang=languages
+ret=return to main
+sc=your score
+restart=restart
+return=return
+mainmenu=mainmenu

@@ -93,6 +93,7 @@ public class Room_Main : MonoBehaviour
                 confirmBut.arg = null;
                 GameManager.gm.currTunnel.OpenDoor(0);
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
+                state = "bad";
                 break;
             case "ok":
                 confirmBut.GetComponentInChildren<Light>().color = okCol;
@@ -102,12 +103,7 @@ public class Room_Main : MonoBehaviour
                 //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleFullWrong);
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
                 AudioManager.am.FMOD_CeilingFasterOneShot();
-                break;
-            case "bad":
-                confirmBut.arg = "light";
-                StartCoroutine(ConfirmCool());
-                GameManager.gm.currTunnel.CloseDoor(0);
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleFullWrong);
+                state = "bad";
                 break;
             default:
                 confirmBut.arg = "light";
@@ -123,6 +119,7 @@ public class Room_Main : MonoBehaviour
             Invoke(nameof(Disablelight), .5f);
         }
         confirmBut.GetComponent<Animator>().SetTrigger("isPressed");
+        
     }
 
     void Disablelight()

@@ -1,0 +1,11 @@
+ply=jogar
+optns=opcoes
+how=como jogar
+quit=sair
+flea=tabela de pontos
+lang=linguagem
+ret=voltar ao menu
+sc=pontos
+restart=reiniciar
+return=voltar
+mainmenu=menuprincipal

@@ -8,11 +8,12 @@ public class MainMenu_Main : MonoBehaviour
     [SerializeField] private Text versionText;
     [HideInInspector] public bool fadeIn = false;
     [HideInInspector] public bool fadeOut = false;
+    [SerializeField] private Slider slider;
 
     private void Awake()
     {
         versionText.text = "Version "+ Application.version;
-        FindObjectOfType<Slider>().value = PlayerPrefs.GetFloat("vol");
+        slider.value = PlayerPrefs.GetFloat("vol");
     }
     private void Update()
     {

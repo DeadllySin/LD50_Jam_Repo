@@ -3,12 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneAndURLLoader : MonoBehaviour
 {
-    private PauseMenu m_PauseMenu;
+    private Menu_Events m_PauseMenu;
 
 
     private void Awake()
     {
-        m_PauseMenu = GetComponentInChildren<PauseMenu>();
+        m_PauseMenu = GetComponentInChildren<Menu_Events>();
     }
 
 

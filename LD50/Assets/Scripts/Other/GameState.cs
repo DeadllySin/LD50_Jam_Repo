@@ -16,6 +16,7 @@ public class GameState : MonoBehaviour
         StartCoroutine(LoadingScreenAsyncOperation());
         if (PlayerPrefs.GetInt("first") == 0)
         {
+            PlayerPrefs.SetString("lang","en");
             PlayerPrefs.SetString("id", "#" + Random.Range(1000,9999).ToString().ToLower());
             PlayerPrefs.SetInt("first", 1);
             PlayerPrefs.SetFloat("vol", 0.8f);
