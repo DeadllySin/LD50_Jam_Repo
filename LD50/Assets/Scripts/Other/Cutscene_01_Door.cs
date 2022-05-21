@@ -11,6 +11,7 @@ public class Cutscene_01_Door : MonoBehaviour
     [SerializeField] private GameObject cinePlayer;
     [SerializeField] private GameObject cineCutscene;
     [SerializeField] private GameManager gm;
+    [SerializeField] private Light l;
 
     //FMOD
     FMOD.Studio.EventInstance doorOpenInstance;
@@ -44,7 +45,7 @@ public class Cutscene_01_Door : MonoBehaviour
         dooropen.SetActive(true);
         doorCloseInstance.start();
         //Debug.Log("test");
-        //l.gameObject.SetActive(false);
+        l.gameObject.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
     }
 

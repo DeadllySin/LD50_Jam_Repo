@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float defaultSpeed;
     [SerializeField] private float deathHeight;
     [SerializeField] private float thresholdToSlower;
+    [SerializeField] private float fastSpped;
     [HideInInspector] public float ceilingSpeed;
     [HideInInspector] public GameObject ceilingSourceChild;
     private bool doOnce;
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
                 ceilingSpeed = slowThresholdSpeed;
                 if (ceiling.transform.position.y < deathHeight)
                 {
+                    ceilingSpeed = fastSpped;
                     FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
                     if (AudioManager.am.GetComponent<A_MusicCallBack>().CBDeath == true) OnDeath();
                 }

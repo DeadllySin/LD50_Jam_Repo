@@ -17,6 +17,7 @@ public class Room_Colors : MonoBehaviour
 
     private void Awake()
     {
+        main = GetComponentInParent<Room_Main>();
         switch (main.gm.colorRoomPro)
         {
             case 0:
@@ -37,7 +38,6 @@ public class Room_Colors : MonoBehaviour
 
         }
         main.gm.colorRoomPro++;
-        main = GetComponentInParent<Room_Main>();
     }
 
     IEnumerator colorOrderEnu()

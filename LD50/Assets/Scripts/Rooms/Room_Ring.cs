@@ -17,8 +17,7 @@ public class Room_Ring : MonoBehaviour
     private void Start()
     {
         main = GetComponentInParent<Room_Main>();
-        int p = 0;
-        while(p < 2)
+        for(int p = 0; p < pole.Length; p++)
         {
             foreach (Transform child in pole[p].questionSpawnerParent) pole[p].questionSpawners.Add(child.gameObject.GetComponent<Transform>());
             switch (main.gm.ringRoomPro)
@@ -52,47 +51,42 @@ public class Room_Ring : MonoBehaviour
                     break;
             }
 
+            print("test");
+
             string[] linesInFile = math.text.Split('\n');
             foreach (string line in linesInFile)
             {
-                if (line.Length == maxSymbols + 2)
+                if (line.Length == maxSymbols + 3)
                 {
-                    string lineTemp = line;
-                    string[] splites;
-                    splites = lineTemp.Split('=');
+                    string[] splites = line.Split('=');
                     pole[p].Questions.Add(splites[0]);
                     pole[p].Solutions.Add(splites[1]);
                 }
             }
-            p++;
-        }
 
-        main.gm.ringRoomPro++;
-        main = GetComponentInParent<Room_Main>();
-
-        for (int r = 0; r < pole.Length; r++)
-        {
-            randomQuestion = Random.Range(0, pole[r].Questions.Count - 1);
-            pole[r].answer = pole[r].Solutions[randomQuestion];
-            pole[r].question = pole[r].Questions[randomQuestion];
+            randomQuestion = Random.Range(0, pole[p].Questions.Count - 1);
+            pole[p].answer = pole[p].Solutions[randomQuestion];
+            pole[p].question = pole[p].Questions[randomQuestion];
             int y = 0;
-            for (int i = 0; i < pole[r].question.Length; i++)
+
+            for (int i = 0; i < pole[p].question.Length; i++)
             {
                 for (int j = 0; j < symbol.Length; j++)
                 {
-                    if (char.Parse(symbol[j].name) == pole[r].question[i])
+                    if (char.Parse(symbol[j].name) == pole[p].question[i])
                     {
-                        GameObject sym = Instantiate(symbol[j], pole[r].questionSpawners[y].position, Quaternion.identity);
-                        sym.GetComponentInChildren<MeshRenderer>().material = pole[r].gem;
-                        sym.transform.parent = pole[r].questionSpawners[y].parent;
-                        if(r == 0) sym.transform.Rotate(0.0f, 90f, 0.0f, Space.World);
+                        GameObject sym = Instantiate(symbol[j], pole[p].questionSpawners[y].position, Quaternion.identity);
+                        sym.GetComponentInChildren<MeshRenderer>().material = pole[p].gem;
+                        sym.transform.parent = pole[p].questionSpawners[y].parent;
+                        if (p == 0) sym.transform.Rotate(0.0f, 90f, 0.0f, Space.World);
                         else sym.transform.Rotate(0.0f, 270f, 0.0f, Space.World);
-                        sym.transform.position = pole[r].questionSpawners[y].position;
+                        sym.transform.position = pole[p].questionSpawners[y].position;
                         y++;
                     }
                 }
             }
         }
+        main.gm.ringRoomPro++;
     }
 
     public void MoveDown(int poleIndex)
@@ -176,6 +170,7 @@ public class Room_Ring : MonoBehaviour
 [System.Serializable]
 public class Pole
 {
+    [HideInInspector] public int ringsOnCorrectSide;
     [HideInInspector] public string question;
     [HideInInspector] public string answer;
     [HideInInspector] public List<string> Questions = new List<string>();
@@ -184,7 +179,7 @@ public class Pole
     public Transform questionSpawnerParent;
     public Slot[] slot;
     public Material gem;
-    [HideInInspector] public int ringsOnCorrectSide;
+
 
     [System.Serializable]
     public struct Slot
