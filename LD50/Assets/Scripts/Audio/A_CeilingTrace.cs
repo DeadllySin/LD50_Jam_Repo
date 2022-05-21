@@ -7,11 +7,12 @@ public class A_CeilingTrace : MonoBehaviour
     [SerializeField] float rayDistance = 20f;
     [SerializeField] Transform EyesTest;
     bool isLookingAtCeiling;
-
+    private GameManager gm;
     
 
-    private void Start()
+    private void Awake()
     {
+        gm = FindObjectOfType<GameManager>();
         isLookingAtCeiling = false;
     }
 
@@ -23,7 +24,7 @@ public class A_CeilingTrace : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(EyesTest.transform.position, transform.forward, out hit, rayDistance))
         {
-            if (hit.collider.gameObject.tag == "Ceiling" && isLookingAtCeiling == false && GameManager.gm.ceiling.transform.position.y > 8f)
+            if (hit.collider.gameObject.tag == "Ceiling" && isLookingAtCeiling == false && gm.ceiling.transform.position.y > 8f)
             {
                 isLookingAtCeiling = true;
                 AudioManager.am.ceilingSSInstance.start();

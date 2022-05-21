@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [Header("Main")]
-    public static GameManager gm;
     private bool isDead;
     public GameObject player;
     public GameObject room;
@@ -49,7 +48,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        gm = this;
         dustStorm.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         playerCine.SetActive(GameState.gs.skipCutscene);

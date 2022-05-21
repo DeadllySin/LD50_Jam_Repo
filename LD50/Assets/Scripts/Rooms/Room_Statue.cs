@@ -5,7 +5,7 @@ using System.Collections;
 public class Room_Statue : MonoBehaviour
 {
     private Player_Hand phand;
-    private Room_Main room;
+    private Room_Main main;
     private int totalStatues;
     private int foundPieces;
     List<GameObject> spawners = new List<GameObject>();
@@ -19,14 +19,14 @@ public class Room_Statue : MonoBehaviour
     [SerializeField] private GameObject[] propSpawners;
     IEnumerator Start()
     {
-        room = GetComponentInParent<Room_Main>();
+        main = GetComponentInParent<Room_Main>();
         for (int i = 0; i < sps.Length; i++)
         {
             pieces.Add(sps[i].piecePrefab);
             prePlaced.Add(sps[i].prePlaced);
         }
-        Debug.Log(GameManager.gm.statueRoomPro);
-        switch (GameManager.gm.statueRoomPro)
+        Debug.Log(main.gm.statueRoomPro);
+        switch (main.gm.statueRoomPro)
         {
             case 0:
                 propSpawners[0].SetActive(true);
@@ -84,14 +84,14 @@ public class Room_Statue : MonoBehaviour
             spawners.RemoveAt(temp);
             pieces.RemoveAt(temp2);
         }
-        GameManager.gm.statueRoomPro++;
+        main.gm.statueRoomPro++;
         yield return 0;
     }
 
     public void Drop()
     {
 
-        phand = GameManager.gm.player.GetComponent<Player_Hand>();
+        phand = main.gm.player.GetComponent<Player_Hand>();
         if (phand.hand == null) return;
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pDrop);
         phand.hand.GetComponentInChildren<Interactable_Statue>().state = "ground";
@@ -103,11 +103,11 @@ public class Room_Statue : MonoBehaviour
 
     public void PickUp()
     {
-        phand = GameManager.gm.player.GetComponent<Player_Hand>();
+        phand = main.gm.player.GetComponent<Player_Hand>();
         if (phand.handTarget != null && phand.hand == null)
         {
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pPickUp);
-            phand = GameManager.gm.player.GetComponent<Player_Hand>();
+            phand = main.gm.player.GetComponent<Player_Hand>();
             sp.state = "inHand";
             phand.hand = sp.gameObject;
             foundPieces++;
@@ -120,7 +120,7 @@ public class Room_Statue : MonoBehaviour
 
     public void Place()
     {
-        phand = GameManager.gm.player.GetComponent<Player_Hand>();
+        phand = main.gm.player.GetComponent<Player_Hand>();
         if (phand.handTarget != null && phand.handTarget.GetComponent<Interactable_Socket>().correctStatue == phand.hand.GetComponent<Interactable_Statue>().statueNumber)
         {
             FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pInsertPiece);
@@ -139,13 +139,13 @@ public class Room_Statue : MonoBehaviour
                 switch (foundPieces)
                 {
                     case 2:
-                        room.state = "ok";
+                        main.state = "ok";
                         break;
                     case 3:
-                        room.state = "perfect";
+                        main.state = "perfect";
                         break;
                     default:
-                        room.state = "bad";
+                        main.state = "bad";
                         break;
                 }
                 break;
@@ -153,13 +153,13 @@ public class Room_Statue : MonoBehaviour
                 switch (foundPieces)
                 {
                     case 3:
-                        room.state = "ok";
+                        main.state = "ok";
                         break;
                     case 4:
-                        room.state = "perfect";
+                        main.state = "perfect";
                         break;
                     default:
-                        room.state = "bad";
+                        main.state = "bad";
                         break;
                 }
                 break;
@@ -167,13 +167,13 @@ public class Room_Statue : MonoBehaviour
                 switch (foundPieces)
                 {
                     case 4:
-                        room.state = "ok";
+                        main.state = "ok";
                         break;
                     case 5:
-                        room.state = "perfect";
+                        main.state = "perfect";
                         break;
                     default:
-                        room.state = "bad";
+                        main.state = "bad";
                         break;
                 }
                 break;

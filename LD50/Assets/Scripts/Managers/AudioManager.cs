@@ -4,6 +4,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager am;
+    private GameManager gm;
 
     [Header("Player")]
     public FMODUnity.EventReference footsteps;
@@ -187,10 +188,11 @@ public class AudioManager : MonoBehaviour
 
     public void FMOD_PlayCeilingLoop()
     {
+        gm = FindObjectOfType<GameManager>();
         ceilingFBDebrisInstance = FMODUnity.RuntimeManager.CreateInstance(am.ceilingFeedbackDebris);
-        ceilingFBDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(GameManager.gm.ceilingSourceChild));
+        ceilingFBDebrisInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gm.ceilingSourceChild));
         ceilingLoopInstance = FMODUnity.RuntimeManager.CreateInstance(am.ceilingLoop);
-        ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(GameManager.gm.ceilingSourceChild));
+        ceilingLoopInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gm.ceilingSourceChild));
         ceilingLoopInstance.start();
     }
 

@@ -5,18 +5,20 @@ public class Tunnel : MonoBehaviour
 {
     bool alreadyColl;
     public Door[] door;
+    private GameManager gm;
     Interactable_Statue[] statue = new Interactable_Statue[3];
     [SerializeField] private GameObject ceil;
     [SerializeField] private GameObject fakeDoor;
     [SerializeField] private GameObject tunnelPrefab;
     private void Awake()
     {
+        gm = FindObjectOfType<GameManager>();
         IdleOponDoor(2);
     }
 
     private void Update()
     {
-        if (GameManager.gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.position = new Vector3(ceil.transform.position.x,GameManager.gm.ceiling.transform.position.y, ceil.transform.position.z);
+        if (gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.position = new Vector3(ceil.transform.position.x,gm.ceiling.transform.position.y, ceil.transform.position.z);
     }
 
     public void NewRoom()
@@ -34,13 +36,13 @@ public class Tunnel : MonoBehaviour
             yield return new WaitForSeconds(.5f);
 
             for (int i = 0; i < 3; i++) statue = FindObjectsOfType<Interactable_Statue>();
-            Room_Main room = GameManager.gm.currRoom.GetComponent<Room_Main>();
-            Tunnel tunnel = GameManager.gm.currTunnel.GetComponent<Tunnel>();
-            GameObject ceiling = GameManager.gm.ceiling;
+            Room_Main room = gm.currRoom.GetComponent<Room_Main>();
+            Tunnel tunnel = gm.currTunnel.GetComponent<Tunnel>();
+            GameObject ceiling = gm.ceiling;
             float roomPos = room.gameObject.transform.position.z + 22;
-            GameManager.gm.roomsCleared++;
+            gm.roomsCleared++;
             Vector3 newCelPos = new Vector3(ceiling.transform.position.x, ceiling.transform.position.y, ceiling.transform.position.z + 22);
-            GameManager.gm.ceiling.transform.position = newCelPos;
+            gm.ceiling.transform.position = newCelPos;
 
             yield return new WaitForSeconds(.1f);
 
@@ -49,8 +51,8 @@ public class Tunnel : MonoBehaviour
 
             yield return new WaitForSeconds(.1f);
 
-            GameManager.gm.currRoom = Instantiate(GameManager.gm.room, new Vector3(0, 0, roomPos), Quaternion.identity);
-            GameManager.gm.currTunnel = Instantiate(tunnelPrefab, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>();
+            gm.currRoom = Instantiate(gm.room, new Vector3(0, 0, roomPos), Quaternion.identity);
+            gm.currTunnel = Instantiate(tunnelPrefab, new Vector3(0, 0, tunnel.gameObject.transform.position.z + 22), Quaternion.identity).GetComponent<Tunnel>();
 
             yield return new WaitForSeconds(.5f);
             IdleDoor(0);
@@ -71,7 +73,7 @@ public class Tunnel : MonoBehaviour
         yield return new WaitForSeconds(.8f);
         Vector3 fakeDoorPos = new Vector3(8.75f, 1, tunnelParent.GetComponent<Tunnel>().door[1].door.gameObject.transform.position.z + 0.5f);
         GameObject fakeDoorTemp = Instantiate(fakeDoor, fakeDoorPos, Quaternion.Euler(new Vector3(0, 90, 0)));
-        fakeDoorTemp.transform.parent = GameManager.gm.currRoom.transform;
+        fakeDoorTemp.transform.parent = gm.currRoom.transform;
         Destroy(tunnelParent);
     }
 

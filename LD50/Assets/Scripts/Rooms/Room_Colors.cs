@@ -17,7 +17,7 @@ public class Room_Colors : MonoBehaviour
 
     private void Awake()
     {
-        switch (GameManager.gm.colorRoomPro)
+        switch (main.gm.colorRoomPro)
         {
             case 0:
                 colAmount = colorAmountProgress[0];
@@ -36,7 +36,7 @@ public class Room_Colors : MonoBehaviour
                 break;
 
         }
-        GameManager.gm.colorRoomPro++;
+        main.gm.colorRoomPro++;
         main = GetComponentInParent<Room_Main>();
     }
 

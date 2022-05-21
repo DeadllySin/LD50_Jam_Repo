@@ -6,10 +6,16 @@ public class Interactable : MonoBehaviour
     private Player_Hand ph;
     private Color col;
     public string arg;
+    private GameManager gm;
     [SerializeField] private bool highlight = true;
     [SerializeField] private string type;
     [SerializeField] private UnityEvent onEnter;
     [SerializeField] private UnityEvent onExit;
+
+    private void Awake()
+    {
+        gm = FindObjectOfType<GameManager>();
+    }
 
     private void OnMouseEnter()
     {
@@ -19,7 +25,7 @@ public class Interactable : MonoBehaviour
             GetComponent<Renderer>().material.color = Color.gray;
         }
 
-        ph = GameManager.gm.player.GetComponent<Player_Hand>();
+        ph = gm.player.GetComponent<Player_Hand>();
         if (onEnter != null) onEnter.Invoke();
         ph.handTarget = this.gameObject;
         ph.lookingAt = type;

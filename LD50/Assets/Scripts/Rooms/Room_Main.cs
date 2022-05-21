@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Room_Main : MonoBehaviour
 {
     string OverWriteRoomSelection;
+    [HideInInspector] public GameManager gm;
     private List<GameObject> rooms = new List<GameObject>();
     private List<string> roomNames = new List<string>();
     [HideInInspector] public string state;
@@ -17,6 +19,7 @@ public class Room_Main : MonoBehaviour
 
     private void Awake()
     {
+        gm = FindObjectOfType<GameManager>();
         OverWriteRoomSelection = GameState.gs.overWriteRoom;
         foreach (Transform child in this.gameObject.GetComponent<Transform>()) rooms.Add(child.gameObject);
         for (int i = 0; i < rooms.Count - 1; i++)
@@ -39,7 +42,7 @@ public class Room_Main : MonoBehaviour
             }
             lastRoom = roomNames[rdm];
             rooms[rdm].SetActive(true);
-            GameManager.gm.currRoomType = roomNames[rdm];
+            gm.currRoomType = roomNames[rdm];
         }
         else
         {
@@ -49,7 +52,7 @@ public class Room_Main : MonoBehaviour
                 {
                     for (int k = 0; k < rooms.Count - 1; k++) rooms[k].SetActive(false);
                     rooms[i].SetActive(true);
-                    GameManager.gm.currRoomType = roomNames[i];
+                    gm.currRoomType = roomNames[i];
                     break;
                 }
             }
@@ -91,15 +94,15 @@ public class Room_Main : MonoBehaviour
             case "perfect":
                 confirmBut.GetComponentInChildren<Light>().color = perfectCol;
                 confirmBut.arg = null;
-                GameManager.gm.currTunnel.OpenDoor(0);
+                gm.currTunnel.OpenDoor(0);
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleCorrect);
                 state = "bad";
                 break;
             case "ok":
                 confirmBut.GetComponentInChildren<Light>().color = okCol;
                 confirmBut.arg = null;
-                GameManager.gm.ceilingSpeed += GameManager.gm.speedBoost;
-                GameManager.gm.currTunnel.OpenDoor(0);
+                gm.ceilingSpeed += gm.speedBoost;
+                gm.currTunnel.OpenDoor(0);
                 //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleFullWrong);
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
                 AudioManager.am.FMOD_CeilingFasterOneShot();
@@ -108,7 +111,7 @@ public class Room_Main : MonoBehaviour
             default:
                 confirmBut.arg = "light";
                 StartCoroutine(ConfirmCool());
-                GameManager.gm.currTunnel.CloseDoor(0);
+                gm.currTunnel.CloseDoor(0);
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleFullWrong);
                 break;
 

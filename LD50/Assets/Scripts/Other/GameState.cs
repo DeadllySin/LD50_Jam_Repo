@@ -11,15 +11,15 @@ public class GameState : MonoBehaviour
 
     private void Awake()
     {
+        if (PlayerPrefs.GetString("lang") == null || PlayerPrefs.GetString("lang") == "") PlayerPrefs.SetString("lang", "en");
         DontDestroyOnLoad(this.gameObject);
         gs = this;
         StartCoroutine(LoadingScreenAsyncOperation());
         if (PlayerPrefs.GetInt("first") == 0)
         {
-            PlayerPrefs.SetString("lang","en");
             PlayerPrefs.SetString("id", "#" + Random.Range(1000,9999).ToString().ToLower());
             PlayerPrefs.SetInt("first", 1);
-            PlayerPrefs.SetFloat("vol", 0.8f);
+            PlayerPrefs.SetFloat("vol", 0.6f);
         }
         AudioManager.am.masterBus.setVolume(PlayerPrefs.GetFloat("vol"));
     }

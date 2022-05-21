@@ -12,15 +12,16 @@ public class Room_Ring : MonoBehaviour
     private int[] ringsOnSide = new int[2];
     private int randomQuestion;
     [HideInInspector] public bool[] solutionCorrect = new bool[2];
+    [SerializeField] private TextAsset math;
 
-
-    private void Awake()
+    private void Start()
     {
+        main = GetComponentInParent<Room_Main>();
         int p = 0;
         while(p < 2)
         {
             foreach (Transform child in pole[p].questionSpawnerParent) pole[p].questionSpawners.Add(child.gameObject.GetComponent<Transform>());
-            switch (GameManager.gm.ringRoomPro)
+            switch (main.gm.ringRoomPro)
             {
                 case 0:
                     maxSymbols = 3;
@@ -51,7 +52,8 @@ public class Room_Ring : MonoBehaviour
                     break;
             }
 
-            foreach (string line in System.IO.File.ReadLines(Application.streamingAssetsPath + "/Math.txt"))
+            string[] linesInFile = math.text.Split('\n');
+            foreach (string line in linesInFile)
             {
                 if (line.Length == maxSymbols + 2)
                 {
@@ -65,7 +67,7 @@ public class Room_Ring : MonoBehaviour
             p++;
         }
 
-        GameManager.gm.ringRoomPro++;
+        main.gm.ringRoomPro++;
         main = GetComponentInParent<Room_Main>();
 
         for (int r = 0; r < pole.Length; r++)

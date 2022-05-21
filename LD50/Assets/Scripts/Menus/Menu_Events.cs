@@ -4,6 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class Menu_Events : MonoBehaviour
 {
+    private GameManager gm;
+
+    private void Awake()
+    {
+        gm = FindObjectOfType<GameManager>();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) //resume
@@ -38,7 +45,7 @@ public class Menu_Events : MonoBehaviour
     public void M_Return()
     {
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-        GameManager.gm.Pause();
+        gm.Pause();
     }
 
     public void M_MainMenu()

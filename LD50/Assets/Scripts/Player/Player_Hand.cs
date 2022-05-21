@@ -1,17 +1,23 @@
 using UnityEngine;
 public class Player_Hand : MonoBehaviour
 {
+    private GameManager gm;
     [HideInInspector] public GameObject hand;
     [HideInInspector] public GameObject handTarget;
     [SerializeField] private float distance;
     [HideInInspector] public string lookingAt = "none";
+
+    private void Awake()
+    {
+        gm = FindObjectOfType<GameManager>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (handTarget == null) return;
             if (DistanceFu(handTarget) != 1) return;
-            switch (GameManager.gm.currRoomType)
+            switch (gm.currRoomType)
             {
                 case "color":
                     {
@@ -21,29 +27,29 @@ public class Player_Hand : MonoBehaviour
                     }
                     if (lookingAt == "restart")
                     {
-                         GameManager.gm.currRoom.GetComponentInChildren<Room_Colors>().Restart(handTarget.GetComponent<Animator>());
+                         gm.currRoom.GetComponentInChildren<Room_Colors>().Restart(handTarget.GetComponent<Animator>());
                     }
                     break;
                     }
                 case "ring":
                     if (lookingAt == "ring_up")
                     {
-                        GameManager.gm.currRoom.GetComponentInChildren<Room_Ring>().MoveUp(handTarget.GetComponent<Interactable_Pole>().whichPole);
+                        gm.currRoom.GetComponentInChildren<Room_Ring>().MoveUp(handTarget.GetComponent<Interactable_Pole>().whichPole);
                         
                     }
                     if (lookingAt == "ring_down")
                     {
-                        GameManager.gm.currRoom.GetComponentInChildren<Room_Ring>().MoveDown(handTarget.GetComponent<Interactable_Pole>().whichPole);
+                        gm.currRoom.GetComponentInChildren<Room_Ring>().MoveDown(handTarget.GetComponent<Interactable_Pole>().whichPole);
                     }
                     break;
                 case "statue":
                     if (lookingAt == "statue" && hand == null)
                     {
-                        GameManager.gm.currRoom.GetComponentInChildren<Room_Statue>().PickUp();
+                        gm.currRoom.GetComponentInChildren<Room_Statue>().PickUp();
                     }
                     if (lookingAt == "socket" && hand != null)
                     {
-                        GameManager.gm.currRoom.GetComponentInChildren<Room_Statue>().Place();
+                        gm.currRoom.GetComponentInChildren<Room_Statue>().Place();
                     }
                     break;
             }
@@ -56,7 +62,7 @@ public class Player_Hand : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            if (GameManager.gm.currRoomType == "statue" && hand != null)
+            if (gm.currRoomType == "statue" && hand != null)
             {
                 FindObjectOfType<Room_Statue>().Drop();
             }

@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -35,4 +35,4 @@ public class EnemyAI : MonoBehaviour
         // Calculate a rotation a step closer to the target and applies rotation to this object
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
-}
+}*/
