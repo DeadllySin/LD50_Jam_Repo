@@ -63,7 +63,9 @@ public class Room_Ring : MonoBehaviour
                     pole[p].Solutions.Add(splites[1]);
                 }
             }
-
+            randomQuestion = Random.Range(0, pole[p].Questions.Count - 1);
+            randomQuestion = Random.Range(0, pole[p].Questions.Count - 1);
+            randomQuestion = Random.Range(0, pole[p].Questions.Count - 1);
             randomQuestion = Random.Range(0, pole[p].Questions.Count - 1);
             pole[p].answer = pole[p].Solutions[randomQuestion];
             pole[p].question = pole[p].Questions[randomQuestion];
