@@ -68,7 +68,6 @@ public class Room_Ring : MonoBehaviour
             pole[p].answer = pole[p].Solutions[randomQuestion];
             pole[p].question = pole[p].Questions[randomQuestion];
             int y = 0;
-
             for (int i = 0; i < pole[p].question.Length; i++)
             {
                 for (int j = 0; j < symbol.Length; j++)
