@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
     }*/
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && GameState.gs.introFinished) Pause();
+        if (Input.GetKeyDown(KeyCode.Escape) && GameState.gs.introFinished && !mainMenu.activeInHierarchy) Pause();
     }
 
     private void OnDeath()
