@@ -7,9 +7,11 @@ public class LanguageManager : MonoBehaviour
     [HideInInspector] public List<string> english = new List<string>();
     [HideInInspector] public List<string> german = new List<string>();
     [HideInInspector] public List<string> portu = new List<string>();
+    [HideInInspector] public List<string> french = new List<string>();
     [SerializeField] private TextAsset englishText;
     [SerializeField] private TextAsset germanText;
     [SerializeField] private TextAsset portuText;
+    [SerializeField] private TextAsset frenchText;
     public string lang = "en";
     public static event Action onChange;
     public static LanguageManager lg;
@@ -31,6 +33,11 @@ public class LanguageManager : MonoBehaviour
         foreach (string line in linesInFile3)
         {
             if (!line.Contains("#")) portu.Add(line);
+        }
+        string[] linesInFile4 = frenchText.text.Split('\n');
+        foreach (string line in linesInFile4)
+        {
+            if (!line.Contains("#")) french.Add(line);
         }
     }
 

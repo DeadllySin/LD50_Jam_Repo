@@ -8,6 +8,7 @@ public class HowToPlaySub : MonoBehaviour
     [SerializeField][Multiline(15)] private string english;
     [SerializeField][Multiline(15)] private string german;
     [SerializeField][Multiline(15)] private string port;
+    [SerializeField][Multiline(15)] private string french;
     [SerializeField] private Text text;
 
     private void OnEnable()
@@ -21,6 +22,9 @@ public class HowToPlaySub : MonoBehaviour
                 text.text = german;
                 break;
             case "pt":
+                text.text = port;
+                break;
+            case "fr":
                 text.text = port;
                 break;
         }

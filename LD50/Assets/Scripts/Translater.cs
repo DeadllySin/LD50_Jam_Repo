@@ -59,6 +59,17 @@ public class Translater : MonoBehaviour
                     }
                 }
                 break;
+            case "fr":
+                for (int i = 0; i < LanguageManager.lg.french.Count; i++)
+                {
+                    string[] translation = LanguageManager.lg.french[i].Split('=');
+                    if (translation[0] == tagName)
+                    {
+                        string trans = translation[1];
+                        GetComponent<Text>().text = trans;
+                    }
+                }
+                break;
         }
     }
 }

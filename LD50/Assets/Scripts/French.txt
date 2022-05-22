@@ -1,0 +1,11 @@
+ply=jouer
+optns=options
+how=comment jouer
+quit=quitter
+flea=tableau des scores
+lang=langages
+ret=retour au menu
+sc=votre score
+restart=recommencer
+return=retour
+mainmenu=menu principal
