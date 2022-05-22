@@ -7,7 +7,6 @@ public class DisplayHighscores : MonoBehaviour
     HighScores myScores;
     [SerializeField] private Text leaderboard;
     [SerializeField] private Text lead2;
-    [SerializeField] private Text kingPlayer;
     [SerializeField] private Text scoreText;
     void Start() //Fetches the Data at the beginning
     {
@@ -16,7 +15,6 @@ public class DisplayHighscores : MonoBehaviour
     }
     public void SetScoresToMenu(PlayerScore[] highscoreList) //Assigns proper name and score for each text value
     {
-        kingPlayer.text = "1. " + highscoreList[0].username + " " + highscoreList[0].score.ToString();
         leaderboard.text = null;
         lead2.text = null;
         for (int i = 0; i < 10; i ++)

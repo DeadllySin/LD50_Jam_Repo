@@ -21,7 +21,7 @@ public class VersionCheck : MonoBehaviour
         latestVersion = www.text;
         if(latestVersion != Application.version)
         {
-            latest.text = "new version available!";
+            latest.text += " - new version available!";
         }
     }
 }

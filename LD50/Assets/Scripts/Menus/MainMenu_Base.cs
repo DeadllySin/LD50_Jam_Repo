@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MainMenu_Base : MonoBehaviour
 {
     [SerializeField] private Button firstButton;
+    [SerializeField] private Slider firstSlider;
     [SerializeField] private float time = 0.05f;
 
     private void OnEnable()
@@ -15,7 +16,8 @@ public class MainMenu_Base : MonoBehaviour
     IEnumerator sel()
     {
         yield return new WaitForSeconds(time);
-        firstButton.Select();
+        firstButton?.Select();
+        firstSlider?.Select();
     }
 
     public void changemenu(GameObject menu)
