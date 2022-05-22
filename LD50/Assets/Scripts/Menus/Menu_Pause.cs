@@ -11,4 +11,9 @@ public class Menu_Pause : MonoBehaviour
     {
         sl.value = PlayerPrefs.GetFloat("vol");
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) FindObjectOfType<GameManager>().Pause();
+    }
 }

@@ -10,8 +10,10 @@ public class Tunnel : MonoBehaviour
     [SerializeField] private GameObject ceil;
     [SerializeField] private GameObject fakeDoor;
     [SerializeField] private GameObject tunnelPrefab;
+    [SerializeField] private GameObject preventGlitch;
     private void Awake()
     {
+        preventGlitch.SetActive(false);
         gm = FindObjectOfType<GameManager>();
         IdleOponDoor(2);
     }
@@ -31,6 +33,7 @@ public class Tunnel : MonoBehaviour
         if (!alreadyColl)
         {
             alreadyColl = true;
+            preventGlitch.SetActive(true);
             CloseDoor(0);
 
             yield return new WaitForSeconds(.5f);

@@ -12,6 +12,8 @@ public class MainMenu_Lead : MonoBehaviour
     private void Start()
     {
         youScore.text = PlayerPrefs.GetInt("roomsCleared").ToString();
+        string[] splitted = PlayerPrefs.GetString("name").Split('#');
+        if(PlayerPrefs.GetString("name") != null || PlayerPrefs.GetString("name") != "") inf.text = splitted[0];
     }
 
     private void Update()
@@ -38,7 +40,6 @@ public class MainMenu_Lead : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         PlayerPrefs.SetString("name", inf.text.ToLower() + PlayerPrefs.GetString("id").ToLower());
         HighScores.UploadScore(PlayerPrefs.GetString("name"), PlayerPrefs.GetInt("roomsCleared"));
-        inf.text = null;
     }
 
     public void changemenu(GameObject menu)

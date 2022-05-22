@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Cutscene_01_Door : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Cutscene_01_Door : MonoBehaviour
 
     private void Awake()
     {
+        dooropen.GetComponent<Animator>().SetTrigger("isIdleOpen");
         gm = FindObjectOfType<GameManager>();
     }
 
@@ -42,9 +44,8 @@ public class Cutscene_01_Door : MonoBehaviour
 
     public void Anim_EnableDoor()
     {
-        dooropen.SetActive(true);
+        dooropen.GetComponent<Animator>().SetTrigger("isClosed");
         doorCloseInstance.start();
-        //Debug.Log("test");
         l.gameObject.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleWrong);
     }
@@ -88,6 +89,7 @@ public class Cutscene_01_Door : MonoBehaviour
     }
     public void turnPlayerOn()
     {
+        FindObjectOfType<EventSystem>().enabled = true;
         player.transform.position = this.transform.position;
         cineCutscene.SetActive(false);
         cinePlayer.SetActive(true);

@@ -1744,7 +1744,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 11.816667
+  - time: 11.2
     functionName: Anim_DeleteDoor
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MainMenu_Base : MonoBehaviour
 {
     [SerializeField] private Button firstButton;
+    [SerializeField] private float time = 0.05f;
 
     private void OnEnable()
     {
@@ -13,7 +14,7 @@ public class MainMenu_Base : MonoBehaviour
 
     IEnumerator sel()
     {
-        yield return new WaitForSeconds(.05f);
+        yield return new WaitForSeconds(time);
         firstButton.Select();
     }
 

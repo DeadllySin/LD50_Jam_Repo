@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
         playerCine.SetActive(GameState.gs.skipCutscene);
         cutsceneCam.SetActive(!GameState.gs.skipCutscene);
         cutscene.SetActive(!GameState.gs.skipCutscene);
-        door.SetActive(GameState.gs.skipCutscene);
+        door.SetActive(!GameState.gs.skipCutscene);
         player.SetActive(GameState.gs.skipCutscene);
         //defaultSpeed = ceilingSpeedScale(defaultSpeed, 0f, 10f, 0f, 0.5f);
         mainMenu.SetActive(!GameState.gs.skipCutscene);
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
         currRoom = FindObjectOfType<Room_Main>().gameObject;
         currTunnel = FindObjectOfType<Tunnel>();
         ceilingSourceChild = player.transform.GetChild(3).gameObject;
+        FindObjectOfType<EventSystem>().enabled = true;
     }
 
     private void FixedUpdate()
@@ -75,7 +77,7 @@ public class GameManager : MonoBehaviour
                 ceilingSpeed = slowThresholdSpeed;
                 if (ceiling.transform.position.y < deathHeight)
                 {
-                    ceilingSpeed = fastSpped;
+                    //ceilingSpeed = fastSpped;
                     FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
                     if (AudioManager.am.GetComponent<A_MusicCallBack>().CBDeath == true) OnDeath();
                 }
@@ -117,11 +119,12 @@ public class GameManager : MonoBehaviour
     }*/
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && GameState.gs.introFinished) Pause();
+        if (Input.GetKeyDown(KeyCode.Escape) && GameState.gs.introFinished) Pause();
     }
 
     private void OnDeath()
     {
+        FindObjectOfType<EventSystem>().enabled = true;
         //Debug.Log("OnDeath Game Manager");
         Destroy(FindObjectOfType<Room_Main>().gameObject);
         isDead = true;
@@ -143,12 +146,35 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        FindObjectOfType<EventSystem>().enabled = (!FindObjectOfType<EventSystem>().enabled);
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-        pauseScreen.SetActive(!pauseScreen.activeSelf);
-        player.SetActive(!player.activeSelf);
+        if (!canPause) return;
+        canPause = false;
+        StartCoroutine(pauseCool());
+        if (pauseScreen.activeInHierarchy)
+        {
+            FindObjectOfType<EventSystem>().enabled = (false);
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+            pauseScreen.SetActive(false);
+            player.SetActive(true);
+        }
+        else
+        {
+            FindObjectOfType<EventSystem>().enabled = (true);
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+            pauseScreen.SetActive(true);
+            player.SetActive(false);
+        }
+
         //if(!player.activeInHierarchy) AudioManager.am.pauseSSInstance.start();
         //else AudioManager.am.pauseSSInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    bool canPause = true;
+
+    IEnumerator pauseCool()
+    {
+        canPause = false;
+        yield return new WaitForSeconds(.6f);
+        canPause = true;
     }
 
 }

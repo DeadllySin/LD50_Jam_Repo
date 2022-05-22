@@ -370,6 +370,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ffd45d664fd9748a4a80fcdec99a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &639192500304394261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2916504878014744220}
+  - component: {fileID: 689649990502997044}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2916504878014744220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639192500304394261}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.544, y: 2.55, z: 6.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8147287964468909957}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &689649990502997044
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639192500304394261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 5, z: 0.8233743}
+  m_Center: {x: 0, y: 0, z: -0.088312864}
 --- !u!1 &1189097278019103961
 GameObject:
   m_ObjectHideFlags: 0
@@ -4339,8 +4383,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.22762, y: 5, z: 2.0511122}
-  m_Center: {x: 0.11381006, y: 1.0824838, z: 1.3923526}
+  m_Size: {x: 7.22762, y: 5, z: 2.9495745}
+  m_Center: {x: 0.11381006, y: 1.0824838, z: 0.94312143}
 --- !u!1 &8147287963716455534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5436,6 +5480,7 @@ Transform:
   - {fileID: 8147287963283334708}
   - {fileID: 1121018101404403660}
   - {fileID: 1670662860}
+  - {fileID: 2916504878014744220}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5461,6 +5506,7 @@ MonoBehaviour:
   ceil: {fileID: 8147287964666956684}
   fakeDoor: {fileID: 3219292511492543933, guid: 243eed46cd913e64f9f3fe1b6f2a6a6d, type: 3}
   tunnelPrefab: {fileID: 8147287964468909956}
+  preventGlitch: {fileID: 639192500304394261}
 --- !u!1 &8147287964485439494
 GameObject:
   m_ObjectHideFlags: 0
