@@ -1,4 +1,5 @@
 using UnityEngine;
+using HinputClasses;
 public class Player_Hand : MonoBehaviour
 {
     private GameManager gm;
@@ -13,7 +14,7 @@ public class Player_Hand : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Hinput.anyGamepad.B.justPressed || Hinput.anyGamepad.A.justPressed || Hinput.anyGamepad.rightBumper.justPressed || Hinput.anyGamepad.rightTrigger.justPressed)
         {
             if (handTarget == null) return;
             if (DistanceFu(handTarget) != 1) return;

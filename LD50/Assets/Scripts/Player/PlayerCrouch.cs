@@ -16,13 +16,13 @@ public class PlayerCrouch : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) ||  !allowStandingUp)
+        if ((Input.GetKeyDown(KeyCode.LeftControl) || Hinput.anyGamepad.leftStickClick.pressed) ||  !allowStandingUp)
         {
             cc.height = 1;
             fps.MoveSpeed = 2;
             fps.SprintSpeed = 2;
         }
-        if (Input.GetKeyUp(KeyCode.LeftControl) && allowStandingUp)
+        if ((Input.GetKeyUp(KeyCode.LeftControl) || Hinput.anyGamepad.leftStickClick.released)  && allowStandingUp)
         {
             cc.height = 2;
             fps.MoveSpeed = 4;
