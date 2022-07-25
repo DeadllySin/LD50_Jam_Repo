@@ -12,7 +12,7 @@ public class LanguageManager : MonoBehaviour
     [SerializeField] private TextAsset germanText;
     [SerializeField] private TextAsset portuText;
     [SerializeField] private TextAsset frenchText;
-    public string lang = "en";
+    [HideInInspector] public string lang = "en";
     public static event Action onChange;
     public static LanguageManager lg;
     void Awake()

@@ -4,7 +4,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public class SS_MenuBar_Test : MonoBehaviour
+public class Screenshot_Tool : MonoBehaviour
 {
     /// <summary>
     /// This adds an entry to the top main menu and a shortcut CTRL+ALT+S and stores files without transparency to Assets/{TimeStamp}.png

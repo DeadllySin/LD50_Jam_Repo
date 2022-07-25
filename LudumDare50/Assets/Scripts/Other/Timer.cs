@@ -6,8 +6,8 @@ public class Timer : MonoBehaviour
     int minutes;
     public static Timer timer;
     public bool countTime = false;
-    public int ms;
-    public int s;
+    [HideInInspector] public int ms;
+    [HideInInspector] public int s;
     [HideInInspector] public string time;
 
     private void Awake()
