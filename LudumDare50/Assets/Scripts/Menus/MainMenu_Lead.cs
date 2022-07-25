@@ -24,16 +24,18 @@ public class MainMenu_Lead : MonoBehaviour
         }
     }
 
+    [System.Obsolete]
     public void Upload()
     {
         for(int i = 0; i < no.Length; i++)
         {
-            if (inf.text.ToLower().Contains(no[i]) || PlayerPrefs.GetInt("roomsCleared") == null || PlayerPrefs.GetInt("roomsCleared") == 0) return;
+            if (inf.text.ToLower().Contains(no[i]) || PlayerPrefs.GetInt("roomsCleared") == 0) return;
         }
         StartCoroutine(up());
 
     }
 
+    [System.Obsolete]
     IEnumerator up()
     {
         HighScores.RemoveScore(PlayerPrefs.GetString("name"));

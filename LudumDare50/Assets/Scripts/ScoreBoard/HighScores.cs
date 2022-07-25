@@ -37,10 +37,13 @@ public class HighScores : MonoBehaviour
         else print("Error uploading" + www.error);
     }
 
+    [System.Obsolete]
     public static void RemoveScore(string username)
     {
         instance.StartCoroutine(instance.DatabaseRemove(username));
     }
+
+    [System.Obsolete]
     IEnumerator DatabaseRemove(string userame)
     {
         WWW www = new WWW(webURL + privateCode + "/delete/" + WWW.EscapeURL(userame));
