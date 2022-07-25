@@ -24,7 +24,6 @@ public class MainMenu_Lead : MonoBehaviour
         }
     }
 
-    [System.Obsolete]
     public void Upload()
     {
         for(int i = 0; i < no.Length; i++)
