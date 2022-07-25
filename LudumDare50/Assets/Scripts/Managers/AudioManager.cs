@@ -80,9 +80,9 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public bool InitCB = false;
     public void Awake()
     {
-        if (am != null)
+        if (am != null && am != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
             Debug.Log("AudioManager already exists or not loaded");
         }
         am = this;

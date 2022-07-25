@@ -13,6 +13,7 @@ public class A_Timer : MonoBehaviour
 
     private void Awake()
     {
+        if(a_timer != null && a_timer != this)Destroy(this);
         a_timer = this;
     }
 
