@@ -6,6 +6,7 @@ public class EventSystemChecker : MonoBehaviour
     //public GameObject eventSystem;
 
     // Use this for initialization
+    [System.Obsolete]
     void Awake()
     {
         if (!FindObjectOfType<EventSystem>())
