@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour
                     startTime = Time.time;
                     dustStorm.SetActive(false);
                     //l.gameObject.SetActive(false);
-                    Timer.timer.countTime = true;
                 }
                 Debug.Log("ceiling is moving");
 
@@ -116,7 +115,6 @@ public class GameManager : MonoBehaviour
         //Debug.Log("OnDeath Game Manager");
         Destroy(FindObjectOfType<Room_Main>().gameObject);
         isDead = true;
-        Timer.timer.countTime = false;
         if (roomsCleared > PlayerPrefs.GetInt("roomsCleared")) PlayerPrefs.SetInt("roomsCleared", roomsCleared);
         scoreText.text = "score " + roomsCleared + "\nhighscore " + PlayerPrefs.GetInt("roomsCleared");
         deathScreen.SetActive(true);
@@ -124,12 +122,6 @@ public class GameManager : MonoBehaviour
         AudioManager.am.FMOD_DeadState();
         AudioManager.am.GetComponent<A_MusicCallBack>().AllowCeilingParam = false;
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Height_Y", 11f);
-
-        //timer
-        float t = Time.time - startTime;
-        minutes = ((int)t / 60).ToString();
-        seconds = (t % 60).ToString("f0");
-        Debug.Log(minutes + " mins" + seconds + " secs");
     }
 
     public void Pause()
