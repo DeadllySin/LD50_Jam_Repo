@@ -34,18 +34,12 @@ public class GameManager : MonoBehaviour
 
     [Header("Ceiling")]
     public GameObject ceiling;
-    public float speedBoost;
-    [SerializeField] float slowThresholdSpeed;
-    [SerializeField] private float defaultSpeed;
-    [SerializeField] private float deathHeight;
-    [SerializeField] private float thresholdToSlower;
-    [SerializeField] private float fastSpped;
-    [HideInInspector] public float ceilingSpeed;
+    public float speedBoost, ceilingSpeed;
+    [SerializeField] private float defaultSpeed, deathHeight, thresholdToSlower, fastSpped, slowThresholdSpeed;
     [HideInInspector] public GameObject ceilingSourceChild;
     private bool doOnce;
     private float startTime;
-    private string minutes;
-    private string seconds;
+    private string minutes, seconds;
 
 
     private void Awake()
@@ -57,7 +51,6 @@ public class GameManager : MonoBehaviour
         cutscene.SetActive(!GameState.gs.skipCutscene);
         door.SetActive(!GameState.gs.skipCutscene);
         player.SetActive(GameState.gs.skipCutscene);
-        //defaultSpeed = ceilingSpeedScale(defaultSpeed, 0f, 10f, 0f, 0.5f);
         mainMenu.SetActive(!GameState.gs.skipCutscene);
         startTime = Time.time;
         ceilingSpeed = defaultSpeed;
@@ -112,11 +105,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /*public static float ceilingSpeedScale(float input, float oldLow, float oldHigh, float newLow, float newHigh)
-    {
-        float t = Mathf.InverseLerp(oldLow, oldHigh, input);
-        return Mathf.Lerp(newLow, newHigh, t);
-    }*/
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && GameState.gs.introFinished && !mainMenu.activeInHierarchy) Pause();
@@ -176,5 +164,4 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(.6f);
         canPause = true;
     }
-
 }

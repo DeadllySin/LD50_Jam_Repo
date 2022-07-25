@@ -24,7 +24,7 @@ public class Player_Hand : MonoBehaviour
                     {
                     if (lookingAt == "color")
                     {
-                        handTarget.GetComponent<Interactable_ColorButton>().OnPressed();
+                        handTarget.GetComponent<Interactable_Button>().OnPressed();
                     }
                     if (lookingAt == "restart")
                     {

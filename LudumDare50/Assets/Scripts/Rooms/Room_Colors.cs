@@ -44,7 +44,7 @@ public class Room_Colors : MonoBehaviour
     {
         for (int g = 0; g < colorOb.Length; g++)
         {
-            colorOb[g].GetComponent<Interactable_ColorButton>().isPressed = true;
+            colorOb[g].GetComponent<Interactable_Button>().isPressed = true;
         }
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("PressingColButtons", 0);
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pColorStart);
@@ -68,7 +68,7 @@ public class Room_Colors : MonoBehaviour
         }
         for (i = 0; i < colorOb.Length; i++)
         {
-            colorOb[i].GetComponent<Interactable_ColorButton>().isPressed = false;
+            colorOb[i].GetComponent<Interactable_Button>().isPressed = false;
         }
         seqCooldown = false;
     }
