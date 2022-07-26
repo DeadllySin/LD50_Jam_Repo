@@ -7,6 +7,7 @@ public class Interactable_Button : MonoBehaviour
 {
     public bool isPressed = true;
     private Animator anim;
+    [SerializeField] private bool canBePressedOnce;
     [SerializeField] private float cooldown = .55f;
     [SerializeField] private Color coL;
     [SerializeField] private UnityEvent unityEvent;
@@ -31,6 +32,6 @@ public class Interactable_Button : MonoBehaviour
     IEnumerator buttonCooldown()
     {
         yield return new WaitForSeconds(cooldown);
-        isPressed = false;
+        if(!canBePressedOnce) isPressed = false;
     }
 }

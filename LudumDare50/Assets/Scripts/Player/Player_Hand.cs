@@ -60,6 +60,10 @@ public class Player_Hand : MonoBehaviour
                 FindObjectOfType<Room_Main>().OnConfirm();
 
             }
+            else if(lookingAt == "Button")
+            {
+                handTarget.GetComponent<Interactable_Button>().OnPressed();
+            }
         }
         if (Input.GetKeyDown(KeyCode.G))
         {

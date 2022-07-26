@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Interactable_Memory : MonoBehaviour
 {
-    [HideInInspector] public MeshRenderer plate;
-    [HideInInspector] public bool hasFoundPair;
+    public MeshRenderer plate;
 
     public void Activate()
     {
-        if(hasFoundPair) return;
+        if(plate.gameObject.activeInHierarchy) return;
         GetComponentInParent<Room_Memory>().RevealPair(this);
     }
 }
