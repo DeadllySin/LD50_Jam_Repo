@@ -27,6 +27,10 @@ public class Room_Memory : MonoBehaviour
         }
     }
 
+    private void FixedUpdate() {
+        Debug.Log(howMuchActive);
+    }
+
     public void RevealAllPlates()
     {
         StartCoroutine(revealEnu());
@@ -64,11 +68,6 @@ public class Room_Memory : MonoBehaviour
             opened[0].gameObject.SetActive(false);
             opened[1].gameObject.SetActive(false);
             opened.Clear();
-
-            for (int i = 0; i < plates.Count; i++)
-            {
-                if (plates[i].plate.gameObject.activeInHierarchy) howMuchActive++;
-            }
         }
     }
 
