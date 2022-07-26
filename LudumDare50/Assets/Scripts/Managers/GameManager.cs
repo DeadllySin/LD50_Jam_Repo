@@ -15,9 +15,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Tunnel currTunnel;
     [HideInInspector] public int lastRoom = 0;
     [HideInInspector] public int roomsCleared = 0;
-    [HideInInspector] public int statueRoomPro;
-    [HideInInspector] public int colorRoomPro;
-    [HideInInspector] public int ringRoomPro;
+    [HideInInspector] public int colorRoomPro,ringRoomPro, statueRoomPro, memoryRoomPro;
     [SerializeField] private GameObject playerCine;
     [SerializeField] private GameObject dustStorm;
 

@@ -23,6 +23,7 @@ public class Interactable_Button : MonoBehaviour
         {
             GetComponentInChildren<Light>().color = coL;
             isPressed = true;
+            Debug.LogError("I think we had a basic button press sound. Add it here");
             anim.SetTrigger("isPressed");
             unityEvent.Invoke();
             StartCoroutine(buttonCooldown());
