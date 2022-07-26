@@ -51,7 +51,7 @@ public class Room_Memory : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (opened[0].material.name == opened[1].material.name)
         {
-            howMuchActive++;
+            howMuchActive +=1;
             if (howMuchActive == 4)
             {
                 rm.state = "perfect";
