@@ -49,6 +49,12 @@ public class Player_Hand : MonoBehaviour
                         gm.currRoom.GetComponentInChildren<Room_Statue>().Place();
                     }
                     break;
+                case "Cups":
+                    if(lookingAt == "cup" && handTarget.GetComponent<Interactable_Cup>().canInteract)
+                    {
+                        hand.transform.position = new Vector3(hand.transform.position.x, hand.transform.position.y + .5f, handTarget.transform.position.z);
+                    }
+                    break;
             }
             if(lookingAt == "Button")
             {
