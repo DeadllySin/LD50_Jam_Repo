@@ -12,16 +12,20 @@ public class MainMenu_Main : MonoBehaviour
 
     private void Awake()
     {
-        versionText.text = "Version "+ Application.version;
+        versionText.text = "Version " + Application.version;
         slider.value = PlayerPrefs.GetFloat("vol");
     }
     private void Update()
     {
-        if (this.isActiveAndEnabled)
+        if (this.enabled)
         {
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
             {
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
+            }
+            if (Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
             }
         }
     }
@@ -56,13 +60,6 @@ public class MainMenu_Main : MonoBehaviour
         }
     }
 
-    public void changemenu(GameObject menu)
-    {
-        menu.SetActive(true);
-        this.gameObject.SetActive(false);
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-    }
-
     private void Start()
     {
         mainMenuUIGroup.alpha = 0;
@@ -72,7 +69,7 @@ public class MainMenu_Main : MonoBehaviour
     {
         mainMenuUIGroup.alpha = 1f;
     }
-    
+
     public void StartGame()
     {
         FindObjectOfType<EventSystem>().enabled = false;
@@ -80,8 +77,9 @@ public class MainMenu_Main : MonoBehaviour
         AudioManager.am.startTimerCB = true;
         fadeOut = true;
         AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = true;
-        AudioManager.am.FMOD_InGameState(); //não mexer que está ligado ás variáveis call back
+        AudioManager.am.FMOD_InGameState(); //nï¿½o mexer que estï¿½ ligado ï¿½s variï¿½veis call back
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+        this.enabled = false;
     }
 
     public void OnValueChanged(Slider sl)

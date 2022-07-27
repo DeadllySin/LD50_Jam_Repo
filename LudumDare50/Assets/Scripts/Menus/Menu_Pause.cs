@@ -7,9 +7,11 @@ public class Menu_Pause : MonoBehaviour
 {
 
     [SerializeField] private Slider sl;
+    [SerializeField] private Button bu;
     private void OnEnable()
     {
         sl.value = PlayerPrefs.GetFloat("vol");
+        bu.Select();
     }
 
     private void Update()
