@@ -9,11 +9,10 @@ public class GameManager : MonoBehaviour
     private bool isDead;
     public GameObject player;
     public GameObject room;
-    public Light l;
     [HideInInspector] public GameObject currRoom;
     [HideInInspector] public string currRoomType;
     [HideInInspector] public Tunnel currTunnel;
-    [HideInInspector] public int lastRoom = 0;
+    [HideInInspector] public string lastRoom = "none";
     [HideInInspector] public int roomsCleared = 0;
     [HideInInspector] public int colorRoomPro,ringRoomPro, statueRoomPro, memoryRoomPro;
     [SerializeField] private GameObject playerCine;
@@ -37,7 +36,6 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public GameObject ceilingSourceChild;
     private bool doOnce;
     private float startTime;
-    private string minutes, seconds;
 
 
     private void Awake()

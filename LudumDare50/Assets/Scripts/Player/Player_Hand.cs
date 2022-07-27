@@ -22,10 +22,6 @@ public class Player_Hand : MonoBehaviour
             {
                 case "color":
                     {
-                    if (lookingAt == "color")
-                    {
-                        handTarget.GetComponent<Interactable_Button>().OnPressed();
-                    }
                     if (lookingAt == "restart")
                     {
                          gm.currRoom.GetComponentInChildren<Room_Colors>().Restart(handTarget.GetComponent<Animator>());
@@ -54,13 +50,7 @@ public class Player_Hand : MonoBehaviour
                     }
                     break;
             }
-
-            if (lookingAt == "confirm")
-            {
-                FindObjectOfType<Room_Main>().OnConfirm();
-
-            }
-            else if(lookingAt == "Button")
+            if(lookingAt == "Button")
             {
                 handTarget.GetComponent<Interactable_Button>().OnPressed();
             }

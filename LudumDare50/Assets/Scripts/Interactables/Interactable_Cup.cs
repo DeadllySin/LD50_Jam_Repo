@@ -7,8 +7,8 @@ public class Interactable_Cup : MonoBehaviour
     public Vector3 goal;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, goal,5);
+        transform.position = Vector3.MoveTowards(transform.position, goal,.05f);
     }
 }

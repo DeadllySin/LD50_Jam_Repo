@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,12 +8,8 @@ public class Room_Main : MonoBehaviour
     private List<GameObject> rooms = new List<GameObject>();
     private List<string> roomNames = new List<string>();
     [HideInInspector] public string state;
-    [SerializeField] private Interactable confirmBut;
     [SerializeField] private Color perfectCol;
     [SerializeField] private Color okCol;
-
-    private bool canConfirm = true;
-    private string lastRoom = "none";
 
     private void Awake()
     {
@@ -35,11 +30,11 @@ public class Room_Main : MonoBehaviour
         {
             int rdm = rdm = Random.Range(0, rooms.Count - 1);
             for (int i = 0; i < rooms.Count - 1; i++) rooms[i].SetActive(false);
-            while (roomNames[rdm] == lastRoom)
+            while (roomNames[rdm] == gm.lastRoom)
             {
                 rdm = Random.Range(0, rooms.Count - 1);
             }
-            lastRoom = roomNames[rdm];
+            gm.lastRoom = roomNames[rdm];
             rooms[rdm].SetActive(true);
             gm.currRoomType = roomNames[rdm];
         }
@@ -56,12 +51,6 @@ public class Room_Main : MonoBehaviour
                 }
             }
         }
-    }
-
-    IEnumerator ConfirmCool()
-    {
-        yield return new WaitForSeconds(.5f);
-        canConfirm = true;
     }
 
     /*
@@ -82,10 +71,8 @@ public class Room_Main : MonoBehaviour
         }
     }*/
 
-    public void OnConfirm()
+    public void OnConfirm(Interactable confirmBut)
     {
-        if (!canConfirm) return;
-        canConfirm = false;
         //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pConfirm);
 
         switch (state)
@@ -109,23 +96,9 @@ public class Room_Main : MonoBehaviour
                 break;
             default:
                 confirmBut.arg = "light";
-                StartCoroutine(ConfirmCool());
                 gm.currTunnel.CloseDoor(0);
                 FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.puzzleFullWrong);
                 break;
-
         }
-        if (confirmBut.arg == "light")
-        {
-            confirmBut.GetComponentInChildren<Light>().enabled = false;
-            Invoke(nameof(Disablelight), .5f);
-        }
-        confirmBut.GetComponent<Animator>().SetTrigger("isPressed");
-        
-    }
-
-    void Disablelight()
-    {
-        confirmBut.GetComponentInChildren<Light>().enabled = true;
     }
 }

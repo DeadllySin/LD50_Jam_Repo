@@ -21,6 +21,7 @@ public class Interactable_Button : MonoBehaviour
     {
         if (!isPressed)
         {
+            GetComponentInChildren<Light>().enabled = true;
             GetComponentInChildren<Light>().color = coL;
             isPressed = true;
             Debug.LogError("I think we had a basic button press sound. Add it here");
@@ -33,6 +34,7 @@ public class Interactable_Button : MonoBehaviour
     IEnumerator buttonCooldown()
     {
         yield return new WaitForSeconds(cooldown);
-        if(!canBePressedOnce) isPressed = false;
+        GetComponentInChildren<Light>().enabled = false;
+        if (!canBePressedOnce) isPressed = false;
     }
 }

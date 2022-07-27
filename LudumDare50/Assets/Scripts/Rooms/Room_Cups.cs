@@ -6,12 +6,7 @@ public class Room_Cups : MonoBehaviour
 {
     [SerializeField] private GameObject[] cups;
 
-    private void Start()
-    {
-
-    }
-
-    IEnumerator move()
+    IEnumerator Start()
     {
         int i = 0;
         while (i < 10)
@@ -25,6 +20,8 @@ public class Room_Cups : MonoBehaviour
             cups[rdm1].GetComponent<Interactable_Cup>().goal = cups[rdm2].transform.position;
             cups[rdm2].GetComponent<Interactable_Cup>().goal = cups[rdm1].transform.position;
             yield return new WaitWhile(() => cups[rdm2].GetComponent<Interactable_Cup>().transform.position != cups[rdm2].GetComponent<Interactable_Cup>().goal);
+            yield return new WaitForSeconds(.5f);
+            i++;
         }
 
     }
