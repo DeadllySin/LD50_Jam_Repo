@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class A_MusicCallBack : MonoBehaviour
 {
-    public bool FMODIntroDoOnce = true;
-    public bool CBDeath = false;
-    public bool CBDoOnce = true;
-    public bool AllowCeilingParam = false;
+    [HideInInspector] public bool FMODIntroDoOnce = true;
+    [HideInInspector] public bool CBDeath = false;
+    [HideInInspector] public bool CBDoOnce = true;
+    [HideInInspector] public bool AllowCeilingParam = false;
     string sExitPattern;
     class TimelineInfo
     {
