@@ -39,7 +39,10 @@ public class A_MusicCallBack : MonoBehaviour
         musicInstance = FMODUnity.RuntimeManager.CreateInstance(musicCallBackInstance);
 
         MenuCB();
-        MenuMusicStart();
+
+        if (GameState.gs.startMusic == true) MenuMusicStart();
+        
+
         //InGameMusicStart();
     }
 

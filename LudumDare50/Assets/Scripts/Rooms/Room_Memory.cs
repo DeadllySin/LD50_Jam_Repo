@@ -12,6 +12,8 @@ public class Room_Memory : MonoBehaviour
     [SerializeField] private float[] revealTimeAll;
     float revealTime;
 
+    [SerializeField] private Material defaultMat;
+
     private void Start()
     {
         foreach (Transform child in this.transform)
@@ -22,10 +24,16 @@ public class Room_Memory : MonoBehaviour
         rm = GetComponentInParent<Room_Main>();
         for (int i = 0; i < plates.Count; i++)
         {
-            Debug.Log("symbols lenght: " + symbols.Count + "plates lenght" + plates.Count);
+            //Debug.Log("symbols lenght: " + symbols.Count + "plates lenght " + plates.Count);
             int rdm = Random.Range(0, symbols.Count);
             plates[i].plate.material = symbols[rdm];
             symbols.RemoveAt(rdm);
+
+            //to test and I know this is redundant as I am replacing
+            //the material and enabling after your for loop disables lol
+            //also don't forget to delete the comment on Interactable_Memory
+            plates[i].plate.gameObject.SetActive(true);
+            plates[i].plate.material = defaultMat;
         }
 
         revealTime = revealTimeAll[rm.gm.memoryRoomPro];
@@ -46,6 +54,7 @@ public class Room_Memory : MonoBehaviour
     public void RevealPair(Interactable_Memory im)
     {
         im.plate.gameObject.SetActive(true);
+        StartCoroutine(ChangeColour()); //part of test - delete after
         if (opened.Count == 0)
         {
             opened.Add(im.plate);
@@ -57,12 +66,32 @@ public class Room_Memory : MonoBehaviour
         }
     }
 
+    //main changes made to test color crossfade below
+    public Color startColor;
+    public Color endColor;
+    public float speed;
+    public Renderer colorRenderer;
+    public GameObject planeTest;
+    private IEnumerator ChangeColour()
+    {
+        float tick = 0f;
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose);
+        while (planeTest.GetComponent<MeshRenderer>().material.color != endColor)
+        {
+            tick += Time.deltaTime * speed;
+            planeTest.GetComponent<MeshRenderer>().material.color = Color.Lerp(startColor, endColor, tick);
+            yield return null;
+        }
+        yield return new WaitForSeconds(2f); //resets to test again after 2 seconds
+        planeTest.GetComponent<MeshRenderer>().material.color = startColor;
+    }
+    //end here
     IEnumerator revealPairEnu()
     {
         yield return new WaitForSeconds(1);
         if (opened[0].material.name == opened[1].material.name)
         {
-            Debug.LogError("Sound for when both colors match");
+            //Debug.LogError("Sound for when both colors match");
             howMuchActive += 1;
             if (howMuchActive == 4)
             {
@@ -73,7 +102,7 @@ public class Room_Memory : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Sound for when both colors DON'T match");
+            //Debug.LogError("Sound for when both colors DON'T match");
             opened[0].gameObject.SetActive(false);
             opened[1].gameObject.SetActive(false);
             opened.Clear();
@@ -82,7 +111,7 @@ public class Room_Memory : MonoBehaviour
 
     IEnumerator revealEnu()
     {
-        Debug.Log(plates.Count);
+        //Debug.Log(plates.Count);
         for (int i = 0; i < plates.Count; i++)
         {
             plates[i].plate.gameObject.SetActive(true);

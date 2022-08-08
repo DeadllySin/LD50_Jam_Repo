@@ -7,6 +7,7 @@ public class GameState : MonoBehaviour
     public static GameState gs;
     public bool skipCutscene;
     public bool introFinished = false;
+    public bool startMusic = true;
     public string overWriteRoom;
 
     private void Awake()
