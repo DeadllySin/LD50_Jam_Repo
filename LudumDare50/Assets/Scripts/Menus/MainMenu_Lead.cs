@@ -4,33 +4,34 @@ using System.Collections;
 
 public class MainMenu_Lead : MonoBehaviour
 {
-    private string[] no = {"anal", "anus", "arse", "ass", "ballsack", "balls", "bastard", "bitch", "biatch", "bloody", "blowjob", "blow job", "bollock", "bollok", "boner", "boob", "bugger", "bum", "butt", "buttplug", "clitoris", "cock", "coon", "crap", "cunt", "damn", "dick", "dildo", "dyke", "fag", "feck", "fellate", "fellatio", "felching", "fuck", "f u c k", "fudgepacker", "fudge packer", "flange", "Goddamn", "God damn", "hell", "homo", "jerk", "jizz", "knobend", "knob end", "labia", "lmao", "lmfao", "muff", "nigger", "nigga", "omg", "penis", "piss", "poop", "prick", "pube", "pussy", "queer", "scrotum", "sex", "shit", "s hit", "sh1t", "slut", "smegma", "spunk", "tit", "tosser", "turd", "twat", "vagina", "wank", "whore", "wtf"};
+    [SerializeField] private TextAsset forbiddenWords;
     [SerializeField] private InputField inf;
     [SerializeField] private Text youScore;
+    string[] words;
 
     private void Start()
     {
+        words = forbiddenWords.text.Split(",");
         youScore.text = PlayerPrefs.GetInt("roomsCleared").ToString();
         string[] splitted = PlayerPrefs.GetString("name").Split('#');
-        if(PlayerPrefs.GetString("name") != null || PlayerPrefs.GetString("name") != "") inf.text = splitted[0];
+        if (PlayerPrefs.GetString("name") != null || PlayerPrefs.GetString("name") != "") inf.text = splitted[0];
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if(!inf.IsActive()) FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
+            if (!inf.IsActive()) FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
         }
     }
 
     public void Upload()
     {
-        for(int i = 0; i < no.Length; i++)
+        for (int i = 0; i < words.Length; i++)
         {
-            if (inf.text.ToLower().Contains(no[i]) || PlayerPrefs.GetInt("roomsCleared") == 0) return;
+            if (inf.text.ToLower().Contains(words[i]) || PlayerPrefs.GetInt("roomsCleared") == 0) return;
         }
         StartCoroutine(up());
-
     }
 
     [System.Obsolete]
