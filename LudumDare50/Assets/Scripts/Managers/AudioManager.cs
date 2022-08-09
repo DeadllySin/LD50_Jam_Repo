@@ -41,7 +41,12 @@ public class AudioManager : MonoBehaviour
     public FMODUnity.EventReference pColorOrderBlue;
     public FMODUnity.EventReference pColorOrderYellow;
     public FMODUnity.EventReference pColorOrderOrange;
-    public FMODUnity.EventReference pColorOrderRed;   
+    public FMODUnity.EventReference pColorOrderRed;
+
+    [Header("Puzzle Memory")]
+    public FMODUnity.EventReference pMemFaceUp;
+    public FMODUnity.EventReference pMemCorrect;
+    public FMODUnity.EventReference pMemIncorrect;
 
     [Header("UI")]
     public FMODUnity.EventReference puzzleCorrect;

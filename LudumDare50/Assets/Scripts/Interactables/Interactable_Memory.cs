@@ -54,5 +54,5 @@ public class Interactable_Memory : MonoBehaviour
         }
     }
 
-    [SerializeField] float speed = .2f;
+    [SerializeField] float speed = .35f;
 }
