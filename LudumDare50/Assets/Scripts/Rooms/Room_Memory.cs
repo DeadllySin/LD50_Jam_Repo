@@ -61,7 +61,7 @@ public class Room_Memory : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (opened[0].GetComponentInParent<Interactable_Memory>().newCol == opened[1].GetComponentInParent<Interactable_Memory>().newCol)
         {
-            //Debug.LogError("Sound for when both colors match");
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pMemCorrect);
             howMuchActive += 1;
             if (howMuchActive == 4)
             {
@@ -72,7 +72,7 @@ public class Room_Memory : MonoBehaviour
         }
         else
         {
-            //Debug.LogError("Sound for when both colors DON'T match");
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pMemIncorrect);
             opened[0].GetComponentInParent<Interactable_Memory>().activateColorState = false;
             opened[1].GetComponentInParent<Interactable_Memory>().activateColorState = false;
             opened.Clear();
