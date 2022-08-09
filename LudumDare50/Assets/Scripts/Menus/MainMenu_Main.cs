@@ -17,17 +17,17 @@ public class MainMenu_Main : MonoBehaviour
     }
     private void Update()
     {
-        if (this.gameObject.activeInHierarchy && !GameState.gs.introFinished && !GameState.gs.skipCutscene)
+        if (!this.gameObject.activeInHierarchy || GameState.gs.introFinished || GameState.gs.skipCutscene) return;
+
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
-            }
-            if (Input.GetKeyDown(KeyCode.KeypadEnter))
-            {
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
-            }
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
         }
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+        }
+
     }
 
     private void FixedUpdate()
