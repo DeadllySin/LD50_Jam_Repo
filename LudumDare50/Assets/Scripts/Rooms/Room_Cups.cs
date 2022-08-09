@@ -11,11 +11,11 @@ public class Room_Cups : MonoBehaviour
 
     public void StartPuzzle()
     {
-        cups[0].transform.position = new Vector3(cups[0].transform.position.x, cups[0].transform.position.y - .5f, cups[0].transform.position.z);
-        cups[1].transform.position = new Vector3(cups[1].transform.position.x, cups[1].transform.position.y - .5f, cups[1].transform.position.z);
-        cups[2].transform.position = new Vector3(cups[2].transform.position.x, cups[2].transform.position.y - .5f, cups[2].transform.position.z);
+        cups[0].transform.position = new Vector3(cups[0].transform.position.x, cups[0].transform.position.y - .2f, cups[0].transform.position.z);
+        cups[1].transform.position = new Vector3(cups[1].transform.position.x, cups[1].transform.position.y - .2f, cups[1].transform.position.z);
+        cups[2].transform.position = new Vector3(cups[2].transform.position.x, cups[2].transform.position.y - .2f, cups[2].transform.position.z);
         coin.parent = cups[1].transform;
-        coin.localPosition = Vector3.zero;
+        coin.localPosition = new Vector3(-0.34009999f,-0.409999996f,-0.37349999f);
         StartCoroutine(cupsEnu());
     }
 

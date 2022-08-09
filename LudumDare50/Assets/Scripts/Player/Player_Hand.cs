@@ -50,9 +50,11 @@ public class Player_Hand : MonoBehaviour
                     }
                     break;
                 case "Cups":
-                    if (lookingAt == "cup" && handTarget.GetComponent<Interactable_Cup>().canInteract)
+                    if (lookingAt == "cup" && handTarget.GetComponent<Interactable_Cup>().canInteract && !handTarget.GetComponent<Interactable_Cup>().isUp)
                     {
-                        hand.transform.position = new Vector3(hand.transform.position.x, hand.transform.position.y + .5f, handTarget.transform.position.z);
+                        handTarget.GetComponent<Interactable_Cup>().isUp = true;
+                        handTarget.transform.position = new Vector3(handTarget.transform.position.x, handTarget.transform.position.y + .5f, handTarget.transform.position.z);
+                        if(handTarget.transform.childCount == 1) FindObjectOfType<Room_Main>().state = "perfect";
                     }
                     break;
             }

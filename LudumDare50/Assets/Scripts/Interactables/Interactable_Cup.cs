@@ -7,6 +7,7 @@ public class Interactable_Cup : MonoBehaviour
 {
     public Vector3 goal;
     [HideInInspector] public bool canInteract;
+    [HideInInspector] public bool isUp;
 
     // Update is called once per frame
     void FixedUpdate()
