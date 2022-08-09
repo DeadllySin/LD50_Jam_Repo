@@ -14,6 +14,7 @@ public class Interactable_Memory : MonoBehaviour
 
     public void Activate()
     {
+        if(plate.material.color == newCol) return;
         GetComponentInParent<Room_Memory>().RevealPair(this);
     }
 
