@@ -32,8 +32,8 @@ public class Room_Memory : MonoBehaviour
             //to test and I know this is redundant as I am replacing
             //the material and enabling after your for loop disables lol
             //also don't forget to delete the comment on Interactable_Memory
-            plates[i].plate.gameObject.SetActive(true);
-            plates[i].plate.material = defaultMat;
+            //plates[i].plate.gameObject.SetActive(true);
+            //plates[i].plate.material = defaultMat;
         }
 
         revealTime = revealTimeAll[rm.gm.memoryRoomPro];
@@ -54,7 +54,7 @@ public class Room_Memory : MonoBehaviour
     public void RevealPair(Interactable_Memory im)
     {
         im.plate.gameObject.SetActive(true);
-        StartCoroutine(ChangeColour()); //part of test - delete after
+        //StartCoroutine(ChangeColour()); //part of test - delete after
         if (opened.Count == 0)
         {
             opened.Add(im.plate);
@@ -66,6 +66,7 @@ public class Room_Memory : MonoBehaviour
         }
     }
 
+    /*
     //main changes made to test color crossfade below
     public Color startColor;
     public Color endColor;
@@ -86,6 +87,8 @@ public class Room_Memory : MonoBehaviour
         planeTest.GetComponent<MeshRenderer>().material.color = startColor;
     }
     //end here
+    */
+
     IEnumerator revealPairEnu()
     {
         yield return new WaitForSeconds(1);

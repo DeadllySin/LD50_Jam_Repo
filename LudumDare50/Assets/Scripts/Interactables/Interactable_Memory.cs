@@ -8,7 +8,7 @@ public class Interactable_Memory : MonoBehaviour
 
     public void Activate()
     {
-        //if(plate.gameObject.activeInHierarchy) return;
+        if(plate.gameObject.activeInHierarchy) return;
         GetComponentInParent<Room_Memory>().RevealPair(this);
     }
 }
