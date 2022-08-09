@@ -9,16 +9,28 @@ public class Interactable_Memory : MonoBehaviour
     public Color newCol;
     public bool activateColorState;
     float tick;
+    bool temp;
 
-
+    private void Awake() {
+        temp = activateColorState;
+    }
 
     public void Activate()
     {
-        if(plate.material.color == newCol) return;
+        if (plate.material.color == newCol) return;
         GetComponentInParent<Room_Memory>().RevealPair(this);
     }
 
     private void FixedUpdate()
+    {
+        if(temp != activateColorState)
+        {
+            temp = activateColorState;
+            StartCoroutine(ChangeColour());
+        }
+    }
+
+    private IEnumerator ChangeColour()
     {
         if (activateColorState)
         {
@@ -27,6 +39,7 @@ public class Interactable_Memory : MonoBehaviour
             {
                 tick += Time.deltaTime * speed;
                 plate.material.color = Color.Lerp(Color.gray, newCol, tick);
+                yield return null;
             }
         }
         else
@@ -36,9 +49,10 @@ public class Interactable_Memory : MonoBehaviour
             {
                 tick += Time.deltaTime * speed;
                 plate.material.color = Color.Lerp(newCol, Color.gray, tick);
+                yield return null;
             }
         }
     }
 
-    float speed = 50;
+    [SerializeField] float speed = .2f;
 }

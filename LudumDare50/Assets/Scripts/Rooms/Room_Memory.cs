@@ -11,7 +11,6 @@ public class Room_Memory : MonoBehaviour
     int howMuchActive = 0;
     [SerializeField] private float[] revealTimeAll;
     float revealTime;
-    [SerializeField] private Material defaultMat;
 
     private void Start()
     {
@@ -19,11 +18,9 @@ public class Room_Memory : MonoBehaviour
         {
             if (child.GetComponent<Interactable_Memory>()) plates.Add(child.GetComponent<Interactable_Memory>());
         }
-
         rm = GetComponentInParent<Room_Main>();
         for (int i = 0; i < plates.Count; i++)
         {
-            //Debug.Log("symbols lenght: " + symbols.Count + "plates lenght " + plates.Count);
             int rdm = Random.Range(0, symbols.Count);
             plates[i].newCol = symbols[rdm].color;
             symbols.RemoveAt(rdm);
@@ -48,7 +45,6 @@ public class Room_Memory : MonoBehaviour
     {
         im.activateColorState  = true;
         Debug.Log(im.gameObject.name);
-        //StartCoroutine(ChangeColour()); //part of test - delete after
         if (opened.Count == 0)
         {
             opened.Add(im.plate);
@@ -60,33 +56,10 @@ public class Room_Memory : MonoBehaviour
         }
     }
 
-    /*
-    //main changes made to test color crossfade below
-    public Color startColor;
-    public Color endColor;
-    public float speed;
-    public Renderer colorRenderer;
-    public GameObject planeTest;
-    private IEnumerator ChangeColour()
-    {
-        float tick = 0f;
-        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose);
-        while (planeTest.GetComponent<MeshRenderer>().material.color != endColor)
-        {
-            tick += Time.deltaTime * speed;
-            planeTest.GetComponent<MeshRenderer>().material.color = Color.Lerp(startColor, endColor, tick);
-            yield return null;
-        }
-        yield return new WaitForSeconds(2f); //resets to test again after 2 seconds
-        planeTest.GetComponent<MeshRenderer>().material.color = startColor;
-    }
-    //end here
-    */
-
     IEnumerator revealPairEnu()
     {
         yield return new WaitForSeconds(1);
-        if (opened[0].material.color == opened[1].material.color)
+        if (opened[0].GetComponentInParent<Interactable_Memory>().newCol == opened[1].GetComponentInParent<Interactable_Memory>().newCol)
         {
             //Debug.LogError("Sound for when both colors match");
             howMuchActive += 1;
