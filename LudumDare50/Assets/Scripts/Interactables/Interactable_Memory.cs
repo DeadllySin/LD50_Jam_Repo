@@ -37,8 +37,6 @@ public class Interactable_Memory : MonoBehaviour
                 plate.material.color = Color.Lerp(newCol, Color.gray, tick);
             }
         }
-
-        plate.material.color = Color.Lerp(Color.gray, newCol, tick);
     }
 
     float speed = 50;
