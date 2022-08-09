@@ -83,12 +83,12 @@ public class Room_Memory : MonoBehaviour
     {
         for (int i = 0; i < plates.Count; i++)
         {
-            plates[i].plate.gameObject.SetActive(true);
+            plates[i].activateColorState = true;
         }
         yield return new WaitForSeconds(revealTime);
         for (int i = 0; i < plates.Count; i++)
         {
-            plates[i].plate.gameObject.SetActive(false);
+            plates[i].activateColorState = false;
         }
     }
 }
