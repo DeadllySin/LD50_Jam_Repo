@@ -16,6 +16,10 @@ public class Menu_Pause : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) FindObjectOfType<GameManager>().Pause();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+             FindObjectOfType<GameManager>().Pause();
+             Debug.Log("NO ITS THIS");
+        }
     }
 }

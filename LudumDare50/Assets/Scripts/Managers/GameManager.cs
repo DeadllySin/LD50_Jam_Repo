@@ -102,7 +102,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && GameState.gs.introFinished && !mainMenu.activeInHierarchy) Pause();
+        if (Input.GetKeyDown(KeyCode.Escape) && GameState.gs.introFinished && !mainMenu.activeInHierarchy)
+        {
+            Debug.Log("ITS IT");
+             Pause();
+        }
     }
 
     private void OnDeath()

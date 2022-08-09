@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using UnityEngine.EventSystems;
 public class MainMenu_Main : MonoBehaviour
 {
@@ -10,6 +11,22 @@ public class MainMenu_Main : MonoBehaviour
     [HideInInspector] public bool fadeOut = false;
     [SerializeField] private Slider slider;
 
+    [SerializeField] string URL;
+    [HideInInspector] public string latestVersion;
+
+    IEnumerator GetNewestVersion(string url)
+    {
+#pragma warning disable CS0618 // Type or member is obsolete
+        WWW www = new WWW(url);
+#pragma warning restore CS0618 // Type or member is obsolete
+        yield return www;
+        latestVersion = www.text;
+        if (latestVersion != Application.version)
+        {
+            versionText.text += " - new version available!";
+        }
+    }
+
     private void Awake()
     {
         versionText.text = "Version " + Application.version;
@@ -17,6 +34,7 @@ public class MainMenu_Main : MonoBehaviour
     }
     private void Update()
     {
+
         if (!this.gameObject.activeInHierarchy || GameState.gs.introFinished || GameState.gs.skipCutscene) return;
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -64,6 +82,11 @@ public class MainMenu_Main : MonoBehaviour
     {
         mainMenuUIGroup.alpha = 0;
         fadeIn = true;
+        StartCoroutine(GetNewestVersion(URL));
+        words = forbiddenWords.text.Split(",");
+        youScore.text = PlayerPrefs.GetInt("roomsCleared").ToString();
+        string[] splitted = PlayerPrefs.GetString("name").Split('#');
+        if (PlayerPrefs.GetString("name") != null || PlayerPrefs.GetString("name") != "") inf.text = splitted[0];
     }
     private void OnEnable()
     {
@@ -96,5 +119,34 @@ public class MainMenu_Main : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    [SerializeField] private TextAsset forbiddenWords;
+    [SerializeField] private InputField inf;
+    [SerializeField] private Text youScore;
+    string[] words;
+    public void Upload()
+    {
+        for (int i = 0; i < words.Length; i++)
+        {
+            if (inf.text.ToLower().Contains(words[i]) || PlayerPrefs.GetInt("roomsCleared") == 0) return;
+        }
+        StartCoroutine(up());
+    }
+
+    [System.Obsolete]
+    IEnumerator up()
+    {
+        HighScores.RemoveScore(PlayerPrefs.GetString("name"));
+        yield return new WaitForSeconds(.5f);
+        PlayerPrefs.SetString("name", inf.text.ToLower() + PlayerPrefs.GetString("id").ToLower());
+        HighScores.UploadScore(PlayerPrefs.GetString("name"), PlayerPrefs.GetInt("roomsCleared"));
+    }
+
+    public void changemenu(GameObject menu)
+    {
+        menu.SetActive(true);
+        this.gameObject.SetActive(false);
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
     }
 }
