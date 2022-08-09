@@ -35,6 +35,8 @@ public class Interactable_Memory : MonoBehaviour
         if (activateColorState)
         {
             tick = 0;
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.pMemFaceUp);
+            Debug.Log("how many times is it triggering");
             while (plate.material.color != newCol)
             {
                 tick += Time.deltaTime * speed;
@@ -54,5 +56,5 @@ public class Interactable_Memory : MonoBehaviour
         }
     }
 
-    [SerializeField] float speed = .2f;
+    [SerializeField] float speed = .35f;
 }
