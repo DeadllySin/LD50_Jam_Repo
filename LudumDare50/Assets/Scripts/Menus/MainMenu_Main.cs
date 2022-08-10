@@ -100,7 +100,7 @@ public class MainMenu_Main : MonoBehaviour
         AudioManager.am.startTimerCB = true;
         fadeOut = true;
         AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = true;
-        AudioManager.am.FMOD_InGameState(); //n�o mexer que est� ligado �s vari�veis call back
+        AudioManager.am.FMOD_InGameState(); //nao mexer que esta ligado as variaveis call back
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
         this.enabled = false;
     }

@@ -21,7 +21,7 @@ public class Menu_Events : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
             {
-                FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
+                //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
             }
         }
     }
