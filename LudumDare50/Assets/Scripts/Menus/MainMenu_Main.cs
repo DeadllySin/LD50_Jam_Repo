@@ -10,10 +10,7 @@ public class MainMenu_Main : MonoBehaviour
     [HideInInspector] public bool fadeIn = false;
     [HideInInspector] public bool fadeOut = false;
     [SerializeField] private Slider slider;
-    [SerializeField] private TextAsset forbiddenWords;
-    [SerializeField] private InputField inf;
-    [SerializeField] private Text youScore;
-    string[] words;
+
     [SerializeField] string URL;
     [HideInInspector] public string latestVersion;
 
@@ -34,13 +31,21 @@ public class MainMenu_Main : MonoBehaviour
     {
         versionText.text = "Version " + Application.version;
         slider.value = PlayerPrefs.GetFloat("vol");
-        mainMenuUIGroup.alpha = 0;
-        fadeIn = true;
-        StartCoroutine(GetNewestVersion(URL));
-        words = forbiddenWords.text.Split(",");
-        youScore.text = PlayerPrefs.GetInt("roomsCleared").ToString();
-        string[] splitted = PlayerPrefs.GetString("name").Split('#');
-        if (PlayerPrefs.GetString("name") != null || PlayerPrefs.GetString("name") != "") inf.text = splitted[0];
+    }
+    private void Update()
+    {
+
+        if (!this.gameObject.activeInHierarchy || GameState.gs.introFinished || GameState.gs.skipCutscene) return;
+
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+        }
+
     }
 
     private void FixedUpdate()
@@ -72,7 +77,17 @@ public class MainMenu_Main : MonoBehaviour
             }
         }
     }
-    
+
+    private void Start()
+    {
+        mainMenuUIGroup.alpha = 0;
+        fadeIn = true;
+        StartCoroutine(GetNewestVersion(URL));
+        words = forbiddenWords.text.Split(",");
+        youScore.text = PlayerPrefs.GetInt("roomsCleared").ToString();
+        string[] splitted = PlayerPrefs.GetString("name").Split('#');
+        if (PlayerPrefs.GetString("name") != null || PlayerPrefs.GetString("name") != "") inf.text = splitted[0];
+    }
     private void OnEnable()
     {
         mainMenuUIGroup.alpha = 1f;
@@ -90,7 +105,26 @@ public class MainMenu_Main : MonoBehaviour
         this.enabled = false;
     }
 
+    public void OnValueChanged(Slider sl)
+    {
+        AudioManager.am.masterBus.setVolume(sl.value);
+        PlayerPrefs.SetFloat("vol", sl.value);
+    }
 
+    public void FMOD_Click()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    [SerializeField] private TextAsset forbiddenWords;
+    [SerializeField] private InputField inf;
+    [SerializeField] private Text youScore;
+    string[] words;
     public void Upload()
     {
         for (int i = 0; i < words.Length; i++)
@@ -107,5 +141,12 @@ public class MainMenu_Main : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         PlayerPrefs.SetString("name", inf.text.ToLower() + PlayerPrefs.GetString("id").ToLower());
         HighScores.UploadScore(PlayerPrefs.GetString("name"), PlayerPrefs.GetInt("roomsCleared"));
+    }
+
+    public void changemenu(GameObject menu)
+    {
+        menu.SetActive(true);
+        this.gameObject.SetActive(false);
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
     }
 }

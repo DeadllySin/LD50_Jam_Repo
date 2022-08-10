@@ -14,25 +14,28 @@ public class Interactable : MonoBehaviour
 
     private void Awake()
     {
-        col = GetComponent<Renderer>().material.color;
         gm = FindObjectOfType<GameManager>();
     }
 
-    public void OnMouseEnterFunc()
+    private void OnMouseEnter()
     {
-        if (onEnter != null) onEnter.Invoke();
         if (gameObject.GetComponent<Renderer>() && highlight)
         {
+            col = GetComponent<Renderer>().material.color;
             GetComponent<Renderer>().material.color = Color.gray;
         }
+
         ph = gm.player.GetComponent<Player_Hand>();
+        if (onEnter != null) onEnter.Invoke();
+        ph.handTarget = this.gameObject;
         ph.lookingAt = type;
     }
 
-    public void OnMouseExitFunc()
+    private void OnMouseExit()
     {
         if (onExit != null) onExit.Invoke();
         ph.lookingAt = "none";
         if (gameObject.GetComponent<Renderer>() && highlight) GetComponent<Renderer>().material.color = col;
+        ph.handTarget = null;
     }
 }
