@@ -16,7 +16,7 @@ public class A_CeilingTrace : MonoBehaviour
         isLookingAtCeiling = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
 
         //Debug.DrawRay(EyesTest.transform.position, transform.forward * rayDistance, isSeeingCeiling ? Color.green : Color.red, 2.0f);

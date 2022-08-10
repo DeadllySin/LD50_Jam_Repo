@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class Menu_Events : MonoBehaviour
 {
     private GameManager gm;
+    [SerializeField] private GameObject[] menus;
 
     private void Awake()
     {
@@ -17,12 +18,11 @@ public class Menu_Events : MonoBehaviour
         {
             M_Return();
         }
-        if (this.enabled)
+        if (GameState.gs.introFinished || GameState.gs.skipCutscene || !gm.isDead) return;
+
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                //FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
-            }
+            FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiSelect);
         }
     }
 
@@ -31,6 +31,7 @@ public class Menu_Events : MonoBehaviour
         AudioManager.am.masterBus.setVolume(sl.value);
         PlayerPrefs.SetFloat("vol", sl.value);
     }
+    
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -48,7 +49,7 @@ public class Menu_Events : MonoBehaviour
         gm.Pause();
     }
 
-    public void M_MainMenu()
+    public void MainMenu()
     {
         GameState.gs.introFinished = false;
         //AudioManager.am.FMODRestarted = false;
@@ -59,9 +60,18 @@ public class Menu_Events : MonoBehaviour
         GameState.gs.introFinished = false;
     }
 
-    public void M_Quit()
+    public void Quit()
     {
         FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.uiClick);
         Application.Quit();
+    }
+
+    public void ChangeMenu(string menu)
+    {
+        for (int i = 0; i < menus.Length; i++)
+        {
+            if (menus[i].name != menu) menus[i].SetActive(false);
+            else menus[i].SetActive(true);
+        }
     }
 }

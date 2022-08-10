@@ -6,7 +6,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     [Header("Main")]
-    private bool isDead;
+    [HideInInspector] public bool isDead, isInMenu;
     public GameObject player;
     public GameObject room;
     [HideInInspector] public GameObject currRoom;
@@ -14,14 +14,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Tunnel currTunnel;
     [HideInInspector] public string lastRoom = "none";
     [HideInInspector] public int roomsCleared = 0;
-    [HideInInspector] public int colorRoomPro,ringRoomPro, statueRoomPro, memoryRoomPro;
-    [SerializeField] private GameObject playerCine;
+    [HideInInspector] public int colorRoomPro, ringRoomPro, statueRoomPro, memoryRoomPro;
     [SerializeField] private GameObject dustStorm;
-
-    [Header("Cutscene")]
-    [SerializeField] public GameObject cutscene;
-    [SerializeField] private GameObject cutsceneCam;
-    [SerializeField] private GameObject door;
 
     [Header("UI")]
     [SerializeField] private Text scoreText;
@@ -42,18 +36,19 @@ public class GameManager : MonoBehaviour
     {
         dustStorm.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
-        playerCine.SetActive(GameState.gs.skipCutscene);
-        cutsceneCam.SetActive(!GameState.gs.skipCutscene);
-        cutscene.SetActive(!GameState.gs.skipCutscene);
-        door.SetActive(!GameState.gs.skipCutscene);
-        player.SetActive(GameState.gs.skipCutscene);
-        mainMenu.SetActive(!GameState.gs.skipCutscene);
+        SkipCutscene();
         startTime = Time.time;
         ceilingSpeed = defaultSpeed;
         currRoom = FindObjectOfType<Room_Main>().gameObject;
         currTunnel = FindObjectOfType<Tunnel>();
         ceilingSourceChild = player.transform.GetChild(3).gameObject;
         FindObjectOfType<EventSystem>().enabled = true;
+    }
+
+    void SkipCutscene()
+    {
+        player.SetActive(GameState.gs.skipCutscene);
+        mainMenu.SetActive(!GameState.gs.skipCutscene);
     }
 
     private void FixedUpdate()
@@ -105,7 +100,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && GameState.gs.introFinished && !mainMenu.activeInHierarchy)
         {
             Debug.Log("ITS IT");
-             Pause();
+            Pause();
         }
     }
 
