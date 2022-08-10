@@ -143,7 +143,7 @@ public class A_MusicCallBack : MonoBehaviour
         if ((string)timelineInfo.lastMarker == "CB_MenuToGame" && CBDoOnce == true) 
         {
             InGameMusicStart();
-            FindObjectOfType<GameManager>().cutscene.GetComponent<Animator>().SetTrigger("play");
+            //FindObjectOfType<GameManager>().cutscene.GetComponent<Animator>().SetTrigger("play");
             CBDoOnce = false;
             A_Timer.a_timer.a_countTime = false;
             AudioManager.am.startTimerCB = false;

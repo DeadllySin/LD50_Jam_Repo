@@ -14,14 +14,10 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Tunnel currTunnel;
     [HideInInspector] public string lastRoom = "none";
     [HideInInspector] public int roomsCleared = 0;
-    [HideInInspector] public int colorRoomPro,ringRoomPro, statueRoomPro, memoryRoomPro;
+    [HideInInspector] public int colorRoomPro, ringRoomPro, statueRoomPro, memoryRoomPro;
     [SerializeField] private GameObject playerCine;
     [SerializeField] private GameObject dustStorm;
-
-    [Header("Cutscene")]
-    [SerializeField] public GameObject cutscene;
-    [SerializeField] private GameObject cutsceneCam;
-    [SerializeField] private GameObject door;
+    [SerializeField] private Animator firstDoor;
 
     [Header("UI")]
     [SerializeField] private Text scoreText;
@@ -43,9 +39,6 @@ public class GameManager : MonoBehaviour
         dustStorm.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         playerCine.SetActive(GameState.gs.skipCutscene);
-        cutsceneCam.SetActive(!GameState.gs.skipCutscene);
-        cutscene.SetActive(!GameState.gs.skipCutscene);
-        door.SetActive(!GameState.gs.skipCutscene);
         player.SetActive(GameState.gs.skipCutscene);
         mainMenu.SetActive(!GameState.gs.skipCutscene);
         startTime = Time.time;
@@ -54,6 +47,19 @@ public class GameManager : MonoBehaviour
         currTunnel = FindObjectOfType<Tunnel>();
         ceilingSourceChild = player.transform.GetChild(3).gameObject;
         FindObjectOfType<EventSystem>().enabled = true;
+    }
+
+    public void OpenDoor()
+    {
+        firstDoor.SetTrigger("isOpen");
+    }
+
+    bool CloseDoorOnce = false;
+    public void CloseDoor()
+    {
+        if(CloseDoorOnce) return;
+        CloseDoorOnce = true;
+        firstDoor.SetTrigger("isClosed");
     }
 
     private void FixedUpdate()
@@ -105,7 +111,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && GameState.gs.introFinished && !mainMenu.activeInHierarchy)
         {
             Debug.Log("ITS IT");
-             Pause();
+            Pause();
         }
     }
 

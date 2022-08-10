@@ -10,6 +10,7 @@ TagManager:
   - Ceiling
   - Fire
   - stand
+  - firstDoor
   layers:
   - Default
   - TransparentFX
