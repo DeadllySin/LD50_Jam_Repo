@@ -1,5 +1,4 @@
 using UnityEngine;
-using HinputClasses;
 public class Player_Hand : MonoBehaviour
 {
     private GameManager gm;
@@ -7,6 +6,7 @@ public class Player_Hand : MonoBehaviour
     [HideInInspector] public GameObject handTarget;
     [SerializeField] private float distance;
     [HideInInspector] public string lookingAt = "none";
+    [SerializeField] private Camera cam;
 
     private void Awake()
     {
@@ -14,10 +14,22 @@ public class Player_Hand : MonoBehaviour
     }
     private void Update()
     {
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit, distance))
+        {
+            if (hit.transform.gameObject.GetComponent<Interactable>()) hit.transform.gameObject.GetComponent<Interactable>().OnMouseEnterFunc();
+            else handTarget = null;
+        }
+        else
+        {
+            handTarget = null;
+        }
+
+
+
         if (Input.GetKeyDown(KeyCode.E) || Hinput.anyGamepad.B.justPressed || Hinput.anyGamepad.A.justPressed || Hinput.anyGamepad.rightBumper.justPressed || Hinput.anyGamepad.rightTrigger.justPressed)
         {
             if (handTarget == null) return;
-            if (DistanceFu(handTarget) != 1) return;
             switch (gm.currRoomType)
             {
                 case "color":
@@ -54,7 +66,7 @@ public class Player_Hand : MonoBehaviour
                     {
                         handTarget.GetComponent<Interactable_Cup>().isUp = true;
                         handTarget.transform.position = new Vector3(handTarget.transform.position.x, handTarget.transform.position.y + .5f, handTarget.transform.position.z);
-                        if(handTarget.transform.childCount == 1) FindObjectOfType<Room_Main>().state = "perfect";
+                        if (handTarget.transform.childCount == 1) FindObjectOfType<Room_Main>().state = "perfect";
                     }
                     break;
             }
@@ -70,11 +82,5 @@ public class Player_Hand : MonoBehaviour
                 FindObjectOfType<Room_Statue>().Drop();
             }
         }
-    }
-
-    public int DistanceFu(GameObject target)
-    {
-        if (Vector3.Distance(target.transform.position, transform.position) < distance) return 1;
-        else return 0;
     }
 }
