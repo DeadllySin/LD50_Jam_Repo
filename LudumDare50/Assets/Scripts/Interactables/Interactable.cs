@@ -23,7 +23,6 @@ public class Interactable : MonoBehaviour
     {
         if (gameObject.GetComponent<Renderer>() && highlight)
         {
-
             GetComponent<Renderer>().material.color = Color.gray;
         }
         if (onEnter != null) onEnter.Invoke();
