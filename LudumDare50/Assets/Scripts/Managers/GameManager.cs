@@ -49,6 +49,16 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<EventSystem>().enabled = true;
     }
 
+    private void Start()
+    {
+        if (GameState.gs.skipCutscene == true)
+        {
+            AudioManager.am.GetComponent<A_MusicCallBack>().CBDoOnce = true;
+            AudioManager.am.GetComponent<A_MusicCallBack>().MenuMusicStop();
+            AudioManager.am.GetComponent<A_MusicCallBack>().ResetMenuCB();
+            AudioManager.am.GetComponent<A_MusicCallBack>().MusicCB();
+        }
+    }
     public void OpenDoor()
     {
         firstDoor.SetTrigger("isOpen");
@@ -72,7 +82,7 @@ public class GameManager : MonoBehaviour
                 ceilingSpeed = slowThresholdSpeed;
                 if (ceiling.transform.position.y < deathHeight)
                 {
-                    //ceilingSpeed = fastSpped;
+                    //ceilingSpeed = fastSpeed;
                     FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "Dead");
                     if (AudioManager.am.GetComponent<A_MusicCallBack>().CBDeath == true) OnDeath();
                 }
@@ -110,7 +120,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && GameState.gs.introFinished && !mainMenu.activeInHierarchy)
         {
-            Debug.Log("ITS IT");
+            Debug.Log("Pause called in Game Manager");
             Pause();
         }
     }

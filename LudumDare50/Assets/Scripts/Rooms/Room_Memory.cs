@@ -33,7 +33,7 @@ public class Room_Memory : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(howMuchActive);
+        //Debug.Log(howMuchActive);
     }
 
     public void RevealAllPlates()
@@ -44,7 +44,7 @@ public class Room_Memory : MonoBehaviour
     public void RevealPair(Interactable_Memory im)
     {
         im.activateColorState  = true;
-        Debug.Log(im.gameObject.name);
+        //Debug.Log(im.gameObject.name);
         if (opened.Count == 0)
         {
             opened.Add(im.plate);
@@ -81,6 +81,7 @@ public class Room_Memory : MonoBehaviour
 
     IEnumerator revealEnu()
     {
+        FMODUnity.RuntimeManager.PlayOneShot(AudioManager.am.doorClose);
         for (int i = 0; i < plates.Count; i++)
         {
             plates[i].activateColorState = true;

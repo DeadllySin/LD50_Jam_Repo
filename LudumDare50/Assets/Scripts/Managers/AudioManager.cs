@@ -52,6 +52,7 @@ public class AudioManager : MonoBehaviour
     public FMODUnity.EventReference puzzleCorrect;
     public FMODUnity.EventReference puzzleWrong;
     public FMODUnity.EventReference puzzleFullWrong;
+    public FMODUnity.EventReference pBasicButton;
     public FMODUnity.EventReference uiClick;
     public FMODUnity.EventReference uiSelect;
 

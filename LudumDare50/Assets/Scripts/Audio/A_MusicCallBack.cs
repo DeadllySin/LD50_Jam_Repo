@@ -40,9 +40,9 @@ public class A_MusicCallBack : MonoBehaviour
 
         MenuCB();
 
-        if (GameState.gs.startMusic == true) MenuMusicStart();
-        
+        //if (GameState.gs.startMusic == true) MenuMusicStart();
 
+        MenuMusicStart();
         //InGameMusicStart();
     }
 
@@ -57,7 +57,7 @@ public class A_MusicCallBack : MonoBehaviour
     public void MenuMusicStop()
     {
         menuInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        //FMOD PARAMETER MASTER STOP
+        //FMOD PARAMETER MASTER STOP maybe I meant command instrument in main music event ->fail safe? 
     }
 
     public void InGameMusicStart()
@@ -135,7 +135,7 @@ public class A_MusicCallBack : MonoBehaviour
 
     void OnGUI()
     {
-        //GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
+        GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
     }
     
     void Update()
@@ -147,6 +147,7 @@ public class A_MusicCallBack : MonoBehaviour
             CBDoOnce = false;
             A_Timer.a_timer.a_countTime = false;
             AudioManager.am.startTimerCB = false;
+            Debug.Log("CB_MenuToGame && CBDoOnce == true");
         }
 
         if ((string)timelineInfo.lastMarker == "ResetCB")
@@ -156,12 +157,11 @@ public class A_MusicCallBack : MonoBehaviour
             MenuMusicStop();
             ResetMenuCB();
             MusicCB();
-            
         }
             
         if ((string)timelineInfo.lastMarker == "Exit_1" || (string)timelineInfo.lastMarker == "Exit_2" || (string)timelineInfo.lastMarker == "Exit_3" || (string)timelineInfo.lastMarker == "E_FullStop")
         {
-            
+
         }
 
         if ((string)timelineInfo.lastMarker == "Death")
@@ -173,6 +173,8 @@ public class A_MusicCallBack : MonoBehaviour
             CBDeath = false;
         }
 
+        //Debug.Log("CBDoOnce " + CBDoOnce);
+        Debug.Log("//FMODIntroDoOnce// " + FMODIntroDoOnce + " //GS introFinished// " + GameState.gs.introFinished + " //FMODRestarded//  " + AudioManager.am.FMODRestarted);
         if (timelineInfo.currentMusicBar >= 9 && (string)timelineInfo.lastMarker == "A")
         {
             if (FMODIntroDoOnce == false && GameState.gs.introFinished == true && AudioManager.am.FMODRestarted == true)
