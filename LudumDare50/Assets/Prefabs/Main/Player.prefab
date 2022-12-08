@@ -509,6 +509,7 @@ MonoBehaviour:
   handTarget: {fileID: 0}
   distance: 3
   lookingAt: none
+  cam: {fileID: 0}
 --- !u!114 &3653882480043813501
 MonoBehaviour:
   m_ObjectHideFlags: 0
