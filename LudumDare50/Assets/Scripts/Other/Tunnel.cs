@@ -20,7 +20,7 @@ public class Tunnel : MonoBehaviour
 
     private void Update()
     {
-        if (gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.position = new Vector3(ceil.transform.position.x,gm.ceiling.transform.position.y, ceil.transform.position.z);
+        if (gm.ceiling.transform.position.y <= ceil.transform.position.y) ceil.transform.position = new Vector3(ceil.transform.position.x, gm.ceiling.transform.position.y, ceil.transform.position.z);
     }
 
     public void NewRoom()

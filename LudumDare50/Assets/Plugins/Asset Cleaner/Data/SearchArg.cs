@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using Leopotam.Ecs;
+﻿using Leopotam.Ecs;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Asset_Cleaner {
-    class SearchArg : IEcsAutoReset {
+namespace Asset_Cleaner
+{
+    class SearchArg : IEcsAutoReset
+    {
         public Object Target;
         public Object Main;
         public string FilePath;
@@ -13,7 +15,8 @@ namespace Asset_Cleaner {
         public List<string> UnusedAssetsFiltered;
         public List<string> UnusedScenesFiltered;
 
-        public void Reset() {
+        public void Reset()
+        {
             UnusedAssetsFiltered = default;
             UnusedScenesFiltered = default;
             Target = default;

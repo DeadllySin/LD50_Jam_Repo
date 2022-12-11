@@ -20,7 +20,7 @@ public class HighScores : MonoBehaviour
     [System.Obsolete]
     public static void UploadScore(string username, int score)  //CALLED when Uploading new Score to WEBSITE
     {//STATIC to call from other scripts easily
-        instance.StartCoroutine(instance.DatabaseUpload(username,score)); //Calls Instance
+        instance.StartCoroutine(instance.DatabaseUpload(username, score)); //Calls Instance
     }
 
     [System.Obsolete]
@@ -78,14 +78,14 @@ public class HighScores : MonoBehaviour
 
     void OrganizeInfo(string rawData) //Divides Scoreboard info by new lines
     {
-        string[] entries = rawData.Split(new char[] {'\n'}, System.StringSplitOptions.RemoveEmptyEntries);
+        string[] entries = rawData.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
         scoreList = new PlayerScore[entries.Length];
-        for (int i = 0; i < entries.Length; i ++) //For each entry in the string array
+        for (int i = 0; i < entries.Length; i++) //For each entry in the string array
         {
-            string[] entryInfo = entries[i].Split(new char[] {'|'});
+            string[] entryInfo = entries[i].Split(new char[] { '|' });
             string username = entryInfo[0];
             int score = int.Parse(entryInfo[1]);
-            scoreList[i] = new PlayerScore(username,score);
+            scoreList[i] = new PlayerScore(username, score);
         }
     }
 }

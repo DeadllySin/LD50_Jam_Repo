@@ -12,14 +12,14 @@ public class GameState : MonoBehaviour
 
     private void Awake()
     {
-        if(gs != null && gs != this) Destroy(this);
+        if (gs != null && gs != this) Destroy(this);
         gs = this;
 
         if (PlayerPrefs.GetString("lang") == null || PlayerPrefs.GetString("lang") == "") PlayerPrefs.SetString("lang", "en");
         DontDestroyOnLoad(this.gameObject);
 
         //StartCoroutine(LoadingScreenAsyncOperation());
-        if(PlayerPrefs.GetString("id") == null || PlayerPrefs.GetString("id") == "") PlayerPrefs.SetString("id", "#" + Random.Range(1000, 9999).ToString().ToLower());
+        if (PlayerPrefs.GetString("id") == null || PlayerPrefs.GetString("id") == "") PlayerPrefs.SetString("id", "#" + Random.Range(1000, 9999).ToString().ToLower());
         if (PlayerPrefs.GetFloat("vol") == 0) PlayerPrefs.SetFloat("vol", 0.6f);
         AudioManager.am.masterBus.setVolume(PlayerPrefs.GetFloat("vol"));
     }

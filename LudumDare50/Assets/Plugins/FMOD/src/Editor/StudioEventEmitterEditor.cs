@@ -190,7 +190,8 @@ namespace FMODUnity
                             if (paramRef != null)
                             {
                                 propertyRecords.Add(
-                                    new PropertyRecord() {
+                                    new PropertyRecord()
+                                    {
                                         paramRef = paramRef,
                                         valueProperties = new List<SerializedProperty>() { valueProperty },
                                     });
@@ -209,7 +210,8 @@ namespace FMODUnity
 
                 missingParameters.Clear();
                 missingParameters.AddRange(eventRef.LocalParameters.Where(
-                    p => {
+                    p =>
+                    {
                         PropertyRecord record = propertyRecords.Find(r => r.name == p.Name);
                         return record == null || record.valueProperties.Count < serializedTargets.Count;
                     }));

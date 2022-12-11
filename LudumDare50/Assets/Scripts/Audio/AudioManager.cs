@@ -113,7 +113,7 @@ public class AudioManager : MonoBehaviour
         {
             AudioManager.am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
             FMOD_InGameState();
-            
+
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 1);
         }
         else
@@ -141,7 +141,7 @@ public class AudioManager : MonoBehaviour
     {
         FMODUnity.RuntimeManager.StudioSystem.setParameterByNameWithLabel("Game_State", "In_Game");
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("SkipIntro", 0);
-        
+
         am.GetComponent<A_MusicCallBack>().FMODIntroDoOnce = false;
 
         //Menu music Stop in timeline ResetCB
@@ -168,7 +168,7 @@ public class AudioManager : MonoBehaviour
             Debug.Log("init false");
             am.GetComponent<A_MusicCallBack>().ResetMusicCB();
             am.GetComponent<A_MusicCallBack>().InGameMusicStop();
-            
+
             am.GetComponent<A_MusicCallBack>().MenuCB();
             am.GetComponent<A_MusicCallBack>().MenuMusicStart(); //starts in fmod main music command event
         }

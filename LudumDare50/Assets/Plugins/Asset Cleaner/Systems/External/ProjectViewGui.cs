@@ -1,11 +1,14 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Asset_Cleaner {
-    static class ProjectViewGui {
+namespace Asset_Cleaner
+{
+    static class ProjectViewGui
+    {
         static CleanerStyleAsset.Style _style = Globals<WindowData>.Value.Style;
 
-        public static void OnProjectWindowItemOnGui(string guid, Rect rect) {
+        public static void OnProjectWindowItemOnGui(string guid, Rect rect)
+        {
             if (!Globals<Config>.Value.MarkRed) return;
 
             var store = Globals<BacklinkStore>.Value;
@@ -17,7 +20,8 @@ namespace Asset_Cleaner {
             long size = 0;
             var _ = store.UnusedFiles.TryGetValue(path, out size) || store.UnusedScenes.TryGetValue(path, out size);
 
-            if (SearchUtils.IsUnused(path)) {
+            if (SearchUtils.IsUnused(path))
+            {
                 var buf = GUI.color;
                 {
                     GUI.color = _style.RedHighlight;
@@ -29,7 +33,8 @@ namespace Asset_Cleaner {
         }
 
 
-        static void ShowRowQuantity(Rect rect, string path, BacklinkStore backlinkStore) {
+        static void ShowRowQuantity(Rect rect, string path, BacklinkStore backlinkStore)
+        {
             if (!AssetDatabase.IsValidFolder(path))
                 return;
 

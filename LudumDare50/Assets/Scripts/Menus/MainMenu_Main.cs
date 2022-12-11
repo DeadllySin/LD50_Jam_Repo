@@ -1,7 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 public class MainMenu_Main : MonoBehaviour
 {
     [SerializeField] private GameObject cutscene;

@@ -137,10 +137,10 @@ public class A_MusicCallBack : MonoBehaviour
     {
         GUILayout.Box(String.Format("Current Bar = {0}, Last Marker = {1}", timelineInfo.currentMusicBar, (string)timelineInfo.lastMarker));
     }
-    
+
     void Update()
     {
-        if ((string)timelineInfo.lastMarker == "CB_MenuToGame" && CBDoOnce == true) 
+        if ((string)timelineInfo.lastMarker == "CB_MenuToGame" && CBDoOnce == true)
         {
             InGameMusicStart();
             //FindObjectOfType<GameManager>().cutscene.GetComponent<Animator>().SetTrigger("play");
@@ -158,7 +158,7 @@ public class A_MusicCallBack : MonoBehaviour
             ResetMenuCB();
             MusicCB();
         }
-            
+
         if ((string)timelineInfo.lastMarker == "Exit_1" || (string)timelineInfo.lastMarker == "Exit_2" || (string)timelineInfo.lastMarker == "Exit_3" || (string)timelineInfo.lastMarker == "E_FullStop")
         {
 

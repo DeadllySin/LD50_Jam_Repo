@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,8 +16,8 @@ public class Menu_Pause : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-             FindObjectOfType<GameManager>().Pause();
-             Debug.Log("NO ITS THIS");
+            FindObjectOfType<GameManager>().Pause();
+            Debug.Log("NO ITS THIS");
         }
     }
 }

@@ -8,7 +8,7 @@ public class A_CeilingTrace : MonoBehaviour
     [SerializeField] Transform EyesTest;
     bool isLookingAtCeiling;
     private GameManager gm;
-    
+
 
     private void Awake()
     {

@@ -1,19 +1,18 @@
-using UnityEngine;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.IMGUI.Controls;
-using UnityEditorInternal;
-using System.IO;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using UnityEditor;
+using UnityEditor.IMGUI.Controls;
+using UnityEngine;
 
 namespace FMODUnity
 {
     [CustomEditor(typeof(Settings))]
     public class SettingsEditor : Editor
     {
-        string[] ToggleDisplay = new string[] { "Disabled", "Enabled", "Development Build Only",  };
+        string[] ToggleDisplay = new string[] { "Disabled", "Enabled", "Development Build Only", };
 
         string[] FrequencyDisplay = new string[] {
             "Platform Default",
@@ -181,7 +180,8 @@ namespace FMODUnity
             platformsView = new PlatformsView(target as Settings, platformTreeViewState);
 
             banksToLoadView = new ReorderableList(banksToLoad);
-            banksToLoadView.onAddDropdownCallback = (rect, list) => {
+            banksToLoadView.onAddDropdownCallback = (rect, list) =>
+            {
                 GenericMenu menu = new GenericMenu();
 
                 menu.AddItem(new GUIContent("Browse..."), false, BrowseForBankToLoad);
@@ -216,17 +216,20 @@ namespace FMODUnity
             {
                 resourcesLoaded = true;
 
-                mainHeaderStyle = new GUIStyle(EditorStyles.label) {
+                mainHeaderStyle = new GUIStyle(EditorStyles.label)
+                {
                     fontStyle = FontStyle.Bold,
                     fontSize = 18,
                 };
                 mainHeaderStyle.normal.textColor = EditorGUIUtility.isProSkin ? Color.white : Color.black;
 
-                sectionHeaderStyle = new GUIStyle(GUI.skin.FindStyle("Foldout")) {
+                sectionHeaderStyle = new GUIStyle(GUI.skin.FindStyle("Foldout"))
+                {
                     fontStyle = FontStyle.Bold,
                 };
 
-                platformHeaderStyle = new GUIStyle(GUI.skin.label) {
+                platformHeaderStyle = new GUIStyle(GUI.skin.label)
+                {
                     richText = true,
                 };
 
@@ -235,13 +238,15 @@ namespace FMODUnity
 
                 inheritedPropertyLabelStyle = GUI.skin.label;
 
-                overriddenPropertyLabelStyle = new GUIStyle(inheritedPropertyLabelStyle) {
+                overriddenPropertyLabelStyle = new GUIStyle(inheritedPropertyLabelStyle)
+                {
                     fontStyle = FontStyle.Bold,
                 };
 
                 inheritedPropertyFoldoutStyle = EditorStyles.foldout;
 
-                overriddenPropertyFoldoutStyle = new GUIStyle(inheritedPropertyFoldoutStyle) {
+                overriddenPropertyFoldoutStyle = new GUIStyle(inheritedPropertyFoldoutStyle)
+                {
                     fontStyle = FontStyle.Bold,
                 };
 
@@ -334,7 +339,8 @@ namespace FMODUnity
 
                     if (data.overridden)
                     {
-                        menu.AddItem(revertContent, false, () => {
+                        menu.AddItem(revertContent, false, () =>
+                        {
                             Undo.RecordObject(platform, "Revert FMOD Platform Properties");
 
                             foreach (Platform.PropertyOverrideControl property in properties)
@@ -550,7 +556,7 @@ namespace FMODUnity
 
             if (editable)
             {
-                 threadsHeight += EditorGUIUtility.standardVerticalSpacing + editButtonRect.height;
+                threadsHeight += EditorGUIUtility.standardVerticalSpacing + editButtonRect.height;
             }
 
             float affinitiesHeight =
@@ -1462,7 +1468,8 @@ namespace FMODUnity
 
             protected override void Prepare()
             {
-                style = new GUIStyle(GUI.skin.label) {
+                style = new GUIStyle(GUI.skin.label)
+                {
                     richText = true,
                     wordWrap = true,
                 };
@@ -2057,7 +2064,8 @@ namespace FMODUnity
 
                     if (canRename && Event.current.type == EventType.Repaint)
                     {
-                        Rect iconRect = new Rect() {
+                        Rect iconRect = new Rect()
+                        {
                             x = labelRect.xMax - renameIcon.width,
                             y = labelRect.yMax - labelStyle.padding.bottom - renameIcon.height,
                             width = renameIcon.width,

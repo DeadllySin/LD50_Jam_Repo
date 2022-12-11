@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DisplayHighscores : MonoBehaviour 
+public class DisplayHighscores : MonoBehaviour
 {
     HighScores myScores;
     [SerializeField] private Text leaderboard;
@@ -17,7 +17,7 @@ public class DisplayHighscores : MonoBehaviour
     {
         leaderboard.text = null;
         lead2.text = null;
-        for (int i = 0; i < 10; i ++)
+        for (int i = 0; i < 10; i++)
         {
             if (highscoreList.Length > i)
             {
@@ -28,7 +28,7 @@ public class DisplayHighscores : MonoBehaviour
     }
     IEnumerator RefreshHighscores() //Refreshes the scores every 30 seconds
     {
-        while(true)
+        while (true)
         {
             myScores.DownloadScores();
             yield return new WaitForSeconds(30);

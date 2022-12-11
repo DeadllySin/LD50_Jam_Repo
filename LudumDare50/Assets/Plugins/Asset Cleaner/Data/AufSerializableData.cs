@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 
-namespace Asset_Cleaner {
+namespace Asset_Cleaner
+{
     [Serializable]
-    class AufSerializableData {
+    class AufSerializableData
+    {
         public const int CurrentVersion = 1;
         public int Version;
         public bool MarkRed;
@@ -15,12 +17,15 @@ namespace Asset_Cleaner {
         public bool IgnoreScriptable;
         public bool IgnoreSprite;
 
-        static int BoolToInt(bool val) {
+        static int BoolToInt(bool val)
+        {
             return val ? 2 : 1;
         }
 
-        static bool IntToBool(int val, bool defaultVal) {
-            switch (val) {
+        static bool IntToBool(int val, bool defaultVal)
+        {
+            switch (val)
+            {
                 case 2:
                     return true;
                 case 1:
@@ -30,8 +35,10 @@ namespace Asset_Cleaner {
             }
         }
 
-        public static AufSerializableData Default() {
-            return new AufSerializableData {
+        public static AufSerializableData Default()
+        {
+            return new AufSerializableData
+            {
                 Version = CurrentVersion,
                 MarkRed = true,
                 ShowInfoBox = true,
@@ -44,7 +51,8 @@ namespace Asset_Cleaner {
             };
         }
 
-        public static void OnSerialize(in Config src, out AufSerializableData result) {
+        public static void OnSerialize(in Config src, out AufSerializableData result)
+        {
             result = new AufSerializableData();
             result.Version = CurrentVersion;
             result.MarkRed = src.MarkRed;
@@ -57,7 +65,8 @@ namespace Asset_Cleaner {
             result.UpdateUnusedAssetsOnDemand = BoolToInt(src.UpdateUnusedAssetsOnDemand);
         }
 
-        public static void OnDeserialize(in AufSerializableData src, ref Config result) {
+        public static void OnDeserialize(in AufSerializableData src, ref Config result)
+        {
             var def = Default();
 
             result.MarkRed = src.MarkRed;
@@ -75,7 +84,8 @@ namespace Asset_Cleaner {
             result.UpdateUnusedAssetsOnDemand = IntToBool(src.UpdateUnusedAssetsOnDemand, def.UpdateUnusedAssetsOnDemand == 2);
         }
 
-        public bool Valid() {
+        public bool Valid()
+        {
             return Version == CurrentVersion || IgnorePathContainsCombined == null;
         }
     }

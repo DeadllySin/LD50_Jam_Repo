@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-namespace Asset_Cleaner {
-    class WindowData {
+namespace Asset_Cleaner
+{
+    class WindowData
+    {
         public bool ExpandFiles;
         public bool ExpandScenes;
         public Vector2 ScrollPos;

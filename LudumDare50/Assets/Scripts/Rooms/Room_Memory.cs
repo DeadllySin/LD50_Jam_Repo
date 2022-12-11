@@ -43,7 +43,7 @@ public class Room_Memory : MonoBehaviour
 
     public void RevealPair(Interactable_Memory im)
     {
-        im.activateColorState  = true;
+        im.activateColorState = true;
         //Debug.Log(im.gameObject.name);
         if (opened.Count == 0)
         {

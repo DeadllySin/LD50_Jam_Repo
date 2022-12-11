@@ -7,7 +7,6 @@ using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 
 namespace FMODUnity

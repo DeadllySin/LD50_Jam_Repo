@@ -2,9 +2,11 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace HinputClasses.Internal {
+namespace HinputClasses.Internal
+{
     // Hinput class handling the visuals of a gamepad in the Example Scene.
-    public class ExampleGamepad : MonoBehaviour {
+    public class ExampleGamepad : MonoBehaviour
+    {
         [Header("OPTIONS")]
         public int index;
         public float stickDistance;
@@ -39,12 +41,14 @@ namespace HinputClasses.Internal {
 
         private Gamepad gamepad { get { return Hinput.gamepad[index]; } }
 
-        private void Start() {
+        private void Start()
+        {
             leftStickStartPosition = leftStick.transform.localPosition;
             rightStickStartPosition = rightStick.transform.localPosition;
         }
 
-        private void Update() {
+        private void Update()
+        {
             text.text = "";
             UpdateAllStickPositions();
             UpdateConnectedButton();
@@ -53,42 +57,49 @@ namespace HinputClasses.Internal {
             CheckSetup();
         }
 
-        private void CheckSetup() {
-            if (!gamepad.isConnected) {
+        private void CheckSetup()
+        {
+            if (!gamepad.isConnected)
+            {
                 text.text = "Please plug in a gamepad to test Hinput";
             }
-            
-            if (!Utils.HinputIsInstalled() && index == 0) {
+
+            if (!Utils.HinputIsInstalled() && index == 0)
+            {
                 text.text = "Don't forget to install Hinput in Tools > Hinput > Set Up Hinput!";
             }
         }
 
-        private void UpdateVibrationButton() {
+        private void UpdateVibrationButton()
+        {
             if (Utils.os != Utils.OS.Windows || index > 3) return;
             if (Time.time < 5) return;
             if (!Utils.HinputIsInstalled()) return;
-            
+
             if (gamepad.isConnected) vibrate.SetActive(true);
             else vibrate.SetActive(false);
         }
 
-        private void UpdateAllStickPositions() {
-            leftStick.transform.localPosition = leftStickStartPosition + 
-                                                gamepad.leftStick.worldPositionCamera*stickDistance;
-            rightStick.transform.localPosition = rightStickStartPosition + 
-                                                 gamepad.rightStick.worldPositionCamera*stickDistance;
-            
-            if (gamepad.leftStick.inPressedZone.pressed) 
+        private void UpdateAllStickPositions()
+        {
+            leftStick.transform.localPosition = leftStickStartPosition +
+                                                gamepad.leftStick.worldPositionCamera * stickDistance;
+            rightStick.transform.localPosition = rightStickStartPosition +
+                                                 gamepad.rightStick.worldPositionCamera * stickDistance;
+
+            if (gamepad.leftStick.inPressedZone.pressed)
                 text.text = "Hinput.gamepad[" + index + "].leftStick";
-            if (gamepad.rightStick.inPressedZone.pressed) 
+            if (gamepad.rightStick.inPressedZone.pressed)
                 text.text = "Hinput.gamepad[" + index + "].rightStick";
         }
 
-        private void UpdateConnectedButton() {
+        private void UpdateConnectedButton()
+        {
             connectedButton.SetActive(gamepad.isConnected);
         }
 
-        private void UpdateAllButtonHighlights() {
+        private void UpdateAllButtonHighlights()
+        {
             UpdateButtonHighLight(gamepad.rightStickClick, rightStickClickHighlight, "rightStickClick");
             UpdateButtonHighLight(gamepad.leftStickClick, leftStickClickHighlight, "leftStickClick");
             UpdateButtonHighLight(gamepad.rightTrigger, rightTriggerHighlight, "rightTrigger");
@@ -107,16 +118,21 @@ namespace HinputClasses.Internal {
             UpdateButtonHighLight(gamepad.A, AHighlight, "A");
         }
 
-        private void UpdateButtonHighLight(Pressable button, GameObject go, string input) {
-            if (button.simplePress.pressed) {
+        private void UpdateButtonHighLight(Pressable button, GameObject go, string input)
+        {
+            if (button.simplePress.pressed)
+            {
                 go.SetActive(true);
-                text.text = "Hinput.gamepad[" + index + "]."+input;
-            } else {
+                text.text = "Hinput.gamepad[" + index + "]." + input;
+            }
+            else
+            {
                 go.SetActive(false);
             }
         }
 
-        public void Vibrate() {
+        public void Vibrate()
+        {
             gamepad.Vibrate();
             EventSystem.current.SetSelectedGameObject(null);
         }

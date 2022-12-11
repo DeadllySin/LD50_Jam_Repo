@@ -2,14 +2,16 @@ using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 #pragma warning disable 649
 
-namespace Asset_Cleaner {
-    class CleanerStyleAsset : ScriptableObject {
+namespace Asset_Cleaner
+{
+    class CleanerStyleAsset : ScriptableObject
+    {
         [Serializable]
-        public class Style {
+        public class Style
+        {
             public Color RedHighlight = new Color(1, 0, 0, 1f);
 
             public GUIContent Lock;
@@ -37,17 +39,20 @@ namespace Asset_Cleaner {
 
             public GUIContent MultiSelect;
 
-            public static bool TryFindSelf(out Style value) {
+            public static bool TryFindSelf(out Style value)
+            {
                 const string typeName = nameof(CleanerStyleAsset);
 
                 var guids = AssetDatabase.FindAssets($"t:{typeName}");
-                if (!guids.Any()) {
+                if (!guids.Any())
+                {
                     AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 }
 
                 Asr.IsTrue(guids.Length > 0, $"No '{typeName}' assets found");
-                var res = guids.Select(AssetDatabase.GUIDToAssetPath).Select(t => (CleanerStyleAsset) AssetDatabase.LoadAssetAtPath(t, typeof(CleanerStyleAsset))).FirstOrDefault();
-                if (res == null) {
+                var res = guids.Select(AssetDatabase.GUIDToAssetPath).Select(t => (CleanerStyleAsset)AssetDatabase.LoadAssetAtPath(t, typeof(CleanerStyleAsset))).FirstOrDefault();
+                if (res == null)
+                {
                     value = default;
                     return false;
                 }
@@ -62,8 +67,10 @@ namespace Asset_Cleaner {
 #pragma warning restore
 
         [CustomEditor(typeof(CleanerStyleAsset))]
-        class Editor : UnityEditor.Editor {
-            public override void OnInspectorGUI() {
+        class Editor : UnityEditor.Editor
+        {
+            public override void OnInspectorGUI()
+            {
 #if false
                      if (GUILayout.Button("Update Btn backgrounds")) {
                     var targ = (CleanerStyleAsset) target; 

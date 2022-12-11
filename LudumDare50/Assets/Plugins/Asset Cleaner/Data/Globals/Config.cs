@@ -1,5 +1,7 @@
-﻿namespace Asset_Cleaner {
-    class Config {
+﻿namespace Asset_Cleaner
+{
+    class Config
+    {
         // serialized
         public bool MarkRed;
         public string IgnorePathContainsCombined;

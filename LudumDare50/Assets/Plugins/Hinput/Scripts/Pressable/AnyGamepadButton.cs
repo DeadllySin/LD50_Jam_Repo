@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace HinputClasses.Internal {
-    public class AnyGamepadButton : Button {
+namespace HinputClasses.Internal
+{
+    public class AnyGamepadButton : Button
+    {
         // --------------------
         // CONSTRUCTOR
         // --------------------
-        
+
         public AnyGamepadButton(string pressableName, Gamepad gamepad, int index, bool isEnabled) :
-            base(pressableName, gamepad, index, isEnabled) {
+            base(pressableName, gamepad, index, isEnabled)
+        {
             buttons = Hinput.gamepad.Select(g => g.buttons[index]).ToList();
         }
 

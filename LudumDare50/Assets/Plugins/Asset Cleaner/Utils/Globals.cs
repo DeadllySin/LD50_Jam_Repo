@@ -1,13 +1,18 @@
-﻿namespace Asset_Cleaner {
-    static class Globals<T> where T : class {
+﻿namespace Asset_Cleaner
+{
+    static class Globals<T> where T : class
+    {
         static T _instance;
 
-        public static T Value {
-            get {
+        public static T Value
+        {
+            get
+            {
                 Asr.IsFalse(_instance == null);
                 return _instance;
             }
-            set {
+            set
+            {
                 var was = HasValue();
                 _instance = value;
 
@@ -22,7 +27,8 @@
         }
     }
 
-    static class __GlobalsCounter {
+    static class __GlobalsCounter
+    {
         internal static int Counter;
         public static bool HasAnyValue() => Counter > 0;
     }

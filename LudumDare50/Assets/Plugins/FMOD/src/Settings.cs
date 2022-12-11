@@ -6,8 +6,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 #if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.Build;
-using UnityEditor.Build.Reporting;
 #endif
 
 namespace FMODUnity
@@ -339,7 +337,7 @@ namespace FMODUnity
                     }
                 }
                 else
-                { 
+                {
                     if (string.IsNullOrEmpty(TargetBankFolder))
                     {
                         return Application.streamingAssetsPath;
@@ -372,7 +370,7 @@ namespace FMODUnity
                     TargetAssetPath = value; ;
                 }
                 else
-                { 
+                {
                     TargetBankFolder = value;
                 }
             }
@@ -549,10 +547,11 @@ namespace FMODUnity
         // [InitializeOnLoad] and calling this function from a static constructor.
         public static void AddPlatformTemplate<T>(string identifier) where T : Platform
         {
-            PlatformTemplates.Add(new PlatformTemplate() {
-                    Identifier = identifier,
-                    CreateInstance = () => CreatePlatformInstance<T>(identifier)
-                });
+            PlatformTemplates.Add(new PlatformTemplate()
+            {
+                Identifier = identifier,
+                CreateInstance = () => CreatePlatformInstance<T>(identifier)
+            });
         }
 
         private static Platform CreatePlatformInstance<T>(string identifier) where T : Platform
@@ -718,7 +717,7 @@ namespace FMODUnity
                 string basename = Regex.Escape(Path.GetFileName(path));
                 Regex regex = new Regex(Il2CppCommand_AdditionalCpp + "=\"[^\"]*" + basename + "\"");
 
-                for (int startIndex = 0; startIndex < newArguments.Length; )
+                for (int startIndex = 0; startIndex < newArguments.Length;)
                 {
                     Match match = regex.Match(newArguments, startIndex);
 

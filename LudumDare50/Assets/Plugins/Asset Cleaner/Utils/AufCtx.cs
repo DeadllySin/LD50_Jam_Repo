@@ -1,7 +1,9 @@
 using Leopotam.Ecs;
 
-namespace Asset_Cleaner {
-    static class AufCtx {
+namespace Asset_Cleaner
+{
+    static class AufCtx
+    {
         public static EcsWorld World;
 
         public static EcsSystems UndoGroup;
@@ -11,7 +13,8 @@ namespace Asset_Cleaner {
         internal static bool InitStarted { get; private set; }
         internal static bool Destroyed { get; private set; }
 
-        internal static void TryInitWorld() {
+        internal static void TryInitWorld()
+        {
             if (InitStarted) return;
             InitStarted = true;
 
@@ -31,7 +34,8 @@ namespace Asset_Cleaner {
                 ).Init();
         }
 
-        internal static void DestroyWorld() {
+        internal static void DestroyWorld()
+        {
             if (!InitStarted) return;
             InitStarted = false;
             Destroyed = true;

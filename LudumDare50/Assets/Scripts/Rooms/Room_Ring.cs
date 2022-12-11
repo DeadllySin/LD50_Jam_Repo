@@ -17,7 +17,7 @@ public class Room_Ring : MonoBehaviour
     private void Start()
     {
         main = GetComponentInParent<Room_Main>();
-        for(int p = 0; p < pole.Length; p++)
+        for (int p = 0; p < pole.Length; p++)
         {
             foreach (Transform child in pole[p].questionSpawnerParent) pole[p].questionSpawners.Add(child.gameObject.GetComponent<Transform>());
             switch (main.gm.ringRoomPro)
@@ -176,7 +176,7 @@ public class Pole
     [HideInInspector] public string answer;
     [HideInInspector] public List<string> Questions = new List<string>();
     [HideInInspector] public List<string> Solutions = new List<string>();
-    [HideInInspector] public List <Transform> questionSpawners = new List<Transform>();
+    [HideInInspector] public List<Transform> questionSpawners = new List<Transform>();
     public Transform questionSpawnerParent;
     public Slot[] slot;
     public Material gem;

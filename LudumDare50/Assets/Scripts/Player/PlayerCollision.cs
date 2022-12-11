@@ -13,7 +13,7 @@ public class PlayerCollision : MonoBehaviour
         if (hit.CompareTag("Transition")) hit.GetComponent<Transform>().GetComponentInParent<Tunnel>().NewRoom();
         if (hit.CompareTag("Transition2")) hit.GetComponent<Transform>().GetComponentInParent<Tunnel>().RemoveTunnel();
         if (hit.CompareTag("stand")) GetComponent<PlayerCrouch>().allowStandingUp = false;
-        if(hit.CompareTag("firstDoor")) FindObjectOfType<GameManager>().CloseDoor();
+        if (hit.CompareTag("firstDoor")) FindObjectOfType<GameManager>().CloseDoor();
     }
 
     private void OnTriggerExit(Collider hit)

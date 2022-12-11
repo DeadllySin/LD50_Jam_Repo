@@ -1,10 +1,12 @@
-﻿using System;
-using Leopotam.Ecs;
+﻿using Leopotam.Ecs;
+using System;
 using UnityEngine;
 using static Asset_Cleaner.AufCtx;
 
-namespace Asset_Cleaner {
-    class SysProcessSearch : IEcsRunSystem {
+namespace Asset_Cleaner
+{
+    class SysProcessSearch : IEcsRunSystem
+    {
         EcsFilter<SelectionChanged> _from = null;
 
         EcsFilter<Result, SearchResultGui, InSceneResult> SceneResultRows = null;
@@ -12,7 +14,8 @@ namespace Asset_Cleaner {
         EcsFilter<SearchArg>.Exclude<InSceneResult> SearchArgMain = null;
         EcsFilter<Result, SearchResultGui, FileResultTag> FileResultRows = null;
 
-        public void Run() {
+        public void Run()
+        {
             if (_from.IsEmpty())
                 return;
 
@@ -25,13 +28,16 @@ namespace Asset_Cleaner {
             if (wd.Window)
                 wd.Window.Repaint();
 
-            foreach (var i in _from.Out(out var get1, out _)) {
+            foreach (var i in _from.Out(out var get1, out _))
+            {
                 var t1 = get1[i];
                 if (!t1.Target) continue;
                 wd.FindFrom = t1.From;
 
-                try {
-                    switch (t1.From) {
+                try
+                {
+                    switch (t1.From)
+                    {
                         case FindModeEnum.Scene:
                             World.NewEntityWith(out SearchArg st);
                             SearchUtils.Init(st, t1.Target, t1.Scene);
@@ -45,7 +51,8 @@ namespace Asset_Cleaner {
                             break;
                     }
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Debug.LogException(e);
                 }
             }

@@ -400,7 +400,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150986499432414830}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -507,7 +507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   handTarget: {fileID: 0}
-  distance: 3
+  distance: 2.5
   lookingAt: none
   cam: {fileID: 0}
 --- !u!114 &3653882480043813501

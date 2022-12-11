@@ -1,25 +1,28 @@
-﻿using System.Linq;
+﻿using Leopotam.Ecs;
+using System.Linq;
 using System.Runtime.InteropServices;
-using Leopotam.Ecs;
 using UnityEditor;
 using UnityEngine;
 using static Asset_Cleaner.AufCtx;
 
-namespace Asset_Cleaner {
+namespace Asset_Cleaner
+{
     class CleanupPrevArg { }
 
     class UndoEvt { }
 
     class RedoEvt { }
 
-    class SysUndoRedoSelection : IEcsRunSystem, IEcsInitSystem, IEcsDestroySystem {
+    class SysUndoRedoSelection : IEcsRunSystem, IEcsInitSystem, IEcsDestroySystem
+    {
         EcsFilter<UndoEvt> UndoEvt = default;
         EcsFilter<RedoEvt> RedoEvt = default;
 
         bool _preventHistoryInsert;
         bool _preventSelectionSet;
 
-        public void Init() {
+        public void Init()
+        {
             Undo.undoRedoPerformed += OnUndoRedoPerformed;
             Selection.selectionChanged += OnSelectionChanged;
             Globals<UndoRedoState>.Value = new UndoRedoState();
@@ -28,19 +31,22 @@ namespace Asset_Cleaner {
             OnSelectionChanged(); //init selection
         }
 
-        public void Destroy() {
+        public void Destroy()
+        {
             Undo.undoRedoPerformed -= OnUndoRedoPerformed;
             Selection.selectionChanged -= OnSelectionChanged;
             Globals<UndoRedoState>.Value = default;
         }
 
-        public void Run() {
+        public void Run()
+        {
             MouseInput();
 
             if (UndoEvt.IsEmpty() && RedoEvt.IsEmpty()) return;
             Counters(undo: !UndoEvt.IsEmpty(), redo: !RedoEvt.IsEmpty(), false);
             _preventHistoryInsert = true;
-            if (!_preventSelectionSet) {
+            if (!_preventSelectionSet)
+            {
                 (var history, var id) = Globals<PersistentUndoRedoState>.Value;
                 SelectionEntry entry = history[id];
                 if (entry.Valid())
@@ -56,12 +62,14 @@ namespace Asset_Cleaner {
         }
 
 
-        static void Counters(bool undo, bool redo, bool insertToHistory) {
+        static void Counters(bool undo, bool redo, bool insertToHistory)
+        {
             var state = Globals<PersistentUndoRedoState>.Value;
             World.NewEntityWith(out RequestRepaintEvt _);
 
             const int MinId = 0;
-            if (insertToHistory) {
+            if (insertToHistory)
+            {
                 var entry = new SelectionEntry();
 
                 var count = state.History.Count - 1 - state.Id;
@@ -71,27 +79,33 @@ namespace Asset_Cleaner {
                 state.History.Add(entry);
                 state.Id = MaxId();
 
-                if (Selection.assetGUIDs.Length > 0) {
+                if (Selection.assetGUIDs.Length > 0)
+                {
                     entry.IsGuids = true;
                     entry.Guids = Selection.assetGUIDs;
                 }
-                else {
+                else
+                {
                     entry.SceneObjects = Selection.objects;
                 }
             }
 
-            if (undo) {
+            if (undo)
+            {
                 // loop to skip invalid 
-                while (true) {
+                while (true)
+                {
                     state.Id -= 1;
                     if (state.Id < MinId) break;
                     if (state.History[state.Id].Valid()) break;
                 }
             }
 
-            if (redo) {
+            if (redo)
+            {
                 // loop to skip invalid
-                while (true) {
+                while (true)
+                {
                     state.Id += 1;
                     if (state.Id > MaxId()) break;
                     if (state.History[state.Id].Valid()) break;
@@ -107,7 +121,8 @@ namespace Asset_Cleaner {
             int MaxId() => Mathf.Max(0, state.History.Count - 1);
         }
 
-        void OnSelectionChanged() {
+        void OnSelectionChanged()
+        {
             World.NewEntityWith(out RequestRepaintEvt _);
             if (Globals<Config>.Value == null || Globals<Config>.Value.Locked) return;
             Counters(undo: false, redo: false, insertToHistory: !_preventHistoryInsert);
@@ -116,21 +131,25 @@ namespace Asset_Cleaner {
             World.NewEntityWith(out SelectionChanged comp);
             World.NewEntityWith(out CleanupPrevArg _);
             var go = Selection.activeGameObject;
-            if (go && go.scene.IsValid()) {
+            if (go && go.scene.IsValid())
+            {
                 comp.From = FindModeEnum.Scene;
                 comp.Target = go;
                 comp.Scene = go.scene;
             }
-            else {
+            else
+            {
                 var guids = Selection.assetGUIDs;
                 // comp.Guids = Selection.assetGUIDs;
                 bool any = guids != null && guids.Length > 0;
-                if (any) {
+                if (any)
+                {
                     comp.From = FindModeEnum.File;
                     var path = AssetDatabase.GUIDToAssetPath(guids[0]);
                     comp.Target = AssetDatabase.LoadAssetAtPath<Object>(path);
                 }
-                else {
+                else
+                {
                     comp.From = FindModeEnum.None;
                     comp.Target = null;
                 }
@@ -138,7 +157,8 @@ namespace Asset_Cleaner {
         }
 
         // prevents selection history flooding
-        void OnUndoRedoPerformed() {
+        void OnUndoRedoPerformed()
+        {
             // below is a hackish way to catch Undo/Redo from editor
             //if (AufCtx.Destroyed) return;
             if (!Undo.GetCurrentGroupName().Equals("Selection Change")) return;
@@ -146,7 +166,8 @@ namespace Asset_Cleaner {
             if (evt == null) return;
             if (evt.rawType != EventType.KeyDown) return;
 
-            switch (evt.keyCode) {
+            switch (evt.keyCode)
+            {
                 case KeyCode.Z:
                     World.NewEntityWith(out UndoEvt _);
                     _preventSelectionSet = true; // prevent manual Selection set  
@@ -158,16 +179,19 @@ namespace Asset_Cleaner {
             }
         }
 
-        void MouseInput() {
+        void MouseInput()
+        {
             if (_nextClick > EditorApplication.timeSinceStartup) return;
 
             var any = false;
-            if (Pressed(0x5)) {
+            if (Pressed(0x5))
+            {
                 World.NewEntityWith(out UndoEvt _);
                 any = true;
             }
 
-            if (Pressed(0x6)) {
+            if (Pressed(0x6))
+            {
                 World.NewEntityWith(out RedoEvt _);
                 any = true;
             }

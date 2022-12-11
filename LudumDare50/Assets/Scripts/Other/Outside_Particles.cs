@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Outside_Particles : MonoBehaviour
@@ -18,12 +16,12 @@ public class Outside_Particles : MonoBehaviour
     //Noise module Scroll Speed, Strengh, frequency, size amount adds life
     void Start()
     {
-        
+
     }
 
 
     void Update()
     {
-        
+
     }
 }

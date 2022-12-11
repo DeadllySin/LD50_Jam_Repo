@@ -1,7 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     bool CloseDoorOnce = false;
     public void CloseDoor()
     {
-        if(CloseDoorOnce) return;
+        if (CloseDoorOnce) return;
         CloseDoorOnce = true;
         firstDoor.SetTrigger("isClosed");
     }
