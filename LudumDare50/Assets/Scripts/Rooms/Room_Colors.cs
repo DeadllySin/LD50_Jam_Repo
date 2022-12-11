@@ -94,8 +94,8 @@ public class Room_Colors : MonoBehaviour
                 break;
             case "orange":
                 FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Puzzles/Color/ColorOrderOrange", colorOb[3].gameObject);
-                break;      
-        } 
+                break;
+        }
     }
 
     public void Restart(Animator anim)

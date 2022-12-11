@@ -10,7 +10,8 @@ public class Interactable_Memory : MonoBehaviour
     float tick;
     bool temp;
 
-    private void Awake() {
+    private void Awake()
+    {
         temp = activateColorState;
     }
 
@@ -23,7 +24,7 @@ public class Interactable_Memory : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(temp != activateColorState)
+        if (temp != activateColorState)
         {
             temp = activateColorState;
             StartCoroutine(ChangeColour());
